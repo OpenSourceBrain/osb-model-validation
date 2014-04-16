@@ -1,8 +1,0 @@
-type: //rec
-rest:
-  type: //map
-  values:
-    type: //any
-    of: 
-      - type: /ost/observableLiteral
-      - type: /ost/observableDatafile

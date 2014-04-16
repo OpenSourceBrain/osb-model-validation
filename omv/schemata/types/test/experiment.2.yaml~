@@ -1,5 +1,0 @@
-duration: 10
-protocol:
-  endogenous:
-    expected:
-      resting: -80
