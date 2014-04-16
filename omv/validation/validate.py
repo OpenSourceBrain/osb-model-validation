@@ -1,6 +1,7 @@
 from os.path import splitext, basename
 from rx_validator import RXSchemaValidator
 from utils import topological_sort, all_types_in_schema
+from pkg_resources import resource_filename
 
 
 class OMVValidator(RXSchemaValidator):
@@ -12,20 +13,22 @@ class OMVValidator(RXSchemaValidator):
 
     def add_osb_prefix(self):
         self.prefix = 'tag:opensourcebrain.org,2014:schemata/omv/'
-        self.rx.add_prefix('ost', self.prefix)
+        self.rx.add_prefix('omv', self.prefix)
 
     def register_osb_types(self):
 
-        self.ost_types = {}
+        self.omv_types = {}
         from glob import glob
-        for ost in glob('../schemata/types/*.yaml') + glob('../schemata/types/base/*.yaml'):
-            tag = self.prefix + splitext(basename(ost))[0]
-            self.ost_types[tag] = self.parse_yaml_file(ost)
+        typedir = resource_filename('omv', 'schemata/types/')
+        for omv in glob(typedir + '*.yaml') + glob(typedir + '/base/*.yaml'):
+            tag = self.prefix + splitext(basename(omv))[0]
+            print 'registering', tag
+            self.omv_types[tag] = self.parse_yaml_file(omv)
 
-        for tag in self.sort_types_by_dependencies(self.ost_types):
-            schema = self.ost_types[tag]
-            # print 'learning', tag
-            # print 'with schema', schema
+        for tag in self.sort_types_by_dependencies(self.omv_types):
+            schema = self.omv_types[tag]
+            print 'learning', tag
+            print 'with schema', schema
             self.rx.learn_type(tag, schema)
 
     def sort_types_by_dependencies(self, tag_schema_map):
