@@ -35,7 +35,7 @@ def all_types_in_schema(d):
                     yield x
         else:
             try: 
-                if v.startswith('/ost'):
+                if v.startswith('/omv'):
                     yield v
             except AttributeError:
                 pass
