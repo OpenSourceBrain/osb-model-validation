@@ -1,0 +1,10 @@
+type: //map
+values:
+  type: //any
+  of: 
+    - type: //num
+    - type: //arr
+      contents:
+        type: //num
+    - type: //str
+

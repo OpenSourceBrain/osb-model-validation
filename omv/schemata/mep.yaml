@@ -1,0 +1,7 @@
+type: //rec
+required:
+  system: //str
+  experiments: 
+    type: //map
+    values:
+      type: /ost/experiment

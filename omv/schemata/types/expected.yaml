@@ -1,0 +1,7 @@
+type: //any
+of: 
+  - type: /ost/observable_literal
+  - type: /ost/observable_datafile
+  - type: //map #to be narrowed down, see test/expected.3.yaml
+    values:
+      type: //any

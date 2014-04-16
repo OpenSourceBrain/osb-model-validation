@@ -1,0 +1,7 @@
+type: //any
+of:
+  - type: //map
+    values: /ost/protocol_properties
+  - type: //str
+    
+  

@@ -1,0 +1,4 @@
+type: //any
+of:
+  - type: //map
+    values: //any

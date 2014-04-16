@@ -1,0 +1,5 @@
+current clamp:
+  duration: 500
+  delay: 1
+  amplitude: 61
+  location: soma

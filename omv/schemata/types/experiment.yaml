@@ -1,0 +1,4 @@
+type: //rec
+required:
+  expected: /ost/expected
+  protocol: /ost/protocol

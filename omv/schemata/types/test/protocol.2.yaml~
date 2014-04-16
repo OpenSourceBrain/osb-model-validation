@@ -1,0 +1,11 @@
+current clamp:
+  delay: 12.3
+  duration: 456
+  amplitude: 78.9
+  expected:
+    spikes: 
+      - 1.1
+      - 2
+      - 3.3
+      - 4
+
