@@ -1,4 +1,4 @@
 type: //any
 of: 
-  - type: /ost/observable_literal
-  - type: /ost/observable_datafile
+  - type: /omv/observable_literal
+  - type: /omv/observable_datafile

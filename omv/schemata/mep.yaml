@@ -4,4 +4,4 @@ required:
   experiments: 
     type: //map
     values:
-      type: /ost/experiment
+      type: /omv/experiment

@@ -1,4 +1,4 @@
 type: //rec
 required:
-  expected: /ost/expected
-  protocol: /ost/protocol
+  expected: /omv/expected
+  protocol: /omv/protocol
