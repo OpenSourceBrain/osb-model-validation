@@ -25,6 +25,8 @@ class OMVAnalyzer(object):
         except (TypeError, KeyError) as e: #observable can be None 
             tolerance =  1e-1
 
-        res = ts.compare_arrays((obs, exp), tolerance)
-        if res:
+        are_close = ts.compare_arrays((obs, exp), tolerance)
+        if not are_close:
             inform('Comparison of \n %s \n and \n %s \n failed against tolerance %g'%(obs,exp, tolerance))
+        
+        return are_close
