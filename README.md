@@ -17,7 +17,7 @@ though). In order to enable it:
       echo -e "target: LEMS_hh_nostim.xml \n engine: LEMS" > NeuroML2/hh.omt
  
 
-- copy the [travis template](templates/travis.yaml) to the projects' root dir,
+- copy the [travis config file template](templates/travis.yml.template) to the projects' root dir,
   and rename it to *.travis.yml* (don't forget the leading dot!):
 
       cd OSB_proj_dir
@@ -28,30 +28,34 @@ though). In order to enable it:
 Once these changes are pushed to the _github_ repo, travis will run
 the tests automatically. You can check the results at
 http://travis-ci.org/OpenSourceBrain/project_name (and ideally add a
-travis build badge to the projects' Readme.md file).
+travis build badge to the projects' Readme.md file). Check 
+[this project](https://github.com/borismarin/hh-testing) for a working example. 
 
 
 After this initial simple test passes, you can start writing more
 elaborate tests by creating a <b>M</b>odel <b>E</b>mergent <b>P</b>roperties (_mep_)
-file and corresponding _omt_ tests, as in [](borismarin/hh-testing).
-_omt_ tests will be automatically discovered independently of their location.
+file and corresponding _omt_ tests. Examples of supported constructs can be found [here]
+(https://github.com/borismarin/hh-testing). Notice that _omt_ tests will
+be automatically discovered by travis, _regardless_ of their location.
     
 
-If you are wise a and want to run the tests locally, before submitting
+If you are wise and want to run the tests locally before submitting
 your changes to github, install the omv python package
 
     pip install git+https://github.com/borismarin/osb-model-validation.git
 
-This package will provide three shell scripts:
+This package provides three shell scripts:
 
 - *omv_test* *[filename.omt]*, which runs a specific test locally
 
 - *omv_alltests*, which recursively discovers all _.omt_ files in the
-  project and runs them.
+  project and runs them (this is the command used by travis).
 
 - *omv_validate_mep* *[filename.mep]*, to validate a _.mep_ file
   against the current _mep_ schema.
 
+Evidently, we will provide a *validate_omt* script as soon as we agree on 
+its schema.
 
 In other words, to run all _omt_ tests inside a project: 
 
