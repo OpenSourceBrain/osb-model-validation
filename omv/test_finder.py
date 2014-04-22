@@ -1,19 +1,26 @@
-from sys import argv
+from sys import argv, exit
 from os import environ, getcwd
 from pathlib import Path 
-from osb_test.parse_ost import parse_ost, load_yaml
+from omv.parse_omt import parse_omt, load_yaml
 
 def test_all():
     cwd = Path(getcwd())
     all_omts = [p.as_posix() for p in cwd.glob('**/*.omt')]
     if environ.get('TRAVIS'):
         engine = environ.get('OST_ENGINE').lower()
-        tsts = [all(parse_ost(t))
+        tsts = [all(parse_omt(t))
                 for t in all_omts 
                 if load_yaml(t)['engine'].lower() == engine]
     else:
-        tsts= [all(parse_ost(t)) for t in all_omts]
+        tsts= [all(parse_omt(t)) for t in all_omts]
     assert all(tsts)
+    
+def test_one():
+    try: 
+        t = argv[1]
+    except:
+        exit('No omt file specified')
+    assert(all(parse_omt(t)))
 
 
 
