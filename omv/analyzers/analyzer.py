@@ -1,4 +1,5 @@
 import utils.timeseries as ts
+from ..common.output import inform
 
 class OMVAnalyzer(object):
     def __init__(self, observable, expected, backend):
@@ -24,4 +25,6 @@ class OMVAnalyzer(object):
         except (TypeError, KeyError) as e: #observable can be None 
             tolerance =  1e-1
 
-        return ts.compare_arrays((obs, exp), tolerance)
+        res = ts.compare_arrays((obs, exp), tolerance)
+        if res:
+            inform('Comparison of \n %s \n and \n %s \n failed against tolerance %g'%(obs,exp, tolerance))
