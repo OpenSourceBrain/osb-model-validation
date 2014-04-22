@@ -2,6 +2,7 @@ import yaml
 from backends import OMVBackends
 from analyzers import OMVAnalyzers
 from common.output import inform
+from os.path import join, dirname
 
 def load_yaml(fname):
     with open(fname) as f:
@@ -17,8 +18,9 @@ def parse_omt(omt_path):
     inform('Running tests defined in:', omt_path)
 
     tests = []
+    omt_root = dirname(omt_path)
     if impl:
-        mepfile = impl['mep']
+        mepfile = join(omt_root, impl['mep'])
         observables = impl['observables']
         mep = load_yaml(mepfile) 
         experiment = mep['experiments'][impl['experiment']]
@@ -26,7 +28,7 @@ def parse_omt(omt_path):
         observables = {'dry':None} 
         experiment = {'expected':{'dry':None}}
 
-    backend = OMVBackends[engine](target)
+    backend = OMVBackends[engine](join(omt_root, target))
     for obsname, observable in observables.iteritems():
         expected = experiment['expected'][obsname]
         tests.append(OMVAnalyzers[obsname](observable, expected, backend))
