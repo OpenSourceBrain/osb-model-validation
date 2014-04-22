@@ -2,6 +2,8 @@ import os
 from glob import glob
 import subprocess as sp
 from textwrap import dedent
+from os.path import dirname, realpath
+from utils.wdir import working_dir
 
 from ..common.output import inform
 
@@ -16,7 +18,8 @@ class NeuronBackend(object):
             inform('Will fetch and install the latest NEURON version', indent=2)
             getnrn.install_neuron()
             
-        self.modelpath = target
+        self.modelpath = realpath(target)
+
         self.extra_pars = []
         try:
             self.stdout = self.compile_modfiles()
@@ -27,31 +30,30 @@ class NeuronBackend(object):
 
 
     def compile_modfiles(self):
-        inform('Compiling modfiles', indent=1)
-        init_dir = os.getcwd()
-        os.chdir(os.path.dirname(os.path.realpath(self.modelpath)))
-        out = 0
-        if len(glob('*.mod')) > 0:
-            out = sp.check_output(['nrnivmodl'])
-            inform(out, indent=2)
-        os.chdir(init_dir)
+        with working_dir(dirname(self.modelpath)):
+            out = 0
+            if len(glob('*.mod')) > 0:
+                inform('Compiling modfiles', indent=1)
+                out = sp.check_output(['nrnivmodl'])
+                inform(out, indent=2)
         return out
         
 
     def run(self):
-        p = sp.Popen(['nrniv'], stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.PIPE)
-        cmd = '''\
-        load_file("noload.hoc")
-        cvode_active(1)
-        load_file("%s")
-        %s
-        ''' % (self.modelpath, '\n'.join(self.extra_pars))
-        stdout, stderr = p.communicate(dedent(cmd))
-        with open('/tmp/osb_test.nrn.stdout', 'w') as f:
-            f.write(stdout)
-        self.stdout = stdout
-        self.stderr = stderr
-        self.returncode = p.returncode
+        with working_dir(dirname(self.modelpath)):
+            p = sp.Popen(['nrniv'], stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.PIPE)
+            cmd = '''\
+            load_file("noload.hoc")
+            cvode_active(1)
+            load_file("%s")
+            %s
+            ''' % (self.modelpath, '\n'.join(self.extra_pars))
+            stdout, stderr = p.communicate(dedent(cmd))
+            with open('/tmp/omv_test.nrn.stdout', 'w') as f:
+                f.write(stdout)
+            self.stdout = stdout
+            self.stderr = stderr
+            self.returncode = p.returncode
 
     def register_query(self, name, cmd=''):
         query = '{{%s}{print "%s: ", %s}}' % (cmd, name, name)
