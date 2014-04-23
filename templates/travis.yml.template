@@ -12,7 +12,6 @@ matrix:
     - env: OST_ENGINE=lems
 
 install: 
-    - pip install ez_setup
     - pip install git+https://github.com/borismarin/osb-model-validation.git
 
 script:
