@@ -9,11 +9,10 @@ class FileNodeHelper(object):
         self.scaling = fn.get('scaling', (1,1))
 
     def __str__(self):
-        return '\n'.join([
-            'file: ' + str(self.filename),
-            'columns: ' + str(self.columns), 
-            'header rows:' + str(self.header),
-        ])
+        return str({'file name' : str(self.filename),
+            'columns (time, voltage)' : str(self.columns), 
+            'initial rows to disregard' : str(self.header),
+        })
     
     def get_timeseries(self):
         return load_data_file(self.filename, self.columns,
