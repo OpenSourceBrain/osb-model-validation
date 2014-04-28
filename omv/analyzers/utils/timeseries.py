@@ -22,10 +22,7 @@ def load_data_file(fname, columns=(0,1), header_lines=0):
 def compare_arrays(arrays, tolerance):
     from numpy import allclose, array
     a1, a2 = array(arrays)
-    #print a1, a2
-    #print '#tol', tolerance
     return allclose(a1, a2, tolerance)
-
 
 def compare_dictionaries(d1, d2, tolerance=0.1):
     from numpy import allclose, array
@@ -54,18 +51,9 @@ def spikes_from_datafile(path, columns=(0,1), header=0, method='threshold', thre
     spk_idx = detect_spikes(v, method, threshold)
     return t[spk_idx]
 
-
-def timeseries_from_file_node(fn):
-    fname = fn['path']
-    cols = fn.get('columns', (0,1))
-    hdr = fn.get('header', 0)
-    return load_data_file(fname, cols, hdr)
-
-def resting_from_file_node(fn):
+def average_resting(tv, window):
     from numpy import mean
-    tv = timeseries_from_file_node(fn)
-    av = fn.get('average last', 1)
-    return mean(tv[1, -av:])
+    return mean(tv[1, -window:])
 
 
 def test_detect_spikes():
@@ -77,13 +65,6 @@ def test_detect_spikes():
 
     spk_idx = detect_spikes(x, method='threshold', threshold=0.1)
     assert all(spk_idx == arange(1,len(x),4))
-
-
-
-
-
-
-
 
 
 

@@ -1,5 +1,6 @@
 from analyzer import OMVAnalyzer
 from utils import timeseries as ts
+from utils import filenode as fn
 from ..common.output import inform
 
 class RestingAnalyzer(OMVAnalyzer):
@@ -9,8 +10,10 @@ class RestingAnalyzer(OMVAnalyzer):
             resting = to_parse
             inform('Explicit resting potential specified', to_parse, indent=1)
         elif 'file' in to_parse:
-            inform('Calculating resting potential from file', to_parse['file'], indent=1)
-            resting = ts.resting_from_file_node(to_parse['file'])
+            f = fn.FileNodeHelper(to_parse['file'])
+            inform('Calculating resting potential from file', f.filename, indent = 1)
+            window = to_parse.get('average last', 1)
+            resting = ts.average_resting(f.get_timeseries(), window)
         return resting
     
     def parse_expected(self):
