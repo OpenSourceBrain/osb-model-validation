@@ -13,6 +13,8 @@ class RestingAnalyzer(OMVAnalyzer):
             f = fn.FileNodeHelper(to_parse['file'])
             inform('Calculating resting potential from file', f.filename, indent = 1)
             window = to_parse.get('average last', 1)
+            if window > 1:
+                inform('Number of final points taken for averaging:', window, indent = 1)
             resting = ts.average_resting(f.get_timeseries(), window)
         return resting
     
