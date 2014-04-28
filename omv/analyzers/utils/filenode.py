@@ -6,6 +6,7 @@ class FileNodeHelper(object):
         self.filename = fn['path']
         self.columns = fn.get('columns', (0,1))
         self.header = fn.get('header', 0)
+        self.scaling = fn.get('scaling', (1,1))
 
     def __str__(self):
         return '\n'.join([
@@ -13,9 +14,14 @@ class FileNodeHelper(object):
             'columns: ' + str(self.columns), 
             'header rows:' + str(self.header),
         ])
-
+    
     def get_timeseries(self):
-        return load_data_file(self.filename, self.columns, self.header)
+        return load_data_file(self.filename, self.columns,
+                              self.header, self.scaling)
+
+
+
+
 
 
 

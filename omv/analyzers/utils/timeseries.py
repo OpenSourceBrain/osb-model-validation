@@ -15,9 +15,10 @@ def detect_spikes(v, method='threshold', threshold=0.):
         #see for example scipy.signal.find_peaks_cwt 
     return extrema
 
-def load_data_file(fname, columns=(0,1), header_lines=0):
+def load_data_file(fname, columns=(0,1), header_lines=0, scaling=(1,1)):
     from numpy import loadtxt
-    return loadtxt(fname, usecols=columns, skiprows=header_lines).T
+    ts = loadtxt(fname, usecols=columns, skiprows=header_lines)
+    return (ts * scaling).T #scratch your heads, matlab users!
 
 def compare_arrays(arrays, tolerance):
     from numpy import allclose, array
@@ -45,7 +46,6 @@ def spikes_from_timeseries(ts, **kwargs):
     spk_idx = detect_spikes(v, method, threshold)
     return t[spk_idx]
 
-
 def spikes_from_datafile(path, columns=(0,1), header=0, method='threshold', threshold=0):
     t, v = load_data_file(path, columns, header)
     spk_idx = detect_spikes(v, method, threshold)
@@ -54,7 +54,6 @@ def spikes_from_datafile(path, columns=(0,1), header=0, method='threshold', thre
 def average_resting(tv, window):
     from numpy import mean
     return mean(tv[1, -window:])
-
 
 def test_detect_spikes():
     from numpy import array, all, arange
@@ -65,7 +64,6 @@ def test_detect_spikes():
 
     spk_idx = detect_spikes(x, method='threshold', threshold=0.1)
     assert all(spk_idx == arange(1,len(x),4))
-
 
 
 
