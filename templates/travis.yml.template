@@ -7,9 +7,6 @@ env:
   matrix:
     - OST_ENGINE=lems
     - OST_ENGINE=neuron
-matrix:
-  allow_failures: #need to implement unit checking...
-    - env: OST_ENGINE=lems
 
 install: 
     - pip install git+https://github.com/borismarin/osb-model-validation.git
