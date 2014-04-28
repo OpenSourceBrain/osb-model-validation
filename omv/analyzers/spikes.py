@@ -11,11 +11,12 @@ class SpikeAnalyzer(OMVAnalyzer):
         elif 'file' in to_parse:
             f = fn.FileNodeHelper(to_parse['file'])
             tv = f.get_timeseries()
+            inform('Reading timeseries from file', f, indent=1)
             if 'spike detection' in to_parse:
                 sd = to_parse['spike detection']
                 method = sd.get('method', 'threshold')
                 threshold = float(sd.get('threshold', 0))
-                inform('Detecting spikes from file', to_parse['file'], indent=1)
+                inform('Detecting spikes with method', method, indent=2)
                 spikes = ts.spikes_from_timeseries(tv, method=method, threshold=threshold)
         return spikes
 
@@ -24,3 +25,13 @@ class SpikeAnalyzer(OMVAnalyzer):
 
     def parse_observable(self):
         return self.parse_spikes(self.observable)
+
+
+
+
+
+
+
+
+
+
