@@ -6,8 +6,8 @@ class RestingAnalyzer(OMVAnalyzer):
 
     def parse_resting(self, to_parse):
         if isinstance(to_parse, (int, float)):
-            inform('Explicit resting potential specified' , indent=1)
             resting = to_parse
+            inform('Explicit resting potential specified', to_parse, indent=1)
         elif 'file' in to_parse:
             inform('Calculating resting potential from file', to_parse['file'], indent=1)
             resting = ts.resting_from_file_node(to_parse['file'])
