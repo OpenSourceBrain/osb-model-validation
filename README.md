@@ -14,7 +14,7 @@ though). In order to enable it:
 - create a dry-run <b>O</b>SB <b>M</b>odel <b>T</b>est (_omt_) file, containing the
   target model file and the simulator, e.g.
  
-      echo -e "target: LEMS_hh_nostim.xml \n engine: LEMS" > NeuroML2/hh.omt
+      echo -e "target: LEMS_hh_nostim.xml\nengine: LEMS" > NeuroML2/hh.omt
  
 
 - copy the [travis config file template](templates/travis.yml.template) to the projects' root dir,
