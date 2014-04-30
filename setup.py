@@ -9,6 +9,7 @@ setup(
         'console_scripts': [
             'omv_validate_mep = omv.validation.validate_mep:main',
             'omv_alltests = omv.test_finder:test_all',
+            'omv_autogen = omv.autogen:autogen',
             'omv_test = omv.test_finder:test_one']},
     package_data={
         'omv': [
@@ -23,5 +24,6 @@ setup(
         'PyYAML',
         'numpy',
         'pyrx',
-        'pathlib'],
+        'pathlib',
+        'pyinotify'],
 )
