@@ -22,11 +22,11 @@ class OMVAnalyzer(object):
         exp = self.parse_expected()
         try: 
             tolerance = float(self.observable['tolerance'])
-        except (TypeError, KeyError) as e: #observable can be None 
+        except (TypeError, KeyError): #observable can be None 
             tolerance =  1e-1
 
         are_close = ts.compare_arrays((obs, exp), tolerance)
         if not are_close:
-            inform('Comparison of \n %s \n and \n %s \n failed against tolerance %g'%(obs,exp, tolerance))
+            inform('Comparison of \n%s\nand\n%s\nfailed against tolerance %g'%(obs,exp, tolerance))
         
         return are_close

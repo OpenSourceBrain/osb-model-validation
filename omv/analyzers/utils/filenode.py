@@ -6,7 +6,7 @@ class FileNodeHelper(object):
         self.filename = fn['path']
         self.columns = fn.get('columns', (0,1))
         self.header = fn.get('header', 0)
-        self.scaling = fn.get('scaling', (1,1))
+        self.scaling = fn.get('scaling', [1.]*len(self.columns))
 
     def __str__(self):
         return str({'file name' : str(self.filename),
