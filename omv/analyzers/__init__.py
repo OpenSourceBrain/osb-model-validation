@@ -3,13 +3,15 @@ from dryrun import DryRunAnalyzer
 from resting import RestingAnalyzer
 from morphology import MorphologyAnalyzer
 from temperature import TemperatureAnalyzer
+from activation import ActivationVariableAnalyzer
 
 OMVAnalyzers = {
     'spike times' : SpikeAnalyzer,
     'dry': DryRunAnalyzer,
     'resting': RestingAnalyzer,
     'morphology': MorphologyAnalyzer,
-    'temperature': TemperatureAnalyzer
+    'temperature': TemperatureAnalyzer,
+    'activation variables': ActivationVariableAnalyzer
 }
 
 
