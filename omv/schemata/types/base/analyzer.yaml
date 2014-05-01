@@ -1,0 +1,14 @@
+type: //rec
+optional:
+  resting: //num
+  morphology: 
+    type: //rec
+    required: 
+      total area: //num
+      number of cells: //num
+  temperature:  //num
+  spike times:
+    type: //arr
+    contents: //num
+  dry: //any  
+    
