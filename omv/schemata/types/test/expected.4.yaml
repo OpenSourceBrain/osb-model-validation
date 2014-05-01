@@ -1,0 +1,8 @@
+resting: -64.9
+morphology:
+  total area: 157080
+  number of cells: 1
+temperature: 6.3
+spike times: [1, 2, 3.3]
+dry: 2
+activation variables:

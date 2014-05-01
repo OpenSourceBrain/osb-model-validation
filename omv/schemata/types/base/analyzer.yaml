@@ -11,4 +11,4 @@ optional:
     type: //arr
     contents: //num
   dry: //any  
-    
+  activation variables: //any    
