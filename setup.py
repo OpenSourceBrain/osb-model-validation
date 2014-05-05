@@ -25,5 +25,5 @@ setup(
         'numpy',
         'pyrx',
         'pathlib',
-        'pyinotify'],
+        'watchdog'],
 )
