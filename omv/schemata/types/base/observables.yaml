@@ -1,6 +1,6 @@
 type: //rec
 optional:
-  resting: //num
+  resting: //num 
   morphology: 
     type: //rec
     required: 
@@ -11,4 +11,6 @@ optional:
     type: //arr
     contents: //num
   dry: //any  
-  activation variables: //any    
+  activation variables: //any 
+  
+

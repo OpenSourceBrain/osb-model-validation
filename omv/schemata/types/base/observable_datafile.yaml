@@ -1,4 +1,9 @@
-type: //map
-values:
-  type: //str
-
+type: //rec
+required:
+  path: //str
+optional:
+  header: //int 
+  columns: 
+    type: //arr
+    contents: //int 
+    
