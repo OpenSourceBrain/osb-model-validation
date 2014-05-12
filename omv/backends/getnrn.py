@@ -1,7 +1,8 @@
 import os
 import sys
 from subprocess import CalledProcessError, STDOUT, check_output as co
-from distutils.core import run_setup
+import pip
+#from distutils.core import run_setup
 
 from utils.wdir import working_dir
 
@@ -20,6 +21,10 @@ def install_neuron(get_latest=True):
     os.mkdir(nrnpath)
     with working_dir(nrnpath):
         if get_latest:
+            print 'Installing cython (required for pyNEURON)...',
+            pip.main(['install'], 'cython')
+            print 'done!'
+
             print 'Getting latest NEURON source...',
             run_n_log(['hg', 'clone', 'http://www.neuron.yale.edu/hg/neuron/nrn'])
             os.chdir('nrn')
@@ -42,7 +47,7 @@ def install_neuron(get_latest=True):
         run_n_log(['make', 'install'])
         print 'done!'
 
-        #print 'Installing pyNEURON...', 
+         #print 'Installing pyNEURON...', 
         #os.chdir('src/nrnpython')
         #run_setup('./setup.py', ['install'])
         #print 'done!'
