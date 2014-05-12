@@ -22,7 +22,7 @@ def install_neuron(get_latest=True):
     with working_dir(nrnpath):
         if get_latest:
             print 'Installing cython (required for pyNEURON)...',
-            pip.main(['install'], 'cython')
+            pip.main(['install', 'cython'])
             print 'done!'
 
             print 'Getting latest NEURON source...',
