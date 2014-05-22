@@ -44,14 +44,14 @@ your changes to github, install the omv python package
 
     pip install git+https://github.com/borismarin/osb-model-validation.git
 
-This package provides three shell scripts:
+This package provide the *omv' command line utility:
 
-- *omv_test* *[filename.omt]*, which runs a specific test locally
+- *omv test <filename.omt>*, which runs a specific test locally
 
-- *omv_alltests*, which recursively discovers all _.omt_ files in the
+- *omv all*, which recursively discovers all _.omt_ files in the
   project and runs them (this is the command used by travis).
 
-- *omv_validate_mep* *[filename.mep]*, to validate a _.mep_ file
+- *omv validate_mep <filename.mep>*, to validate a _.mep_ file
   against the current _mep_ schema.
 
 Evidently, we will provide a *validate_omt* script as soon as we agree on 
