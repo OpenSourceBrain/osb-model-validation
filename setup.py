@@ -7,7 +7,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'omv_validate_mep = omv.validation.validate_mep:main',
+            'omv = omv.omv_util:main',
             'omv_alltests = omv.find_tests:test_all',
             'omv_autogen = omv.autogen:autogen',
             'omv_test = omv.finde_tests:test_one']},
