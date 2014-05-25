@@ -4,22 +4,19 @@
   Usage:
     omv all  
     omv test <testMe.omt>
-
-    omv autogen [-y] [-d] 
-
+    omv autogen [options] 
     omv install <backend> 
     omv list-backends 
-
     omv validate-mep <mepfile>
     omv validate-omt <omtfile>
     omv (-h | --help)
     omv --version
   
   Options:
-    -h, --help     Show this screen.
+    -h --help     Show this screen.
+    -d --dryrun   Generate dry-run tests only (default) 
     --version     Show version.
     -y            Auto-select default options (non-interactive mode)
-    -d,--dryrun   Generate dry-run tests only (default) 
 """
 from docopt import docopt
 from find_tests import test_all, test_one
@@ -56,8 +53,10 @@ def main():
             print be
 
     elif arguments['autogen']:
-        dry = arguments['-d']
-        autogen()
+        print 'Automatically generating model validation files'
+        dry = arguments['--dryrun']
+        auto = arguments['-y']
+        autogen(auto, dry)
     
     
 if __name__ == '__main__':
