@@ -23,7 +23,7 @@ def read_option(options, default=0):
     return opt
 
 
-def find_targets():
+def find_targets(auto=False):
     targets = []
     for d, eng_ext in dirs_to_engines_exts.iteritems():
         if isdir(d):
@@ -33,7 +33,11 @@ def find_targets():
             print '  Will look for scripts with {0} extension'.format(ext)
             scripts = glob(join(d, '*' + ext))
             # print '    found', scripts
-            script = read_option(scripts)
+            if auto:
+                print 'selecting default: ', scripts[0]
+                script = scripts[0]
+            else:
+                script = read_option(scripts)
             targets.append((engine, script))
             # print 'selected', script
     return targets
@@ -70,10 +74,11 @@ script:
         fh.write(travis)
 
 
-def autogen():
-    targets = find_targets()
+def autogen(auto=False, dry=True):
+    targets = find_targets(auto)
     for engine, target in targets:
-        create_dryrun(engine, target)
+        if dry:
+            create_dryrun(engine, target)
     generate_dottravis(targets)
 
 
