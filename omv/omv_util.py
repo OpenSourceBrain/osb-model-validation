@@ -4,22 +4,29 @@
   Usage:
     omv all  
     omv test <testMe.omt>
-    omv validate-mep <mepfile>
-    omv validate-omt <omtfile>
+
+    omv autogen [-y] [-d] 
+
     omv install <backend> 
     omv list-backends 
+
+    omv validate-mep <mepfile>
+    omv validate-omt <omtfile>
     omv (-h | --help)
     omv --version
   
   Options:
-    -h --help     Show this screen.
+    -h, --help     Show this screen.
     --version     Show version.
-    -l --backends List known backends.
+    -y            Auto-select default options (non-interactive mode)
+    -d,--dryrun   Generate dry-run tests only (default) 
 """
 from docopt import docopt
 from find_tests import test_all, test_one
 from validation import validate_mep
+from autogen import autogen
 from backends import OMVBackends
+
 
 def main():
     arguments = docopt(__doc__, version='OpenSourceBrain Model Validation 0.0')
@@ -47,7 +54,10 @@ def main():
     elif arguments['list-backends']:
         for be in OMVBackends.keys():
             print be
-        
+
+    elif arguments['autogen']:
+        dry = arguments['-d']
+        autogen()
     
     
 if __name__ == '__main__':
