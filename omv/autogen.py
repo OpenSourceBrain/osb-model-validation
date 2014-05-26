@@ -53,23 +53,27 @@ def create_dryrun(engine, target):
 
 
 def generate_dottravis(targets):
+    env_vars = {'NEURON': "$HOME/neuron/nrn/`arch`/bin",
+                'jNeuroML': "$HOME/jnml/jNeuroMLJar"}
     travis = '''\
 language: python
 python: 2.7
 
 env:
-global:
-    - PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python/site-packages PATH=$PATH:$HOME/neuron/nrn/`arch`/bin:$HOME/jnml/jNeuroMLJar JNML_HOME=$HOME/jnml/jNeuroMLJar
-matrix:
+  global:
+    - PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python/site-packages PATH={path} {extra_envs}
+  matrix:
     - OST_ENGINE=lems
     - OST_ENGINE=neuron
 
-install: 
+install:
     - pip install git+https://github.com/borismarin/osb-model-validation.git
 
 script:
     - omv_alltests
-'''
+'''.format(path=':'.join(["$PATH", "$HOME/neuron/nrn/`arch`/bin", "$HOME/jnml/jNeuroMLJar"]),
+           extra_envs="JNML_HOME=$HOME/jnml/jNeuroMLJar")
+
     with open('.travis.yml', 'w') as fh:
         fh.write(travis)
 
