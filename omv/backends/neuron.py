@@ -57,7 +57,7 @@ class NeuronBackend(object):
 
     def register_query(self, name, cmd=''):
         query = '{{%s}{print "%s: ", %s}}' % (cmd, name, name)
-        inform('registred nrn query:', query, indent=2)
+        inform('registered nrn query:', query, indent=2)
         self.extra_pars.append(query)
         return name
 

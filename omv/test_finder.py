@@ -14,6 +14,14 @@ def test_all():
     else:
         tsts= [all(parse_omt(t)) for t in all_omts]
     assert all(tsts)
+
+    print """
+
+    --------------------------
+     OMV: All tests passing! 
+    --------------------------
+
+    """
     
 def test_one():
     try: 
