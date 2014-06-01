@@ -2,6 +2,7 @@ from os.path import isdir, join, split
 from glob import glob
 import yaml
 
+#TODO: extract from backend dir
 dirs_to_engines_exts = {'NEURON': {'engine': 'NEURON', 'extension': '.hoc'},
                         'NeuroML2': {'engine': 'LEMS', 'extension': '.nml'}}
 
@@ -53,30 +54,36 @@ def create_dryrun(engine, target):
 
 
 def generate_dottravis(targets):
-    env_vars = {'NEURON': "$HOME/neuron/nrn/`arch`/bin",
-                'jNeuroML': "$HOME/jnml/jNeuroMLJar"}
-    travis = '''\
-language: python
-python: 2.7
 
-env:
-  global:
-    - PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python/site-packages PATH={path} {extra_envs}
-  matrix:
-    - OST_ENGINE=lems
-    - OST_ENGINE=neuron
+    #TODO: move to backend dir
+    be_paths = {'NEURON': "$HOME/neuron/nrn/`arch`/bin",
+                'LEMS': "$HOME/jnml/jNeuroMLJar"}
+    be_env_vars = {'LEMS':"JNML_HOME=$HOME/jnml/jNeuroMLJar"}
 
-install:
-    - pip install git+https://github.com/borismarin/osb-model-validation.git
+    backends = [t[0] for t in targets]
+    paths = ':'.join(["$PATH"]+[be_paths[be] for be in backends if
+        be in be_paths])
 
-script:
-    - omv_alltests
-'''.format(path=':'.join(["$PATH", "$HOME/neuron/nrn/`arch`/bin", "$HOME/jnml/jNeuroMLJar"]),
-           extra_envs="JNML_HOME=$HOME/jnml/jNeuroMLJar")
+    extra_envs = ' '.join([be_env_vars[be] for be in backends if
+        be in be_env_vars])
+
+    pp = 'PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python/site-packages'
+    pa = 'PATH=' + paths
+    gls = ' '.join([pp, extra_envs, pa])
+
+    engines = ['OST_ENGINE='+be for be in backends]
+    repo = "git+https://github.com/borismarin/osb-model-validation.git"
+
+    travis = UnsortableOrderedDict([
+    ('language', 'python'),
+    ('python', 2.7),
+    ('env', {'global' : gls, 'matrix': engines}), 
+    ('install',  ['pip install ' + repo]),
+    ('script',  ['omv all'])
+    ])
 
     with open('.travis.yml', 'w') as fh:
-        fh.write(travis)
-
+        fh.write(yaml.dump(travis, default_flow_style=False))
 
 def autogen(auto=False, dry=True):
     targets = find_targets(auto)
@@ -85,6 +92,14 @@ def autogen(auto=False, dry=True):
             create_dryrun(engine, target)
     generate_dottravis(targets)
 
+from collections import OrderedDict
+class UnsortableList(list):
+    def sort(self, *args, **kwargs):
+        pass
+class UnsortableOrderedDict(OrderedDict):
+    def items(self, *args, **kwargs):
+        return UnsortableList(OrderedDict.items(self, *args, **kwargs))
+yaml.add_representer(UnsortableOrderedDict, yaml.representer.SafeRepresenter.represent_dict)
 
 if __name__ == '__main__':
     autogen()
