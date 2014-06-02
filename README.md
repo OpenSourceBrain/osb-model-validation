@@ -44,7 +44,7 @@ your changes to github, install the omv python package
 
     pip install git+https://github.com/borismarin/osb-model-validation.git
 
-This package provide the *omv' command line utility:
+This package provides the *omv* command line utility:
 
 - *omv test <filename.omt>*, which runs a specific test locally
 
@@ -54,10 +54,32 @@ This package provide the *omv' command line utility:
 - *omv validate_mep <filename.mep>*, to validate a _.mep_ file
   against the current _mep_ schema.
 
+- additional options: ```omv -h```
+
+        OpenSourceBrain Model Validation and Testing
+        ============================================
+        
+        Usage:
+          omv all  
+          omv test <testMe.omt>
+          omv autogen [options] 
+          omv install <backend> 
+          omv list-backends 
+          omv validate-mep <mepfile>
+          omv validate-omt <omtfile>
+          omv (-h | --help)
+          omv --version
+        
+        Options:
+          -h --help     Show this screen.
+          -d --dryrun   Generate dry-run tests only [default: False]
+          --version     Show version.
+          -y            Auto-select default options (non-interactive mode)
+
 Evidently, we will provide a *validate_omt* script as soon as we agree on 
 its schema.
 
 In other words, to run all _omt_ tests inside a project: 
 
     cd OSB_proj_dir
-    omv_alltests
+    omv all
