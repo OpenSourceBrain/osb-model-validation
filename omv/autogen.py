@@ -12,10 +12,12 @@ class UnsortableOrderedDict(OrderedDict):
         return UnsortableList(OrderedDict.items(self, *args, **kwargs))
 yaml.add_representer(UnsortableOrderedDict, yaml.representer.SafeRepresenter.represent_dict)
 
-def read_option(options, default=0):
+def read_option(options, default=0, silent=False):
     for i, opt in enumerate(options):
         print '\t\t', i, opt
     opt = None
+    if silent:
+        opt = default
     while opt is None:
         try:
             sel = int(
