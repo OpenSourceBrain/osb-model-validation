@@ -2,14 +2,22 @@ from os.path import isdir, join, split
 from glob import glob
 import yaml
 
-dirs_to_engines_exts = {'NEURON': {'engine': 'NEURON', 'extension': '.hoc'},
-                        'NeuroML2': {'engine': 'LEMS', 'extension': '.nml'}}
+#ugly hack to get .travis.yaml closer to manual version
+from collections import OrderedDict
+class UnsortableList(list):
+    def sort(self, *args, **kwargs):
+        pass
+class UnsortableOrderedDict(OrderedDict):
+    def items(self, *args, **kwargs):
+        return UnsortableList(OrderedDict.items(self, *args, **kwargs))
+yaml.add_representer(UnsortableOrderedDict, yaml.representer.SafeRepresenter.represent_dict)
 
-
-def read_option(options, default=0):
+def read_option(options, default=0, silent=False):
     for i, opt in enumerate(options):
         print '\t\t', i, opt
     opt = None
+    if silent:
+        opt = default
     while opt is None:
         try:
             sel = int(
@@ -22,8 +30,10 @@ def read_option(options, default=0):
             opt = options[default]
     return opt
 
-
-def find_targets():
+def find_targets(auto=False):
+    #TODO: should belong to backend
+    dirs_to_engines_exts = {'NEURON': {'engine': 'NEURON', 'extension': '.hoc'},
+                            'NeuroML2': {'engine': 'jNeuroML', 'extension': '.nml'}}
     targets = []
     for d, eng_ext in dirs_to_engines_exts.iteritems():
         if isdir(d):
@@ -33,7 +43,11 @@ def find_targets():
             print '  Will look for scripts with {0} extension'.format(ext)
             scripts = glob(join(d, '*' + ext))
             # print '    found', scripts
-            script = read_option(scripts)
+            if auto:
+                print 'selecting default: ', scripts[0]
+                script = scripts[0]
+            else:
+                script = read_option(scripts)
             targets.append((engine, script))
             # print 'selected', script
     return targets
@@ -49,31 +63,39 @@ def create_dryrun(engine, target):
 
 
 def generate_dottravis(targets):
-    travis = '''\
-language: python
-python: 2.7
+    from backends import be_paths, be_env_vars
 
-env:
-global:
-    - PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python/site-packages PATH=$PATH:$HOME/neuron/nrn/`arch`/bin:$HOME/jnml/jNeuroMLJar JNML_HOME=$HOME/jnml/jNeuroMLJar
-matrix:
-    - OST_ENGINE=lems
-    - OST_ENGINE=neuron
+    backends = [t[0] for t in targets]
+    paths = ':'.join(["$PATH"]+[be_paths[be] for be in backends if
+        be in be_paths])
 
-install: 
-    - pip install git+https://github.com/borismarin/osb-model-validation.git
+    extra_envs = ' '.join([be_env_vars[be] for be in backends if
+        be in be_env_vars])
 
-script:
-    - omv_alltests
-'''
+    pp = 'PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python/site-packages'
+    pa = 'PATH=' + paths
+    gls = ' '.join([pp, extra_envs, pa])
+
+    engines = ['OST_ENGINE='+be for be in backends]
+    #TODO: softcode 
+    repo = "git+https://github.com/borismarin/osb-model-validation.git"
+
+    travis = UnsortableOrderedDict([
+        ('language', 'python'),
+        ('python', 2.7),
+        ('env', {'global' : gls, 'matrix': engines}), 
+        ('install',  ['pip install ' + repo]),
+        ('script',  ['omv all'])
+    ])
+
     with open('.travis.yml', 'w') as fh:
-        fh.write(travis)
+        fh.write(yaml.dump(travis, default_flow_style=False))
 
-
-def autogen():
-    targets = find_targets()
+def autogen(auto=False, dry=True):
+    targets = find_targets(auto)
     for engine, target in targets:
-        create_dryrun(engine, target)
+        if dry:
+            create_dryrun(engine, target)
     generate_dottravis(targets)
 
 
