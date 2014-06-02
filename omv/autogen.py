@@ -4,7 +4,7 @@ import yaml
 
 #TODO: extract from backend dir
 dirs_to_engines_exts = {'NEURON': {'engine': 'NEURON', 'extension': '.hoc'},
-                        'NeuroML2': {'engine': 'LEMS', 'extension': '.nml'}}
+                        'NeuroML2': {'engine': 'jNeuroML', 'extension': '.nml'}}
 
 
 def read_option(options, default=0):
@@ -57,8 +57,8 @@ def generate_dottravis(targets):
 
     #TODO: move to backend dir
     be_paths = {'NEURON': "$HOME/neuron/nrn/`arch`/bin",
-                'LEMS': "$HOME/jnml/jNeuroMLJar"}
-    be_env_vars = {'LEMS':"JNML_HOME=$HOME/jnml/jNeuroMLJar"}
+                'jNeuroML': "$HOME/jnml/jNeuroMLJar"}
+    be_env_vars = {'jNeuroML':"JNML_HOME=$HOME/jnml/jNeuroMLJar"}
 
     backends = [t[0] for t in targets]
     paths = ':'.join(["$PATH"]+[be_paths[be] for be in backends if

@@ -3,5 +3,5 @@ from lems import LemsBackend
 
 OMVBackends = {
     'NEURON' : NeuronBackend,
-    'LEMS' : LemsBackend
+    'jNeuroML' : LemsBackend
 }
