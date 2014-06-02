@@ -12,12 +12,10 @@ class UnsortableOrderedDict(OrderedDict):
         return UnsortableList(OrderedDict.items(self, *args, **kwargs))
 yaml.add_representer(UnsortableOrderedDict, yaml.representer.SafeRepresenter.represent_dict)
 
-def read_option(options, default=0, silent=False):
+def read_option(options, default=0):
     for i, opt in enumerate(options):
         print '\t\t', i, opt
     opt = None
-    if silent:
-        opt = default
     while opt is None:
         try:
             sel = int(
@@ -42,14 +40,13 @@ def find_targets(auto=False):
             print 'Default directory for {0} engine found.'.format(engine)
             print '  Will look for scripts with {0} extension'.format(ext)
             scripts = glob(join(d, '*' + ext))
-            # print '    found', scripts
-            if auto:
-                print 'selecting default: ', scripts[0]
-                script = scripts[0]
-            else:
-                script = read_option(scripts)
-            targets.append((engine, script))
-            # print 'selected', script
+            if scripts:
+                if auto:
+                    print 'selecting default: ', scripts[0]
+                    script = scripts[0]
+                else:
+                    script = read_option(scripts)
+                targets.append((engine, script))
     return targets
 
 
@@ -93,10 +90,13 @@ def generate_dottravis(targets):
 
 def autogen(auto=False, dry=True):
     targets = find_targets(auto)
-    for engine, target in targets:
-        if dry:
-            create_dryrun(engine, target)
-    generate_dottravis(targets)
+    if targets:
+        for engine, target in targets:
+            if dry:
+                create_dryrun(engine, target)
+        generate_dottravis(targets)
+    else:
+        print 'No target scripts found!'
 
 
 if __name__ == '__main__':
