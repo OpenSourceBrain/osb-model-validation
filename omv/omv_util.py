@@ -14,7 +14,7 @@
   
   Options:
     -h --help     Show this screen.
-    -d --dryrun   Generate dry-run tests only (default) 
+    -d --dryrun   Generate dry-run tests only [default: False]
     --version     Show version.
     -y            Auto-select default options (non-interactive mode)
 """
