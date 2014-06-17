@@ -23,12 +23,8 @@ def test_all():
 
     """
     
-def test_one():
-    try: 
-        t = argv[1]
-    except:
-        exit('No omt file specified')
-    assert(all(parse_omt(t)))
+def test_one(omt_fname):
+    assert(all(parse_omt(omt_fname)))
 
 
 
