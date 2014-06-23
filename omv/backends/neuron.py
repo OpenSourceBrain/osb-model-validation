@@ -29,7 +29,7 @@ class NeuronBackend(OMVBackend):
         return ret
  
 
-    def install(self):
+    def install(self, backend_version):
         import getnrn
         inform('Will fetch and install the latest NEURON version', indent=2)
         getnrn.install_neuron()
