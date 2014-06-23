@@ -2,31 +2,37 @@ import os
 from glob import glob
 import subprocess as sp
 from textwrap import dedent
-from os.path import dirname, realpath
 from utils.wdir import working_dir
+from backend import OMVBackend
+from os.path import dirname
 
 from ..common.output import inform
 
-class NeuronBackend(object):
+class NeuronBackend(OMVBackend):
 
     def __init__(self, target):
-        try:
-            FNULL = open(os.devnull, 'w')
-            sp.check_call(['nrniv', '--version'], stdout=FNULL)
-        except OSError:
-            import getnrn
-            inform('Will fetch and install the latest NEURON version', indent=2)
-            getnrn.install_neuron()
-            
-        self.modelpath = realpath(target)
-
-        self.extra_pars = []
+        super(NeuronBackend, self).__init__(target)
         try:
             self.stdout = self.compile_modfiles()
         except sp.CalledProcessError as err:
             self.stderr = err.output
             self.returncode = err.returncode
             inform('Error compiling modfiles:', self.stderr, indent=2)
+
+    def is_installed(self, version):
+        ret = True
+        try:
+            FNULL = open(os.devnull, 'w')
+            sp.check_call(['nrniv', '--version'], stdout=FNULL)
+        except OSError:
+            ret =  False
+        return ret
+ 
+
+    def install(self):
+        import getnrn
+        inform('Will fetch and install the latest NEURON version', indent=2)
+        getnrn.install_neuron()
 
 
     def compile_modfiles(self):
@@ -76,11 +82,6 @@ class NeuronBackend(object):
             
     def query_temperature(self):
         return self.register_query('temperature', 'temperature=celsius')
-
-
-
-
-
 
 
 
