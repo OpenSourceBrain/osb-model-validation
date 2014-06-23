@@ -9,8 +9,7 @@ setup(
         'console_scripts': [
             'omv = omv.omv_util:main',
             'omv_alltests = omv.find_tests:test_all',
-            'omv_autogen = omv.autogen:autogen',
-            'omv_test = omv.finde_tests:test_one']},
+            'omv_autogen = omv.autogen:autogen']},
     package_data={
         'omv': [
             'schemata/mep.yaml',

@@ -23,7 +23,11 @@ def load_data_file(fname, columns=(0,1), header_lines=0, scaling=1):
 def compare_arrays(arrays, tolerance):
     from numpy import allclose, array
     a1, a2 = array(arrays)
-    return allclose(a1, a2, tolerance)
+    try:
+        comp = allclose(a1, a2, tolerance)
+    except ValueError:
+        comp = False
+    return comp
 
 def compare_dictionaries(d1, d2, tolerance=0.1):
     from numpy import allclose, array
