@@ -11,15 +11,14 @@ import shutil
 import datetime
 from subprocess import check_output as co
 
-
-testable_projects = 0
-passing_projects = 0
 projects = 0
+testable_projects = 0
+non_omv_tests = 0
+passing_projects = 0
 
 test_dir = "local_test"
 
 fresh_clones = True
-
 
 if fresh_clones: 
     if os.path.exists(test_dir):
@@ -49,10 +48,11 @@ if __name__ == "__main__":
             if github_repo.check_file_in_repository(".travis.yml"):
 
                 raw_url = github_repo.link_to_raw_file_in_repo(".travis.yml")
-                print("  .travis.yml found at %s"%raw_url)
+                print("  .travis.yml found at %s\n"%raw_url)
                 contents = osb.get_page(raw_url)
                 if not 'omv' in contents:
-                    print("That .travis.yml does not look like is uses OMV...")
+                    print("That .travis.yml does not look like it uses OMV...")
+                    non_omv_tests+=1
                 else:
                     testable_projects +=1
                     target_dir = '%s/%s'%(test_dir, project.identifier)
@@ -70,5 +70,5 @@ if __name__ == "__main__":
 
     end = datetime.datetime.now()
 
-    print("\n%i projects checked, of which %i have OMV test(s) and %i passed in %s seconds\n"%(projects, testable_projects, passing_projects, (end-start).seconds))
+    print("\n%i projects checked, of which %i have OMV tests (%i non-OMV tested projects) and %i passed with OMV in %s seconds\n"%(projects, testable_projects, non_omv_tests, passing_projects, (end-start).seconds))
 
