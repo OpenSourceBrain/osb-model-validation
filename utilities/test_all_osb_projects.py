@@ -11,6 +11,9 @@ testable_projects = 0
 passing_projects = 0
 projects = 0
 
+test_dir = "local_test"
+
+
 
 if __name__ == "__main__":
     
