@@ -1,18 +1,24 @@
 import os
-from ..common.output import inform
 import subprocess as sp
 
-class LemsBackend(object):
+from ..common.output import inform
+from backend import OMVBackend
 
-    def __init__(self, target):
+class LemsBackend(OMVBackend):
+
+    def is_installed(self, version):
+        ret = True
         try:
             FNULL = open(os.devnull, 'w')
             sp.check_call(['jnml', '-h'], stdout=FNULL)
         except OSError:
-            from getjnml import install_jnml
-            inform('Will fetch and install the latest JNeuroML jar', indent=2)
-            install_jnml()
-        self.modelpath = target
+            ret = False
+        return ret
+        
+    def install(self, version):
+        from getjnml import install_jnml
+        inform('Will fetch and install the latest JNeuroML jar', indent=2)
+        install_jnml()
 
     def run(self):
         try:
