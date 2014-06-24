@@ -60,27 +60,16 @@ def create_dryrun(engine, target):
 
 
 def generate_dottravis(targets):
-    from backends import be_paths, be_env_vars
 
     backends = [t[0] for t in targets]
-    paths = ':'.join(["$PATH"]+[be_paths[be] for be in backends if
-        be in be_paths])
-
-    extra_envs = ' '.join([be_env_vars[be] for be in backends if
-        be in be_env_vars])
-
-    pp = 'PYTHONPATH=$PYTHONPATH:$HOME/local/lib/python/site-packages'
-    pa = 'PATH=' + paths
-    gls = ' '.join([pp, extra_envs, pa])
-
-    engines = ['OST_ENGINE='+be for be in backends]
+    engines = ['OMV_ENGINE='+be for be in backends]
     #TODO: softcode 
     repo = "git+https://github.com/borismarin/osb-model-validation.git"
 
     travis = UnsortableOrderedDict([
         ('language', 'python'),
         ('python', 2.7),
-        ('env', {'global' : gls, 'matrix': engines}), 
+        ('matrix', engines), 
         ('install',  ['pip install ' + repo]),
         ('script',  ['omv all'])
     ])
