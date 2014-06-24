@@ -10,6 +10,7 @@ from ..common.output import inform
 
 class NeuronBackend(OMVBackend):
 
+
     def __init__(self, target):
         super(NeuronBackend, self).__init__(target)
         try:
@@ -20,6 +21,7 @@ class NeuronBackend(OMVBackend):
             inform('Error compiling modfiles:', self.stderr, indent=2)
 
     def is_installed(self, version):
+
         ret = True
         try:
             FNULL = open(os.devnull, 'w')
@@ -31,6 +33,8 @@ class NeuronBackend(OMVBackend):
 
     def install(self, backend_version):
         import getnrn
+        self.path = "$HOME/neuron/nrn/`arch`/bin"
+        self.environment_vars = {'PYTHONPATH':'$PYTHONPATH:$HOME/local/lib/python/site-packages'}
         inform('Will fetch and install the latest NEURON version', indent=2)
         getnrn.install_neuron()
 
