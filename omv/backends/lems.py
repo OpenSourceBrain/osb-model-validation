@@ -17,8 +17,10 @@ class LemsBackend(OMVBackend):
         
     def install(self, version):
         from getjnml import install_jnml
-        self.path = "$HOME/jnml/jNeuroMLJar"
-        self.environment_vars = {'JNML_HOME':'$HOME/jnml/jNeuroMLJar'}
+        home = os.environ['HOME']
+        p = os.path.join(home, 'jnml/jNeuroMLJar')
+        self.path = p
+        self.environment_vars = {'JNML_HOME': p}
         inform('Will fetch and install the latest JNeuroML jar', indent=2)
         install_jnml()
 
