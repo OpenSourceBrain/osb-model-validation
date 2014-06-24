@@ -4,7 +4,7 @@ import subprocess as sp
 from ..common.output import inform
 from backend import OMVBackend
 
-class LemsBackend(OMVBackend):
+class JNeuroMLBackend(OMVBackend):
 
     def is_installed(self, version):
         ret = True
@@ -21,7 +21,7 @@ class LemsBackend(OMVBackend):
         p = os.path.join(home, 'jnml/jNeuroMLJar')
         self.path = p
         self.environment_vars = {'JNML_HOME': p}
-        inform('Will fetch and install the latest JNeuroML jar', indent=2)
+        inform('Will fetch and install the latest jNeuroML jar', indent=2)
         install_jnml()
 
     def run(self):

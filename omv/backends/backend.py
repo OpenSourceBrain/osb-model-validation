@@ -37,7 +37,8 @@ class OMVBackend(object):
                 self.install(backend_version)
                 self.set_environment()
                 self.set_path()
-            except: 
+            except Exception as e: 
+                print(e)
                 raise(BackendInstallationError)
 
         self.modelpath = realpath(target)
