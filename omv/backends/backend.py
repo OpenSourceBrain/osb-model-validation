@@ -21,11 +21,13 @@ class OMVBackend(object):
     def set_environment(self):
         if self.environment_vars:
             for name,val in self.environment_vars.iteritems():
+                print '\t Setting env var', name, '=', val
                 environ[name] = val
 
     def set_path(self):
         if self.path:
             environ['PATH'] = ':'.join((environ['PATH'], self.path))
+            print '\t Setting path', environ['PATH']
     
     def __init__(self, target, backend_version=None):
         
