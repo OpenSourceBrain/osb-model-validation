@@ -1,5 +1,6 @@
 import os
 from glob import glob
+import platform
 import subprocess as sp
 from textwrap import dedent
 from utils.wdir import working_dir
@@ -33,7 +34,9 @@ class NeuronBackend(OMVBackend):
 
     def install(self, backend_version):
         import getnrn
-        self.path = "$HOME/neuron/nrn/`arch`/bin"
+        home = os.environ['HOME']
+        arch = platform.machine()
+        self.path = "%/neuron/nrn/`arch`/bin" % (home, arch)
         self.environment_vars = {'PYTHONPATH':'$PYTHONPATH:$HOME/local/lib/python/site-packages'}
         inform('Will fetch and install the latest NEURON version', indent=2)
         getnrn.install_neuron()
