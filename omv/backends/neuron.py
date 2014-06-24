@@ -11,6 +11,7 @@ from ..common.output import inform
 
 class NeuronBackend(OMVBackend):
 
+    backend_name = "NEURON"
 
     def __init__(self, target):
         super(NeuronBackend, self).__init__(target)

@@ -6,6 +6,8 @@ from backend import OMVBackend
 
 class JNeuroMLBackend(OMVBackend):
 
+    backend_name = "jNeuroML"
+        
     def is_installed(self, version):
         ret = True
         try:

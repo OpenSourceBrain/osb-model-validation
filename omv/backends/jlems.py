@@ -6,6 +6,8 @@ from ..common.output import inform
 from backend import OMVBackend
 
 class JLemsBackend(OMVBackend):
+    
+    backend_name = "jLEMS"
 
     def is_installed(self, version):
         ret = True
