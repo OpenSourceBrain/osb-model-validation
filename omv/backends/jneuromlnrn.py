@@ -26,7 +26,7 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
         
     def run(self):
         try:
-            self.stdout = sp.check_output(['jnml', self.modelpath, '-neuron', '-nogui'])
+            self.stdout = sp.check_output(['jnml', self.modelpath, '-neuron', '-nogui', '-run'])
             self.returncode = 0
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
