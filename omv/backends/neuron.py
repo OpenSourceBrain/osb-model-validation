@@ -11,6 +11,7 @@ from ..common.output import inform
 
 class NeuronBackend(OMVBackend):
 
+    name = "NEURON"
 
     def __init__(self, target):
         super(NeuronBackend, self).__init__(target)
@@ -21,7 +22,9 @@ class NeuronBackend(OMVBackend):
             self.returncode = err.returncode
             inform('Error compiling modfiles:', self.stderr, indent=2)
 
-    def is_installed(self, version):
+    @staticmethod
+    def is_installed(version):
+        print("Checking whether %s is installed..."%NeuronBackend.name)
 
         ret = True
         try:
@@ -31,14 +34,14 @@ class NeuronBackend(OMVBackend):
             ret =  False
         return ret
  
-
-    def install(self, backend_version):
+    @staticmethod
+    def install(backend_version):
         import getnrn
         home = os.environ['HOME']
         arch = platform.machine()
         pp = os.path.join(home,'local/lib/python/site-packages') 
-        self.path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
-        self.environment_vars = {'PYTHONPATH': pp}
+        NeuronBackend.path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
+        NeuronBackend.environment_vars = {'PYTHONPATH': pp, 'NEURON_HOME':os.path.join(home, 'neuron/nrn/', arch)}
         inform('Will fetch and install the latest NEURON version', indent=2)
         getnrn.install_neuron()
 
