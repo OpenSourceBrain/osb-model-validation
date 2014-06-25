@@ -16,13 +16,10 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
     
     
     def install(self, version):
-        from getjnml import install_jnml
-        home = os.environ['HOME']
-        p = os.path.join(home, 'jnml/jNeuroMLJar')
-        self.path = p
-        self.environment_vars = {'JNML_HOME': p}
-        inform('Will fetch and install the latest jNeuroML jar for '+self.name, indent=2)
-        install_jnml()
+        if not JNeuroMLBackend.is_installed(None):
+            JNeuroMLBackend.install(None)
+        if not NeuronBackend.is_installed(None):
+            NeuronBackend.install(None)
         
     def run(self):
         try:
