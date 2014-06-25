@@ -7,9 +7,11 @@ from backend import OMVBackend
 
 class JLemsBackend(OMVBackend):
     
-    backend_name = "jLEMS"
+    name = "jLEMS"
 
-    def is_installed(self, version):
+    @staticmethod
+    def is_installed(version):
+        print("Checking whether %s is installed..."%JLemsBackend.name)
         ret = True
         try:
             FNULL = open(os.devnull, 'w')

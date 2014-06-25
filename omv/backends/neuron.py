@@ -11,7 +11,7 @@ from ..common.output import inform
 
 class NeuronBackend(OMVBackend):
 
-    backend_name = "NEURON"
+    name = "NEURON"
 
     def __init__(self, target):
         super(NeuronBackend, self).__init__(target)
@@ -22,7 +22,9 @@ class NeuronBackend(OMVBackend):
             self.returncode = err.returncode
             inform('Error compiling modfiles:', self.stderr, indent=2)
 
-    def is_installed(self, version):
+    @staticmethod
+    def is_installed(version):
+        print("Checking whether %s is installed..."%NeuronBackend.name)
 
         ret = True
         try:

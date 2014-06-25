@@ -6,9 +6,11 @@ from backend import OMVBackend
 
 class JNeuroMLBackend(OMVBackend):
 
-    backend_name = "jNeuroML"
+    name = "jNeuroML"
         
-    def is_installed(self, version):
+    @staticmethod
+    def is_installed(version):
+        print("Checking whether %s is installed..."%JNeuroMLBackend.name)
         ret = True
         try:
             FNULL = open(os.devnull, 'w')

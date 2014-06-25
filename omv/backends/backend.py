@@ -6,12 +6,12 @@ class BackendInstallationError(Exception):
 
 class OMVBackend(object):
     
-    backend_name = "Not yet set!"
+    name = "Name not yet set!!"
     environment_vars = {}
     path = ''
     
     def __str__(self):
-        return self.backend_name
+        return self.name
 
     def is_installed(self, version):
         raise NotImplementedError()
