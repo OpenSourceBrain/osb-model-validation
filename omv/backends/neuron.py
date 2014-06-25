@@ -41,7 +41,7 @@ class NeuronBackend(OMVBackend):
         arch = platform.machine()
         pp = os.path.join(home,'local/lib/python/site-packages') 
         NeuronBackend.path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
-        NeuronBackend.environment_vars = {'PYTHONPATH': pp}
+        NeuronBackend.environment_vars = {'PYTHONPATH': pp, 'NEURON_HOME':os.path.join(home, 'neuron/nrn/', arch)}
         inform('Will fetch and install the latest NEURON version', indent=2)
         getnrn.install_neuron()
 

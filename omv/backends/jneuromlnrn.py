@@ -15,11 +15,21 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
         return JNeuroMLBackend.is_installed(None) and NeuronBackend.is_installed(None)
     
     
-    def install(self, version):
+    @staticmethod
+    def install(version):
+        
         if not JNeuroMLBackend.is_installed(None):
             JNeuroMLBackend.install(None)
         if not NeuronBackend.is_installed(None):
             NeuronBackend.install(None)
+    
+        JNeuroMLNRNBackend.path = JNeuroMLBackend.path
+        JNeuroMLNRNBackend.environment_vars = {}
+        JNeuroMLNRNBackend.environment_vars.update(JNeuroMLBackend.environment_vars)
+        JNeuroMLNRNBackend.environment_vars.update(NeuronBackend.environment_vars)
+        print "PATH: "+JNeuroMLNRNBackend.path
+        print "VARS: "+JNeuroMLNRNBackend.environment_vars
+        
         
     def run(self):
         try:
