@@ -69,7 +69,7 @@ def generate_dottravis(targets):
     travis = UnsortableOrderedDict([
         ('language', 'python'),
         ('python', 2.7),
-        ('matrix', engines), 
+        ('env', engines), 
         ('install',  ['pip install ' + repo]),
         ('script',  ['omv all'])
     ])
