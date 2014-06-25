@@ -35,6 +35,7 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
         try:
             print("Running with %s..."%JNeuroMLNRNBackend.name)
             self.stdout = sp.check_output(['jnml', self.modelpath, '-neuron', '-nogui', '-run'])
+            print self.stdout
             print("Success with %s..."%JNeuroMLNRNBackend.name)
             self.returncode = 0
         except sp.CalledProcessError as err:
