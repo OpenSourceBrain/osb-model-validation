@@ -23,7 +23,7 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
         if not NeuronBackend.is_installed(None):
             NeuronBackend.install(None)
     
-        JNeuroMLNRNBackend.path = JNeuroMLBackend.path
+        JNeuroMLNRNBackend.path = JNeuroMLBackend.path+":"+NeuronBackend.path
         JNeuroMLNRNBackend.environment_vars = {}
         JNeuroMLNRNBackend.environment_vars.update(JNeuroMLBackend.environment_vars)
         JNeuroMLNRNBackend.environment_vars.update(NeuronBackend.environment_vars)
@@ -33,7 +33,9 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
         
     def run(self):
         try:
+            print("Running with %s..."%JNeuroMLNRNBackend.name)
             self.stdout = sp.check_output(['jnml', self.modelpath, '-neuron', '-nogui', '-run'])
+            print("Success with %s..."%JNeuroMLNRNBackend.name)
             self.returncode = 0
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
