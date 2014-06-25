@@ -4,9 +4,13 @@ import subprocess as sp
 from ..common.output import inform
 from backend import OMVBackend
 
-class LemsBackend(OMVBackend):
+class JNeuroMLBackend(OMVBackend):
 
-    def is_installed(self, version):
+    name = "jNeuroML"
+        
+    @staticmethod
+    def is_installed(version):
+        print("Checking whether %s is installed..."%JNeuroMLBackend.name)
         ret = True
         try:
             FNULL = open(os.devnull, 'w')
@@ -15,13 +19,14 @@ class LemsBackend(OMVBackend):
             ret = False
         return ret
         
-    def install(self, version):
+    @staticmethod
+    def install(version):
         from getjnml import install_jnml
         home = os.environ['HOME']
         p = os.path.join(home, 'jnml/jNeuroMLJar')
-        self.path = p
-        self.environment_vars = {'JNML_HOME': p}
-        inform('Will fetch and install the latest JNeuroML jar', indent=2)
+        JNeuroMLBackend.path = p
+        JNeuroMLBackend.environment_vars = {'JNML_HOME': p}
+        inform('Will fetch and install the latest jNeuroML jar', indent=2)
         install_jnml()
 
     def run(self):
