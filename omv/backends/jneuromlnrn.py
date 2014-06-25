@@ -28,7 +28,7 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
         JNeuroMLNRNBackend.environment_vars.update(JNeuroMLBackend.environment_vars)
         JNeuroMLNRNBackend.environment_vars.update(NeuronBackend.environment_vars)
         print "PATH: "+JNeuroMLNRNBackend.path
-        print "VARS: "+JNeuroMLNRNBackend.environment_vars
+        print JNeuroMLNRNBackend.environment_vars
         
         
     def run(self):
