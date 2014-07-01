@@ -1,6 +1,4 @@
 from analyzer import OMVAnalyzer
-from utils import timeseries as ts
-from ..common.output import inform
 
 class TemperatureAnalyzer(OMVAnalyzer):
 

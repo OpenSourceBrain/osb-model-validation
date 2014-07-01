@@ -1,7 +1,6 @@
 import os
 import subprocess as sp
 
-from ..common.output import inform
 from jneuroml import JNeuroMLBackend
 from neuron import NeuronBackend
 
@@ -34,9 +33,9 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
     def run(self):
         try:
             print("Running with %s..."%JNeuroMLNRNBackend.name)
-            self.stdout = sp.check_output(['jnml', self.modelpath, '-neuron', '-nogui', '-run'])
-            print self.stdout
-            print("Success with %s..."%JNeuroMLNRNBackend.name)
+            self.stdout = sp.check_output(['jnml', self.modelpath, '-neuron', '-nogui', '-run'], cwd=os.path.dirname(self.modelpath))
+            #print self.stdout
+            print("Success with running %s..."%JNeuroMLNRNBackend.name)
             self.returncode = 0
         except sp.CalledProcessError as err:
             self.returncode = err.returncode

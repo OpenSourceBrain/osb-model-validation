@@ -2,10 +2,11 @@ import utils.timeseries as ts
 from ..common.output import inform
 
 class OMVAnalyzer(object):
-    def __init__(self, observable, expected, backend):
+    def __init__(self, observable, expected, backend, omt_root):
         self.backend = backend
         self.observable = observable
         self.expected = expected
+        self.omt_root = omt_root
         self.before_running()
 
     def before_running(self):

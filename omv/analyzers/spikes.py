@@ -9,7 +9,7 @@ class SpikeAnalyzer(OMVAnalyzer):
         if isinstance(to_parse, list):
             spikes = to_parse
         elif 'file' in to_parse:
-            f = fn.FileNodeHelper(to_parse['file'])
+            f = fn.FileNodeHelper(to_parse['file'], self.omt_root)
             tv = f.get_timeseries()
             inform('Reading timeseries from:', f, indent=1)
             if 'spike detection' in to_parse:

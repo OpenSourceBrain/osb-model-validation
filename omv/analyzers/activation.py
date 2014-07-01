@@ -7,7 +7,7 @@ class ActivationVariableAnalyzer(OMVAnalyzer):
 
     def parse_observable(self):
         if 'file' in self.observable:
-            f = fn.FileNodeHelper(self.observable['file'])
+            f = fn.FileNodeHelper(self.observable['file'], self.omt_root)
             inform('Activation variable from file',
                     self.observable['file'])
             return f.get_timeseries()

@@ -1,9 +1,10 @@
 from timeseries import load_data_file
+from os.path import join
 
 class FileNodeHelper(object):
 
-    def __init__(self, fn):
-        self.filename = fn['path']
+    def __init__(self, fn, root_dir):
+        self.filename = join(root_dir, fn['path'])
         self.columns = fn.get('columns', (0,1))
         self.header = fn.get('header', 0)
         self.scaling = fn.get('scaling', [1.]*len(self.columns))

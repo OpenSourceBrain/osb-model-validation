@@ -31,7 +31,7 @@ def parse_omt(omt_path):
     backend = OMVBackends[engine](join(omt_root, target))
     for obsname, observable in observables.iteritems():
         expected = experiment['expected'].get(obsname, None)
-        tests.append(OMVAnalyzers[obsname](observable, expected, backend))
+        tests.append(OMVAnalyzers[obsname](observable, expected, backend, omt_root))
 
     backend.run()
     return [t() for t in tests]

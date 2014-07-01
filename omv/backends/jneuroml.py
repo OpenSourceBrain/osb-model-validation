@@ -1,7 +1,6 @@
 import os
 import subprocess as sp
 
-from ..common.output import inform
 from backend import OMVBackend
 
 class JNeuroMLBackend(OMVBackend):
@@ -31,7 +30,7 @@ class JNeuroMLBackend(OMVBackend):
 
     def run(self):
         try:
-            self.stdout = sp.check_output(['jnml', self.modelpath, '-nogui'])
+            self.stdout = sp.check_output(['jnml', self.modelpath, '-nogui'], cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
