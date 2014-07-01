@@ -28,6 +28,10 @@ class OMVAnalyzer(object):
 
         are_close = ts.compare_arrays((obs, exp), tolerance)
         if not are_close:
-            inform('Comparison of \n%s\nand\n%s\nfailed against tolerance %g'%(obs,exp, tolerance))
+            obs_str = "["
+            for o in obs:
+                obs_str+="%s, "%o
+            obs_str = obs_str[:-2]+"]"
+            inform('Comparison of \n(observed data): %s\nand\n(expected data): %s\nfailed against tolerance %g'%(obs_str,exp, tolerance))
         
         return are_close
