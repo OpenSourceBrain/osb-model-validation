@@ -1,6 +1,6 @@
 import os
 import subprocess as sp
-
+from ..common.output import inform
 from backend import OMVBackend
 
 class JNeuroMLBackend(OMVBackend):
