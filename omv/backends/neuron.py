@@ -54,7 +54,6 @@ class NeuronBackend(OMVBackend):
                 out = sp.check_output(['nrnivmodl'])
                 inform(out, indent=2)
         return out
-        
 
     def run(self):
         with working_dir(dirname(self.modelpath)):
@@ -71,21 +70,9 @@ class NeuronBackend(OMVBackend):
             self.stdout = stdout
             self.stderr = stderr
             self.returncode = p.returncode
-
-    def register_query(self, name, cmd=''):
-        query = '{{%s}{print "%s: ", %s}}' % (cmd, name, name)
-        inform('registered nrn query:', query, indent=2)
-        self.extra_pars.append(query)
-        return name
-
-    def fetch_query(self, key):
-        import re
-        m = re.search(key+':'+'\s*([0-9]*\.?[0-9]+)\s*', self.stdout)
-        if m:
-            return m.groups()[0]
-        else:
-            print 'not found!'
-            raise KeyError
+            
+    def build_query_string(self, name, cmd):
+        return '{{%s}{print "%s: ", %s}}' % (cmd, name, name)
 
     def query_area(self, secname):
         name = self.register_query('area_%s'%secname, 'forsec "%s" {for (x,0) area_%s+=area(x)}'%(secname,secname))

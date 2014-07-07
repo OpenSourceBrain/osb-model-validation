@@ -35,6 +35,9 @@ class OMVBackend(object):
 
     def install(self, version):
         raise NotImplementedError()
+        
+    def build_query_string(self, name, cmd):
+        raise NotImplementedError()
 
     def set_environment(self):
         if self.environment_vars:
@@ -46,3 +49,18 @@ class OMVBackend(object):
         if self.path:
             environ['PATH'] = ':'.join((environ['PATH'], self.path))
             print '\t Setting path', environ['PATH']
+
+    def register_query(self, name, cmd=''):
+        query = self.build_query_string(name, cmd) 
+        print '\t\tRegistered backend query:', query
+        self.extra_pars.append(query)
+        return name
+
+    def fetch_query(self, key):
+        import re
+        m = re.search(key+':'+'\s*([0-9]*\.?[0-9]+)\s*', self.stdout)
+        if m:
+            return m.groups()[0]
+        else:
+            print 'not found!'
+            raise KeyError
