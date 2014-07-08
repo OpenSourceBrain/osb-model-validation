@@ -20,7 +20,7 @@ class GenesisBackend(OMVBackend):
             temp = NamedTemporaryFile(suffix='.g')
             temp.writelines(['echo "version: "{version} \n', 'quit \n'])
             temp.seek(0)
-            out = sp.check_output(['genesis', '-nox', '-batch', '-notty', temp.name])
+            out = sp.check_output(['nxgenesis', '-nox', '-batch', '-notty', temp.name])
             m = re.search('version:'+'\s*([0-9]*\.?[0-9]+)\s*', out)
             if m:
                 ret = m.groups()[0]
