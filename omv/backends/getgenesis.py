@@ -10,7 +10,7 @@ def install_genesis(get_latest=False):
         print co(['wget', 'https://github.com/borismarin/omv-testbed/raw/master/genesis23omv.tgz'])
         print co(['pwd'])
         print co(['tar', 'xzvf', 'genesis23omv.tgz'])
-        os.chdir('genesis/src')
+        os.chdir('genesis-2.3/src')
         print co(['make'])
         print co(['cp', 'startup/travis_simrc',
                   os.path.join(os.environ['HOME'], '.simrc')])

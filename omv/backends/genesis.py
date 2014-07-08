@@ -35,7 +35,7 @@ class GenesisBackend(OMVBackend):
     def install(cls, backend_version):
         import getgenesis
         home = os.environ['HOME']
-        cls.path = os.path.join(home, 'genesis', 'genesis', 'src')
+        cls.path = os.path.join(home, 'genesis', 'genesis-2.3', 'src')
         print 'Will fetch and install genesis-2.3'
         getgenesis.install_genesis()
 
@@ -58,7 +58,7 @@ class GenesisBackend(OMVBackend):
                 print temp.readlines()
                 print self.stdout
                 print '########################'
-                print self.se
+                print self.stderr
                 print '########################'
                 self.returncode = 0
             except sp.CalledProcessError as e:
