@@ -22,9 +22,9 @@ class NeuronBackend(OMVBackend):
             self.returncode = err.returncode
             inform('Error compiling modfiles:', self.stderr, indent=2)
 
-    @staticmethod
-    def is_installed(version):
-        print("Checking whether %s is installed..."%NeuronBackend.name)
+    @classmethod
+    def is_installed(cls, version):
+        print("Checking whether %s is installed..."% cls.name)
 
         ret = True
         try:
@@ -34,14 +34,14 @@ class NeuronBackend(OMVBackend):
             ret =  False
         return ret
  
-    @staticmethod
-    def install(backend_version):
+    @classmethod
+    def install(cls, backend_version):
         import getnrn
         home = os.environ['HOME']
         arch = platform.machine()
         pp = os.path.join(home,'local/lib/python/site-packages') 
-        NeuronBackend.path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
-        NeuronBackend.environment_vars = {'PYTHONPATH': pp, 'NEURON_HOME':os.path.join(home, 'neuron/nrn/', arch)}
+        cls.path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
+        cls.environment_vars = {'PYTHONPATH': pp, 'NEURON_HOME':os.path.join(home, 'neuron/nrn/', arch)}
         inform('Will fetch and install the latest NEURON version', indent=2)
         getnrn.install_neuron()
 
@@ -54,7 +54,6 @@ class NeuronBackend(OMVBackend):
                 out = sp.check_output(['nrnivmodl'])
                 inform(out, indent=2)
         return out
-        
 
     def run(self):
         with working_dir(dirname(self.modelpath)):
@@ -71,21 +70,9 @@ class NeuronBackend(OMVBackend):
             self.stdout = stdout
             self.stderr = stderr
             self.returncode = p.returncode
-
-    def register_query(self, name, cmd=''):
-        query = '{{%s}{print "%s: ", %s}}' % (cmd, name, name)
-        inform('registered nrn query:', query, indent=2)
-        self.extra_pars.append(query)
-        return name
-
-    def fetch_query(self, key):
-        import re
-        m = re.search(key+':'+'\s*([0-9]*\.?[0-9]+)\s*', self.stdout)
-        if m:
-            return m.groups()[0]
-        else:
-            print 'not found!'
-            raise KeyError
+            
+    def build_query_string(self, name, cmd):
+        return '{{%s}{print "%s: ", %s}}' % (cmd, name, name)
 
     def query_area(self, secname):
         name = self.register_query('area_%s'%secname, 'forsec "%s" {for (x,0) area_%s+=area(x)}'%(secname,secname))

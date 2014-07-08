@@ -55,7 +55,8 @@ docs/_build/
 
 # vim/emacs
 *~
-*flymake* 
+*flymake.py
+*#*
 
 
 # OSB Test specific
