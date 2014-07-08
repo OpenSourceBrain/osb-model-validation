@@ -11,7 +11,7 @@ def install_genesis(get_latest=False):
         print co(['pwd'])
         print co(['tar', 'xzvf', 'genesis23omv.tgz'])
         os.chdir('genesis-2.3/src')
-        print co(['make'])
+        print co(['make nxgenesis'])
         print co(['cp', 'startup/travis_simrc',
                   os.path.join(os.environ['HOME'], '.simrc')])
 

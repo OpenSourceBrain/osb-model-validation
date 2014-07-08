@@ -48,7 +48,7 @@ class GenesisBackend(OMVBackend):
                 temp.seek(0)
 
                 with open('/tmp/omv.gen.err', 'w+') as se:
-                    self.stdout = sp.check_output(['genesis', '-nox',
+                    self.stdout = sp.check_output(['nxgenesis', '-nox',
                                                    '-batch', '-notty', temp.name],
                                                   stderr=se)
                     se.seek(0)
