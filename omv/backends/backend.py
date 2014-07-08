@@ -58,7 +58,7 @@ class OMVBackend(object):
 
     def fetch_query(self, key):
         import re
-        m = re.search(key+':'+'\s*([0-9]*\.?[0-9]+)\s*', self.stdout)
+        m = re.search(key+':'+'\s*([0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)\s*', self.stdout)
         if m:
             return m.groups()[0]
         else:
