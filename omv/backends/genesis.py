@@ -53,6 +53,13 @@ class GenesisBackend(OMVBackend):
                                                   stderr=se)
                     se.seek(0)
                     self.stderr = se.readlines()
+                print '########################'
+                temp.seek(0)
+                print temp.readlines()
+                print self.stdout
+                print '########################'
+                print self.se
+                print '########################'
                 self.returncode = 0
             except sp.CalledProcessError as e:
                 self.returncode = e.returncode
