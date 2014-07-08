@@ -8,10 +8,11 @@ def install_genesis(get_latest=False):
     os.mkdir(genpath)
     with working_dir(genpath):
         print co(['wget', 'https://github.com/borismarin/omv-testbed/raw/master/genesis23omv.tgz'])
-        print co(['pwd'])
         print co(['tar', 'xzvf', 'genesis23omv.tgz'])
         print co(['ls', '-la', 'genesis-2.3'])
         os.chdir('genesis-2.3/src')
+        print co(['pwd'])
+        print co(['ls', '-la'])
         print co(['make nxgenesis'])
         print co(['cp', 'startup/travis_simrc',
                   os.path.join(os.environ['HOME'], '.simrc')])
