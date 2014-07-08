@@ -1,6 +1,4 @@
 from analyzer import OMVAnalyzer
-from utils import timeseries as ts
-from ..common.output import inform
 
 class MorphologyAnalyzer(OMVAnalyzer):
     
@@ -13,7 +11,9 @@ class MorphologyAnalyzer(OMVAnalyzer):
         return self.expected['total area']
 
     def parse_observable(self):
-        return float(self.backend.fetch_query(self.query))
+        area = float(self.backend.fetch_query(self.query))
+        scale = float(self.observable.get('scaling', 1))
+        return scale * area
 
 
 
