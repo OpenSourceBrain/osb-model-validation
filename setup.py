@@ -14,7 +14,8 @@ setup(
         'omv': [
             'schemata/mep.yaml',
             'schemata/types/*.yaml',
-            'schemata/types/base/*.yaml']},
+            'schemata/types/base/*.yaml',
+            'backends/utils/genesis_utils.g']},
     url='http://opensourcebrain.org/OSBModelValidation',
     license='LICENSE.txt',
     description='OpenSourceBrain Model Validation',

@@ -1,2 +1,3 @@
 include README.md
+include omv/backends/utils/genesis_utils.g
 recursive-include omv/schemata *
