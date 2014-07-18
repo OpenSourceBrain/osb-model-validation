@@ -2,10 +2,11 @@ import utils.timeseries as ts
 from ..common.output import inform
 
 class OMVAnalyzer(object):
-    def __init__(self, observable, expected, backend):
+    def __init__(self, observable, expected, backend, omt_root):
         self.backend = backend
         self.observable = observable
         self.expected = expected
+        self.omt_root = omt_root
         self.before_running()
 
     def before_running(self):
@@ -27,6 +28,6 @@ class OMVAnalyzer(object):
 
         are_close = ts.compare_arrays((obs, exp), tolerance)
         if not are_close:
-            inform('Comparison of \n%s\nand\n%s\nfailed against tolerance %g'%(obs,exp, tolerance))
+            inform('Comparison of \n(observed data): %s\nand\n(expected data): %s\nfailed against tolerance %g'%([float(o) for o in obs],exp, tolerance))
         
         return are_close

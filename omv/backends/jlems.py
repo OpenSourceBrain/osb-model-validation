@@ -35,7 +35,7 @@ class JLemsBackend(OMVBackend):
     def run(self):
         try:
             print("Running file %s with jLEMS" % self.modelpath)
-            self.stdout = sp.check_output(['lems', self.modelpath, '-nogui'])
+            self.stdout = sp.check_output(['lems', self.modelpath, '-nogui'], cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
