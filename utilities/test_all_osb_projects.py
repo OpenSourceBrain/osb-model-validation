@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
                 raw_url = github_repo.link_to_raw_file_in_repo(".travis.yml")
                 print("  .travis.yml found at %s\n"%raw_url)
-                contents = osb.get_page(raw_url)
+                contents = osb.utils.get_page(raw_url)
                 if not 'omv' in contents:
                     print("That .travis.yml does not look like it uses OMV...")
                     non_omv_tests+=1
