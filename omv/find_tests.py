@@ -23,11 +23,11 @@ def test_all():
         
     inform("\n")
     inform("==================================")
-    inform("%i tests found"%len(all_omts))
+    inform("%i tests found"%len(all_omts), indent=1)
     if all(tsts):
-        inform("All tests passing!")
+        inform("All tests passing!", indent=1)
     else:
-        inform("Tests failed: %s"%(all(tsts)))
+        inform("Some tests failed: %s"%(tsts), indent=1)
     inform("==================================")
     
     assert all(tsts)
@@ -37,10 +37,11 @@ def test_one(omt_fname):
     inform("\n")
     inform("==================================")
     if all(results):
-        inform("Test passed: %s"%omt_fname)
+        inform("Test passed: %s"%omt_fname, indent=1)
     else:
-        inform("Test failed: %s %s"%(omt_fname, results))
+        inform("Test failed: %s %s"%(omt_fname, results), indent=1)
     inform("==================================")
+    
     assert(all(results))
 
 
