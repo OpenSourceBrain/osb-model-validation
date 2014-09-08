@@ -3,6 +3,7 @@ import subprocess as sp
 
 from jneuroml import JNeuroMLBackend
 from neuron import NeuronBackend
+from ..common.output import inform
 
 class JNeuroMLNRNBackend(JNeuroMLBackend):
 
@@ -10,7 +11,7 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
 
     @staticmethod
     def is_installed(version):
-        print("Checking whether %s is installed..."%JNeuroMLNRNBackend.name)
+        inform("Checking whether %s is installed..."%JNeuroMLNRNBackend.name, indent=1)
         return JNeuroMLBackend.is_installed(None) and NeuronBackend.is_installed(None)
     
     
@@ -26,18 +27,18 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
         JNeuroMLNRNBackend.environment_vars = {}
         JNeuroMLNRNBackend.environment_vars.update(JNeuroMLBackend.environment_vars)
         JNeuroMLNRNBackend.environment_vars.update(NeuronBackend.environment_vars)
-        print "PATH: "+JNeuroMLNRNBackend.path
-        print JNeuroMLNRNBackend.environment_vars
+        inform("PATH: "+JNeuroMLNRNBackend.path)
+        inform("Env vars: %s"%JNeuroMLNRNBackend.environment_vars)
         
         
     def run(self):
         try:
-            print("Running with %s..."%JNeuroMLNRNBackend.name)
+            inform("Running with %s..."%JNeuroMLNRNBackend.name, indent=1)
             self.stdout = sp.check_output(['jnml', self.modelpath, '-neuron', '-nogui', '-run'], cwd=os.path.dirname(self.modelpath))
-            #print self.stdout
-            print("Success with running %s..."%JNeuroMLNRNBackend.name)
+            inform("Success with running %s..."%JNeuroMLNRNBackend.name, indent=1)
             self.returncode = 0
         except sp.CalledProcessError as err:
+            inform("Error with %s..."%JNeuroMLNRNBackend.name, indent=1)
             self.returncode = err.returncode
             self.stdout = err.output
             

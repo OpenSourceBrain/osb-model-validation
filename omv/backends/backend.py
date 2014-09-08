@@ -1,6 +1,8 @@
 from os.path import realpath
 from os import environ
 
+from ..common.output import inform
+
 class BackendInstallationError(Exception):
     pass
 
@@ -18,7 +20,7 @@ class OMVBackend(object):
                 self.set_environment()
                 self.set_path()
             except Exception as e:
-                print(e)
+                inform(e)
                 raise(BackendInstallationError)
 
         self.modelpath = realpath(target)
@@ -42,17 +44,17 @@ class OMVBackend(object):
     def set_environment(self):
         if self.environment_vars:
             for name, val in self.environment_vars.iteritems():
-                print '\t Setting env var', name, '=', val
+                inform('Setting env var '+ name+ '='+ val)
                 environ[name] = val
 
     def set_path(self):
         if self.path:
             environ['PATH'] = ':'.join((environ['PATH'], self.path))
-            print '\t Setting path', environ['PATH']
+            inform('Setting path: '+ environ['PATH'])
 
     def register_query(self, name, cmd=''):
         query = self.build_query_string(name, cmd) 
-        print '\t\tRegistered backend query:', query
+        inform('Registered backend query: ' + query)
         self.extra_pars.append(query)
         return name
 
@@ -62,5 +64,5 @@ class OMVBackend(object):
         if m:
             return m.groups()[0]
         else:
-            print 'not found!'
+            inform('Not found!')
             raise KeyError

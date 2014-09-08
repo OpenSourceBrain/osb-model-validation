@@ -15,6 +15,7 @@ def parse_omt(omt_path):
     target = omt['target']
     impl = omt.get('implements')
 
+    inform('--------------------------------')
     inform('Running tests defined in:', omt_path)
 
     tests = []

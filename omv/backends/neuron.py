@@ -24,7 +24,7 @@ class NeuronBackend(OMVBackend):
 
     @classmethod
     def is_installed(cls, version):
-        print("Checking whether %s is installed..."% cls.name)
+        inform("Checking whether %s is installed..."% cls.name, indent=1)
 
         ret = True
         try:
@@ -56,11 +56,14 @@ class NeuronBackend(OMVBackend):
         return out
 
     def run(self):
+        verbose = False
         with working_dir(dirname(self.modelpath)):
+            
+            inform("Running %s on %s..."% (self.name, self.modelpath), indent=1)
             p = sp.Popen(['nrniv'], stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.PIPE)
             cmd = '''\
             load_file("noload.hoc")
-            cvode_active(1)
+            //cvode_active(1)
             load_file("%s")
             %s
             ''' % (self.modelpath, '\n'.join(self.extra_pars))
@@ -69,6 +72,12 @@ class NeuronBackend(OMVBackend):
                 f.write(stdout)
             self.stdout = stdout
             self.stderr = stderr
+            
+            if verbose:
+                inform("OUT: "+stdout)
+                inform("ERR: "+stderr)            
+                inform("returncode: %i"%p.returncode)
+
             self.returncode = p.returncode
             
     def build_query_string(self, name, cmd):

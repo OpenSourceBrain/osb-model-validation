@@ -19,7 +19,13 @@ class OMVAnalyzer(object):
         pass
 
     def __call__(self):
-        obs = self.parse_observable()
+        
+        try:
+            obs = self.parse_observable()
+        except IOError as e:
+            inform("Input/output error when checking for observable data: %s"%e)
+            return False
+        
         exp = self.parse_expected()
         try: 
             tolerance = float(self.observable['tolerance'])

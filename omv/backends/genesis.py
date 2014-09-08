@@ -6,6 +6,8 @@ from tempfile import NamedTemporaryFile
 from backend import OMVBackend
 from utils.wdir import working_dir
 
+from ..common.output import inform
+
 
 class GenesisBackend(OMVBackend):
 
@@ -14,7 +16,7 @@ class GenesisBackend(OMVBackend):
     @classmethod
     def is_installed(cls, version):
         from tempfile import NamedTemporaryFile
-        print("Checking whether %s is installed..." % cls.name)
+        inform("Checking whether %s is installed..." % cls.name, indent=1)
 
         ret = True
         try:
@@ -38,7 +40,7 @@ class GenesisBackend(OMVBackend):
         import getgenesis
         home = os.environ['HOME']
         cls.path = os.path.join(home, 'genesis', 'genesis-2.3', 'src')
-        print 'Will fetch and install genesis-2.3'
+        inform('Will fetch and install genesis-2.3', indent=1)
         getgenesis.install_genesis()
 
     def run(self):

@@ -2,6 +2,7 @@ import os
 import subprocess as sp
 
 from jneuroml import JNeuroMLBackend
+from ..common.output import inform
 
 class JNeuroMLValidateV1Backend(JNeuroMLBackend):
 
@@ -9,7 +10,7 @@ class JNeuroMLValidateV1Backend(JNeuroMLBackend):
 
     @staticmethod
     def is_installed(version):
-        print("Checking whether %s is installed..."%JNeuroMLValidateV1Backend.name)
+        inform("Checking whether %s is installed..."%JNeuroMLValidateV1Backend.name, indent=1)
         return JNeuroMLBackend.is_installed(None)
     
     
@@ -26,9 +27,9 @@ class JNeuroMLValidateV1Backend(JNeuroMLBackend):
         
     def run(self):
         try:
-            print("Running with %s..."%JNeuroMLValidateV1Backend.name)
+            inform("Running with %s..."%JNeuroMLValidateV1Backend.name, indent=1)
             self.stdout = sp.check_output(['jnml', '-validatev1', self.modelpath], cwd=os.path.dirname(self.modelpath))
-            print("Success with running %s..."%JNeuroMLValidateV1Backend.name)
+            inform("Success with running %s..."%JNeuroMLValidateV1Backend.name, indent=1)
             self.returncode = 0
         except sp.CalledProcessError as err:
             self.returncode = err.returncode

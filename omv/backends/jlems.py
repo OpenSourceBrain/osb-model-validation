@@ -11,13 +11,13 @@ class JLemsBackend(OMVBackend):
 
     @staticmethod
     def is_installed(version):
-        print("Checking whether %s is installed..."%JLemsBackend.name)
+        inform("Checking whether %s is installed..."%JLemsBackend.name, indent=1)
         ret = True
         try:
             FNULL = open(os.devnull, 'w')
             sp.check_call(['lems', '-h'], stdout=FNULL)
         except OSError as err:
-            print("Couldn't execute lems:\n%s"%err)
+            inform("Couldn't execute lems:\n%s"%err)
             ret = True
         return ret
         
@@ -34,14 +34,14 @@ class JLemsBackend(OMVBackend):
 
     def run(self):
         try:
-            print("Running file %s with jLEMS" % self.modelpath)
+            inform("Running file %s with jLEMS" % self.modelpath, indent=1)
             self.stdout = sp.check_output(['lems', self.modelpath, '-nogui'], cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
             self.stdout = err.output
         except Exception as err:
-            print("Another error with running jLEMS:\n%s"%err)
+            inform("Another error with running jLEMS:\n%s"%err, indent=1)
             self.returncode = -1
             self.stdout = "???"
 
