@@ -41,6 +41,7 @@ def test_one(omt_fname):
     else:
         inform("Test failed: %s %s"%(omt_fname, results), indent=1)
     inform("==================================")
+    inform("\n")
     
     assert(all(results))
 
