@@ -1,6 +1,7 @@
 import utils.timeseries as ts
 from ..common.output import inform
 
+
 class OMVAnalyzer(object):
     def __init__(self, observable, expected, backend, omt_root):
         self.backend = backend
@@ -22,18 +23,28 @@ class OMVAnalyzer(object):
         
         try:
             obs = self.parse_observable()
+            exp = self.parse_expected()
         except IOError as e:
-            inform("Input/output error when checking for observable data: %s"%e)
+            inform("Input/output error when\
+                   checking for observable data: %s" % e)
             return False
         
-        exp = self.parse_expected()
-        try: 
+        try:
             tolerance = float(self.observable['tolerance'])
-        except (TypeError, KeyError): #observable can be None 
-            tolerance =  1e-1
+        except (TypeError, KeyError):  # observable can be None
+            tolerance = 1e-1
 
         are_close = ts.compare_arrays((obs, exp), tolerance)
         if not are_close:
-            inform('Comparison of \n(observed data): %s\nand\n(expected data): %s\nfailed against tolerance %g'%([float(o) for o in obs],exp, tolerance))
-        
+            try:  # making it easier to copy/paste lists
+                pretty_obs = [float(el) for el in obs]
+                pretty_exp = [float(el) for el in exp]
+            except TypeError:  # obs,exp can be singletons
+                pretty_obs, pretty_exp = map(float, (obs, exp))
+            inform("Comparison of \n\
+                    (observed data): %s\n\
+                    and\n\
+                    (expected data): %s\n\
+                    failed against tolerance %g" %
+                   (pretty_obs, pretty_exp, tolerance))
         return are_close

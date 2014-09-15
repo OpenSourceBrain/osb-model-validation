@@ -3,6 +3,7 @@ from utils import timeseries as ts
 from utils import filenode as fn
 from ..common.output import inform
 
+
 class SpikeAnalyzer(OMVAnalyzer):
     
     def parse_spikes(self, to_parse):
@@ -17,7 +18,8 @@ class SpikeAnalyzer(OMVAnalyzer):
                 method = sd.get('method', 'threshold')
                 threshold = float(sd.get('threshold', 0))
                 inform('Detecting spikes with method:', method, indent=2)
-                spikes = ts.spikes_from_timeseries(tv, method=method, threshold=threshold)
+                spikes = ts.spikes_from_timeseries(tv, method=method,
+                                                   threshold=threshold)
         return spikes
 
     def parse_expected(self):
