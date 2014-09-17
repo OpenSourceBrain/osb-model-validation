@@ -51,27 +51,22 @@ class OMVTestParser(object):
                                 backend, self.omt_root)
 
 
-class OMVTestSuite(object):
-    def __init__(self, omt_path):
-        mepomt = OMVTestParser(omt_path)
-        self.backend = OMVBackends[mepomt.engine](mepomt.modelpath)
-        self.experiments = [exp for exp in mepomt.generate_exps(self.backend)]
-
-    def run(self):
-        self.backend.run()
-
-        inform('running checks for experiments ',
-               [exp.name for exp in self.experiments], indent=2)
-        results = []
-        for exp in self.experiments:
-            results.append([check() for check in exp.checks])
-        return results
-
-
 def parse_omt(omt_path):
-    return OMVTestSuite(omt_path).run()
     
+    mepomt = OMVTestParser(omt_path)
+    backend = OMVBackends[mepomt.engine](mepomt.modelpath)
+    experiments = [exp for exp in mepomt.generate_exps(backend)]
 
+    backend.run()
+
+    inform('running checks for experiments ',
+           [exp.name for exp in experiments], indent=2)
+
+    results = []
+    for exp in experiments:
+        results.append([check() for check in exp.checks])
+
+    return results
     
     
 
