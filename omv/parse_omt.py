@@ -1,6 +1,6 @@
 from backends import OMVBackends
 from omt_mep_parser import OMVTestParser
-from common.output import inform
+from common.io import inform
 
 
 def parse_omt(omt_path):

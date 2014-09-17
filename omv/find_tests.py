@@ -1,9 +1,7 @@
 from os import environ, getcwd
 from pathlib import Path
 from omv.parse_omt import parse_omt
-from common.yaml import load_yaml
-
-from common.output import inform
+from common.io import load_yaml, inform
 
 
 def test_all():

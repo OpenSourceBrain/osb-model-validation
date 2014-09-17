@@ -2,7 +2,8 @@ import os
 import subprocess as sp
 
 from jneuroml import JNeuroMLBackend
-from ..common.output import inform
+from ..common.io import inform
+
 
 class JNeuroMLValidateV1Backend(JNeuroMLBackend):
 
@@ -10,9 +11,9 @@ class JNeuroMLValidateV1Backend(JNeuroMLBackend):
 
     @staticmethod
     def is_installed(version):
-        inform("Checking whether %s is installed..."%JNeuroMLValidateV1Backend.name, indent=1)
+        inform("Checking whether %s is installed..." % JNeuroMLValidateV1Backend.name,
+               indent=1)
         return JNeuroMLBackend.is_installed(None)
-    
     
     @staticmethod
     def install(version):
@@ -24,12 +25,14 @@ class JNeuroMLValidateV1Backend(JNeuroMLBackend):
         JNeuroMLValidateV1Backend.environment_vars = {}
         JNeuroMLValidateV1Backend.environment_vars.update(JNeuroMLBackend.environment_vars)
         
-        
     def run(self):
         try:
-            inform("Running with %s..."%JNeuroMLValidateV1Backend.name, indent=1)
-            self.stdout = sp.check_output(['jnml', '-validatev1', self.modelpath], cwd=os.path.dirname(self.modelpath))
-            inform("Success with running %s..."%JNeuroMLValidateV1Backend.name, indent=1)
+            inform("Running with ", JNeuroMLValidateV1Backend.name,
+                   indent=1)
+            self.stdout = sp.check_output(['jnml', '-validatev1', self.modelpath],
+                                          cwd=os.path.dirname(self.modelpath))
+            inform("Success with running ",  JNeuroMLValidateV1Backend.name,
+                   indent=1)
             self.returncode = 0
         except sp.CalledProcessError as err:
             self.returncode = err.returncode

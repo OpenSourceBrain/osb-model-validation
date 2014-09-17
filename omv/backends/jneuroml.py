@@ -1,7 +1,9 @@
 import os
 import subprocess as sp
-from ..common.output import inform
+
+from ..common.io import inform
 from backend import OMVBackend
+
 
 class JNeuroMLBackend(OMVBackend):
 
@@ -9,7 +11,8 @@ class JNeuroMLBackend(OMVBackend):
         
     @staticmethod
     def is_installed(version):
-        inform("Checking whether %s is installed..."%JNeuroMLBackend.name, indent=1)
+        inform("Checking whether %s is installed..." % JNeuroMLBackend.name,
+               indent=1)
         ret = True
         try:
             FNULL = open(os.devnull, 'w')
@@ -30,8 +33,10 @@ class JNeuroMLBackend(OMVBackend):
 
     def run(self):
         try:
-            inform("Running file %s with %s" % (self.modelpath, self.name), indent=1)
-            self.stdout = sp.check_output(['jnml', self.modelpath, '-nogui'], cwd=os.path.dirname(self.modelpath))
+            inform("Running file %s with %s" % (self.modelpath, self.name),
+                   indent=1)
+            self.stdout = sp.check_output(['jnml', self.modelpath, '-nogui'],
+                                          cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
