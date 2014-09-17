@@ -3,20 +3,22 @@ from utils import timeseries as ts
 from utils import filenode as fn
 from ..common.output import inform
 
+
 class ActivationVariableAnalyzer(OMVAnalyzer):
 
     def parse_observable(self):
         if 'file' in self.observable:
             f = fn.FileNodeHelper(self.observable['file'], self.omt_root)
             inform('Activation variable from file',
-                    self.observable['file'])
+                   self.observable['file'], indent=1)
             return f.get_timeseries()
     
     def __call__(self):
         obs = self.parse_observable()
-        allin = ts.all_within_bounds(obs, (0,1))
+        allin = ts.all_within_bounds(obs, (0, 1))
         if not allin:
-            inform('Activation variable outside of (0,1) interval: ', obs)
+            inform('Activation variable outside of (0,1) interval: ',
+                   obs, indent=1)
         return allin
 
 
