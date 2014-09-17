@@ -2,9 +2,8 @@ from analyzers import OMVAnalyzers
 
 
 class OMVExperiment(object):
-    def __init__(self, experiment, observables, backend, omt_root):
-        self.observables = observables
-        self.experiment = experiment
+    def __init__(self, name, experiment, observables, backend, omt_root):
+        self.name = name
         self.checks = []
         for obsname, observable in observables.iteritems():
             # an experiment can have multiple observables
