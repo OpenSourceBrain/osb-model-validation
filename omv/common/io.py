@@ -3,31 +3,36 @@ import textwrap
 
 LINEWIDTH = 70
 PROMPT = '[omv] '
+INDENT = '  '
 
 
 def omvify(x):
     return textwrap.TextWrapper(initial_indent=PROMPT,
-                                subsequent_indent=PROMPT).fill(x)
+                                subsequent_indent=PROMPT,
+                                replace_whitespace=False).fill(x)
 
 
-def center(string):
-    nwhite = (LINEWIDTH - len(PROMPT) - len(string)) // 2
+def centralize(string):
+    nwhite = (LINEWIDTH - len(PROMPT) - len(string))//2 
     return nwhite * ' ' + string
 
 
-def underlined(string, char='-'):
-    rule = len(string) * char
-    return map(center, [string, rule])
+def rule(string, char='-'):
+    return len(string) * char
 
 
-def inform(msg, pars=None, indent=0, underline=None):
+def inform(msg, pars=None, indent=0, underline=False, overline=False, center=False):
+    p = pars if pars else ''
+    infostr = INDENT * indent + msg + p
     if underline:
-        l = underlined(msg, underline)
-        msg = '\n'.join(map(omvify, l))
+        block = [infostr, rule(infostr, underline)]
+    elif overline:
+        block = [rule(infostr, overline), infostr]
     else:
-        p = pars if pars else ''
-        msg = omvify('  ' * indent + msg + p)
-    print msg
+        block = [infostr]
+    if center:
+        block = map(centralize, block)
+    print '\n'.join(map(omvify, block))
 
 
 def load_yaml(fname):
