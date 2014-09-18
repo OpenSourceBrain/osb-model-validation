@@ -15,31 +15,22 @@ def test_all():
     else:
         tsts = [all(parse_omt(t)) for t in all_omts]
 
-    info = ""
-    for omt in all_omts:
-        info += omt + "\n"
-
-    inform("\n")
-    inform("==================================")
-    inform("%i tests found" % len(all_omts), indent=1)
+    inform("%i tests found" % len(all_omts), overline='-', center=True)
     if all(tsts):
-        inform("All tests passing!", indent=1)
+        inform("All tests passing!", underline='-', center=True)
     else:
-        inform("Some tests failed: %s" % (tsts), indent=1)
-    inform("==================================")
+        inform("Some tests failed: %s" % (tsts), underline=)
 
     assert all(tsts)
 
 
 def test_one(omt_fname):
     results = parse_omt(omt_fname)
-    inform("\n")
-    inform("==================================")
     if all(results):
-        inform("Test passed: %s" % omt_fname, indent=1)
+        inform("Test passed: %s" % omt_fname, overline='-',
+               center=True)
     else:
-        inform("Test failed: %s %s" % (omt_fname, results), indent=1)
-    inform("==================================")
-    inform("\n")
+        inform("Test failed: %s %s" % (omt_fname, results),
+               underline='-', center=True)
 
     assert(all(results))
