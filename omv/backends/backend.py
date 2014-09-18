@@ -1,6 +1,6 @@
 from os.path import realpath
 from os import environ
-from ..common.io import inform
+from ..common.inout import inform
 
 
 class BackendInstallationError(Exception):

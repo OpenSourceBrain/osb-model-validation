@@ -7,7 +7,7 @@ from utils.wdir import working_dir
 from backend import OMVBackend
 from os.path import dirname
 
-from ..common.io import inform
+from ..common.inout import inform
 
 
 class NeuronBackend(OMVBackend):

@@ -25,7 +25,7 @@ def inform(msg, pars=None, indent=0, underline=False,
            overline=False, center=False):
 
     p = pars if pars else ''
-    infostr = INDENT * indent + msg + p
+    infostr = INDENT * indent + msg + str(p)
     if underline:
         block = [infostr, rule(infostr, underline)]
     elif overline:

@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from ..common.io import inform
+from ..common.inout import inform
 from backend import OMVBackend
 
 

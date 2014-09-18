@@ -3,7 +3,7 @@ import subprocess as sp
 
 from jneuroml import JNeuroMLBackend
 from neuron import NeuronBackend
-from ..common.io import inform
+from ..common.inout import inform
 
 
 class JNeuroMLNRNBackend(JNeuroMLBackend):

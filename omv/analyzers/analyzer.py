@@ -1,5 +1,5 @@
 import utils.timeseries as ts
-from ..common.io import inform
+from ..common.inout import inform
 
 
 class OMVAnalyzer(object):

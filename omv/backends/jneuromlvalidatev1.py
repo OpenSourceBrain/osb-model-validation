@@ -2,7 +2,7 @@ import os
 import subprocess as sp
 
 from jneuroml import JNeuroMLBackend
-from ..common.io import inform
+from ..common.inout import inform
 
 
 class JNeuroMLValidateV1Backend(JNeuroMLBackend):

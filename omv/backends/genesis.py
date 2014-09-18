@@ -5,7 +5,7 @@ from tempfile import NamedTemporaryFile
 
 from backend import OMVBackend
 from utils.wdir import working_dir
-from ..common.io import inform
+from ..common.inout import inform
 
 
 class GenesisBackend(OMVBackend):

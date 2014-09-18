@@ -1,6 +1,6 @@
 from experiment import OMVExperiment
 from os.path import join, dirname
-from common.io import load_yaml
+from common.inout import load_yaml
 
 
 class OMVTestParser(object):

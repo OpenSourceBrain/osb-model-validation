@@ -1,7 +1,7 @@
 from analyzer import OMVAnalyzer
 from utils import timeseries as ts
 from utils import filenode as fn
-from ..common.io import inform
+from ..common.inout import inform
 
 
 class SpikeAnalyzer(OMVAnalyzer):

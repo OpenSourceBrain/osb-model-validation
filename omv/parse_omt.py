@@ -1,9 +1,10 @@
 from backends import OMVBackends
 from omt_mep_parser import OMVTestParser
-from common.io import inform
+from common.inout import inform
 
 
 def parse_omt(omt_path):
+    inform("\n\nRunning tests defined in file", omt_path)
     
     mepomt = OMVTestParser(omt_path)
     backend = OMVBackends[mepomt.engine](mepomt.modelpath)
