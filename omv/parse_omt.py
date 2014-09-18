@@ -5,8 +5,9 @@ from os.path import basename
 
 
 def parse_omt(omt_path):
+    inform('')
     inform("Running tests defined in ", basename(omt_path),
-           underline='=', center=True)
+           underline='=', center=False)
     
     mepomt = OMVTestParser(omt_path)
     backend = OMVBackends[mepomt.engine](mepomt.modelpath)

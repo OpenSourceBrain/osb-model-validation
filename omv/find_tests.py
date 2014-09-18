@@ -15,11 +15,12 @@ def test_all():
     else:
         tsts = [all(parse_omt(t)) for t in all_omts]
 
-    inform("%i tests found" % len(all_omts), overline='-', center=True)
+    inform('')
+    inform("%i tests found" % len(all_omts), overline='=', center=True)
     if all(tsts):
-        inform("All tests passing!", underline='-', center=True)
+        inform("All tests passing!", underline='=', center=True)
     else:
-        inform("Some tests failed: %s" % (tsts), underline='-')
+        inform("Some tests failed: %s" % (tsts), underline='=')
 
     assert all(tsts)
 

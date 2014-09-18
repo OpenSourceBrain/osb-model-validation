@@ -1,5 +1,5 @@
 import yaml
-import textwrap
+# import textwrap
 
 LINEWIDTH = 70
 PROMPT = '[omv] '
@@ -7,9 +7,10 @@ INDENT = '  '
 
 
 def omvify(x):
-    return textwrap.TextWrapper(initial_indent=PROMPT,
-                                subsequent_indent=len(PROMPT) * ' ',
-                                replace_whitespace=False).fill(x)
+    # return textwrap.TextWrapper(initial_indent=PROMPT,
+    #                             subsequent_indent=len(PROMPT) * ' ',
+    #                             replace_whitespace=False).fill(x)
+    return PROMPT + x
 
 
 def centralize(string):
