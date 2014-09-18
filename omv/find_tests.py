@@ -19,7 +19,7 @@ def test_all():
     if all(tsts):
         inform("All tests passing!", underline='-', center=True)
     else:
-        inform("Some tests failed: %s" % (tsts), underline=)
+        inform("Some tests failed: %s" % (tsts), underline='-')
 
     assert all(tsts)
 

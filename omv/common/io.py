@@ -13,7 +13,7 @@ def omvify(x):
 
 
 def centralize(string):
-    nwhite = (LINEWIDTH - len(PROMPT) - len(string))//2 
+    nwhite = (LINEWIDTH - len(PROMPT) - len(string))//2
     return nwhite * ' ' + string
 
 
@@ -21,7 +21,9 @@ def rule(string, char='-'):
     return len(string) * char
 
 
-def inform(msg, pars=None, indent=0, underline=False, overline=False, center=False):
+def inform(msg, pars=None, indent=0, underline=False,
+           overline=False, center=False):
+
     p = pars if pars else ''
     infostr = INDENT * indent + msg + p
     if underline:
