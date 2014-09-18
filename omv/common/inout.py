@@ -8,7 +8,7 @@ INDENT = '  '
 
 def omvify(x):
     return textwrap.TextWrapper(initial_indent=PROMPT,
-                                subsequent_indent=PROMPT,
+                                subsequent_indent=len(PROMPT) * ' ',
                                 replace_whitespace=False).fill(x)
 
 
