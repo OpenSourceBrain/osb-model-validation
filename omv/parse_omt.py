@@ -1,6 +1,6 @@
 from backends import OMVBackends
 from omt_mep_parser import OMVTestParser
-from common.inout import inform
+from common.inout import inform, check
 from os.path import basename
 
 
@@ -15,12 +15,16 @@ def parse_omt(omt_path):
 
     backend.run()
 
-    inform('running checks for experiments ',
-           [exp.name for exp in experiments], indent=1)
-
     results = []
     for exp in experiments:
-        results.append(exp.check_all)
+        inform('Running checks for experiment ', exp.name, indent=1)
+        inform('')
+        res = exp.check_all()
+        results.append(res.values)
+        inform('{:<30}{:^20}'.format('Observable', 'Test Passed'),
+               underline='-', indent=3)
+        for rn, rv in res.iteritems():
+            inform(u'{:<30}{:^20}'.format(rn, check(rv)), indent=3)
 
     return results
     

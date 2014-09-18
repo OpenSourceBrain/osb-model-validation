@@ -11,8 +11,6 @@ class JNeuroMLBackend(OMVBackend):
         
     @staticmethod
     def is_installed(version):
-        inform("Checking whether %s is installed..." % JNeuroMLBackend.name,
-               indent=1)
         ret = True
         try:
             FNULL = open(os.devnull, 'w')

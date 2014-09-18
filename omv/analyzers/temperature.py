@@ -1,5 +1,6 @@
 from analyzer import OMVAnalyzer
 
+
 class TemperatureAnalyzer(OMVAnalyzer):
 
     def before_running(self):

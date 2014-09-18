@@ -25,9 +25,6 @@ class NeuronBackend(OMVBackend):
 
     @classmethod
     def is_installed(cls, version):
-        inform("Checking whether %s is installed..." % cls.name,
-               indent=1)
-
         ret = True
         try:
             FNULL = open(os.devnull, 'w')

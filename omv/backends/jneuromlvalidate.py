@@ -11,8 +11,6 @@ class JNeuroMLValidateBackend(JNeuroMLBackend):
 
     @staticmethod
     def is_installed(version):
-        inform("Checking whether %s is installed..." % JNeuroMLValidateBackend.name,
-               indent=1)
         return JNeuroMLBackend.is_installed(None)
     
     @staticmethod

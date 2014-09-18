@@ -1,9 +1,11 @@
 import yaml
+from collections import deque
 # import textwrap
 
 LINEWIDTH = 70
 PROMPT = '[omv] '
 INDENT = '  '
+VERBOSITY = 0
 
 
 def omvify(x):
@@ -13,28 +15,44 @@ def omvify(x):
     return PROMPT + x
 
 
+def check(b):
+    tick = u'\u2714' if b else u'\u2718'
+    return tick
+
+
 def centralize(string):
-    nwhite = (LINEWIDTH - len(PROMPT) - len(string))//2
-    return nwhite * ' ' + string
+    fmt = '{{:^{}}}'.format(LINEWIDTH)
+    return fmt.format(string)
 
 
 def rule(string, char='-'):
-    return len(string) * char
+    return len(string.lstrip()) * char
 
 
 def inform(msg, pars=None, indent=0, underline=False,
-           overline=False, center=False):
+           overline=False, center=False, verbosity=0):
 
-    p = pars if pars else ''
-    infostr = INDENT * indent + msg + str(p)
-    if underline:
-        block = [infostr, rule(infostr, underline)]
-    elif overline:
-        block = [rule(infostr, overline), infostr]
+    if verbosity > VERBOSITY:
+        return
+
+    if isinstance(msg, list):
+        block = deque(msg)
+        infostr = max(msg, key=len)
     else:
-        block = [infostr]
+        p = pars if pars else ''
+        infostr = msg + str(p)
+        block = deque([infostr])
+
+    if underline:
+        block.append(rule(infostr, underline))
+    elif overline:
+        block.appendleft(rule(infostr, overline))
+
     if center:
         block = map(centralize, block)
+    if indent:
+        block = map(lambda l: INDENT * indent + l, block)
+          
     print '\n'.join(map(omvify, block))
 
 

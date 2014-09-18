@@ -15,7 +15,6 @@ class GenesisBackend(OMVBackend):
     @classmethod
     def is_installed(cls, version):
         from tempfile import NamedTemporaryFile
-        inform("Checking whether %s is installed..." % cls.name, indent=1)
 
         ret = True
         try:

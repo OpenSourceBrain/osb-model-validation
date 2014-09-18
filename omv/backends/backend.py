@@ -14,6 +14,8 @@ class OMVBackend(object):
     path = ''
 
     def __init__(self, target, backend_version=None):
+        inform("Checking whether %s is installed..." % self.name,
+               indent=1, verbosity=1)
         if not self.is_installed(backend_version):
             try:
                 self.install(backend_version)
@@ -44,17 +46,18 @@ class OMVBackend(object):
     def set_environment(self):
         if self.environment_vars:
             for name, val in self.environment_vars.iteritems():
-                inform('Setting env var ' + name, val, indent=2)
+                inform('Setting env var %s: ' % name, val,
+                       indent=2, verbosity=1)
                 environ[name] = val
 
     def set_path(self):
         if self.path:
             environ['PATH'] = ':'.join((environ['PATH'], self.path))
-            inform('Setting path', environ['PATH'], indent=2)
+            inform('Setting path', environ['PATH'], indent=2, verbosity=1)
 
     def register_query(self, name, cmd=''):
         query = self.build_query_string(name, cmd)
-        inform('Registered backend query', query, indent=2)
+        inform('Registered backend query: ', query, indent=2, verbosity=1)
         self.extra_pars.append(query)
         return name
 
