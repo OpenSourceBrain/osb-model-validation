@@ -2,8 +2,8 @@
 ============================================
 
   Usage:
-    omv all [options]
-    omv test <testMe.omt>
+    omv all [-V | --verbose]
+    omv test <testMe.omt> [-V | --verbose]
     omv autogen [options]
     omv install <backend>
     omv list-backends
