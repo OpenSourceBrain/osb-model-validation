@@ -3,7 +3,7 @@ import os
 import subprocess as sp
 from tempfile import NamedTemporaryFile
 
-from backend import OMVBackend
+from backend import OMVBackend, BackendExecutionError
 from utils.wdir import working_dir
 from ..common.inout import inform
 
@@ -61,6 +61,7 @@ class GenesisBackend(OMVBackend):
                 self.returncode = 0
             except sp.CalledProcessError as e:
                 self.returncode = e.returncode
+                raise BackendExecutionError
             finally:
                 temp.close()
 

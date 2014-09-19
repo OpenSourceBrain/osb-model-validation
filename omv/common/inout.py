@@ -45,7 +45,7 @@ def inform(msg, pars=None, indent=0, underline=False,
 
     if underline:
         block.append(rule(infostr, underline))
-    elif overline:
+    if overline:
         block.appendleft(rule(infostr, overline))
 
     if center:

@@ -4,7 +4,7 @@ import platform
 import subprocess as sp
 from textwrap import dedent
 from utils.wdir import working_dir
-from backend import OMVBackend
+from backend import OMVBackend, BackendExecutionError
 from os.path import dirname
 
 from ..common.inout import inform
@@ -41,7 +41,7 @@ class NeuronBackend(OMVBackend):
         pp = os.path.join(home, 'local/lib/python/site-packages')
         cls.path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
         cls.environment_vars = {'PYTHONPATH': pp,
-                                'NEURON_HOME':os.path.join(home, 'neuron/nrn/', arch)}
+                                'NEURON_HOME': os.path.join(home, 'neuron/nrn/', arch)}
         inform('Will fetch and install the latest NEURON version', indent=2)
         getnrn.install_neuron()
 
@@ -55,7 +55,6 @@ class NeuronBackend(OMVBackend):
         return out
 
     def run(self):
-        verbose = False
         with working_dir(dirname(self.modelpath)):
             
             inform("Running %s on %s..." % (self.name, self.modelpath),
@@ -69,17 +68,18 @@ class NeuronBackend(OMVBackend):
             %s
             ''' % (self.modelpath, '\n'.join(self.extra_pars))
             stdout, stderr = p.communicate(dedent(cmd))
-            with open('/tmp/omv_test.nrn.stdout', 'w') as f:
-                f.write(stdout)
+            # with open('/tmp/omv_test.nrn.stdout', 'w') as f:
+            #     f.write(stdout)
             self.stdout = stdout
             self.stderr = stderr
             
-            if verbose:
-                inform("OUT: ", stdout)
-                inform("ERR: ", stderr)
-                inform("returncode: ", p.returncode)
+            inform("OUT: ", stdout, verbosity=1, indent=2)
+            inform("ERR: ", stderr, verbosity=1, indent=2)
+            inform("returncode: ", p.returncode, verbosity=1, indent=2)
 
             self.returncode = p.returncode
+            if self.returncode is not 0:
+                raise BackendExecutionError
             
     def build_query_string(self, name, cmd):
         return '{{%s}{print "%s: ", %s}}' % (cmd, name, name)

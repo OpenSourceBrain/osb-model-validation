@@ -2,7 +2,7 @@ import os
 import subprocess as sp
 
 from ..common.inout import inform
-from backend import OMVBackend
+from backend import OMVBackend, BackendExecutionError
 
 
 class JLemsBackend(OMVBackend):
@@ -39,6 +39,7 @@ class JLemsBackend(OMVBackend):
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
             self.stdout = err.output
+            raise BackendExecutionError
         except Exception as err:
             inform("Another error with running jLEMS:", err, indent=1)
             self.returncode = -1

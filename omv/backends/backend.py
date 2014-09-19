@@ -7,6 +7,10 @@ class BackendInstallationError(Exception):
     pass
 
 
+class BackendExecutionError(Exception):
+    pass
+
+
 class OMVBackend(object):
 
     name = 'Name not yet set!'

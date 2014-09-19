@@ -4,6 +4,7 @@ import subprocess as sp
 from jneuroml import JNeuroMLBackend
 from neuron import NeuronBackend
 from ..common.inout import inform
+from backend import BackendExecutionError
 
 
 class JNeuroMLNRNBackend(JNeuroMLBackend):
@@ -37,12 +38,14 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
     def run(self):
         try:
             inform("Running with %s..." % JNeuroMLNRNBackend.name, indent=1)
-            self.stdout = sp.check_output(['jnml', self.modelpath, '-neuron', '-nogui', '-run'],
-                                          cwd=os.path.dirname(self.modelpath))
-            inform("Success with running %s..." %
+            self.stdout = sp.check_output(
+                ['jnml', self.modelpath, '-neuron', '-nogui', '-run'],
+                cwd=os.path.dirname(self.modelpath))
+            inform("Success with running ",
                    JNeuroMLNRNBackend.name, indent=1)
             self.returncode = 0
         except sp.CalledProcessError as err:
-            inform("Error with", JNeuroMLNRNBackend.name, indent=1)
+            inform("Error with ", JNeuroMLNRNBackend.name, indent=1)
             self.returncode = err.returncode
             self.stdout = err.output
+            raise BackendExecutionError

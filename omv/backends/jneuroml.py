@@ -2,7 +2,7 @@ import os
 import subprocess as sp
 
 from ..common.inout import inform
-from backend import OMVBackend
+from backend import OMVBackend, BackendExecutionError
 
 
 class JNeuroMLBackend(OMVBackend):
@@ -39,21 +39,4 @@ class JNeuroMLBackend(OMVBackend):
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
             self.stdout = err.output
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            raise BackendExecutionError
