@@ -1,9 +1,13 @@
 from os.path import realpath
 from os import environ
+from ..common.inout import inform
 
-from ..common.output import inform
 
 class BackendInstallationError(Exception):
+    pass
+
+
+class BackendExecutionError(Exception):
     pass
 
 
@@ -14,6 +18,8 @@ class OMVBackend(object):
     path = ''
 
     def __init__(self, target, backend_version=None):
+        inform("Checking whether %s is installed..." % self.name,
+               indent=1, verbosity=1)
         if not self.is_installed(backend_version):
             try:
                 self.install(backend_version)
@@ -44,23 +50,25 @@ class OMVBackend(object):
     def set_environment(self):
         if self.environment_vars:
             for name, val in self.environment_vars.iteritems():
-                inform('Setting env var '+ name+ '='+ val)
+                inform('Setting env var %s: ' % name, val,
+                       indent=2, verbosity=1)
                 environ[name] = val
 
     def set_path(self):
         if self.path:
             environ['PATH'] = ':'.join((environ['PATH'], self.path))
-            inform('Setting path: '+ environ['PATH'])
+            inform('Setting path', environ['PATH'], indent=2, verbosity=1)
 
     def register_query(self, name, cmd=''):
-        query = self.build_query_string(name, cmd) 
-        inform('Registered backend query: ' + query)
+        query = self.build_query_string(name, cmd)
+        inform('Registered backend query: ', query, indent=2, verbosity=1)
         self.extra_pars.append(query)
         return name
 
     def fetch_query(self, key):
         import re
-        m = re.search(key+':'+'\s*([0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)\s*', self.stdout)
+        match_float = '\s*([0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)\s*'
+        m = re.search(key+':' + match_float, self.stdout)
         if m:
             return m.groups()[0]
         else:

@@ -4,10 +4,11 @@ import platform
 import subprocess as sp
 from textwrap import dedent
 from utils.wdir import working_dir
-from backend import OMVBackend
+from backend import OMVBackend, BackendExecutionError
 from os.path import dirname
 
-from ..common.output import inform
+from ..common.inout import inform
+
 
 class NeuronBackend(OMVBackend):
 
@@ -24,14 +25,12 @@ class NeuronBackend(OMVBackend):
 
     @classmethod
     def is_installed(cls, version):
-        inform("Checking whether %s is installed..."% cls.name, indent=1)
-
         ret = True
         try:
             FNULL = open(os.devnull, 'w')
             sp.check_call(['nrniv', '--version'], stdout=FNULL)
         except OSError:
-            ret =  False
+            ret = False
         return ret
  
     @classmethod
@@ -39,12 +38,12 @@ class NeuronBackend(OMVBackend):
         import getnrn
         home = os.environ['HOME']
         arch = platform.machine()
-        pp = os.path.join(home,'local/lib/python/site-packages') 
+        pp = os.path.join(home, 'local/lib/python/site-packages')
         cls.path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
-        cls.environment_vars = {'PYTHONPATH': pp, 'NEURON_HOME':os.path.join(home, 'neuron/nrn/', arch)}
+        cls.environment_vars = {'PYTHONPATH': pp,
+                                'NEURON_HOME': os.path.join(home, 'neuron/nrn/', arch)}
         inform('Will fetch and install the latest NEURON version', indent=2)
         getnrn.install_neuron()
-
 
     def compile_modfiles(self):
         with working_dir(dirname(self.modelpath)):
@@ -56,11 +55,12 @@ class NeuronBackend(OMVBackend):
         return out
 
     def run(self):
-        verbose = False
         with working_dir(dirname(self.modelpath)):
             
-            inform("Running %s on %s..."% (self.name, self.modelpath), indent=1)
-            p = sp.Popen(['nrniv'], stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.PIPE)
+            inform("Running %s on %s..." % (self.name, self.modelpath),
+                   indent=1)
+            p = sp.Popen(['nrniv'],
+                         stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.PIPE)
             cmd = '''\
             load_file("noload.hoc")
             //cvode_active(1)
@@ -68,23 +68,26 @@ class NeuronBackend(OMVBackend):
             %s
             ''' % (self.modelpath, '\n'.join(self.extra_pars))
             stdout, stderr = p.communicate(dedent(cmd))
-            with open('/tmp/omv_test.nrn.stdout', 'w') as f:
-                f.write(stdout)
+            # with open('/tmp/omv_test.nrn.stdout', 'w') as f:
+            #     f.write(stdout)
             self.stdout = stdout
             self.stderr = stderr
             
-            if verbose:
-                inform("OUT: "+stdout)
-                inform("ERR: "+stderr)            
-                inform("returncode: %i"%p.returncode)
+            inform("OUT: ", stdout, verbosity=1, indent=2)
+            inform("ERR: ", stderr, verbosity=1, indent=2)
+            inform("returncode: ", p.returncode, verbosity=1, indent=2)
 
             self.returncode = p.returncode
+            if self.returncode is not 0:
+                raise BackendExecutionError
             
     def build_query_string(self, name, cmd):
         return '{{%s}{print "%s: ", %s}}' % (cmd, name, name)
 
     def query_area(self, secname):
-        name = self.register_query('area_%s'%secname, 'forsec "%s" {for (x,0) area_%s+=area(x)}'%(secname,secname))
+        qname = 'area_%s' % secname
+        qcmd = 'forsec "%s" {for (x,0) area_%s+=area(x)}' % (secname, secname)
+        name = self.register_query(qname, qcmd)
         return name
             
     def query_temperature(self):

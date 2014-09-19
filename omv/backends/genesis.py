@@ -3,10 +3,9 @@ import os
 import subprocess as sp
 from tempfile import NamedTemporaryFile
 
-from backend import OMVBackend
+from backend import OMVBackend, BackendExecutionError
 from utils.wdir import working_dir
-
-from ..common.output import inform
+from ..common.inout import inform
 
 
 class GenesisBackend(OMVBackend):
@@ -16,7 +15,6 @@ class GenesisBackend(OMVBackend):
     @classmethod
     def is_installed(cls, version):
         from tempfile import NamedTemporaryFile
-        inform("Checking whether %s is installed..." % cls.name, indent=1)
 
         ret = True
         try:
@@ -63,6 +61,7 @@ class GenesisBackend(OMVBackend):
                 self.returncode = 0
             except sp.CalledProcessError as e:
                 self.returncode = e.returncode
+                raise BackendExecutionError
             finally:
                 temp.close()
 

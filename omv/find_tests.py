@@ -1,66 +1,40 @@
 from os import environ, getcwd
-from pathlib import Path 
-from omv.parse_omt import parse_omt, load_yaml
+from pathlib import Path
+from omv.parse_omt import parse_omt
+from common.inout import load_yaml, inform
 
-from common.output import inform
 
 def test_all():
     cwd = Path(getcwd())
     all_omts = [p.as_posix() for p in cwd.glob('**/*.omt')]
-    tests_run = []
     if environ.get('TRAVIS'):
         engine = environ.get('OMV_ENGINE').lower()
         tsts = [all(parse_omt(t))
-                for t in all_omts 
+                for t in all_omts
                 if load_yaml(t)['engine'].lower() == engine]
     else:
-        tsts= [all(parse_omt(t)) for t in all_omts]
-        
+        tsts = [all(parse_omt(t)) for t in all_omts]
 
-    info = ""
-    for omt in all_omts:
-        info += omt + "\n" 
-        
-    inform("\n")
-    inform("==================================")
-    inform("%i tests found"%len(all_omts), indent=1)
+    inform('')
+    inform("%i tests found" % len(all_omts),
+           overline='-', underline='-', center=True)
+    inform('')
     if all(tsts):
-        inform("All tests passing!", indent=1)
+        inform("All tests passing!", underline='=', center=True)
     else:
-        inform("Some tests failed: %s"%(tsts), indent=1)
-    inform("==================================")
-    
+        inform("Some tests failed: %s" % (tsts), underline='=')
+
     assert all(tsts)
-    
+
+
 def test_one(omt_fname):
     results = parse_omt(omt_fname)
-    inform("\n")
-    inform("==================================")
+    inform('')
     if all(results):
-        inform("Test passed: %s"%omt_fname, indent=1)
+        inform("Test passed: %s" % omt_fname, overline='=',
+               center=True)
     else:
-        inform("Test failed: %s %s"%(omt_fname, results), indent=1)
-    inform("==================================")
-    inform("\n")
-    
+        inform("Test failed: %s %s" % (omt_fname, results),
+               underline='=', center=True)
+
     assert(all(results))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

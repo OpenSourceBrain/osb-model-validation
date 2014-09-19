@@ -1,60 +1,38 @@
-import yaml
 from backends import OMVBackends
-from analyzers import OMVAnalyzers
-from common.output import inform
-from os.path import join, dirname
+from backends.backend import BackendInstallationError, BackendExecutionError
+from omt_mep_parser import OMVTestParser
+from common.inout import inform, check
+from os.path import basename
 
-def load_yaml(fname):
-    with open(fname) as f:
-        y = yaml.safe_load(f)
-    return y
 
 def parse_omt(omt_path):
-    omt = load_yaml(omt_path)
-    engine = omt['engine']
-    target = omt['target']
-    impl = omt.get('implements')
-
-    inform('--------------------------------')
-    inform('Running tests defined in:', omt_path)
-
-    tests = []
-    omt_root = dirname(omt_path)
-    if impl:
-        mepfile = join(omt_root, impl['mep'])
-        observables = impl['observables']
-        mep = load_yaml(mepfile) 
-        experiment = mep['experiments'][impl['experiment']]
-    else:
-        observables = {'dry':None} 
-        experiment = {'expected':{'dry':None}}
-
-    backend = OMVBackends[engine](join(omt_root, target))
-    for obsname, observable in observables.iteritems():
-        expected = experiment['expected'].get(obsname, None)
-        tests.append(OMVAnalyzers[obsname](observable, expected, backend, omt_root))
-
-    backend.run()
-    return [t() for t in tests]
+    inform('')
+    inform("Running tests defined in ", basename(omt_path),
+           underline='=', center=False)
     
+    mepomt = OMVTestParser(omt_path)
+    backend = OMVBackends[mepomt.engine](mepomt.modelpath)
+    experiments = [exp for exp in mepomt.generate_exps(backend)]
+    
+    results = [False]
+    try:
+        backend.run()
+        results = []
+        for exp in experiments:
+            inform('Running checks for experiment ', exp.name, indent=1)
+            inform('')
+            res = exp.check_all()
+            results.append(res.values)
+            inform('{:<30}{:^20}'.format('Observable', 'Test Passed'),
+                   underline='-', indent=3)
+            for rn, rv in res.iteritems():
+                inform(u'{:<30}{:^20}'.format(rn, check(rv)), indent=3)
+    except (BackendInstallationError, BackendExecutionError):
+        inform('ERROR running backend ', backend.name, indent=1,
+               underline='-', overline='-')
 
-
-if __name__ == '__main__':
-    import sys
-    t = parse_omt(sys.argv[1])
-    print 'Test results:', t
-    exit(not all(t))
+    return results
     
     
-
-
-
-
-
-
-
-
-
-
 
 

@@ -1,9 +1,9 @@
 import os
 import subprocess as sp
-from subprocess import check_output as co
 
-from ..common.output import inform
-from backend import OMVBackend
+from ..common.inout import inform
+from backend import OMVBackend, BackendExecutionError
+
 
 class JLemsBackend(OMVBackend):
     
@@ -11,13 +11,12 @@ class JLemsBackend(OMVBackend):
 
     @staticmethod
     def is_installed(version):
-        inform("Checking whether %s is installed..."%JLemsBackend.name, indent=1)
         ret = True
         try:
             FNULL = open(os.devnull, 'w')
             sp.check_call(['lems', '-h'], stdout=FNULL)
         except OSError as err:
-            inform("Couldn't execute lems:\n%s"%err)
+            inform("Couldn't execute lems:", err, indent=1)
             ret = True
         return ret
         
@@ -31,17 +30,18 @@ class JLemsBackend(OMVBackend):
         install_jlems()
         inform('Done...', indent=2)
         
-
     def run(self):
         try:
             inform("Running file %s with jLEMS" % self.modelpath, indent=1)
-            self.stdout = sp.check_output(['lems', self.modelpath, '-nogui'], cwd=os.path.dirname(self.modelpath))
+            self.stdout = sp.check_output(['lems', self.modelpath, '-nogui'],
+                                          cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
             self.stdout = err.output
+            raise BackendExecutionError
         except Exception as err:
-            inform("Another error with running jLEMS:\n%s"%err, indent=1)
+            inform("Another error with running jLEMS:", err, indent=1)
             self.returncode = -1
             self.stdout = "???"
 
