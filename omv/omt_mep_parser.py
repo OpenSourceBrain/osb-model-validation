@@ -3,14 +3,20 @@ from os.path import join, dirname
 from common.inout import load_yaml
 
 
+class OMVParseError(BaseException):
+    pass
+
+
 class OMVTestParser(object):
     def __init__(self, omt_path):
+        self.omt_path = omt_path
         self.omt_root = dirname(omt_path)
         self.omt = load_yaml(omt_path)
         if 'mep' in self.omt:
-            mep_path = join(self.omt_root, self.omt['mep'])
-            self.mep = load_yaml(mep_path)
+            self.mep_path = join(self.omt_root, self.omt['mep'])
+            self.mep = load_yaml(self.mep_path)
         else:
+            self.mep_path = None
             self.mep = None
             
     @property

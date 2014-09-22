@@ -1,6 +1,6 @@
 from os import environ, getcwd
 from pathlib import Path
-from omv.parse_omt import parse_omt
+from parse_omt import parse_omt
 from common.inout import load_yaml, inform
 
 
@@ -9,32 +9,34 @@ def test_all():
     all_omts = [p.as_posix() for p in cwd.glob('**/*.omt')]
     if environ.get('TRAVIS'):
         engine = environ.get('OMV_ENGINE').lower()
-        tsts = [all(parse_omt(t))
-                for t in all_omts
-                if load_yaml(t)['engine'].lower() == engine]
+        tallies = [parse_omt(t)
+                   for t in all_omts
+                   if load_yaml(t)['engine'].lower() == engine]
     else:
-        tsts = [all(parse_omt(t)) for t in all_omts]
+        tallies = [parse_omt(t) for t in all_omts]
 
+    results = [t.all_passed() for t in tallies]
     inform('')
     inform("%i tests found" % len(all_omts),
            overline='-', underline='-', center=True)
     inform('')
-    if all(tsts):
+    if all(results):
         inform("All tests passing!", underline='=', center=True)
     else:
-        inform("Some tests failed: %s" % (tsts), underline='=')
+        failed = [t.experiments for t in tallies if not t.all_passed()]
+        inform("Some tests failed: ",  failed, underline='=')
 
-    assert all(tsts)
+    assert all(results)
 
 
 def test_one(omt_fname):
-    results = parse_omt(omt_fname)
+    tally = parse_omt(omt_fname)
     inform('')
-    if all(results):
+    if tally.all_passed():
         inform("Test passed: %s" % omt_fname, overline='=',
                center=True)
     else:
-        inform("Test failed: %s %s" % (omt_fname, results),
+        inform("Test failed: %s %s" % (omt_fname, tally.omt),
                underline='=', center=True)
 
-    assert(all(results))
+    assert(tally.all_passed())
