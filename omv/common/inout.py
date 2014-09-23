@@ -40,7 +40,7 @@ def inform(msg, pars=None, indent=0, underline=False,
         infostr = max(msg, key=len)
     else:
         p = pars if pars else ''
-        infostr = msg + str(p)
+        infostr = str(msg) + str(p)
         block = deque([infostr])
 
     if underline:

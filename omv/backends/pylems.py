@@ -17,7 +17,7 @@ class PyLemsBackend(OMVBackend):
             sp.check_call(['pylems', '-h'], stdout=FNULL)
         except OSError as err:
             inform("Couldn't execute pylems:", err, indent=1)
-            ret = True
+            ret = False
         return ret
         
     def install(self, version):
