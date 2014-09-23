@@ -20,7 +20,7 @@ def parse_omt(omt_path):
     try:
         backend.run()
         for exp in experiments:
-            inform('Running checks for experiment ', exp.name, indent=1)
+            inform('Running checks for experiment: ', exp.name, indent=1)
             inform('')
             results = exp.check_all()
             inform('{:<30}{:^20}'.format('Observable', 'Test Passed'),
