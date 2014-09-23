@@ -17,7 +17,7 @@ class JLemsBackend(OMVBackend):
             sp.check_call(['lems', '-h'], stdout=FNULL)
         except OSError as err:
             inform("Couldn't execute lems:", err, indent=1)
-            ret = True
+            ret = False
         return ret
         
     def install(self, version):

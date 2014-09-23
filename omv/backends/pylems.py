@@ -25,7 +25,7 @@ class PyLemsBackend(OMVBackend):
         home = os.environ['HOME']
         p = os.path.join(home, 'pylems')
         self.path = p
-        self.environment_vars = {'PYEMS_HOME': p}
+        self.environment_vars = {'PYLEMS_HOME': p}
         inform('Will fetch and install the latest PyLEMS', indent=2)
         install_pylems()
         inform('Done...', indent=2)
@@ -33,7 +33,7 @@ class PyLemsBackend(OMVBackend):
     def run(self):
         try:
             inform("Running file %s with %s" % (self.modelpath, self.name), indent=1)
-            self.stdout = sp.check_output(['lems', self.modelpath, '-nogui'],
+            self.stdout = sp.check_output(['pylems', self.modelpath, '-nogui'],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
