@@ -40,7 +40,9 @@ def inform(msg, pars=None, indent=0, underline=False,
         infostr = max(msg, key=len)
     else:
         p = pars if pars else ''
-        infostr = str(msg) + str(p)
+        #print("msg is %s"%msg.__class__)
+        msgstr = msg.encode('utf-8') if isinstance(msg, unicode) else str(msg)
+        infostr = msgstr + str(p)
         block = deque([infostr])
 
     if underline:

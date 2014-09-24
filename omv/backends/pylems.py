@@ -16,7 +16,7 @@ class PyLemsBackend(OMVBackend):
             FNULL = open(os.devnull, 'w')
             sp.check_call(['pylems', '-h'], stdout=FNULL)
         except OSError as err:
-            inform("Couldn't execute pylems:", err, indent=1)
+            inform("Couldn't execute PyLEMS: ", err, indent=1)
             ret = False
         return ret
         
@@ -41,7 +41,7 @@ class PyLemsBackend(OMVBackend):
             self.stdout = err.output
             raise BackendExecutionError
         except Exception as err:
-            inform("Another error with running %s:"%self.name, err, indent=1)
+            inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1
             self.stdout = "???"
 
