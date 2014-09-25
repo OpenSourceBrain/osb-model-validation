@@ -20,7 +20,8 @@ class PyLemsBackend(OMVBackend):
             ret = False
         return ret
         
-    def install(self, version):
+    @staticmethod
+    def install(version):
         from getpylems import install_pylems
         home = os.environ['HOME']
         p = os.path.join(home, 'pylems')
