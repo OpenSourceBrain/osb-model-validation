@@ -25,8 +25,8 @@ class PyLemsBackend(OMVBackend):
         from getpylems import install_pylems
         home = os.environ['HOME']
         p = os.path.join(home, 'pylems')
-        self.path = p
-        self.environment_vars = {'PYLEMS_HOME': p}
+        PyLemsBackend.path = p
+        PyLemsBackend.environment_vars = {'PYLEMS_HOME': p}
         inform('Will fetch and install the latest PyLEMS', indent=2)
         install_pylems()
         inform('Done...', indent=2)
