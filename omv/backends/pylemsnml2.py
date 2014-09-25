@@ -27,7 +27,7 @@ class PyLemsNeuroML2Backend(OMVBackend):
         if not PyLemsBackend.is_installed(None):
             PyLemsBackend.install(None)
         if not os.path.isdir(default_nml2_dir):
-            getnml2.install_nml2(None)
+            install_nml2()
             
         inform('Finished installation of %s...'%self.name, indent=2)
         
