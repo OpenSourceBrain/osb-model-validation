@@ -18,6 +18,3 @@ def install_pylems():
         print co(['python', 'setup.py', 'install'])
         inform('Successfully installed PyLEMS', indent=2, verbosity=1)
         
-# TODO: Move to getnml2
-def install_nml2():
-    print co(['git', 'clone', 'https://github.com/NeuroML/NeuroML2.git'])

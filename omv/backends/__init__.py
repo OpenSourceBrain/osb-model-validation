@@ -8,6 +8,7 @@ from jneuromlvalidate import JNeuroMLValidateBackend
 from jneuromlvalidatev1 import JNeuroMLValidateV1Backend
 from jlems import JLemsBackend
 from pylems import PyLemsBackend
+from pylemsnml2 import PyLemsNeuroML2Backend
 from genesis import GenesisBackend
 
 
