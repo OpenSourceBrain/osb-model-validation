@@ -47,7 +47,8 @@ class OMVAnalyzer(object):
                     (expected data): %s\n\
                     failed against tolerance %g" %
                    (pretty_obs, pretty_exp, tolerance))
-            inform("A better tolerance to try is: %f"% max(abs(obs-exp)/exp), indent=1)
+            if len(obs) == len(exp):
+                inform("A better tolerance to try is: %f"% max(abs(obs-exp)/exp), indent=1)
         else:
             best_tol = max(abs(obs-exp)/exp)
             if best_tol < tolerance:
