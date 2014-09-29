@@ -1,5 +1,6 @@
 import yaml
 from collections import deque
+import os
 # import textwrap
 
 LINEWIDTH = 70
@@ -62,3 +63,10 @@ def load_yaml(fname):
     with open(fname) as f:
         y = yaml.safe_load(f)
     return y
+
+def trim_path(fname):
+    cwd = os.getcwd()
+    if fname.startswith(cwd):
+        return "."+fname[len(cwd):]
+    else:
+        return fname

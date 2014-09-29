@@ -1,14 +1,13 @@
 from backends import OMVBackends
 from backends.backend import BackendInstallationError, BackendExecutionError
 from omt_mep_parser import OMVTestParser
-from common.inout import inform, check
-from os.path import basename
+from common.inout import inform, check, trim_path
 from tally import Tallyman
 
 
 def parse_omt(omt_path):
     inform('')
-    inform("Running tests defined in ", basename(omt_path),
+    inform("Running tests defined in ", trim_path(omt_path),
            underline='=', center=False)
     
     mepomt = OMVTestParser(omt_path)

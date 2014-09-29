@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from ..common.inout import inform
+from ..common.inout import inform, trim_path
 from backend import OMVBackend, BackendExecutionError
 
 
@@ -33,7 +33,7 @@ class PyLemsBackend(OMVBackend):
         
     def run(self):
         try:
-            inform("Running file %s with %s" % (self.modelpath, self.name), indent=1)
+            inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
             self.stdout = sp.check_output(['pylems', self.modelpath, '-nogui'],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0

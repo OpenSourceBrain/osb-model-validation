@@ -4,7 +4,7 @@ import subprocess as sp
 from pylems import PyLemsBackend
 from getnml2 import default_nml2_dir, install_nml2
 
-from ..common.inout import inform
+from ..common.inout import inform, trim_path
 from backend import OMVBackend, BackendExecutionError
 
 
@@ -35,7 +35,7 @@ class PyLemsNeuroML2Backend(OMVBackend):
         try:
             nml2_comp_type_def_dir = os.path.join(default_nml2_dir,'NeuroML2CoreTypes')
             
-            inform("Running file %s with %s, including path: %s" % (self.modelpath, self.name, nml2_comp_type_def_dir), indent=1)
+            inform("Running file %s with %s, including path: %s" % (trim_path(self.modelpath), self.name, nml2_comp_type_def_dir), indent=1)
             
             self.stdout = sp.check_output(['pylems', '-I', nml2_comp_type_def_dir, self.modelpath, '-nogui'],
                                           cwd=os.path.dirname(self.modelpath))
