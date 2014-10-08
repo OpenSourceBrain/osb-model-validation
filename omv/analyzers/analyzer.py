@@ -34,7 +34,7 @@ class OMVAnalyzer(object):
         except (TypeError, KeyError):  # observable can be None
             tolerance = 1e-1
 
-        are_close = ts.compare_arrays((obs, exp), tolerance)
+        are_close, best_tol = ts.compare_arrays((obs, exp), tolerance)
         if not are_close:
             try:  # making it easier to copy/paste lists
                 pretty_obs = [float(el) for el in obs]
@@ -48,9 +48,8 @@ class OMVAnalyzer(object):
                     failed against tolerance %g" %
                    (pretty_obs, pretty_exp, tolerance))
             if len(obs) == len(exp):
-                inform("A better tolerance to try is: %f"% max(abs(obs-exp)/exp), indent=1)
+                inform("A better tolerance to try is: ", best_tol, indent=1)
         else:
-            best_tol = max(abs(obs-exp)/exp)
             if best_tol < tolerance:
-                inform("Passed, but an even better tolerance might be: %f, as opposed to: %f"% (best_tol, tolerance), indent=3, verbosity=1)
+                inform("Passed, but an even better tolerance might be: %f, as opposed to: %f" % (best_tol, tolerance), indent=3, verbosity=1)
         return are_close
