@@ -4,16 +4,16 @@ import os
 # import textwrap
 
 LINEWIDTH = 70
-PROMPT = '[omv] '
-INDENT = '  '
-VERBOSITY = 0
+__PROMPT__ = '[omv] '
+__INDENT__ = '  '
+__VERBOSITY__ = 0
 
 
 def omvify(x):
-    # return textwrap.TextWrapper(initial_indent=PROMPT,
-    #                             subsequent_indent=len(PROMPT) * ' ',
+    # return textwrap.TextWrapper(initial_indent=__PROMPT__,
+    #                             subsequent_indent=len(__PROMPT__) * ' ',
     #                             replace_whitespace=False).fill(x)
-    return PROMPT + x
+    return __PROMPT__ + x
 
 
 def check(b):
@@ -33,7 +33,7 @@ def rule(string, char='-'):
 def inform(msg, pars=None, indent=0, underline=False,
            overline=False, center=False, verbosity=0):
 
-    if verbosity > VERBOSITY:
+    if verbosity > __VERBOSITY__:
         return
 
     if isinstance(msg, list):
@@ -54,7 +54,7 @@ def inform(msg, pars=None, indent=0, underline=False,
     if center:
         block = map(centralize, block)
     if indent:
-        block = map(lambda l: INDENT * indent + l, block)
+        block = map(lambda l: __INDENT__ * indent + l, block)
           
     print '\n'.join(map(omvify, block))
 
@@ -63,6 +63,7 @@ def load_yaml(fname):
     with open(fname) as f:
         y = yaml.safe_load(f)
     return y
+
 
 def trim_path(fname):
     cwd = os.getcwd()

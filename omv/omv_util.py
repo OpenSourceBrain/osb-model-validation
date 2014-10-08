@@ -31,7 +31,7 @@ def main():
 
     if arguments['--verbose']:
         import common.inout
-        common.inout.VERBOSITY = 1
+        common.inout.__VERBOSITY__ = 1
 
     if arguments['test']:
         test_one(arguments['<testMe.omt>'])
