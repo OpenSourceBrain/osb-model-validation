@@ -30,7 +30,7 @@ def compare_arrays(arrays, tolerance):
         comp = allclose(a1, a2, tolerance)
     except ValueError:
         comp = False
-    best_tol = max(abs(a1-a2)/a2)
+    best_tol = max(abs((a1-a2)/a2))
     return (comp, best_tol)
 
 
