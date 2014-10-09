@@ -10,7 +10,7 @@ def detect_spikes(v, method='threshold', threshold=0.):
     elif method == 'derivative':
         # This should only work for noiseless cases!
         dx = diff(v)
-        extrema = flatnonzero(bitwise_and((dx <= 0), (roll(dx,1) > 0)))
+        extrema = flatnonzero(bitwise_and((dx <= 0), (roll(dx, 1) > 0)))
     else:
         print 'still need to implement fancier spike detectors...'
         #see for example scipy.signal.find_peaks_cwt 
@@ -25,12 +25,14 @@ def load_data_file(fname, columns=(0, 1), header_lines=0, scaling=1):
 
 def compare_arrays(arrays, tolerance):
     from numpy import allclose, array, max, abs
+
     a1, a2 = array(arrays)
+    best_tol = None
     try:
         comp = allclose(a1, a2, tolerance)
+        best_tol = max(abs((a1-a2)/a2))
     except ValueError:
         comp = False
-    best_tol = max(abs((a1-a2)/a2))
     return (comp, best_tol)
 
 
@@ -81,7 +83,7 @@ def all_nonzero(ts):
 
 def test_detect_spikes():
     from numpy import array, all, arange
-    x = array([-1, 0, 1, 0] * 10) 
+    x = array([-1, 0, 1, 0] * 10)
 
     spk_idx = detect_spikes(x, method='derivative')
     assert all(spk_idx == arange(2, len(x), 4))
