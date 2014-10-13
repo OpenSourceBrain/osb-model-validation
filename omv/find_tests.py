@@ -1,7 +1,7 @@
 from os import environ, getcwd
 from pathlib import Path
 from parse_omt import parse_omt
-from common.inout import load_yaml, inform
+from common.inout import load_yaml, inform, trim_path
 
 
 def test_all():
@@ -23,7 +23,7 @@ def test_all():
     if all(results):
         inform("All tests passing!", underline='=', center=True)
     else:
-        failed = [t.experiments for t in tallies if not t.all_passed()]
+        failed = [trim_path(t.omt) for t in tallies if not t.all_passed()]
         inform("Some tests failed: ",  failed, underline='=')
 
     assert all(results)
@@ -36,7 +36,7 @@ def test_one(omt_fname):
         inform("Test passed: %s" % omt_fname, overline='=',
                center=True)
     else:
-        inform("Test failed: %s %s" % (omt_fname, tally.omt),
+        inform("Test failed: %s" % (omt_fname),
                underline='=', center=True)
 
     assert(tally.all_passed())
