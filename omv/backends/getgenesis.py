@@ -10,7 +10,7 @@ def install_genesis(get_latest=False):
     with working_dir(genpath):
         print co(['wget',
                   'https://github.com/borismarin/genesis2.4gamma/archive/master.zip'])
-        print co(['tar', 'xzvf', 'master.zip'])
+        print co(['unzip', 'master.zip'])
         print co(['ls', '-la', 'genesis2.4gamma-master'])
         os.chdir('genesis2.4gamma-master/src')
         print co(['make', 'nxgenesis'])
