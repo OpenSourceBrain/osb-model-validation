@@ -37,8 +37,8 @@ class GenesisBackend(OMVBackend):
     def install(cls, backend_version):
         import getgenesis
         home = os.environ['HOME']
-        cls.path = os.path.join(home, 'genesis', 'genesis-2.3', 'src')
-        inform('Will fetch and install genesis-2.3', indent=1)
+        cls.path = os.path.join(home, 'genesis2.4gamma-master', 'src')
+        inform('Will fetch and install genesis-2.4', indent=1)
         getgenesis.install_genesis()
 
     def run(self):
