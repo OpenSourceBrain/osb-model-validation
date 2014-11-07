@@ -13,6 +13,7 @@ def install_genesis(get_latest=False):
         print co(['unzip', 'master.zip'])
         print co(['ls', '-la', 'genesis2.4gamma-master'])
         os.chdir('genesis2.4gamma-master/src')
+        print co(['./configure'])
         print co(['make', 'nxgenesis'])
         print co(['cp', 'startup/travis_simrc',
                   os.path.join(os.environ['HOME'], '.simrc')])
