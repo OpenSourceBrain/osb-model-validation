@@ -11,14 +11,14 @@ simrc = """
 //      SIMPATH - path to search for scripts (includes the startup path)
 //      SIMNOTES - default file for simulator notes
 //===========================================================================
-setenv SIMPATH. {getenv HOME}/genesis/genesis2.4gamma-master/src/startup\
-{getenv HOME}/genesis/genesis2.4gamma-master/Scripts/neurokit   \
+setenv SIMPATH {getenv HOME}/genesis/genesis2.4gamma-master/src/startup \
+{getenv HOME}/genesis/genesis2.4gamma-master/Scripts/neurokit \
 {getenv HOME}/genesis/genesis2.4gamma-master/Scripts/neurokit/prototypes
 
 // This adds the Xodus 1 compatability library directory to the
 // SIMPATH.  If you are not expecting to use X1compat, you can
 // comment out the following line.
-setenv SIMPATH {getenv SIMPATH}\
+setenv SIMPATH {getenv SIMPATH} \
 {getenv HOME}/genesis/genesis2.4gamma-master/Scripts/X1compat
 
 setenv SIMNOTES {getenv HOME}/genesis/genesis2.4gamma-master/.notes
