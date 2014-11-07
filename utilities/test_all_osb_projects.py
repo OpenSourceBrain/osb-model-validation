@@ -64,6 +64,8 @@ if __name__ == "__main__":
                         print "Running 'omv all' on", target_dir
                         test_all()
                     passing_projects += 1
+                    
+                print("\nSo far: %i projects with OMV tests which pass\n" % (passing_projects))
 
             else:
                 print("  (No .travis.yml)")

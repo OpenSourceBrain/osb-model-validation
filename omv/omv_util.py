@@ -34,10 +34,18 @@ def main():
         common.inout.__VERBOSITY__ = 1
 
     if arguments['test']:
-        test_one(arguments['<testMe.omt>'])
+        try:
+            test_one(arguments['<testMe.omt>'])
+        except AssertionError:
+            print("Failed due to non passing tests")
+            exit(1)
 
     elif arguments['all']:
-        test_all()
+        try:
+            test_all()
+        except AssertionError:
+            print("Failed due to non passing tests")
+            exit(1)
 
     elif arguments['validate-mep']:
         validate_mep.validate(arguments['<mepfile>'])

@@ -1,5 +1,4 @@
 from collections import OrderedDict
-from yaml import dump
 
 
 class Tallyman(object):

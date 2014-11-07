@@ -10,6 +10,7 @@ from jlems import JLemsBackend
 from pylems import PyLemsBackend
 from pylemsnml2 import PyLemsNeuroML2Backend
 from genesis import GenesisBackend
+from brian import BrianBackend
 
 
 OMVBackends = {be.name: be for be in locals().values()
