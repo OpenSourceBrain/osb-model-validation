@@ -5,7 +5,7 @@ from ..common.inout import inform, trim_path
 from backend import OMVBackend, BackendExecutionError
 
 
-class BrianBackend(OMVBackend):
+class Brian1Backend(OMVBackend):
     
     name = "Brian"
 
@@ -14,16 +14,16 @@ class BrianBackend(OMVBackend):
         ret = True
         try:
             import brian
-            inform("Brian is correctly installed in there...", indent=2)
+            inform("Brian version %s is correctly installed..." % brian.__version__, indent=2)
             
-        except Error as err:
+        except Exception as err:
             inform("Couldn't import Brian into Python: ", err, indent=1)
             ret = False
         return ret
         
     @staticmethod
     def install(version):
-        from getbrian import install_brian
+        from getbrian1 import install_brian
         home = os.environ['HOME']
         inform('Will fetch and install the latest Brian (version 1.x)', indent=2)
         install_brian()

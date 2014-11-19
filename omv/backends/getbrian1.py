@@ -10,5 +10,6 @@ def install_brian():
     
     with working_dir(install_root):
         print co(['pip', 'install', 'brian'])
-        inform('Successfully installed Brian', indent=2, verbosity=1)
+        import brian
+        inform('Successfully installed Brian version %s'%brian.__version__, indent=2, verbosity=1)
         
