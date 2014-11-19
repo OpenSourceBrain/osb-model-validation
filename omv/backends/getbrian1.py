@@ -16,7 +16,7 @@ def install_brian():
     with working_dir(install_root):
         execute(['sudo', 'pip', 'install', 'conda'])
         execute(['sudo', 'conda', 'init'])
-        execute(['conda', 'create', '-p', 'conda_libs', '--yes', 'pip', 'numpy', 'scipy', 'python'])
+        execute(['conda', 'create', '-p', 'conda_libs', '--yes', 'pip', 'numpy', 'scipy', 'python=$TRAVIS_PYTHON_VERSION'])
         execute(['easy_install', 'brian'])
         
         #inform('Finished installing, testing...', indent=2, verbosity=1)
