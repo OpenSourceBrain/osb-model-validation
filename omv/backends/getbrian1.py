@@ -21,5 +21,5 @@ def install_brian():
         
         #inform('Finished installing, testing...', indent=2, verbosity=1)
         #import brian
-        inform('Successfully installed Brian version %s'%brian.__version__, indent=2, verbosity=1)
+        inform('Successfully installed Brian...', indent=2, verbosity=1)
         
