@@ -5,8 +5,8 @@ from ..common.inout import inform
 from utils.wdir import working_dir
 
 def execute(cmds):
-    print("Executing: %s"%cmds)
-    print(co(cmds))
+    inform("Executing: %s"%cmds, indent=1, verbosity=1)
+    inform(co(cmds), indent=1)
     
 
 def install_brian():
@@ -16,7 +16,7 @@ def install_brian():
     with working_dir(install_root):
         execute(['sudo', 'pip', 'install', 'conda'])
         execute(['sudo', 'conda', 'init'])
-        execute(['conda', 'create', '-p', '$HOME/py', '--yes', "'numpy scipy'"])
+        execute(['conda', 'create', '-p', '$HOME/py', '--yes', 'pip', 'numpy', 'scipy', '"python=$TRAVIS_PYTHON_VERSION"'])
         execute(['sudo', 'pip', 'install', 'brian'])
         import brian
         inform('Successfully installed Brian version %s'%brian.__version__, indent=2, verbosity=1)
