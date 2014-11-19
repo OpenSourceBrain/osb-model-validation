@@ -19,7 +19,7 @@ def install_brian():
         execute(['conda', 'create', '-p', 'conda_libs', '--yes', 'pip', 'numpy', 'scipy', 'python'])
         execute(['easy_install', 'brian'])
         
-        inform('Finished installing, testing...', indent=2, verbosity=1)
-        import brian
+        #inform('Finished installing, testing...', indent=2, verbosity=1)
+        #import brian
         inform('Successfully installed Brian version %s'%brian.__version__, indent=2, verbosity=1)
         
