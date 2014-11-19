@@ -15,6 +15,7 @@ class BrianBackend(OMVBackend):
         try:
             FNULL = open(os.devnull, 'w')
             sp.check_call(['python', '-c', '"import brian"'], stdout=FNULL)
+            inform("Brian is installed...", indent=1)
         except OSError as err:
             inform("Couldn't import Brian into Python: ", err, indent=1)
             ret = False
