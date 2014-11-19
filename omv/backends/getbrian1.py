@@ -16,8 +16,10 @@ def install_brian():
     with working_dir(install_root):
         execute(['sudo', 'pip', 'install', 'conda'])
         execute(['sudo', 'conda', 'init'])
-        execute(['conda', 'create', '-p', '$HOME/py', '--yes', 'pip', 'numpy', 'scipy', '"python=$TRAVIS_PYTHON_VERSION"'])
+        execute(['conda', 'create', '-p', '$HOME/py', '--yes', 'pip', 'numpy', 'scipy', 'python'])
         execute(['sudo', 'pip', 'install', 'brian'])
+        
+        inform('Finished installing, testing...', indent=2, verbosity=1)
         import brian
         inform('Successfully installed Brian version %s'%brian.__version__, indent=2, verbosity=1)
         
