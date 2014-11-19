@@ -16,8 +16,8 @@ def install_brian():
     with working_dir(install_root):
         execute(['sudo', 'pip', 'install', 'conda'])
         execute(['sudo', 'conda', 'init'])
-        execute(['conda', 'create', '-p', '$HOME/py', '--yes', 'pip', 'numpy', 'scipy', 'python'])
-        execute(['sudo', 'pip', 'install', 'brian'])
+        execute(['conda', 'create', '-p', 'conda_libs', '--yes', 'pip', 'numpy', 'scipy', 'python'])
+        execute(['easy_install', 'brian'])
         
         inform('Finished installing, testing...', indent=2, verbosity=1)
         import brian
