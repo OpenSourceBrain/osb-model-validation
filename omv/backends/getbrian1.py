@@ -9,7 +9,7 @@ def install_brian():
     install_root = os.environ['HOME']
     
     with working_dir(install_root):
-        print co(['pip', 'install', 'brian'])
+        print co(['easy_install', 'brian'])
         import brian
         inform('Successfully installed Brian version %s'%brian.__version__, indent=2, verbosity=1)
         
