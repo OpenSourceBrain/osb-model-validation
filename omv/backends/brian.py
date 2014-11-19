@@ -14,7 +14,7 @@ class BrianBackend(OMVBackend):
         ret = True
         try:
             import brian
-            inform("Brian is correctly installed...", indent=2)
+            inform("Brian is correctly installed in there...", indent=2)
             
         except Error as err:
             inform("Couldn't import Brian into Python: ", err, indent=1)
