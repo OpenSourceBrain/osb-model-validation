@@ -9,6 +9,5 @@ def install_brian():
     except Exception as e:
         m = 'ERROR installing Brian: ' + str(e)
     finally:
-        inform(m, indent=2, verbosity=1)
-
+        print m
         
