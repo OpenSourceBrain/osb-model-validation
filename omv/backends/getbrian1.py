@@ -4,11 +4,13 @@ import pip
 def install_scipy_dev():
     try:
         import scipy
-    except:
-        print 'Installing scipy dev...'
-        pip.main(['install', 'cython'])
-        pip.main(['install', 'git+http://github.com/scipy/scipy/'])
-        import scipy
+    except ImportError:
+        # Compiling from source is terribly slow, and requires Blas/Lapack...
+        #print 'Installing scipy dev...'
+        #pip.main(['install', 'cython'])
+        #pip.main(['install', 'git+http://github.com/scipy/scipy/'])
+        print("ERROR: Brian requires scipy. Please install it manually.")
+        raise ImportError
 
 
 def install_brian():
