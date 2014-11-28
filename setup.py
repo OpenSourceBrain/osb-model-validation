@@ -6,17 +6,14 @@ setup(
     author_email='borismarin@gmail.com',
     packages=find_packages(),
     entry_points={
-        'console_scripts': [
-            'omv = omv.omv_util:main',
-            'omv_alltests = omv.find_tests:test_all',
-            'omv_autogen = omv.autogen:autogen']},
+        'console_scripts': ['omv = omv.omv_util:main']},
     package_data={
         'omv': [
             'schemata/mep.yaml',
             'schemata/types/*.yaml',
             'schemata/types/base/*.yaml',
             'backends/utils/genesis_utils.g']},
-    url='http://opensourcebrain.org/OSBModelValidation',
+    url='https://github.com/OpenSourceBrain/osb-model-validation',
     license='LICENSE.txt',
     description='OpenSourceBrain Model Validation',
     long_description=open('README.md').read(),
