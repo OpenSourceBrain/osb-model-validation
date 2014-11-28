@@ -2,6 +2,7 @@ import yaml
 from collections import deque
 import os
 # import textwrap
+import subprocess as sp
 
 LINEWIDTH = 70
 __PROMPT__ = '[omv] '
@@ -71,3 +72,7 @@ def trim_path(fname):
         return "."+fname[len(cwd):]
     else:
         return fname
+    
+def check_output(cmds, cwd='.'):
+    inform("Running commands: %s"%cmds, indent=2, verbosity=0)
+    return sp.check_output(cmds, cwd=cwd)
