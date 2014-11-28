@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from common.inout import trim_path
 
 
 class Tallyman(object):
@@ -27,3 +28,81 @@ class Tallyman(object):
         s['All Passed'] = self.all_passed()
         #return dump(s, default_flow_style=False)
         return s
+    
+    def __repr__(self):
+        return str(self.serialize())
+
+
+class TallyHolder(object):
+    
+    tallies = {}
+    all_engines = []
+    
+    def add(self, tally):
+        
+        if not tally.backend in self.all_engines:
+            self.all_engines.append(tally.backend)
+            
+        mp = trim_path(tally.modelpath)
+        
+        if not self.tallies.has_key(mp):
+            self.tallies[mp] = {}
+        
+        mptallies = self.tallies[mp]
+        
+        if not mptallies.has_key(tally.backend):
+            mptallies[tally.backend] = []
+            
+        mptallies[tally.backend].append(tally)
+        
+    def summary(self):
+        width1 = 60
+        border = '+'+'-'*width1+'+'
+        header = '|'+' '*width1+'| '
+        
+        totals = {}
+        for engine in self.all_engines:
+            border += '-'*(len(engine)+2)+"+"
+            header += engine+' | '
+            totals[engine]=0
+        
+        summary = '%s\n%s\n%s\n' %(border, header, border)
+        
+        
+        for mp in self.tallies.keys():
+            
+            mp_ = mp
+            max = width1 -2
+            if len(mp_)>max:
+                pre = 8
+                mp_ = '%s(...)%s'%(mp_[:pre],mp_[-1*(max - pre - 6):])
+                
+            summary += '| '+mp_+' '*(width1-len(mp_)-2)+" |   "
+            
+            mptallies = self.tallies[mp]
+            
+            for engine in self.all_engines:
+                if not mptallies.has_key(engine):
+                    
+                    info = "%s"%(' ')
+                    summary += ' '*(len(engine)-len(info)-2)+info+" |   "
+                else:
+                    tals = mptallies[engine]
+                    for t in tals:
+                        if t.backend == engine:
+                            info = "%s"%(len(t.experiments))
+                            totals[engine]+=len(t.experiments)
+                            summary += ' '*(len(engine)-len(info)-2)+info+" |   "
+            summary += '\n'
+            
+        summary += border+'\n'+'| Totals: '+' '*(width1-9)+'|   '
+        
+        for engine in self.all_engines:
+            info = "%s"%(totals[engine])
+            summary += ' '*(len(engine)-len(info)-2)+info+" |   "
+                
+        summary += '\n'+border
+        return summary
+        
+        
+        

@@ -30,6 +30,8 @@ def centralize(string):
 def rule(string, char='-'):
     return len(string.lstrip()) * char
 
+def is_verbose(level=1):
+    return __VERBOSITY__ >= level
 
 def inform(msg, pars=None, indent=0, underline=False,
            overline=False, center=False, verbosity=0):
