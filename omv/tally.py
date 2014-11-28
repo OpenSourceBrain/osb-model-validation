@@ -91,6 +91,10 @@ class TallyHolder(object):
                     for t in tals:
                         if t.backend == engine:
                             info = "%s"%(len(t.experiments))
+                            if not t.mep:
+                                info+='(d)'
+                            if not t.all_passed():
+                                info+='(X)'
                             totals[engine]+=len(t.experiments)
                             summary += ' '*(len(engine)-len(info)-2)+info+" |   "
             summary += '\n'

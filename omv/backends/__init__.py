@@ -13,6 +13,8 @@ from pylemsnml2 import PyLemsNeuroML2Backend
 from genesis import GenesisBackend
 from brian1 import Brian1Backend
 from pynn import PyNNBackend
+from pynnneuron import PyNNNRNBackend
+from pynnbrian1 import PyNNBrian1Backend
 
 
 OMVBackends = {be.name: be for be in locals().values()

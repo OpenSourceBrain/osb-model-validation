@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from ..common.inout import inform
+from ..common.inout import inform, trim_path
 from backend import OMVBackend, BackendExecutionError
 
 
