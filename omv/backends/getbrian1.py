@@ -22,5 +22,5 @@ def install_brian():
     except Exception as e:
         m = 'ERROR installing Brian: ' + str(e)
     finally:
-        print m
+        print(m)
         
