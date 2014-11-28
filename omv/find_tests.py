@@ -17,14 +17,14 @@ def test_all():
 
     results = [t.all_passed() for t in tallies]
     inform('')
-    inform("%i tests found" % len(all_omts),
+    inform("%i test(s) found" % len(all_omts),
            overline='-', underline='-', center=True)
     inform('')
     if all(results):
         inform("All tests passing!", underline='=', center=True)
     else:
         failed = [trim_path(t.omt) for t in tallies if not t.all_passed()]
-        inform("Some tests failed: ",  failed, underline='=')
+        inform("Some test(s) failed: ",  failed, underline='=')
 
     assert all(results)
 
