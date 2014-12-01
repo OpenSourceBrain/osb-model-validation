@@ -8,8 +8,7 @@ from utils.wdir import working_dir
 
 def install_nest():
     
-    inform('Installing NEST, not', indent=2, verbosity=1)
-    exit(0)
+    inform('Installing NEST', indent=2, verbosity=1)
     nestpath = os.path.join(os.environ['HOME'],'nest')
     nestpath2 = os.path.join(os.environ['HOME'],'nest/nest')
     os.mkdir(nestpath)
