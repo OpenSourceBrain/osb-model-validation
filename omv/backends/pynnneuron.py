@@ -20,10 +20,10 @@ class PyNNNRNBackend(PyNNBackend):
         
     @staticmethod
     def install(version):
-        if not PyNNBackend.is_installed(None):
-            PyNNBackend.install(None)
         if not NeuronBackend.is_installed(None):
             NeuronBackend.install(None)
+        if not PyNNBackend.is_installed(None):
+            PyNNBackend.install(None)
 
         PyNNNRNBackend.path = PyNNBackend.path + \
             ":" + NeuronBackend.path
