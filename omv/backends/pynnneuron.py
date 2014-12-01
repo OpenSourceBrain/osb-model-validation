@@ -41,6 +41,11 @@ class PyNNNRNBackend(PyNNBackend):
         import pyNN
         pynn_mod_dir = os.path.dirname(pyNN.__file__)+'/neuron/nmodl/'
         inform("Attempting to compile PyNN mod files for standard models in %s..."%pynn_mod_dir)
+        
+        print check_output(['ls', os.path.dirname(pyNN.__file__)], cwd=pynn_mod_dir)
+        print check_output(['ls', pynn_mod_dir], cwd=pynn_mod_dir)
+        print check_output(['ls', '/home/travis/local/lib/python/site-packages'], cwd=pynn_mod_dir)
+        
         print check_output(['nrnivmodl'], cwd=pynn_mod_dir)
 
 
