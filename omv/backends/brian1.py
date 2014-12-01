@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from ..common.inout import inform, trim_path
+from ..common.inout import inform, trim_path, check_output
 from backend import OMVBackend, BackendExecutionError
 
 
@@ -32,7 +32,7 @@ class Brian1Backend(OMVBackend):
     def run(self):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
-            self.stdout = sp.check_output(['python', self.modelpath, '-nogui'],
+            self.stdout = check_output(['python', self.modelpath, '-nogui'],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:

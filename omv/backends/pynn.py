@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from ..common.inout import inform, trim_path
+from ..common.inout import inform, trim_path, check_output
 from backend import OMVBackend, BackendExecutionError
 
 
@@ -27,13 +27,13 @@ class PyNNBackend(OMVBackend):
         home = os.environ['HOME']
         inform('Will fetch and install the latest pyNN', indent=2)
         install_pynn()
-        inform('Done...', indent=2)
+        inform('Done, PyNN version %s is correctly installed...' % pyNN.__version__, indent=2)
 
 
     def run(self):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
-            self.stdout = sp.check_output(['python', self.modelpath],
+            self.stdout = check_output(['python', self.modelpath],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:

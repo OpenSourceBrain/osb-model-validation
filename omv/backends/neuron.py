@@ -28,7 +28,8 @@ class NeuronBackend(OMVBackend):
         ret = True
         try:
             FNULL = open(os.devnull, 'w')
-            sp.check_call(['nrniv', '--version'], stdout=FNULL)
+            output = sp.check_output(['nrniv', '--version'])
+            inform('%s is installed'%output.strip(), indent=2)
         except OSError:
             ret = False
         return ret

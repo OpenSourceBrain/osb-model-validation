@@ -4,7 +4,7 @@ import subprocess as sp
 from neuron import NeuronBackend
 from pynn import PyNNBackend
 
-from ..common.inout import inform, trim_path
+from ..common.inout import inform, trim_path, check_output
 from backend import OMVBackend, BackendExecutionError
 
 
@@ -14,9 +14,11 @@ class PyNNNRNBackend(PyNNBackend):
 
     @staticmethod
     def is_installed(version):
-        inform("Checking whether %s is installed..." %
+        inform("Checking whether %s is installed correctly..." %
                PyNNNRNBackend.name, indent=1)
-        return PyNNBackend.is_installed(None) and NeuronBackend.is_installed(None)
+        installed = PyNNBackend.is_installed(None) and NeuronBackend.is_installed(None)
+        
+        return installed
         
     @staticmethod
     def install(version):
@@ -34,12 +36,17 @@ class PyNNNRNBackend(PyNNBackend):
             NeuronBackend.environment_vars)
         inform("PATH: " + PyNNNRNBackend.path)
         inform("Env vars: %s" % PyNNNRNBackend.environment_vars)
+        inform("Attempting to compile PyNN mod files for standard models...")
+        import pyNN
+        pynn_mod_dir = os.path.dirname(pyNN.__file__)+'/neuron/nmodl/'
+        print check_output(['nrnivmodl'], cwd=pynn_mod_dir)
 
 
     def run(self):
         try:
+                                          
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
-            self.stdout = sp.check_output(['python', self.modelpath, 'neuron'],
+            self.stdout = check_output(['python', self.modelpath, 'neuron'],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:

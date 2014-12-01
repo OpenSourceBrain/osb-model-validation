@@ -3,7 +3,7 @@ import subprocess as sp
 
 from jneuroml import JNeuroMLBackend
 from neuron import NeuronBackend
-from ..common.inout import inform, trim_path
+from ..common.inout import inform, trim_path, check_output
 from backend import BackendExecutionError
 
 
@@ -38,7 +38,7 @@ class JNeuroMLNRNBackend(JNeuroMLBackend):
     def run(self):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), JNeuroMLNRNBackend.name), indent=1)
-            self.stdout = sp.check_output(
+            self.stdout = check_output(
                 ['jnml', self.modelpath, '-neuron', '-nogui', '-run'],
                 cwd=os.path.dirname(self.modelpath))
             inform("Success with running ",

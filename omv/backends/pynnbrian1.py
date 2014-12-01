@@ -4,8 +4,8 @@ import subprocess as sp
 from brian1 import Brian1Backend
 from pynn import PyNNBackend
 
-from ..common.inout import inform, trim_path
-from backend import OMVBackend, BackendExecutionError
+from ..common.inout import inform, trim_path, check_output
+from backend import BackendExecutionError
 
 
 class PyNNBrian1Backend(PyNNBackend):
@@ -38,7 +38,7 @@ class PyNNBrian1Backend(PyNNBackend):
     def run(self):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
-            self.stdout = sp.check_output(['python', self.modelpath, 'brian'],
+            self.stdout = check_output(['python', self.modelpath, 'brian'],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
