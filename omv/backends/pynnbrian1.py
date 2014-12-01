@@ -20,10 +20,12 @@ class PyNNBrian1Backend(PyNNBackend):
         
     @staticmethod
     def install(version):
-        if not PyNNBackend.is_installed(None):
-            PyNNBackend.install(None)
         if not Brian1Backend.is_installed(None):
             Brian1Backend.install(None)
+            inform("%s installed Brian..." % PyNNBrian1Backend.name, indent=2, verbosity =1)
+        if not PyNNBackend.is_installed(None):
+            PyNNBackend.install(None)
+            inform("%s installed PyNN..." % PyNNBrian1Backend.name, indent=2, verbosity =1)
 
         PyNNBrian1Backend.path = PyNNBackend.path + \
             ":" + Brian1Backend.path
