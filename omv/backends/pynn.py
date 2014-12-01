@@ -27,7 +27,7 @@ class PyNNBackend(OMVBackend):
         home = os.environ['HOME']
         inform('Will fetch and install the latest pyNN', indent=2)
         install_pynn()
-        inform('Done, PyNN version %s is correctly installed...' % pyNN.__version__, indent=2)
+        inform('Done, PyNN is correctly installed...', indent=2)
 
 
     def run(self):
