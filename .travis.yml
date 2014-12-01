@@ -14,4 +14,6 @@ install:
 
 script:
     - cd utilities/tests
-    - omv all -V
+    #- omv all -V
+    - omv test .test.nestsli.omt 
+
