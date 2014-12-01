@@ -1,2 +1,2 @@
-target: test_pynn.py 
+target: test_pynn_nrn.py 
 engine: PyNN_NEURON

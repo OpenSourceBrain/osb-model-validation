@@ -51,22 +51,22 @@ def main():
         validate_mep.validate(arguments['<mepfile>'])
 
     elif arguments['validate-omt']:
-        print 'OMT validation not implemented yet!'
+        print('OMT validation not implemented yet!')
 
     elif arguments['install']:
         be = arguments['<backend>']
         if be not in OMVBackends:
-            print 'Backend', be, 'unknown!'
+            print('Backend' + be + 'unknown!')
         else:
-            print 'Will install', arguments['<backend>']
-            print 'Backend installation not implemented yet!'
+            print('Will install: %s'% arguments['<backend>'])
+            print('Backend installation not implemented yet!')
 
     elif arguments['list-backends']:
         for be in OMVBackends.keys():
-            print be
+            print(be)
 
     elif arguments['autogen']:
-        print 'Automatically generating model validation files'
+        print('Automatically generating model validation files')
         dry = arguments['--dryrun']
         auto = arguments['-y']
         autogen(auto, dry)

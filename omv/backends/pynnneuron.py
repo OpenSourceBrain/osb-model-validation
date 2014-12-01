@@ -36,13 +36,12 @@ class PyNNNRNBackend(PyNNBackend):
             PyNNBackend.environment_vars)
         PyNNNRNBackend.environment_vars.update(
             NeuronBackend.environment_vars)
-        inform("PATH: " + PyNNNRNBackend.path)
-        inform("Env vars: %s" % PyNNNRNBackend.environment_vars)
+        inform("PATH: " + PyNNNRNBackend.path, indent=2, verbosity =1)
+        inform("Env vars: %s" % PyNNNRNBackend.environment_vars, indent=2, verbosity =1)
         import pyNN
         pynn_mod_dir = os.path.dirname(pyNN.__file__)+'/neuron/nmodl/'
-        inform("Attempting to compile PyNN mod files for standard models in %s..."%pynn_mod_dir)
+        inform("Attempting to compile PyNN mod files for standard models in %s..."%pynn_mod_dir, indent=2, verbosity =1)
         
-        print check_output(['ls', os.path.dirname(pyNN.__file__)], cwd=pynn_mod_dir)
         print check_output(['ls', pynn_mod_dir], cwd=pynn_mod_dir)
         
         print check_output([NeuronBackend.environment_vars['NEURON_HOME']+'/bin/nrnivmodl'], cwd=pynn_mod_dir)
