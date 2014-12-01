@@ -12,6 +12,7 @@ from pylems import PyLemsBackend
 from pylemsnml2 import PyLemsNeuroML2Backend
 from genesis import GenesisBackend
 from brian1 import Brian1Backend
+from nest import NestBackend
 from pynn import PyNNBackend
 from pynnneuron import PyNNNRNBackend
 from pynnbrian1 import PyNNBrian1Backend
