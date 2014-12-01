@@ -24,8 +24,10 @@ class PyNNNRNBackend(PyNNBackend):
     def install(version):
         if not NeuronBackend.is_installed(None):
             NeuronBackend.install(None)
+            inform("%s installed NEURON..." % PyNNNRNBackend.name, indent=2, verbosity =1)
         if not PyNNBackend.is_installed(None):
             PyNNBackend.install(None)
+            inform("%s installed PyNN..." % PyNNNRNBackend.name, indent=2, verbosity =1)
 
         PyNNNRNBackend.path = PyNNBackend.path + \
             ":" + NeuronBackend.path

@@ -1,5 +1,5 @@
 import pip
-
+from ..common.inout import inform
 
 def install_pynn():
     try:
@@ -9,5 +9,5 @@ def install_pynn():
     except Exception as e:
         m = 'ERROR installing pyNN: ' + str(e)
     finally:
-        print(m)
+        inform(m)
         

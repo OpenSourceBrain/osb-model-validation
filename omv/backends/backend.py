@@ -18,7 +18,7 @@ class OMVBackend(object):
     path = ''
 
     def __init__(self, target, backend_version=None):
-        inform("Checking whether %s is installed..." % self.name,
+        inform("Checking whether %s is already installed..." % self.name,
                indent=1, verbosity=1)
         if not self.is_installed(backend_version):
             try:
@@ -27,7 +27,7 @@ class OMVBackend(object):
                 self.set_path()
             except Exception as e:
                 inform(e)
-                raise(BackendInstallationError)
+                raise(BackendInstallationError(e))
 
         self.modelpath = realpath(target)
         self.extra_pars = []
