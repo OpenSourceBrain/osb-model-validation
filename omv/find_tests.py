@@ -10,10 +10,13 @@ def test_all():
     all_omts = [p.as_posix() for p in cwd.glob('**/*.omt')]
     th = TallyHolder()
     if environ.get('TRAVIS'):
-        engine = environ.get('OMV_ENGINE').lower()
-        tallies = [parse_omt(t)
-                   for t in all_omts
-                   if load_yaml(t)['engine'].lower() == engine]
+        if not environ.get('OMV_ENGINE'):
+            tallies = [parse_omt(t) for t in all_omts]
+        else:
+            engine = environ.get('OMV_ENGINE').lower()
+            tallies = [parse_omt(t)
+                       for t in all_omts
+                       if load_yaml(t)['engine'].lower() == engine]
     else:
         tallies = [parse_omt(t) for t in all_omts]
         
