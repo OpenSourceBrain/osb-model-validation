@@ -44,9 +44,8 @@ class PyNNNRNBackend(PyNNBackend):
         
         print check_output(['ls', os.path.dirname(pyNN.__file__)], cwd=pynn_mod_dir)
         print check_output(['ls', pynn_mod_dir], cwd=pynn_mod_dir)
-        print check_output(['ls', '/home/travis/local/lib/python/site-packages'], cwd=pynn_mod_dir)
         
-        print check_output(['nrnivmodl'], cwd=pynn_mod_dir)
+        print check_output([NeuronBackend.environment_vars['NEURON_HOME']+'/bin/nrnivmodl'], cwd=pynn_mod_dir)
 
 
     def run(self):
