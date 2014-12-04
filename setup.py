@@ -12,7 +12,7 @@ setup(
             'schemata/mep.yaml',
             'schemata/types/*.yaml',
             'schemata/types/base/*.yaml',
-            'backends/utils/genesis_utils.g']},
+            'engines/utils/genesis_utils.g']},
     url='https://github.com/OpenSourceBrain/osb-model-validation',
     license='LICENSE.txt',
     description='OpenSourceBrain Model Validation',
