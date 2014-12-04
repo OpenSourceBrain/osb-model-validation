@@ -7,6 +7,7 @@ virtualenv:
 
 before_install:
 
+    # Requirements for Brian & NEST
     - sudo apt-get install -qq python-numpy python-scipy python-matplotlib python-sympy
 
 install:

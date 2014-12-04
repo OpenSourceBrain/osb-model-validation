@@ -11,6 +11,9 @@ def parse_omt(omt_path):
            underline='=', center=False)
     
     mepomt = OMVTestParser(omt_path)
+    if not OMVBackends.has_key(mepomt.engine):
+        inform("Error! Unrecognised engine: %s"%mepomt.engine)
+        exit(1)
     backend = OMVBackends[mepomt.engine](mepomt.modelpath)
     experiments = [exp for exp in mepomt.generate_exps(backend)]
     

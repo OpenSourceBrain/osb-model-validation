@@ -1,2 +1,2 @@
 target: test_pynn_simulators.py 
-engine: PyNN_NEURON
+engine: PyNN_Nest
