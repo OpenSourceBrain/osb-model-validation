@@ -36,9 +36,11 @@ class OMVAnalyzer(object):
 
         are_close, best_tol = ts.compare_arrays((obs, exp), tolerance)
         if not are_close:
+            suggest_tol = True
             try:  # making it easier to copy/paste lists
                 pretty_obs = [float(el) for el in obs]
                 pretty_exp = [float(el) for el in exp]
+                suggest_tol = len(obs) == len(exp)
             except TypeError:  # obs,exp can be singletons
                 pretty_obs, pretty_exp = map(float, (obs, exp))
             inform("Comparison of \n\
@@ -47,7 +49,7 @@ class OMVAnalyzer(object):
                     (expected data): %s\n\
                     failed against tolerance %g" %
                    (pretty_obs, pretty_exp, tolerance))
-            if len(obs) == len(exp):
+            if suggest_tol:
                 inform("A better tolerance to try is: ", best_tol, indent=1)
         else:
             if best_tol < tolerance:
