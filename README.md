@@ -1,7 +1,7 @@
-osb-model-validation
+OSB Model Validation
 ====================
 
-Tools for automated model validation in OpenSourceBrain projects.
+Tools for automated model validation in [Open Source Brain](http://www.opensourcebrain.org) projects, but which can be used for testing model behaviour on many simulation engines, both locally and on [Travis-CI](https://travis-ci.org).
 
 
 Instructions
@@ -42,7 +42,7 @@ be automatically discovered by travis, _regardless_ of their location.
 If you are wise and want to run the tests locally before submitting
 your changes to github, install the omv python package
 
-    pip install git+https://github.com/borismarin/osb-model-validation.git
+    pip install git+https://github.com/OpenSourceBrain/osb-model-validation.git
 
 This package provides the *omv* command line utility:
 
@@ -60,19 +60,20 @@ This package provides the *omv* command line utility:
         ============================================
         
         Usage:
-          omv all  
-          omv test <testMe.omt>
-          omv autogen [options] 
-          omv install <backend> 
-          omv list-backends 
+          omv all [-V | --verbose]
+          omv test <testMe.omt> [-V | --verbose]
+          omv autogen [options]
+          omv install <backend>
+          omv list-backends
           omv validate-mep <mepfile>
           omv validate-omt <omtfile>
           omv (-h | --help)
           omv --version
-        
+      
         Options:
           -h --help     Show this screen.
-          -d --dryrun   Generate dry-run tests only [default: False]
+          -d --dryrun   Generate dry-run tests only [default: False].
+          -V --verbose  Display additional diagnosis messages [default: False].
           --version     Show version.
           -y            Auto-select default options (non-interactive mode)
 
