@@ -5,8 +5,8 @@
     omv all [-V | --verbose]
     omv test <testMe.omt> [-V | --verbose]
     omv autogen [options]
-    omv install <backend>
-    omv list-backends
+    omv install <engine>
+    omv list-engines
     omv validate-mep <mepfile>
     omv validate-omt <omtfile>
     omv (-h | --help)
@@ -23,7 +23,7 @@ from docopt import docopt
 from find_tests import test_all, test_one
 from validation import validate_mep
 from autogen import autogen
-from backends import OMVBackends
+from engines import OMVEngines
 
 
 def main():
@@ -54,15 +54,15 @@ def main():
         print('OMT validation not implemented yet!')
 
     elif arguments['install']:
-        be = arguments['<backend>']
-        if be not in OMVBackends:
-            print('Backend' + be + 'unknown!')
+        be = arguments['<engine>']
+        if be not in OMVEngine:
+            print('Engine' + be + 'unknown!')
         else:
-            print('Will install: %s'% arguments['<backend>'])
-            print('Backend installation not implemented yet!')
+            print('Will install: %s'% arguments['<engine>'])
+            print('Engine installation not implemented yet!')
 
-    elif arguments['list-backends']:
-        for be in OMVBackends.keys():
+    elif arguments['list-engines']:
+        for be in OMVEngine.keys():
             print(be)
 
     elif arguments['autogen']:

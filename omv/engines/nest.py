@@ -2,10 +2,10 @@ import os
 import subprocess as sp
 
 from ..common.inout import inform, trim_path, check_output
-from backend import OMVBackend, BackendExecutionError
+from engine import OMVEngine, EngineExecutionError
 
 
-class NestBackend(OMVBackend):
+class NestEngine(OMVEngine):
     
     name = "NEST"
     
@@ -28,13 +28,13 @@ class NestBackend(OMVBackend):
         from getnest import install_nest
         home = os.environ['HOME']
         p = os.path.join(home, 'nest/nest')
-        NestBackend.path = p
-        NestBackend.environment_vars = {'NEST_HOME': p,
+        NestEngine.path = p
+        NestEngine.environment_vars = {'NEST_HOME': p,
                                         'PYTHONPATH': p+'/lib/python2.7/site-packages/'}
         inform('Will fetch and install the latest NEST', indent=2)
         install_nest()
         inform('Done...', indent=2)
-        print NestBackend.environment_vars
+        print NestEngine.environment_vars
         
     def run(self):
         
@@ -50,7 +50,7 @@ class NestBackend(OMVBackend):
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
             self.stdout = err.output
-            raise BackendExecutionError
+            raise EngineExecutionError
         except Exception as err:
             inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1

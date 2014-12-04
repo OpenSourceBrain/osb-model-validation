@@ -2,10 +2,10 @@ import os
 import subprocess as sp
 
 from ..common.inout import inform, trim_path
-from backend import OMVBackend, BackendExecutionError
+from engine import OMVEngine, EngineExecutionError
 
 
-class JNeuroMLBackend(OMVBackend):
+class JNeuroMLEngine(OMVEngine):
 
     name = "jNeuroML"
         
@@ -24,8 +24,8 @@ class JNeuroMLBackend(OMVBackend):
         from getjnml import install_jnml
         home = os.environ['HOME']
         p = os.path.join(home, 'jnml/jNeuroMLJar')
-        JNeuroMLBackend.path = p
-        JNeuroMLBackend.environment_vars = {'JNML_HOME': p}
+        JNeuroMLEngine.path = p
+        JNeuroMLEngine.environment_vars = {'JNML_HOME': p}
         inform('Will fetch and install the latest jNeuroML jar', indent=2)
         install_jnml()
 
@@ -39,4 +39,4 @@ class JNeuroMLBackend(OMVBackend):
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
             self.stdout = err.output
-            raise BackendExecutionError
+            raise EngineExecutionError

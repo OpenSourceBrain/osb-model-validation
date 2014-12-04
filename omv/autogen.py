@@ -29,7 +29,7 @@ def read_option(options, default=0):
     return opt
 
 def find_targets(auto=False):
-    #TODO: should belong to backend
+    #TODO: should belong to engine
     dirs_to_engines_exts = {'NEURON': {'engine': 'NEURON', 'extension': '.hoc'},
                             'NeuroML2': {'engine': 'jNeuroML', 'extension': '.nml'}}
     targets = []
@@ -61,8 +61,8 @@ def create_dryrun(engine, target):
 
 def generate_dottravis(targets):
 
-    backends = [t[0] for t in targets]
-    engines = ['OMV_ENGINE='+be for be in backends]
+    engines = [t[0] for t in targets]
+    engines = ['OMV_ENGINE='+be for be in engines]
     #TODO: softcode 
     repo = "git+https://github.com/borismarin/osb-model-validation.git"
 

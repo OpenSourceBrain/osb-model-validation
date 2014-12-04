@@ -3,12 +3,12 @@ import os
 import subprocess as sp
 from tempfile import NamedTemporaryFile
 
-from backend import OMVBackend, BackendExecutionError
+from engine import OMVEngine, EngineExecutionError
 from utils.wdir import working_dir
 from ..common.inout import inform
 
 
-class GenesisBackend(OMVBackend):
+class GenesisEngine(OMVEngine):
 
     name = "genesis"
 
@@ -34,7 +34,7 @@ class GenesisBackend(OMVBackend):
         return ret
 
     @classmethod
-    def install(cls, backend_version):
+    def install(cls, engine_version):
         import getgenesis
         home = os.environ['HOME']
         cls.path = os.path.join(home, 'genesis',
@@ -49,7 +49,7 @@ class GenesisBackend(OMVBackend):
                 temp = NamedTemporaryFile(suffix='.g')
                 temp.write('include %s\n' % self.modelpath)
                 temp.write('include %s\n' %
-                           resource_filename('omv', 'backends/utils/genesis_utils.g'))
+                           resource_filename('omv', 'engines/utils/genesis_utils.g'))
                 temp.write('\n'.join(self.extra_pars) + '\n')
                 temp.seek(0)
 
@@ -62,7 +62,7 @@ class GenesisBackend(OMVBackend):
                 self.returncode = 0
             except sp.CalledProcessError as e:
                 self.returncode = e.returncode
-                raise BackendExecutionError
+                raise EngineExecutionError
             finally:
                 temp.close()
 

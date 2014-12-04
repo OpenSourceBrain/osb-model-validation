@@ -4,18 +4,18 @@ import platform
 import subprocess as sp
 from textwrap import dedent
 from utils.wdir import working_dir
-from backend import OMVBackend, BackendExecutionError
+from engine import OMVEngine, EngineExecutionError
 from os.path import dirname
 
 from ..common.inout import inform
 
 
-class NeuronBackend(OMVBackend):
+class NeuronEngine(OMVEngine):
 
     name = "NEURON"
 
     def __init__(self, target):
-        super(NeuronBackend, self).__init__(target)
+        super(NeuronEngine, self).__init__(target)
         try:
             self.stdout = self.compile_modfiles()
         except sp.CalledProcessError as err:
@@ -35,7 +35,7 @@ class NeuronBackend(OMVBackend):
         return ret
  
     @classmethod
-    def install(cls, backend_version):
+    def install(cls, engine_version):
         import getnrn
         home = os.environ['HOME']
         arch = platform.machine()
@@ -80,7 +80,7 @@ class NeuronBackend(OMVBackend):
 
             self.returncode = p.returncode
             if self.returncode is not 0:
-                raise BackendExecutionError
+                raise EngineExecutionError
             
     def build_query_string(self, name, cmd):
         return '{{%s}{print "%s: ", %s}}' % (cmd, name, name)
