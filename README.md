@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/OpenSourceBrain/osb-model-validation.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/osb-model-validation)
+------------------------------------------
+
 OSB Model Validation
 ====================
 
