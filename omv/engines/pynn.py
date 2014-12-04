@@ -2,10 +2,10 @@ import os
 import subprocess as sp
 
 from ..common.inout import inform, trim_path, check_output
-from backend import OMVBackend, BackendExecutionError
+from engine import OMVEngine, EngineExecutionError
 
 
-class PyNNBackend(OMVBackend):
+class PyNNEngine(OMVEngine):
     
     name = "PyNN"
 
@@ -39,7 +39,7 @@ class PyNNBackend(OMVBackend):
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
             self.stdout = err.output
-            raise BackendExecutionError
+            raise EngineExecutionError
         except Exception as err:
             inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1

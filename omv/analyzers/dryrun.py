@@ -4,13 +4,13 @@ from ..common.inout import inform
 
 class DryRunAnalyzer(OMVAnalyzer):
     
-    def __init__(self, ost, expected, backend, omt_root):
+    def __init__(self, ost, expected, engine, omt_root):
         inform('No mep file specified. Will only run simulation using: ',
-               backend, indent=1)
-        self.backend = backend
+               engine, indent=1)
+        self.engine = engine
 
     def __call__(self):
-        return not self.backend.returncode
+        return not self.engine.returncode
 
 
 

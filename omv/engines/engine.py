@@ -3,31 +3,31 @@ from os import environ
 from ..common.inout import inform
 
 
-class BackendInstallationError(Exception):
+class EngineInstallationError(Exception):
     pass
 
 
-class BackendExecutionError(Exception):
+class EngineExecutionError(Exception):
     pass
 
 
-class OMVBackend(object):
+class OMVEngine(object):
 
     name = 'Name not yet set!'
     environment_vars = {}
     path = ''
 
-    def __init__(self, target, backend_version=None):
+    def __init__(self, target, engine_version=None):
         inform("Checking whether %s is already installed..." % self.name,
                indent=1, verbosity=1)
-        if not self.is_installed(backend_version):
+        if not self.is_installed(engine_version):
             try:
-                self.install(backend_version)
+                self.install(engine_version)
                 self.set_environment()
                 self.set_path()
             except Exception as e:
                 inform(e)
-                raise(BackendInstallationError(e))
+                raise(EngineInstallationError(e))
 
         self.modelpath = realpath(target)
         self.extra_pars = []
@@ -61,7 +61,7 @@ class OMVBackend(object):
 
     def register_query(self, name, cmd=''):
         query = self.build_query_string(name, cmd)
-        inform('Registered backend query: ', query, indent=2, verbosity=1)
+        inform('Registered engine query: ', query, indent=2, verbosity=1)
         self.extra_pars.append(query)
         return name
 

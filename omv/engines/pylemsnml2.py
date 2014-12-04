@@ -1,14 +1,14 @@
 import os
 import subprocess as sp
 
-from pylems import PyLemsBackend
+from pylems import PyLemsEngine
 from getnml2 import default_nml2_dir, install_nml2
 
 from ..common.inout import inform, trim_path
-from backend import OMVBackend, BackendExecutionError
+from engine import OMVEngine, EngineExecutionError
 
 
-class PyLemsNeuroML2Backend(OMVBackend):
+class PyLemsNeuroML2Engine(OMVEngine):
     
     name = "PyLEMS_NeuroML2"
 
@@ -16,16 +16,16 @@ class PyLemsNeuroML2Backend(OMVBackend):
     @staticmethod
     def is_installed(version):
         inform("Checking whether %s is installed..." %
-               PyLemsNeuroML2Backend.name, indent=1)
+               PyLemsNeuroML2Engine.name, indent=1)
                
         nml2_installed = os.path.isdir(default_nml2_dir)
                
-        return PyLemsBackend.is_installed(None) and nml2_installed
+        return PyLemsEngine.is_installed(None) and nml2_installed
         
     def install(self, version):
         
-        if not PyLemsBackend.is_installed(None):
-            PyLemsBackend.install(None)
+        if not PyLemsEngine.is_installed(None):
+            PyLemsEngine.install(None)
         if not os.path.isdir(default_nml2_dir):
             install_nml2()
             
@@ -43,7 +43,7 @@ class PyLemsNeuroML2Backend(OMVBackend):
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
             self.stdout = err.output
-            raise BackendExecutionError
+            raise EngineExecutionError
         except Exception as err:
             inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1

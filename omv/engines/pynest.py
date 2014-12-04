@@ -2,12 +2,12 @@ import os
 import subprocess as sp
 
 from ..common.inout import inform, trim_path, check_output
-from backend import OMVBackend, BackendExecutionError
+from engine import OMVEngine, EngineExecutionError
 
-from nest import NestBackend
+from nest import NestEngine
 
 
-class PyNestBackend(OMVBackend):
+class PyNestEngine(OMVEngine):
     
     name = "PyNEST"
     
@@ -18,7 +18,7 @@ class PyNestBackend(OMVBackend):
         try:
             import nest
             inform("NEST version %s is correctly installed with Python support..." % "???", indent=2)
-            inform("Env vars: %s" % PyNestBackend.environment_vars, indent=2)
+            inform("Env vars: %s" % PyNestEngine.environment_vars, indent=2)
             
         except Exception as err:
             inform("Couldn't import NEST into Python: ", err, indent=1)
@@ -27,9 +27,9 @@ class PyNestBackend(OMVBackend):
         
     @staticmethod
     def install(version):
-        NestBackend.install(version)
-        PyNestBackend.path = NestBackend.path
-        PyNestBackend.environment_vars = NestBackend.environment_vars
+        NestEngine.install(version)
+        PyNestEngine.path = NestEngine.path
+        PyNestEngine.environment_vars = NestEngine.environment_vars
         
     def run(self):
         
@@ -50,7 +50,7 @@ class PyNestBackend(OMVBackend):
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
             self.stdout = err.output
-            raise BackendExecutionError
+            raise EngineExecutionError
         except Exception as err:
             inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1

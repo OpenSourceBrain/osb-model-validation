@@ -6,7 +6,7 @@ class Tallyman(object):
     def __init__(self, mepomt):
         self.omt = mepomt.omt_path
         self.mep = mepomt.mep_path
-        self.backend = mepomt.engine
+        self.engine = mepomt.engine
         self.modelpath = mepomt.modelpath
         self.experiments = {}
 
@@ -20,7 +20,7 @@ class Tallyman(object):
         self.experiments[exp.name] = results
 
     def serialize(self):
-        s = OrderedDict({'backend': self.backend})
+        s = OrderedDict({'engine': self.engine})
         s['MEP file'] = self.mep
         s['OMT file'] = self.omt
         s['Model path'] = self.modelpath
@@ -40,8 +40,8 @@ class TallyHolder(object):
     
     def add(self, tally):
         
-        if not tally.backend in self.all_engines:
-            self.all_engines.append(tally.backend)
+        if not tally.engine in self.all_engines:
+            self.all_engines.append(tally.engine)
             
         mp = trim_path(tally.modelpath)
         
@@ -50,10 +50,10 @@ class TallyHolder(object):
         
         mptallies = self.tallies[mp]
         
-        if not mptallies.has_key(tally.backend):
-            mptallies[tally.backend] = []
+        if not mptallies.has_key(tally.engine):
+            mptallies[tally.engine] = []
             
-        mptallies[tally.backend].append(tally)
+        mptallies[tally.engine].append(tally)
         
     def summary(self):
         width1 = 60
@@ -89,7 +89,7 @@ class TallyHolder(object):
                 else:
                     tals = mptallies[engine]
                     for t in tals:
-                        if t.backend == engine:
+                        if t.engine == engine:
                             info = "%s"%(len(t.experiments))
                             if not t.mep:
                                 info+='d'

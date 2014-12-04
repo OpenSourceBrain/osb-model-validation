@@ -1,40 +1,40 @@
 import os
 import subprocess as sp
 
-from nest import NestBackend
-from pynn import PyNNBackend
+from nest import NestEngine
+from pynn import PyNNEngine
 
 from ..common.inout import inform, trim_path, check_output
-from backend import BackendExecutionError
+from engine import EngineExecutionError
 
 
-class PyNNNestBackend(PyNNBackend):
+class PyNNNestEngine(PyNNEngine):
     
     name = "PyNN_Nest"
 
     @staticmethod
     def is_installed(version):
         inform("Checking whether %s is installed..." %
-               PyNNNestBackend.name, indent=1)
-        return PyNNBackend.is_installed(None) and NestBackend.is_installed(None)
+               PyNNNestEngine.name, indent=1)
+        return PyNNEngine.is_installed(None) and NestEngine.is_installed(None)
         
     @staticmethod
     def install(version):
-        if not NestBackend.is_installed(None):
-            NestBackend.install(None)
-            inform("%s installed Nest..." % PyNNNestBackend.name, indent=2, verbosity =1)
-        if not PyNNBackend.is_installed(None):
-            PyNNBackend.install(None)
-            inform("%s installed PyNN..." % PyNNNestBackend.name, indent=2, verbosity =1)
+        if not NestEngine.is_installed(None):
+            NestEngine.install(None)
+            inform("%s installed Nest..." % PyNNNestEngine.name, indent=2, verbosity =1)
+        if not PyNNEngine.is_installed(None):
+            PyNNEngine.install(None)
+            inform("%s installed PyNN..." % PyNNNestEngine.name, indent=2, verbosity =1)
 
-        PyNNNestBackend.path = PyNNBackend.path + \
-            ":" + NestBackend.path
-        PyNNNestBackend.environment_vars = {}
-        PyNNNestBackend.environment_vars.update(
-            PyNNBackend.environment_vars)
-        PyNNNestBackend.environment_vars.update(
-            NestBackend.environment_vars)
-        inform("PATH: " + PyNNNestBackend.path)
+        PyNNNestEngine.path = PyNNEngine.path + \
+            ":" + NestEngine.path
+        PyNNNestEngine.environment_vars = {}
+        PyNNNestEngine.environment_vars.update(
+            PyNNEngine.environment_vars)
+        PyNNNestEngine.environment_vars.update(
+            NestEngine.environment_vars)
+        inform("PATH: " + PyNNNestEngine.path)
 
 
     def run(self):
@@ -46,7 +46,7 @@ class PyNNNestBackend(PyNNBackend):
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
             self.stdout = err.output
-            raise BackendExecutionError
+            raise EngineExecutionError
         except Exception as err:
             inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1

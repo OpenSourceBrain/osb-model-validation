@@ -3,8 +3,8 @@ from ..common.inout import inform
 
 
 class OMVAnalyzer(object):
-    def __init__(self, observable, expected, backend, omt_root):
-        self.backend = backend
+    def __init__(self, observable, expected, engine, omt_root):
+        self.engine = engine
         self.observable = observable
         self.expected = expected
         self.omt_root = omt_root

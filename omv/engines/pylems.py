@@ -2,10 +2,10 @@ import os
 import subprocess as sp
 
 from ..common.inout import inform, trim_path
-from backend import OMVBackend, BackendExecutionError
+from engine import OMVEngine, EngineExecutionError
 
 
-class PyLemsBackend(OMVBackend):
+class PyLemsEngine(OMVEngine):
     
     name = "PyLEMS"
 
@@ -25,8 +25,8 @@ class PyLemsBackend(OMVBackend):
         from getpylems import install_pylems
         home = os.environ['HOME']
         p = os.path.join(home, 'pylems')
-        PyLemsBackend.path = p
-        PyLemsBackend.environment_vars = {'PYLEMS_HOME': p}
+        PyLemsEngine.path = p
+        PyLemsEngine.environment_vars = {'PYLEMS_HOME': p}
         inform('Will fetch and install the latest PyLEMS', indent=2)
         install_pylems()
         inform('Done...', indent=2)
@@ -40,7 +40,7 @@ class PyLemsBackend(OMVBackend):
         except sp.CalledProcessError as err:
             self.returncode = err.returncode
             self.stdout = err.output
-            raise BackendExecutionError
+            raise EngineExecutionError
         except Exception as err:
             inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1

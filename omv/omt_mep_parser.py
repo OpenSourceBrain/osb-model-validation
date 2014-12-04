@@ -35,15 +35,15 @@ class OMVTestParser(object):
     def omt_experiments(self):
         return self.omt['experiments']
 
-    def generate_exps(self, backend):
+    def generate_exps(self, engine):
         if self.mep:
             for expname, exp in self.omt_experiments.iteritems():
                 expmep = self.mep_experiments[expname]
                 obs = exp['observables']
                 yield OMVExperiment(expname, expmep, obs,
-                                    backend, self.omt_root)
+                                    engine, self.omt_root)
         else:
             exp = {'expected': {'dry': None}}
             obs = {'dry': None}
             yield OMVExperiment('Dry run', exp, obs,
-                                backend, self.omt_root)
+                                engine, self.omt_root)
