@@ -25,7 +25,7 @@ def test_all():
 
     results = [t.all_passed() for t in tallies]
     inform('')
-    inform("%i test(s) found" % len(all_omts),
+    inform("%i test(s) run" % len(tallies),
            overline='-', underline='-', center=True)
     inform('')
     if all(results):
