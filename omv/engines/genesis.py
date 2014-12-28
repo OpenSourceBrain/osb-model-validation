@@ -22,10 +22,12 @@ class GenesisEngine(OMVEngine):
             temp.writelines(['echo "version: "{version} \n', 'quit \n'])
             temp.seek(0)
             out = sp.check_output(
-                ['nxgenesis', '-nox', '-batch', '-notty', temp.name])
+                ['genesis', '-nox', '-batch', '-notty', temp.name])
             m = re.search('version:' + '\s*([0-9]*\.?[0-9]+)\s*', out)
             if m:
                 ret = m.groups()[0]
+                inform("Found GENESIS in path, version %s" % ret,
+                        verbosity=1, indent=2)
         except OSError:
             ret = False
         finally:
@@ -54,7 +56,7 @@ class GenesisEngine(OMVEngine):
                 temp.seek(0)
 
                 with open('/tmp/omv.gen.err', 'w+') as se:
-                    self.stdout = sp.check_output(['nxgenesis', '-nox',
+                    self.stdout = sp.check_output(['genesis', '-nox',
                                                    '-batch', '-notty', temp.name],
                                                   stderr=se)
                     se.seek(0)
