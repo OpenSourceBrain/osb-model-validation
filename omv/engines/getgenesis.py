@@ -45,7 +45,7 @@ def install_genesis(get_latest=False):
         print co(['ls', '-la', 'genesis2.4gamma-master'])
         os.chdir('genesis2.4gamma-master/src')
         print co(['./configure'])
-        print co(['make', 'nxgenesis'])
+        print co(['make'])
         open(os.path.join(os.environ['HOME'], '.simrc'), 'w').write(simrc)
 
 
