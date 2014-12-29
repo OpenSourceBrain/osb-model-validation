@@ -6,7 +6,7 @@ conda update -q conda
 conda info -a
 export OMV_VENV=omv_$OMV_ENGINE
 conda create --yes -n $OMV_VENV python=$TRAVIS_PYTHON_VERSION pip numpy scipy
-conda install -n $OMV_VENV -c https://conda.binstar.org/borismarin conda-api omv
+conda install -n $OMV_VENV -c https://conda.binstar.org/borismarin conda-api
 source activate $OMV_VENV
 pip install https://github.com/borismarin/osb-model-validation.git@conda
 """
