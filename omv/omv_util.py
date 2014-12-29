@@ -9,6 +9,7 @@
     omv list-engines
     omv validate-mep <mepfile>
     omv validate-omt <omtfile>
+    omv travis-conda-setup
     omv (-h | --help)
     omv --version
 
@@ -24,6 +25,7 @@ from find_tests import test_all, test_one
 from validation import validate_mep
 from autogen import autogen
 from engines import OMVEngines
+from utilities.travis_conda import generate_evalstring
 
 
 def main():
@@ -70,6 +72,9 @@ def main():
         dry = arguments['--dryrun']
         auto = arguments['-y']
         autogen(auto, dry)
+
+    elif arguments['travis-conda-setup']:
+        generate_evalstring()
 
 
 if __name__ == '__main__':
