@@ -1,0 +1,19 @@
+script = """wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+bash miniconda.sh -b -p $TRAVIS_BUILD_DIR/conda
+export PATH=$TRAVIS_BUILD_DIR/conda/bin:$PATH
+conda config --set always_yes yes --set changeps1 no
+conda update -q conda
+conda info -a
+export OMV_VENV=omv_$OMV_ENGINE
+conda create --yes -n $OMV_VENV python=$TRAVIS_PYTHON_VERSION pip numpy scipy
+conda install -n $OMV_VENV -c https://conda.binstar.org/borismarin conda-api omv
+source activate $OMV_VENV
+pip install https://github.com/borismarin/osb-model-validation.git@conda
+"""
+
+def generate_evalstring():
+    for li in script.splitlines():
+        print li, ';'
+
+
+
