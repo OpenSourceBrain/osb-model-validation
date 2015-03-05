@@ -27,6 +27,8 @@ if fresh_clones:
 
 os.makedirs(test_dir)
 
+ignores = ['neurosciences-repository']
+
 if __name__ == "__main__":
     start = datetime.datetime.now()
 
@@ -39,39 +41,43 @@ if __name__ == "__main__":
 
         print("\n%sProject: %s (%s)\n" %
               ("-" * 8, project.name, project.identifier))
+        
+        if project.identifier not in ignores:
 
-        github_repo = project.github_repo
+            github_repo = project.github_repo
 
-        projects += 1
+            projects += 1
 
-        if github_repo is not None:
-            identifier = project.identifier
+            if github_repo is not None:
+                identifier = project.identifier
 
-            if github_repo.check_file_in_repository(".travis.yml"):
+                if github_repo.check_file_in_repository(".travis.yml"):
 
-                raw_url = github_repo.link_to_raw_file_in_repo(".travis.yml")
-                print("  .travis.yml found at %s\n" % raw_url)
-                contents = osb.utils.get_page(raw_url)
-                if 'omv' not in contents:
-                    print("That .travis.yml does not look like it uses OMV...")
-                    non_omv_tests += 1
+                    raw_url = github_repo.link_to_raw_file_in_repo(".travis.yml")
+                    print("  .travis.yml found at %s\n" % raw_url)
+                    contents = osb.utils.get_page(raw_url)
+                    if 'omv' not in contents:
+                        print("That .travis.yml does not look like it uses OMV...")
+                        non_omv_tests += 1
+                    else:
+                        testable_projects += 1
+                        target_dir = '%s/%s' % (test_dir, project.identifier)
+                        print co(['git', 'clone',
+                                  project.github_repo_str, target_dir])
+                        with working_dir(target_dir):
+                            print "Running 'omv all' on", target_dir
+                            test_all()
+                        passing_projects += 1
+
+                    print("\nSo far: %i projects with OMV tests which pass\n" % (passing_projects))
+
                 else:
-                    testable_projects += 1
-                    target_dir = '%s/%s' % (test_dir, project.identifier)
-                    print co(['git', 'clone',
-                              project.github_repo_str, target_dir])
-                    with working_dir(target_dir):
-                        print "Running 'omv all' on", target_dir
-                        test_all()
-                    passing_projects += 1
-                    
-                print("\nSo far: %i projects with OMV tests which pass\n" % (passing_projects))
+                    print("  (No .travis.yml)")
 
             else:
-                print("  (No .travis.yml)")
-
+                print("  (No GitHub repository)")
         else:
-            print("  (No GitHub repository)")
+            print("  (Ignoring...)")
 
     end = datetime.datetime.now()
 
