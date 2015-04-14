@@ -6,7 +6,7 @@ OSB Model Validation
 
 Tools for automated model validation in [Open Source Brain](http://www.opensourcebrain.org) projects, but which can be used for testing model behaviour on many simulation engines, both locally and on [Travis-CI](https://travis-ci.org).
 
-To see this framework in action, click on some of the green buttons below:
+To see this framework in action, click on some of the green buttons below:   
 
 |  OSB project   |   Tests on Travis-CI    |  .travis.yml script |
 |----------|:-------------:|:------:|
