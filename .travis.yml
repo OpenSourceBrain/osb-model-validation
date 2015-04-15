@@ -5,6 +5,15 @@ python: 2.7
 virtualenv:
     system_site_packages: true
 
+env:
+    - OMV_ENGINE=NEST
+    - OMV_ENGINE=PyNEST
+    - OMV_ENGINE=PyNN_Brian1
+    - OMV_ENGINE=Brian
+    - OMV_ENGINE=PyNN_NEURON
+    - OMV_ENGINE=PyNN
+    - OMV_ENGINE=PyNN_Nest
+
 before_install:
 
     # Requirements for Brian & NEST
