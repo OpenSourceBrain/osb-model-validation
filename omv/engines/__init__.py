@@ -12,7 +12,7 @@ from pylems import PyLemsEngine
 from pylemsnml2 import PyLemsNeuroML2Engine
 from genesis import GenesisEngine
 from brian1 import Brian1Engine
-from nest import NestEngine
+from nestsli import NestEngine
 from pynest import PyNestEngine
 from pynn import PyNNEngine
 from pynnneuron import PyNNNRNEngine

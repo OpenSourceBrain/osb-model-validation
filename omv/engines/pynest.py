@@ -4,7 +4,7 @@ import subprocess as sp
 from ..common.inout import inform, trim_path, check_output
 from engine import OMVEngine, EngineExecutionError
 
-from nest import NestEngine
+from nestsli import NestEngine
 
 
 class PyNestEngine(OMVEngine):

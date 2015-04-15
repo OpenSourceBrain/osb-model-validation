@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from nest import NestEngine
+from nestsli import NestEngine
 from pynn import PyNNEngine
 
 from ..common.inout import inform, trim_path, check_output
