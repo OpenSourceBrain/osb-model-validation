@@ -71,8 +71,26 @@ def average_resting(tv, window, col=1):
     return mean(tv[-window:, col])
     
 
+def input_resistance(tv, ti, h_window, cmd_window, voltages, col=1):
+    from numpy import mean,where
+    t = ti[:,0]
+    print cmd_window
+    t_holding = where((t >= h_window[0]) & (t <= h_window[1]))
+    t_cmd = where((t >= cmd_window[0]) & (t <= cmd_window[1]))
+    holding_i = mean(ti[t_holding, col])
+    command_i = mean(ti[t_cmd, col])
+    holding_v = mean(tv[t_holding, col])
+    command_v = mean(tv[t_cmd, col])
+    i_step = command_i - holding_i
+    v_step = command_v - holding_v #voltages[0]-voltages[1]
+    print v_step, i_step, holding_i, command_i
+    input_resistance = v_step / i_step
+    return input_resistance
+    
+
 def all_within_bounds(ts, bounds=(0, 1)):
     from numpy import all
+    print type(bounds[0]),bounds[0],bounds[1], ts.size
     return all((ts[:, 1:] >= bounds[0]) & (ts[:, 1:] <= bounds[1]))
     
 
