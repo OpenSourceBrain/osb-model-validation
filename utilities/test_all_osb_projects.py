@@ -12,7 +12,7 @@ import pprint
 
 from subprocess import check_output as co
 from omv.find_tests import test_all
-from omv.backends.utils.wdir import working_dir
+from omv.engines.utils.wdir import working_dir
 
 from osb.Repository import GitHubRepository
 
