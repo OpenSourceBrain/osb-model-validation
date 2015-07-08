@@ -24,10 +24,13 @@ from find_tests import test_all, test_one
 from validation import validate_mep
 from autogen import autogen
 from engines import OMVEngines
+import os
 
 
 def main():
     arguments = docopt(__doc__, version='OpenSourceBrain Model Validation 0.0')
+
+    set_env_vars()
 
     if arguments['--verbose']:
         import common.inout
@@ -71,6 +74,12 @@ def main():
         auto = arguments['-y']
         autogen(auto, dry)
 
+def set_env_vars():
+
+    if os.name == 'nt':
+
+        # Windows does not have a HOME var defined by default
+        os.environ['HOME'] = os.environ['USERPROFILE']
 
 if __name__ == '__main__':
     main()

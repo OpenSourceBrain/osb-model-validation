@@ -14,7 +14,7 @@ class JNeuroMLEngine(OMVEngine):
         ret = True
         try:
             FNULL = open(os.devnull, 'w')
-            sp.check_call(['jnml', '-h'], stdout=FNULL)
+            sp.check_call(['jnml' if os.name != 'nt' else 'jnml.bat', '-h'], stdout=FNULL)
         except OSError:
             ret = False
         return ret
@@ -33,7 +33,7 @@ class JNeuroMLEngine(OMVEngine):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name),
                    indent=1)
-            self.stdout = sp.check_output(['jnml', self.modelpath, '-nogui'],
+            self.stdout = sp.check_output(['jnml' if os.name != 'nt' else 'jnml.bat', self.modelpath, '-nogui'],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:

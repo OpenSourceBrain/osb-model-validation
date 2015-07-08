@@ -29,7 +29,7 @@ class JNeuroMLValidateV1Engine(JNeuroMLEngine):
             inform("Running with ", JNeuroMLValidateV1Engine.name,
                    indent=1)
             self.stdout = sp.check_output(
-                ['jnml', '-validatev1', self.modelpath],
+                ['jnml' if os.name != 'nt' else 'jnml.bat', '-validatev1', self.modelpath],
                 cwd=os.path.dirname(self.modelpath))
             inform("Success with running ",  JNeuroMLValidateV1Engine.name,
                    indent=1, verbosity=1)

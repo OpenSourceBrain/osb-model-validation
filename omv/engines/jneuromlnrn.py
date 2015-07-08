@@ -39,7 +39,7 @@ class JNeuroMLNRNEngine(JNeuroMLEngine):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), JNeuroMLNRNEngine.name), indent=1)
             self.stdout = check_output(
-                ['jnml', self.modelpath, '-neuron', '-nogui', '-run'],
+                ['jnml' if os.name != 'nt' else 'jnml.bat', self.modelpath, '-neuron', '-nogui', '-run'],
                 cwd=os.path.dirname(self.modelpath))
             inform("Success with running ",
                    JNeuroMLNRNEngine.name, indent=1)
