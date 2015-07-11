@@ -2,6 +2,8 @@ import os
 import subprocess as sp
 
 from jneuroml import JNeuroMLEngine, EngineExecutionError
+from jneuromlvalidate import resolve_paths
+
 from ..common.inout import inform
 
 
@@ -26,10 +28,15 @@ class JNeuroMLValidateV1Engine(JNeuroMLEngine):
         
     def run(self):
         try:
-            inform("Running with ", JNeuroMLValidateV1Engine.name,
+            path_s = resolve_paths(self.modelpath)
+                
+            cmds = ['jnml' if os.name != 'nt' else 'jnml.bat', '-validatev1']
+            for p in path_s: cmds.append(p)
+            
+            inform("Running with %s, using %s..." % (JNeuroMLValidateV1Engine.name,
+                   cmds),
                    indent=1)
-            self.stdout = sp.check_output(
-                ['jnml' if os.name != 'nt' else 'jnml.bat', '-validatev1', self.modelpath],
+            self.stdout = sp.check_output(cmds,
                 cwd=os.path.dirname(self.modelpath))
             inform("Success with running ",  JNeuroMLValidateV1Engine.name,
                    indent=1, verbosity=1)

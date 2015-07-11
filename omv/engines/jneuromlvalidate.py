@@ -4,6 +4,21 @@ import subprocess as sp
 from jneuroml import JNeuroMLEngine, EngineExecutionError
 from ..common.inout import inform
 
+# Make explicit list from: '*.nml myfile.xml' etc.
+def resolve_paths(path_s):
+    
+    if '*' in path_s:
+        import glob
+        if ' ' in path_s:
+            all = []
+            for p in path_s.split(' '):
+                for g in glob.glob(p):
+                    all.append(g)
+            path_s = all
+        else:
+            path_s = glob.glob(path_s)
+    
+    return path_s
 
 class JNeuroMLValidateEngine(JNeuroMLEngine):
 
@@ -26,10 +41,15 @@ class JNeuroMLValidateEngine(JNeuroMLEngine):
         
     def run(self):
         try:
-            inform("Running with %s..." % JNeuroMLValidateEngine.name,
+            path_s = resolve_paths(self.modelpath)
+                
+            cmds = ['jnml' if os.name != 'nt' else 'jnml.bat', '-validate']
+            for p in path_s: cmds.append(p)
+            
+            inform("Running with %s, using %s..." % (JNeuroMLValidateEngine.name,
+                   cmds),
                    indent=1)
-            self.stdout = sp.check_output(
-                ['jnml' if os.name != 'nt' else 'jnml.bat', '-validate', self.modelpath],
+            self.stdout = sp.check_output(cmds,
                 cwd=os.path.dirname(self.modelpath))
             inform("Success with running ", JNeuroMLValidateEngine.name,
                    indent=1, verbosity=1)
