@@ -18,6 +18,9 @@ class FileNodeHelper(object):
             # No preexisting file
             return None
 
+    def exists(self):
+        return os.path.exists(self.filename)
+
     def has_changed(self):
         return self.get_timestamp() != self.tstamp
 

@@ -17,7 +17,11 @@ class SpikeAnalyzer(OMVAnalyzer):
         if isinstance(to_parse, list):
             spikes = to_parse
         elif 'file' in to_parse:
-            if self.f.has_changed():
+            if not self.f.has_changed():
+                inform('ERROR! Datafile %s does not exist!'
+                       % self.f.filename, indent=2, verbosity=0, underline='-')
+                spikes = []
+            elif self.f.has_changed():
                 tv = self.f.get_timeseries()
                 inform('Reading timeseries from: ', self.f,
                        indent=1, verbosity=1)
