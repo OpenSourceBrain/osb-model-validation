@@ -19,6 +19,7 @@ from pynn import PyNNEngine
 from pynnneuron import PyNNNRNEngine
 from pynnbrian1 import PyNNBrian1Engine
 from pynnnest import PyNNNestEngine
+from octave import OctaveEngine
 
 
 OMVEngines = {be.name: be for be in locals().values()
