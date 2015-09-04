@@ -9,9 +9,7 @@ def install_octave():
     
     inform('Installing Octave', indent=2, verbosity=1)
     
-    with working_dir(nestpath):
-        
-        check_output(['apt-get', 'install', 'octave'])
+    check_output(['apt-get', 'install', 'octave'])
         
 
 if __name__ == '__main__':
