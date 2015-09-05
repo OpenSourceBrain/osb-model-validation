@@ -9,7 +9,7 @@ def install_octave():
     
     inform('Installing Octave', indent=2, verbosity=1)
     
-    check_output(['apt-get', 'install', 'octave'])
+    check_output(['sudo', 'apt-get', 'install', 'octave'])
         
 
 if __name__ == '__main__':
