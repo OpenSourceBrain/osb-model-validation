@@ -24,5 +24,6 @@ from octave import OctaveEngine
 
 OMVEngines = {be.name: be for be in locals().values()
               if inspect.isclass(be)
-              and issubclass(be, OMVEngine)}
+              and issubclass(be, OMVEngine)
+              and not be.name == 'Name not yet set!'}
 

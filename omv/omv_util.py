@@ -65,8 +65,12 @@ def main():
             print('Engine installation not implemented yet!')
 
     elif arguments['list-engines']:
-        for be in OMVEngines.keys():
-            print(be)
+        print('The following engines are currently supported by OMV:\n')
+        engines = sorted(OMVEngines.keys())
+        
+        for be in engines:
+            print('  %s'%be)
+        print('')
 
     elif arguments['autogen']:
         print('Automatically generating model validation files')
