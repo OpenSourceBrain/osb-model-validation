@@ -49,5 +49,10 @@ def test_one(omt_fname):
     else:
         inform("Test failed: %s" % (omt_fname),
                underline='=', center=True)
+               
+    if is_verbose():
+        th = TallyHolder()
+        th.add(tally)
+        print('\n'+th.summary()+'\n')
 
     assert(tally.all_passed())

@@ -58,14 +58,14 @@ def main():
 
     elif arguments['install']:
         be = arguments['<engine>']
-        if be not in OMVEngine:
+        if be not in OMVEngines:
             print('Engine' + be + 'unknown!')
         else:
             print('Will install: %s'% arguments['<engine>'])
             print('Engine installation not implemented yet!')
 
     elif arguments['list-engines']:
-        for be in OMVEngine.keys():
+        for be in OMVEngines.keys():
             print(be)
 
     elif arguments['autogen']:
