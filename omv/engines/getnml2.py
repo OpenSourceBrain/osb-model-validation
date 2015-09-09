@@ -13,5 +13,8 @@ def install_nml2():
     
     with working_dir(install_root):
         print co(['git', 'clone', 'https://github.com/NeuroML/NeuroML2.git'])
-        inform('Successfully cloned NeuroML2', indent=2, verbosity=1)
+    with working_dir(default_nml2_dir):
+        print co(['git', 'checkout', 'development'])
+        
+    inform('Successfully cloned NeuroML2', indent=2, verbosity=1)
     
