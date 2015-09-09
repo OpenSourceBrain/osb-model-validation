@@ -32,7 +32,7 @@ if fresh_clones:
 
 os.makedirs(test_dir)
 
-ignores = ['neurosciences-repository', 'brunel2000']
+ignores = ['neurosciences-repository', 'brunel2000', 'drosophila-acc-l3-motoneuron-gunay-et-al-2014']
 
 all_repos = {  }
 
