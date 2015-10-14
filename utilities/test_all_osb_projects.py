@@ -9,6 +9,7 @@ import osb
 import shutil
 import datetime
 import pprint
+import sys
 
 from subprocess import check_output as co
 from omv.find_tests import test_all
@@ -34,6 +35,12 @@ os.makedirs(test_dir)
 
 ignores = ['neurosciences-repository', 'brunel2000', 'drosophila-acc-l3-motoneuron-gunay-et-al-2014']
 
+if '-q' in sys.argv:
+    ignores.append('pospischiletal2008')  # Slow...
+    ignores.append('blue-brain-project-showcase')  # Slow...
+    ignores.append('acnet2')  # Slow...
+    ignores.append('granulecell')  # Slow...
+
 all_repos = {  }
 
 additional_repos = { 'NeuroML2':             GitHubRepository.create('https://github.com/NeuroML/NeuroML2') ,
@@ -50,8 +57,10 @@ if __name__ == "__main__":
 
     project_num = 1000
     if len(sys.argv) == 2:
-        project_num = int(sys.argv[1])
-
+        try:
+            project_num = int(sys.argv[1])
+        except:
+            print "ignoring..."
     for project in osb.get_projects(min_curation_level="Low",
                                     limit=project_num):
 
