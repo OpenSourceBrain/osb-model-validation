@@ -12,6 +12,7 @@ env:
     - OMV_ENGINE=Brian
     - OMV_ENGINE=Brian2
     - OMV_ENGINE=PyNN_NEURON
+    - OMV_ENGINE=PyNEURON
     - OMV_ENGINE=PyNN
     - OMV_ENGINE=PyNN_Nest
     - OMV_ENGINE=Octave
