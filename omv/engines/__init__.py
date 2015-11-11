@@ -17,6 +17,7 @@ from nestsli import NestEngine
 from pynest import PyNestEngine
 from pynn import PyNNEngine
 from pynnneuron import PyNNNRNEngine
+from pyneuron import PyNRNEngine
 from pynnbrian1 import PyNNBrian1Engine
 from pynnnest import PyNNNestEngine
 from octave import OctaveEngine
