@@ -42,7 +42,7 @@ class PyNRNEngine(NeuronEngine):
             
             inform("Running %s on %s..." % (self.name, self.modelpath),
                    indent=1)
-            p = sp.Popen(['nrniv', '-python', self.modelpath],
+            p = sp.Popen(['nrniv', '-python', self.modelpath, '-nogui'],
                          stdin=sp.PIPE, stdout=sp.PIPE, stderr=sp.PIPE)
             cmd = '''\
             %s
