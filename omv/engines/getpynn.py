@@ -1,3 +1,4 @@
+import os
 import pip
 from ..common.inout import inform
 
