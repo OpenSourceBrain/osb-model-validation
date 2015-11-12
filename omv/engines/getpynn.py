@@ -12,7 +12,7 @@ def install_pynn():
         install_root = os.environ['HOME']
 
         with working_dir(install_root):
-            check_output(['git', 'clone', 'git@github.com:NeuralEnsemble/PyNN.git'])
+            check_output(['git', 'clone', 'https://github.com/NeuralEnsemble/PyNN.git'])
 
         path = os.path.join(install_root,'PyNN')
 
