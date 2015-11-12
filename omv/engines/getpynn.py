@@ -1,6 +1,7 @@
 import os
 import pip
-from ..common.inout import inform
+from ..common.inout import inform, check_output
+from utils.wdir import working_dir
 
 def install_pynn():
     try:
