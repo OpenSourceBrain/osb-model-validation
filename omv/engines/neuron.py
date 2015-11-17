@@ -7,15 +7,15 @@ from utils.wdir import working_dir
 from engine import OMVEngine, EngineExecutionError
 from os.path import dirname
 
-from ..common.inout import inform
+from ..common.inout import inform, is_verbose
 
 
 class NeuronEngine(OMVEngine):
 
     name = "NEURON"
 
-    def __init__(self, target):
-        super(NeuronEngine, self).__init__(target)
+    def __init__(self, target, do_not_check_install=False, engine_version=None):
+        super(NeuronEngine, self).__init__(target, do_not_check_install)
         try:
             self.stdout = self.compile_modfiles()
         except sp.CalledProcessError as err:
@@ -29,7 +29,8 @@ class NeuronEngine(OMVEngine):
         try:
             FNULL = open(os.devnull, 'w')
             output = sp.check_output(['nrniv', '--version'])
-            inform('%s is installed'%output.strip(), indent=2)
+            if is_verbose():
+                inform('%s is installed'%output.strip(), indent=2)
         except OSError:
             ret = False
         return ret

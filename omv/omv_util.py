@@ -6,6 +6,7 @@
     omv test <testMe.omt> [-V | --verbose]
     omv autogen [options]
     omv install <engine>
+    omv find
     omv list-engines
     omv validate-mep <mepfile>
     omv validate-omt <omtfile>
@@ -49,6 +50,13 @@ def main():
         except AssertionError:
             print("Failed due to non passing tests")
             exit(1)
+            
+    elif arguments['find']:
+        try:
+            test_all(do_not_run=True)
+        except AssertionError:
+            print("Failed due to non passing tests")
+            exit(1)
 
     elif arguments['validate-mep']:
         validate_mep.validate(arguments['<mepfile>'])
@@ -57,19 +65,23 @@ def main():
         print('OMT validation not implemented yet!')
 
     elif arguments['install']:
-        be = arguments['<engine>']
-        if be not in OMVEngines:
-            print('Engine' + be + 'unknown!')
+        engine = arguments['<engine>']
+        if engine not in OMVEngines:
+            print('Engine' + engine + 'unknown!')
         else:
             print('Will install: %s'% arguments['<engine>'])
             print('Engine installation not implemented yet!')
 
     elif arguments['list-engines']:
-        print('The following engines are currently supported by OMV:\n')
         engines = sorted(OMVEngines.keys())
         
-        for be in engines:
-            print('  %s'%be)
+        installed = {}
+        for engine in engines:
+            installed[engine] = OMVEngines[engine].is_installed('')
+            
+        print('\n\nThe following engines are currently supported by OMV:\n')
+        for engine in engines:
+            print('  %s%s(installed: %s)'%(engine, ' '*(30-len(engine)), installed[engine]))
         print('')
 
     elif arguments['autogen']:

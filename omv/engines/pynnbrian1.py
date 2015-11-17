@@ -4,7 +4,7 @@ import subprocess as sp
 from brian1 import Brian1Engine
 from pynn import PyNNEngine
 
-from ..common.inout import inform, trim_path, check_output
+from ..common.inout import inform, trim_path, check_output, is_verbose
 from engine import EngineExecutionError
 
 
@@ -14,8 +14,9 @@ class PyNNBrian1Engine(PyNNEngine):
 
     @staticmethod
     def is_installed(version):
-        inform("Checking whether %s is installed..." %
-               PyNNBrian1Engine.name, indent=1)
+        if is_verbose():
+            inform("Checking whether %s is installed..." %
+                   PyNNBrian1Engine.name, indent=1)
         return PyNNEngine.is_installed(None) and Brian1Engine.is_installed(None)
         
     @staticmethod

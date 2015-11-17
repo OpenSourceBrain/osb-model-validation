@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from ..common.inout import inform, trim_path, check_output
+from ..common.inout import inform, trim_path, check_output, is_verbose
 from engine import OMVEngine, EngineExecutionError
 
 
@@ -14,10 +14,11 @@ class NestEngine(OMVEngine):
     def is_installed(version):
         ret = True
         
-        nestpath2 = os.path.join(os.environ['HOME'],'nest/nest')
+        #nestpath2 = os.path.join(os.environ['HOME'],'nest/nest')
         try:
             FNULL = open(os.devnull, 'w')
-            print(check_output([nestpath2+'/bin/nest', '-v']))
+            
+            check_output(['nest', '-v'], verbosity=is_verbose())
         except OSError as err:
             inform("Couldn't execute NEST: ", err, indent=1)
             ret = False
@@ -38,13 +39,13 @@ class NestEngine(OMVEngine):
         
     def run(self):
         
-        nestpath2 = os.path.join(os.environ['HOME'],'nest/nest')
+        #nestpath2 = os.path.join(os.environ['HOME'],'nest/nest')
         
         inform("Env vars: %s" % self.environment_vars, indent=2)
         
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
-            self.stdout = check_output([nestpath2+'/bin/nest', self.modelpath],
+            self.stdout = check_output(['nest', self.modelpath],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:

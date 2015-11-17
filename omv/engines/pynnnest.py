@@ -4,7 +4,7 @@ import subprocess as sp
 from nestsli import NestEngine
 from pynn import PyNNEngine
 
-from ..common.inout import inform, trim_path, check_output
+from ..common.inout import inform, trim_path, check_output, is_verbose
 from engine import EngineExecutionError
 
 
@@ -14,8 +14,9 @@ class PyNNNestEngine(PyNNEngine):
 
     @staticmethod
     def is_installed(version):
-        inform("Checking whether %s is installed..." %
-               PyNNNestEngine.name, indent=1)
+        if is_verbose():
+            inform("Checking whether %s is installed..." %
+                   PyNNNestEngine.name, indent=1)
         return PyNNEngine.is_installed(None) and NestEngine.is_installed(None)
         
     @staticmethod

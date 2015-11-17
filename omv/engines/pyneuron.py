@@ -6,7 +6,7 @@ from os.path import dirname
 
 from neuron import NeuronEngine
 
-from ..common.inout import inform, trim_path, check_output
+from ..common.inout import inform, is_verbose
 from engine import EngineExecutionError
 
 
@@ -16,8 +16,9 @@ class PyNRNEngine(NeuronEngine):
 
     @staticmethod
     def is_installed(version):
-        inform("Checking whether %s is installed correctly..." %
-               PyNRNEngine.name, indent=1)
+        if is_verbose():
+            inform("Checking whether %s is installed correctly..." %
+                   PyNRNEngine.name, indent=1)
         installed = NeuronEngine.is_installed(None)
         
         return installed

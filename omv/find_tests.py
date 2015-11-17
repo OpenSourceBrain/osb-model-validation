@@ -5,7 +5,7 @@ from common.inout import load_yaml, inform, trim_path, is_verbose
 from tally import TallyHolder
 
 
-def test_all():
+def test_all(do_not_run=False):
     cwd = Path(getcwd())
     all_omts = [p.as_posix() for p in cwd.glob('**/*.omt')]
     th = TallyHolder()
@@ -18,26 +18,27 @@ def test_all():
                        for t in all_omts
                        if load_yaml(t)['engine'].lower() == engine]
     else:
-        tallies = [parse_omt(t) for t in all_omts]
+        tallies = [parse_omt(t, do_not_run) for t in all_omts]
         
-    for t in tallies:
-        th.add(t)
+    if not do_not_run:
+        for t in tallies:
+            th.add(t)
 
-    results = [t.all_passed() for t in tallies]
-    inform('')
-    inform("%i test(s) run" % len(tallies),
-           overline='-', underline='-', center=True)
-    inform('')
-    if all(results):
-        inform("All tests passing!", underline='=', center=True)
-    else:
-        failed = [trim_path(t.omt) for t in tallies if not t.all_passed()]
-        inform("Some test(s) failed: ",  failed, underline='=')
-    
-    if is_verbose():
-        print('\n'+th.summary()+'\n')
+        results = [t.all_passed() for t in tallies]
+        inform('')
+        inform("%i test(s) run" % len(tallies),
+               overline='-', underline='-', center=True)
+        inform('')
+        if all(results):
+            inform("All tests passing!", underline='=', center=True)
+        else:
+            failed = [trim_path(t.omt) for t in tallies if not t.all_passed()]
+            inform("Some test(s) failed: ",  failed, underline='=')
 
-    assert all(results)
+        if is_verbose():
+            print('\n'+th.summary()+'\n')
+
+        assert all(results)
 
 
 def test_one(omt_fname):

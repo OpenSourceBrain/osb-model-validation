@@ -75,6 +75,6 @@ def trim_path(fname):
     else:
         return fname
     
-def check_output(cmds, cwd='.'):
-    inform("Running commands: %s in %s"%(cmds, cwd), indent=2, verbosity=0)
+def check_output(cmds, cwd='.', verbosity=0):
+    inform("Running commands: %s in %s"%(cmds, cwd), indent=2, verbosity=verbosity)
     return sp.check_output(cmds, cwd=cwd)

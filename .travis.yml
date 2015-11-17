@@ -26,7 +26,8 @@ install:
     - python setup.py install
 
 script:
+    - omv list-engines
     - cd utilities/tests
     - omv all -V
-    #- omv test .test.nestsli.omt 
+    - omv list-engines
 

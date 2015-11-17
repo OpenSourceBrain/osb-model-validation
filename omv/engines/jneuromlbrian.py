@@ -3,7 +3,7 @@ import subprocess as sp
 
 from jneuroml import JNeuroMLEngine
 from brian1 import Brian1Engine
-from ..common.inout import inform, trim_path, check_output
+from ..common.inout import inform, trim_path, check_output, is_verbose
 from engine import EngineExecutionError
 
 
@@ -13,7 +13,8 @@ class JNeuroMLBrianEngine(JNeuroMLEngine):
 
     @staticmethod
     def is_installed(version):
-        inform("Checking whether %s is installed..." %
+        if is_verbose():
+            inform("Checking whether %s is installed..." %
                JNeuroMLBrianEngine.name, indent=1)
         return JNeuroMLEngine.is_installed(None) and Brian1Engine.is_installed(None)
 

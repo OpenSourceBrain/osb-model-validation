@@ -17,17 +17,18 @@ class OMVEngine(object):
     environment_vars = {}
     path = ''
 
-    def __init__(self, target, engine_version=None):
-        inform("Checking whether %s is already installed..." % self.name,
-               indent=1, verbosity=1)
-        if not self.is_installed(engine_version):
-            try:
-                self.install(engine_version)
-                self.set_environment()
-                self.set_path()
-            except Exception as e:
-                inform(e)
-                raise(EngineInstallationError(e))
+    def __init__(self, target, do_not_check_install, engine_version=None):
+        if not do_not_check_install:
+            inform("Checking whether %s is already installed..." % self.name,
+                   indent=1, verbosity=1)
+            if not self.is_installed(engine_version):
+                try:
+                    self.install(engine_version)
+                    self.set_environment()
+                    self.set_path()
+                except Exception as e:
+                    inform(e)
+                    raise(EngineInstallationError(e))
 
         self.modelpath = realpath(target)
         self.extra_pars = []

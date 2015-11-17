@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from ..common.inout import inform, trim_path, check_output
+from ..common.inout import inform, trim_path, check_output, is_verbose
 from engine import OMVEngine, EngineExecutionError
 
 from nestsli import NestEngine
@@ -17,8 +17,14 @@ class PyNestEngine(OMVEngine):
         ret = True
         try:
             import nest
-            inform("NEST version %s is correctly installed with Python support..." % "???", indent=2)
-            inform("Env vars: %s" % PyNestEngine.environment_vars, indent=2)
+            try:
+                version = nest.version()
+            except:
+                version = '???'
+            
+            if is_verbose():
+                inform("NEST version: %s is correctly installed with Python support..." % version, indent=2)
+                inform("Env vars: %s" % PyNestEngine.environment_vars, indent=2)
             
         except Exception as err:
             inform("Couldn't import NEST into Python: ", err, indent=1)
@@ -33,10 +39,12 @@ class PyNestEngine(OMVEngine):
         
     def run(self):
         
-        nestpath2 = os.path.join(os.environ['HOME'],'nest/nest')
+        nestpath = os.path.join(os.environ['HOME'],'nest/nest')
+        if os.environ.has_key('NEST_INSTALL_DIR'):
+            nestpath = os.environ['NEST_INSTALL_DIR']
         
-        self.environment_vars = {'NEST_HOME': nestpath2,
-                                 'PYTHONPATH': nestpath2+'/lib/python2.7/site-packages/'}
+        self.environment_vars = {'NEST_HOME': nestpath,
+                                 'PYTHONPATH': nestpath+'/lib/python2.7/site-packages/'}
                             
         self.set_environment()
                                         

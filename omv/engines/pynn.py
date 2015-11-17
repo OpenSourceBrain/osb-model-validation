@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from ..common.inout import inform, trim_path, check_output
+from ..common.inout import inform, trim_path, check_output, is_verbose
 from engine import OMVEngine, EngineExecutionError
 
 
@@ -14,7 +14,8 @@ class PyNNEngine(OMVEngine):
         ret = True
         try:
             import pyNN
-            inform("pyNN version %s is correctly installed..." % pyNN.__version__, indent=2)
+            if is_verbose():
+                inform("pyNN version %s is correctly installed..." % pyNN.__version__, indent=2)
             
         except Exception as err:
             inform("Couldn't import pyNN into Python: ", err, indent=1)

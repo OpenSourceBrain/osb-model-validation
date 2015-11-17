@@ -4,7 +4,7 @@ import subprocess as sp
 from neuron import NeuronEngine
 from pynn import PyNNEngine
 
-from ..common.inout import inform, trim_path, check_output
+from ..common.inout import inform, trim_path, check_output, is_verbose
 from engine import OMVEngine, EngineExecutionError
 
 
@@ -14,8 +14,9 @@ class PyNNNRNEngine(PyNNEngine):
 
     @staticmethod
     def is_installed(version):
-        inform("Checking whether %s is installed correctly..." %
-               PyNNNRNEngine.name, indent=1)
+        if is_verbose():
+            inform("Checking whether %s is installed correctly..." %
+                   PyNNNRNEngine.name, indent=1)
         installed = PyNNEngine.is_installed(None) and NeuronEngine.is_installed(None)
         
         return installed
