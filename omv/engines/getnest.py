@@ -1,7 +1,5 @@
 import os
-import sys
 from ..common.inout import inform, check_output
-from distutils.core import run_setup
 
 from utils.wdir import working_dir
 
@@ -14,7 +12,7 @@ def install_nest():
     os.mkdir(nestpath)
     
     with working_dir(nestpath):
-        version='2.6.0'
+        version='2.8.0'
         check_output(['wget', 'http://www.nest-simulator.org/downloads/gplreleases/nest-%s.tar.gz'%version])
         #check_output(['cp', '/home/padraig/temp/nest-2.4.2.tar.gz', '.'])
         check_output(['tar', 'xzvf', 'nest-%s.tar.gz'%version])

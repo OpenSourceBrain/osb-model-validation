@@ -6,46 +6,58 @@ from engine import OMVEngine, EngineExecutionError
 
 
 class NestEngine(OMVEngine):
-    
+
     name = "NEST"
-    
+
+
+    @staticmethod
+    def get_nest_environment():
+
+        nestpath = os.path.join(os.environ['HOME'],'nest/nest/')
+        nestbin = nestpath
+        if os.environ.has_key('NEST_INSTALL_DIR'):
+            nestpath = os.environ['NEST_INSTALL_DIR']+'/'
+            nestbin = os.environ['NEST_INSTALL_DIR']+'/bin/'
+
+        environment_vars = {'NEST_HOME': nestpath,
+                            'NEST_BIN': nestbin,
+                            'PYTHONPATH': nestpath+'/lib/python2.7/site-packages/'}
+
+        return environment_vars
+
 
     @staticmethod
     def is_installed(version):
         ret = True
-        
-        #nestpath2 = os.path.join(os.environ['HOME'],'nest/nest')
+
+        environment_vars = NestEngine.get_nest_environment()
+
         try:
             FNULL = open(os.devnull, 'w')
-            
-            check_output(['nest', '-v'], verbosity=is_verbose())
+
+            check_output([environment_vars['NEST_BIN']+'nest', '-v'], verbosity=is_verbose())
         except OSError as err:
             inform("Couldn't execute NEST: ", err, indent=1)
             ret = False
         return ret
-        
+
+
     @staticmethod
     def install(version):
+
         from getnest import install_nest
-        home = os.environ['HOME']
-        p = os.path.join(home, 'nest/nest')
-        NestEngine.path = p
-        NestEngine.environment_vars = {'NEST_HOME': p,
-                                        'PYTHONPATH': p+'/lib/python2.7/site-packages/'}
-        inform('Will fetch and install the latest NEST', indent=2)
         install_nest()
         inform('Done...', indent=2)
-        print NestEngine.environment_vars
-        
+
+
     def run(self):
-        
-        #nestpath2 = os.path.join(os.environ['HOME'],'nest/nest')
-        
-        inform("Env vars: %s" % self.environment_vars, indent=2)
-        
+
+        self.environment_vars = NestEngine.get_nest_environment()
+        self.set_environment()
+
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
-            self.stdout = check_output(['nest', self.modelpath],
+            self.stdout = check_output([self.environment_vars['NEST_BIN']+'nest', self.modelpath],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
@@ -56,21 +68,5 @@ class NestEngine(OMVEngine):
             inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1
             self.stdout = "???"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
