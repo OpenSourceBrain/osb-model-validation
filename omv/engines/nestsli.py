@@ -14,13 +14,10 @@ class NestEngine(OMVEngine):
     def get_nest_environment():
 
         nestpath = os.path.join(os.environ['HOME'],'nest/nest/')
-        nestbin = nestpath
         if os.environ.has_key('NEST_INSTALL_DIR'):
             nestpath = os.environ['NEST_INSTALL_DIR']+'/'
-            nestbin = os.environ['NEST_INSTALL_DIR']+'/bin/'
 
         environment_vars = {'NEST_HOME': nestpath,
-                            'NEST_BIN': nestbin,
                             'PYTHONPATH': nestpath+'/lib/python2.7/site-packages/'}
 
         return environment_vars
@@ -35,7 +32,7 @@ class NestEngine(OMVEngine):
         try:
             FNULL = open(os.devnull, 'w')
 
-            check_output([environment_vars['NEST_BIN']+'nest', '-v'], verbosity=is_verbose())
+            check_output([environment_vars['NEST_HOME']+'bin/nest', '-v'], verbosity=is_verbose())
         except OSError as err:
             inform("Couldn't execute NEST: ", err, indent=1)
             ret = False
@@ -57,7 +54,7 @@ class NestEngine(OMVEngine):
 
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
-            self.stdout = check_output([self.environment_vars['NEST_BIN']+'nest', self.modelpath],
+            self.stdout = check_output([self.environment_vars['NEST_HOME']+'bin/nest', self.modelpath],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
