@@ -5,6 +5,7 @@ from morphology import MorphologyAnalyzer
 from temperature import TemperatureAnalyzer
 from activation import ActivationVariableAnalyzer
 from input_resistance import InputResAnalyzer
+from timeseries import TimeSeriesAnalyzer
 
 OMVAnalyzers = {
     'spike times' : SpikeAnalyzer,
@@ -13,7 +14,8 @@ OMVAnalyzers = {
     'morphology': MorphologyAnalyzer,
     'temperature': TemperatureAnalyzer,
     'activation variables': ActivationVariableAnalyzer,
-    'input resistance': InputResAnalyzer
+    'input resistance': InputResAnalyzer,
+    'timeseries': TimeSeriesAnalyzer
 }
 
 

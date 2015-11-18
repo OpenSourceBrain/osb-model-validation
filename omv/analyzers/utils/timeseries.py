@@ -110,8 +110,18 @@ def test_detect_spikes():
     assert all(spk_idx == arange(1, len(x), 4))
 
 
-
-
+def pretty_print_copypaste(obs, exp):
+    from numpy import atleast_1d
+    ob = atleast_1d(obs) 
+    ex = atleast_1d(exp) 
+    suggest_tol = False
+    try:  # making it easier to copy/paste lists
+	pretty_obs = [float(el) for el in ob]
+	pretty_exp = [float(el) for el in ex]
+	suggest_tol = len(ob) == len(ex)
+    except TypeError: # obs, exp can be rank > 1. Not sure if we would ever c&p those
+	pretty_obs, pretty_exp = (str(ob), str(ex))
+    return pretty_obs, pretty_exp, suggest_tol
 
 
 
