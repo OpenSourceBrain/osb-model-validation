@@ -11,9 +11,11 @@ class PyNestEngine(OMVEngine):
     
     name = "PyNEST"
     
-
     @staticmethod
     def is_installed(version):
+        
+        PyNestEngine.environment_vars = NestEngine.get_nest_environment()
+        
         ret = True
         try:
             import nest
@@ -23,7 +25,8 @@ class PyNestEngine(OMVEngine):
                 version = '???'
             
             if is_verbose():
-                inform("NEST version: %s is correctly installed with Python support..." % version, indent=2)
+                inform("NEST version: %s is installed with Python support..." 
+                    % version, indent=2)
                 inform("Env vars: %s" % PyNestEngine.environment_vars, indent=2)
             
         except Exception as err:
@@ -31,21 +34,17 @@ class PyNestEngine(OMVEngine):
             ret = False
         return ret
         
+        
     @staticmethod
     def install(version):
         NestEngine.install(version)
         PyNestEngine.path = NestEngine.path
         PyNestEngine.environment_vars = NestEngine.environment_vars
         
+        
     def run(self):
         
-        nestpath = os.path.join(os.environ['HOME'],'nest/nest')
-        if os.environ.has_key('NEST_INSTALL_DIR'):
-            nestpath = os.environ['NEST_INSTALL_DIR']
-        
-        self.environment_vars = {'NEST_HOME': nestpath,
-                                 'PYTHONPATH': nestpath+'/lib/python2.7/site-packages/'}
-                            
+        self.environment_vars = NestEngine.get_nest_environment()
         self.set_environment()
                                         
         inform("Env vars: %s" % self.environment_vars, indent=2)

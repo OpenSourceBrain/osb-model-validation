@@ -28,18 +28,16 @@ class PyNNNestEngine(PyNNEngine):
             PyNNEngine.install(None)
             inform("%s installed PyNN..." % PyNNNestEngine.name, indent=2, verbosity =1)
 
-        PyNNNestEngine.path = PyNNEngine.path + \
-            ":" + NestEngine.path
-        PyNNNestEngine.environment_vars = {}
-        PyNNNestEngine.environment_vars.update(
-            PyNNEngine.environment_vars)
-        PyNNNestEngine.environment_vars.update(
-            NestEngine.environment_vars)
-        inform("PATH: " + PyNNNestEngine.path)
 
 
     def run(self):
         try:
+
+            self.environment_vars = NestEngine.get_nest_environment()
+            self.set_environment()
+
+            inform("Env vars: %s" % self.environment_vars, indent=2)
+        
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
             self.stdout = check_output(['python', self.modelpath, 'nest'],
                                           cwd=os.path.dirname(self.modelpath))
