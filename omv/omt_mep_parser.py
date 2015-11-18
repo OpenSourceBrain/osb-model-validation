@@ -17,6 +17,7 @@ class OMVTestParser(object):
             self.mep_root = dirname(self.mep_path)
             self.mep = load_yaml(self.mep_path)
         else:
+            self.mep_root = None 
             self.mep_path = None
             self.mep = None
             
