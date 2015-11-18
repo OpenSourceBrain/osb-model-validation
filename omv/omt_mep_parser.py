@@ -14,8 +14,10 @@ class OMVTestParser(object):
         self.omt = load_yaml(omt_path)
         if 'mep' in self.omt:
             self.mep_path = join(self.omt_root, self.omt['mep'])
+            self.mep_root = dirname(self.mep_path)
             self.mep = load_yaml(self.mep_path)
         else:
+            self.mep_root = None 
             self.mep_path = None
             self.mep = None
             
@@ -41,9 +43,9 @@ class OMVTestParser(object):
                 expmep = self.mep_experiments[expname]
                 obs = exp['observables']
                 yield OMVExperiment(expname, expmep, obs,
-                                    engine, self.omt_root)
+                                    engine, self.omt_root, self.mep_root)
         else:
             exp = {'expected': {'dry': None}}
             obs = {'dry': None}
             yield OMVExperiment('Dry run', exp, obs,
-                                engine, self.omt_root)
+                                engine, self.omt_root, self.mep_root)

@@ -3,11 +3,12 @@ from ..common.inout import inform
 
 
 class OMVAnalyzer(object):
-    def __init__(self, observable, expected, engine, omt_root):
+    def __init__(self, observable, expected, engine, omt_root, mep_root):
         self.engine = engine
         self.observable = observable
         self.expected = expected
         self.omt_root = omt_root
+        self.mep_root = mep_root
         self.before_running()
 
     def before_running(self):
@@ -33,16 +34,10 @@ class OMVAnalyzer(object):
             tolerance = float(self.observable['tolerance'])
         except (TypeError, KeyError):  # observable can be None
             tolerance = 1e-1
-
         are_close, best_tol = ts.compare_arrays((obs, exp), tolerance)
         if not are_close:
             suggest_tol = True
-            try:  # making it easier to copy/paste lists
-                pretty_obs = [float(el) for el in obs]
-                pretty_exp = [float(el) for el in exp]
-                suggest_tol = len(obs) == len(exp)
-            except TypeError:  # obs,exp can be singletons
-                pretty_obs, pretty_exp = map(float, (obs, exp))
+	    pretty_obs, pretty_exp, suggest_tol = ts.pretty_print_copypaste(obs,exp)
             inform("Comparison of \n\
                     (observed data): %s\n\
                     and\n\

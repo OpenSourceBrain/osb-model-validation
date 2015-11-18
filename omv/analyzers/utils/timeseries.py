@@ -74,7 +74,7 @@ def average_resting(tv, window, col=1):
 def input_resistance(tv, ti, h_window, cmd_window, voltages, col=1):
     from numpy import mean,where
     t = ti[:,0]
-    print cmd_window
+    #print cmd_window
     t_holding = where((t >= h_window[0]) & (t <= h_window[1]))
     t_cmd = where((t >= cmd_window[0]) & (t <= cmd_window[1]))
     holding_i = mean(ti[t_holding, col])
@@ -83,14 +83,14 @@ def input_resistance(tv, ti, h_window, cmd_window, voltages, col=1):
     command_v = mean(tv[t_cmd, col])
     i_step = command_i - holding_i
     v_step = command_v - holding_v #voltages[0]-voltages[1]
-    print v_step, i_step, holding_i, command_i
+    #print v_step, i_step, holding_i, command_i
     input_resistance = v_step / i_step
     return input_resistance
     
 
 def all_within_bounds(ts, bounds=(0, 1)):
     from numpy import all
-    print type(bounds[0]),bounds[0],bounds[1], ts.size
+    #print type(bounds[0]),bounds[0],bounds[1], ts.size
     return all((ts[:, 1:] >= bounds[0]) & (ts[:, 1:] <= bounds[1]))
     
 
@@ -110,8 +110,18 @@ def test_detect_spikes():
     assert all(spk_idx == arange(1, len(x), 4))
 
 
-
-
+def pretty_print_copypaste(obs, exp):
+    from numpy import atleast_1d
+    ob = atleast_1d(obs) 
+    ex = atleast_1d(exp) 
+    suggest_tol = False
+    try:  # making it easier to copy/paste lists
+	pretty_obs = [float(el) for el in ob]
+	pretty_exp = [float(el) for el in ex]
+	suggest_tol = len(ob) == len(ex)
+    except TypeError: # obs, exp can be rank > 1. Not sure if we would ever c&p those
+	pretty_obs, pretty_exp = (str(ob), str(ex))
+    return pretty_obs, pretty_exp, suggest_tol
 
 
 

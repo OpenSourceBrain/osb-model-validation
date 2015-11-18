@@ -64,3 +64,5 @@ docs/_build/
 
 # OSB Test specific
 utilities/local_test
+
+.venv
