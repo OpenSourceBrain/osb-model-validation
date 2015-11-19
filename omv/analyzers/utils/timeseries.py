@@ -4,7 +4,7 @@ def detect_spikes(v, method='threshold', threshold=0.):
     extrema = array([])
 
     if method == 'threshold':
-        extrema = flatnonzero(bitwise_and((v[:-1] <= threshold),
+        extrema = 1 + flatnonzero(bitwise_and((v[:-1] <= threshold),
                                           (roll(v, -1)[:-1] > threshold)))
     elif method == 'derivative':
         # This should only work for noiseless cases!
@@ -120,13 +120,13 @@ def test_detect_spikes():
     assert all(spk_idx == arange(2, len(x), 4))
 
     spk_idx = detect_spikes(x, method='threshold', threshold=0.1)
-    assert all(spk_idx == arange(1, len(x), 4))
+    assert all(spk_idx == arange(2, len(x), 4))
 
     xx = -x # edge case: first point > threshold
     spk_idx = detect_spikes(xx, method='derivative')
-    assert all(spk_idx == arange(4, len(xx)-1, 4))
+    assert all(spk_idx == arange(4, len(xx), 4))
 
     spk_idx = detect_spikes(xx, method='threshold', threshold=0.1)
-    assert all(spk_idx == arange(3, len(xx)-1, 4))
+    assert all(spk_idx == arange(4, len(xx), 4))
 
 
