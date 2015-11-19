@@ -4,16 +4,12 @@ def detect_spikes(v, method='threshold', threshold=0.):
     extrema = array([])
 
     if method == 'threshold':
-	if v[0] > threshold: # first point is never a spike
-            v[0] = threshold
-        extrema = flatnonzero(bitwise_and((v <= threshold),
-                                          (roll(v, -1) > threshold)))
+        extrema = flatnonzero(bitwise_and((v[:-1] <= threshold),
+                                          (roll(v, -1)[:-1] > threshold)))
     elif method == 'derivative':
         # This should only work for noiseless cases!
-        dx = diff(v)
-	if dx[-1] > 0: # first point is never a spike 
-            dx[-1] = 0  
-        extrema = flatnonzero(bitwise_and((dx <= 0), (roll(dx, 1) > 0)))
+	dx = diff(v)
+        extrema = 1 + flatnonzero(bitwise_and((dx[:-1] >= 0), (roll(dx, -1)[:-1] < 0)))
     else:
         print 'still need to implement fancier spike detectors...'
         #see for example scipy.signal.find_peaks_cwt 
