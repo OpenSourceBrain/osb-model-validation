@@ -4,12 +4,15 @@ def detect_spikes(v, method='threshold', threshold=0.):
     extrema = array([])
 
     if method == 'threshold':
-        extrema = flatnonzero(bitwise_and((v < threshold),
-                                          (roll(v, -1) >= threshold)))
-
+	if v[0] > threshold: # first point is never a spike
+            v[0] = threshold
+        extrema = flatnonzero(bitwise_and((v <= threshold),
+                                          (roll(v, -1) > threshold)))
     elif method == 'derivative':
         # This should only work for noiseless cases!
         dx = diff(v)
+	if dx[-1] > 0: # first point is never a spike 
+            dx[-1] = 0  
         extrema = flatnonzero(bitwise_and((dx <= 0), (roll(dx, 1) > 0)))
     else:
         print 'still need to implement fancier spike detectors...'
@@ -99,17 +102,6 @@ def all_nonzero(ts):
     return all(ts[:, 1:])
 
 
-def test_detect_spikes():
-    from numpy import array, all, arange
-    x = array([-1, 0, 1, 0] * 10)
-
-    spk_idx = detect_spikes(x, method='derivative')
-    assert all(spk_idx == arange(2, len(x), 4))
-
-    spk_idx = detect_spikes(x, method='threshold', threshold=0.1)
-    assert all(spk_idx == arange(1, len(x), 4))
-
-
 def pretty_print_copypaste(obs, exp):
     from numpy import atleast_1d
     ob = atleast_1d(obs) 
@@ -124,6 +116,21 @@ def pretty_print_copypaste(obs, exp):
     return pretty_obs, pretty_exp, suggest_tol
 
 
+def test_detect_spikes():
+    from numpy import array, all, arange
+    x = array([-1, 0, 1, 0] * 10)
 
+    spk_idx = detect_spikes(x, method='derivative')
+    assert all(spk_idx == arange(2, len(x), 4))
+
+    spk_idx = detect_spikes(x, method='threshold', threshold=0.1)
+    assert all(spk_idx == arange(1, len(x), 4))
+
+    xx = -x # edge case: first point > threshold
+    spk_idx = detect_spikes(xx, method='derivative')
+    assert all(spk_idx == arange(4, len(xx)-1, 4))
+
+    spk_idx = detect_spikes(xx, method='threshold', threshold=0.1)
+    assert all(spk_idx == arange(3, len(xx)-1, 4))
 
 
