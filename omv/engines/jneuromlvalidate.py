@@ -57,6 +57,8 @@ class JNeuroMLValidateEngine(JNeuroMLEngine):
         except sp.CalledProcessError as err:
             inform("Error with ",  JNeuroMLValidateEngine.name,
                    indent=1, verbosity=1)
+            inform(err.output.replace('\n', '\n  >   '),  '',
+                   indent=1, verbosity=1)
             self.returncode = err.returncode
             self.stdout = err.output
             raise EngineExecutionError
