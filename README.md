@@ -11,7 +11,7 @@ To see this framework in action, click on some of the green buttons below:
 
 |  OSB project   |   Tests on Travis-CI    |  .travis.yml script |
 |----------|:-------------:|:------:|
-|[FitzHugh Nagumo](http://www.opensourcebrain.org/projects/fitzhugh-nagumo-fitzhugh-1969) | [![Build Status](https://travis-ci.org/borismarin/FitzHugh-Nagumo.svg?branch=master)](https://travis-ci.org/borismarin/FitzHugh-Nagumo) | [.travis.yml](https://github.com/borismarin/FitzHugh-Nagumo/blob/master/.travis.yml) |
+|[FitzHugh Nagumo](http://www.opensourcebrain.org/projects/fitzhugh-nagumo-fitzhugh-1969) | [![Build Status](https://travis-ci.org/OpenSourceBrain/FitzHugh-Nagumo.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/FitzHugh-Nagumo) | [.travis.yml](https://github.com/borismarin/FitzHugh-Nagumo/blob/master/.travis.yml) |
 |[Auditory cortex network](http://www.opensourcebrain.org/projects/acnet2)|[![Build Status](https://travis-ci.org/OpenSourceBrain/ACnet2.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/ACnet2)|[.travis.yml](https://github.com/OpenSourceBrain/ACnet2/blob/master/.travis.yml)|
 | [SBML Showcase](http://www.opensourcebrain.org/projects/sbmlshowcase) | [![Build Status](https://travis-ci.org/OpenSourceBrain/SBMLShowcase.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/SBMLShowcase) | [.travis.yml](https://github.com/OpenSourceBrain/SBMLShowcase/blob/master/.travis.yml)|
 
