@@ -14,6 +14,7 @@ class SpikeAnalyzer(OMVAnalyzer):
                        indent=2, verbosity=1)
 
     def parse_spikes(self, to_parse):
+        spikes = []
         if isinstance(to_parse, list):
             spikes = to_parse
         elif 'file' in to_parse:
@@ -33,6 +34,8 @@ class SpikeAnalyzer(OMVAnalyzer):
                            method, indent=2, verbosity=1)
                     spikes = ts.spikes_from_timeseries(tv, method=method,
                                                        threshold=threshold)
+                else:  # file contains spike times
+                    spikes = tv
             else:
                 inform('ERROR! Preexistent datafile %s has not been updated!'
                        % self.f.filename, indent=2, verbosity=0, underline='-')

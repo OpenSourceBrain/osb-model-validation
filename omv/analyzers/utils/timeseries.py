@@ -2,7 +2,6 @@ def detect_spikes(v, method='threshold', threshold=0.):
     from numpy import flatnonzero, bitwise_and, roll, diff, array
 
     extrema = array([])
-
     if method == 'threshold':
         extrema = 1 + flatnonzero(bitwise_and((v[:-1] <= threshold),
                                           (roll(v, -1)[:-1] > threshold)))
@@ -23,13 +22,14 @@ def load_data_file(fname, columns=(0, 1), header_lines=0, scaling=1):
 
 
 def compare_arrays(arrays, tolerance):
-    from numpy import allclose, array, max, abs
+    from numpy import allclose, array, max, abs, atleast_1d
 
     a1, a2 = array(arrays)
     best_tol = None
     try:
         comp = allclose(a1, a2, tolerance)
-        best_tol = max(abs((a1-a2)/a2))
+    	if len(atleast_1d(a1)) > 0:
+       	    best_tol = max(abs((a1-a2)/a2))
     except ValueError:
         comp = False
     return (comp, best_tol)
@@ -109,7 +109,7 @@ def pretty_print_copypaste(obs, exp):
 	suggest_tol = len(ob) == len(ex)
     except TypeError: # obs, exp can be rank > 1. Not sure if we would ever c&p those
 	pretty_obs, pretty_exp = (str(ob), str(ex))
-    return pretty_obs, pretty_exp, suggest_tol
+    return pretty_obs, pretty_exp
 
 
 def test_detect_spikes():
