@@ -67,13 +67,17 @@ def main():
     elif arguments['install']:
         engine = arguments['<engine>']
         if engine not in OMVEngines:
-            print('Engine' + engine + 'unknown!')
+            print('Engine ' + engine + ' unknown!')
         else:
             eng = arguments['<engine>']
             print('Will install: %s'% eng)
             if eng == 'NEURON':
-                from engines.getnrn import install_neuron
-                install_neuron()
+                from engines.neuron import NeuronEngine
+                if not NeuronEngine.is_installed(''):
+                    from engines.getnrn import install_neuron
+                    install_neuron()
+                else:
+                    print("%s was already installed!"%eng)
             elif eng == 'jLEMS':
                 from engines.getjnml import install_jnml
                 install_jnml()

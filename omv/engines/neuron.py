@@ -22,28 +22,44 @@ class NeuronEngine(OMVEngine):
             self.stderr = err.output
             self.returncode = err.returncode
             inform('Error compiling modfiles:', self.stderr, indent=2)
+            
+            
+    @staticmethod
+    def get_nrn_environment():
+
+        home = os.environ['HOME']
+        arch = platform.machine()
+        pp = os.path.join(home, 'local/lib/python/site-packages')
+        path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
+        environment_vars = {'PYTHONPATH': pp,
+                            'NEURON_HOME': os.path.join(home, 'neuron/nrn/', arch)}
+
+        return environment_vars, path
 
     @classmethod
     def is_installed(cls, version):
         ret = True
+        
         try:
-            FNULL = open(os.devnull, 'w')
             output = sp.check_output(['nrniv', '--version'])
             if is_verbose():
-                inform('%s is installed'%output.strip(), indent=2)
+                inform('%s was already installed locally'%output.strip(), indent=2)
         except OSError:
-            ret = False
+            try:
+                cls.path, cls.environment_vars = NeuronEngine.get_nrn_environment()
+                output = sp.check_output(['nrniv', '--version'])
+                if is_verbose():
+                    inform('%s was already installed (by OMV..?)'%output.strip(), indent=2)
+            except OSError:
+                ret = False
         return ret
  
     @classmethod
     def install(cls, engine_version):
         import getnrn
-        home = os.environ['HOME']
-        arch = platform.machine()
-        pp = os.path.join(home, 'local/lib/python/site-packages')
-        cls.path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
-        cls.environment_vars = {'PYTHONPATH': pp,
-                                'NEURON_HOME': os.path.join(home, 'neuron/nrn/', arch)}
+        
+        cls.path, cls.environment_vars = NeuronEngine.get_nrn_environment()
+        
         inform('Will fetch and install the latest NEURON version', indent=2)
         getnrn.install_neuron()
 
