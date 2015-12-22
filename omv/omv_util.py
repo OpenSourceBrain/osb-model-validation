@@ -69,8 +69,17 @@ def main():
         if engine not in OMVEngines:
             print('Engine' + engine + 'unknown!')
         else:
-            print('Will install: %s'% arguments['<engine>'])
-            print('Engine installation not implemented yet!')
+            eng = arguments['<engine>']
+            print('Will install: %s'% eng)
+            if eng == 'NEURON':
+                from engines.getnrn import install_neuron
+                install_neuron()
+            if eng == 'jLEMS':
+                from engines.getjnml import install_jnml
+                install_jnml()
+            else:
+                print('Code not implemented yet for installing %s!'%seng)
+            
 
     elif arguments['list-engines']:
         engines = sorted(OMVEngines.keys())
