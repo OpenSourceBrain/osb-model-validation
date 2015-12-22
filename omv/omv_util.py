@@ -74,11 +74,11 @@ def main():
             if eng == 'NEURON':
                 from engines.getnrn import install_neuron
                 install_neuron()
-            if eng == 'jLEMS':
+            elif eng == 'jLEMS':
                 from engines.getjnml import install_jnml
                 install_jnml()
             else:
-                print('Code not implemented yet for installing %s!'%seng)
+                print('Code not implemented yet for installing %s!'%eng)
             
 
     elif arguments['list-engines']:
