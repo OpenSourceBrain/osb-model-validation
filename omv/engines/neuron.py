@@ -46,11 +46,12 @@ class NeuronEngine(OMVEngine):
                 inform('%s was already installed locally'%output.strip(), indent=2)
         except OSError:
             try:
-                cls.path, cls.environment_vars = NeuronEngine.get_nrn_environment()
+                cls.environment_vars, cls.path = NeuronEngine.get_nrn_environment()
                 output = sp.check_output(['nrniv', '--version'])
                 if is_verbose():
                     inform('%s was already installed (by OMV..?)'%output.strip(), indent=2)
             except OSError:
+                    inform('NEURON not currently installed', indent=2)
                 ret = False
         return ret
  
@@ -58,7 +59,7 @@ class NeuronEngine(OMVEngine):
     def install(cls, engine_version):
         import getnrn
         
-        cls.path, cls.environment_vars = NeuronEngine.get_nrn_environment()
+        cls.environment_vars, cls.path = NeuronEngine.get_nrn_environment()
         
         inform('Will fetch and install the latest NEURON version', indent=2)
         getnrn.install_neuron()
