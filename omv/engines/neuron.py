@@ -46,12 +46,10 @@ class NeuronEngine(OMVEngine):
                 inform('%s was already installed locally'%output.strip(), indent=2)
         except OSError:
             try:
-                cls.environment_vars, cls.path = NeuronEngine.get_nrn_environment()
-                cls.set_environment()
-                cls.set_path()
+                environment_vars, path = NeuronEngine.get_nrn_environment()
                 
                 inform('Testing NEURON with env: %s and path: %s'%(cls.environment_vars, cls.path), indent=2)
-                output = sp.check_output(['nrniv', '--version'])
+                output = sp.check_output([path+'/nrniv', '--version'])
                 if is_verbose():
                     inform('%s was already installed (by OMV..?)'%output.strip(), indent=2)
             except OSError:
@@ -68,6 +66,7 @@ class NeuronEngine(OMVEngine):
         inform('Will fetch and install the latest NEURON version', indent=2)
         getnrn.install_neuron()
 
+
     def compile_modfiles(self):
         with working_dir(dirname(self.modelpath)):
             out = 0
@@ -77,7 +76,13 @@ class NeuronEngine(OMVEngine):
                 inform(out, indent=2)
         return out
 
+
     def run(self):
+        
+        self.environment_vars = NeuronEngine.get_nrn_environment()
+        self.set_environment()
+        self.set_path()
+        
         with working_dir(dirname(self.modelpath)):
             
             inform("Running %s on %s..." % (self.name, self.modelpath),
