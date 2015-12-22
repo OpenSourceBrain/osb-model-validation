@@ -1,3 +1,15 @@
+sudo: false
+
+# Requirements for Brian & NEST
+addons:
+  apt:
+    packages:
+    - python-numpy 
+    - python-scipy 
+    - python-matplotlib 
+    - python-sympy
+    
+    
 language: python
 
 python: 2.7
@@ -16,11 +28,6 @@ env:
     - OMV_ENGINE=PyNN
     - OMV_ENGINE=PyNN_Nest
     - OMV_ENGINE=Octave
-
-before_install:
-
-    # Requirements for Brian & NEST
-    - sudo apt-get install -qq python-numpy python-scipy python-matplotlib python-sympy
 
 install:
     - python setup.py install
