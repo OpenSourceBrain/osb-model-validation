@@ -52,7 +52,7 @@ class NeuronEngine(OMVEngine):
                     inform('%s was already installed (by OMV..?)'%output.strip(), indent=2)
             except OSError:
                     inform('NEURON not currently installed', indent=2)
-                ret = False
+                    ret = False
         return ret
  
     @classmethod
