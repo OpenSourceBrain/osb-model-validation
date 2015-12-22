@@ -1,4 +1,4 @@
-sudo: flase
+sudo: false
 
 # Requirements for Brian & NEST
 addons:
