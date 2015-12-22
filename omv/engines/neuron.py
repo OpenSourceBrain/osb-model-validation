@@ -47,6 +47,10 @@ class NeuronEngine(OMVEngine):
         except OSError:
             try:
                 cls.environment_vars, cls.path = NeuronEngine.get_nrn_environment()
+                cls.set_environment()
+                cls.set_path()
+                
+                inform('Testing NEURON with env: %s and path: %s'%(cls.environment_vars, cls.path), indent=2)
                 output = sp.check_output(['nrniv', '--version'])
                 if is_verbose():
                     inform('%s was already installed (by OMV..?)'%output.strip(), indent=2)
