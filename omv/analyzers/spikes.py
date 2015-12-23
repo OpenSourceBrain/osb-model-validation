@@ -2,6 +2,7 @@ from analyzer import OMVAnalyzer
 from utils import timeseries as ts
 from utils import filenode as fn
 from ..common.inout import inform
+from os import getcwd
 
 
 class SpikeAnalyzer(OMVAnalyzer):
@@ -18,8 +19,12 @@ class SpikeAnalyzer(OMVAnalyzer):
         if isinstance(to_parse, list):
             spikes = to_parse
         elif 'file' in to_parse:
-            if not self.f.has_changed():
-                inform('ERROR! Datafile %s does not exist!'
+            if not self.f.exists():
+                inform('ERROR! Datafile %s does not exist (relative to %s)!'%
+                        (self.f.filename, getcwd()), indent=2, verbosity=0, underline='-')
+                spikes = []
+            elif not self.f.has_changed():
+                inform('ERROR! Datafile %s has not changed!'
                        % self.f.filename, indent=2, verbosity=0, underline='-')
                 spikes = []
             elif self.f.has_changed():

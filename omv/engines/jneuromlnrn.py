@@ -25,14 +25,16 @@ class JNeuroMLNRNEngine(JNeuroMLEngine):
             JNeuroMLEngine.install(None)
         if not NeuronEngine.is_installed(None):
             NeuronEngine.install(None)
+            
+        environment_vars_nrn, path_nrn = NeuronEngine.get_nrn_environment()
 
         JNeuroMLNRNEngine.path = JNeuroMLEngine.path + \
-            ":" + NeuronEngine.path
+            ":" + path_nrn
         JNeuroMLNRNEngine.environment_vars = {}
         JNeuroMLNRNEngine.environment_vars.update(
             JNeuroMLEngine.environment_vars)
         JNeuroMLNRNEngine.environment_vars.update(
-            NeuronEngine.environment_vars)
+            environment_vars_nrn)
         inform("PATH: " + JNeuroMLNRNEngine.path)
         inform("Env vars: %s" % JNeuroMLNRNEngine.environment_vars)
 

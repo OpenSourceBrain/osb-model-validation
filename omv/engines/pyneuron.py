@@ -29,9 +29,11 @@ class PyNRNEngine(NeuronEngine):
             NeuronEngine.install(None)
             inform("%s installed NEURON..." % PyNRNEngine.name, indent=2, verbosity =1)
 
-        PyNRNEngine.path = NeuronEngine.path
+        environment_vars_nrn, path_nrn = NeuronEngine.get_nrn_environment()
+        
+        PyNRNEngine.path = path_nrn
         PyNRNEngine.environment_vars = {}
-        PyNRNEngine.environment_vars.update(NeuronEngine.environment_vars)
+        PyNRNEngine.environment_vars.update(environment_vars_nrn)
             
         inform("PATH: " + PyNRNEngine.path, indent=2, verbosity =1)
         inform("Env vars: %s" % PyNRNEngine.environment_vars, indent=2, verbosity =1)
@@ -39,6 +41,14 @@ class PyNRNEngine(NeuronEngine):
 
 
     def run(self):
+        
+        try:
+            self.stdout = self.compile_modfiles()
+        except sp.CalledProcessError as err:
+            self.stderr = err.output
+            self.returncode = err.returncode
+            inform('Error compiling modfiles:', self.stderr, indent=2)
+            
         with working_dir(dirname(self.modelpath)):
             
             inform("Running %s on %s..." % (self.name, self.modelpath),

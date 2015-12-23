@@ -1,5 +1,6 @@
 from timeseries import load_data_file
 from os.path import join, getmtime
+from os.path import exists as os_exists
 
 
 class FileNodeHelper(object):
@@ -19,7 +20,7 @@ class FileNodeHelper(object):
             return None
 
     def exists(self):
-        return os.path.exists(self.filename)
+        return os_exists(self.filename)
 
     def has_changed(self):
         return self.get_timestamp() != self.tstamp
