@@ -83,6 +83,9 @@ def main():
             elif eng == 'jLEMS':
                 from engines.getjnml import install_jnml
                 install_jnml()
+            elif eng == 'Brian':
+                from engines.getbrian1 import install_brian
+                install_brian()
             else:
                 print('Code not implemented yet for installing %s!'%eng)
                 exit(1)
