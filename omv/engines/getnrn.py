@@ -2,12 +2,15 @@ import os
 import sys
 from subprocess import check_output as co
 from distutils.core import run_setup
+from ..common.inout import inform
 
 from utils.wdir import working_dir
 
 
 def install_neuron(get_latest=False):
     nrnpath = os.path.join(os.environ['HOME'],'neuron')
+    
+    inform('Installing NEURON into %s'%nrnpath, indent=1)
     os.mkdir(nrnpath)
     with working_dir(nrnpath):
         if get_latest:

@@ -16,12 +16,20 @@ class NeuronEngine(OMVEngine):
 
     def __init__(self, target, do_not_check_install=False, engine_version=None):
         super(NeuronEngine, self).__init__(target, do_not_check_install)
-        try:
-            self.stdout = self.compile_modfiles()
-        except sp.CalledProcessError as err:
-            self.stderr = err.output
-            self.returncode = err.returncode
-            inform('Error compiling modfiles:', self.stderr, indent=2)
+        
+        inform("Checking whether %s is already installed..." % self.name,
+                   indent=1, verbosity=1)
+        if not self.is_installed(engine_version):
+            try:
+                self.install(engine_version)
+            except Exception as e:
+                inform(e)
+                raise(EngineInstallationError(e))
+        
+        self.environment_vars, self.path = NeuronEngine.get_nrn_environment()
+        self.set_environment()
+        self.set_path()
+        
             
             
     @staticmethod
@@ -79,9 +87,12 @@ class NeuronEngine(OMVEngine):
 
     def run(self):
         
-        self.environment_vars = NeuronEngine.get_nrn_environment()
-        self.set_environment()
-        self.set_path()
+        try:
+            self.stdout = self.compile_modfiles()
+        except sp.CalledProcessError as err:
+            self.stderr = err.output
+            self.returncode = err.returncode
+            inform('Error compiling modfiles:', self.stderr, indent=2)
         
         with working_dir(dirname(self.modelpath)):
             

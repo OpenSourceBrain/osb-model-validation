@@ -27,6 +27,7 @@ from autogen import autogen
 from engines import OMVEngines
 import os
 
+import common.inout
 
 def main():
     arguments = docopt(__doc__, version='OpenSourceBrain Model Validation 0.0')
@@ -34,7 +35,6 @@ def main():
     set_env_vars()
 
     if arguments['--verbose']:
-        import common.inout
         common.inout.__VERBOSITY__ = 1
 
     if arguments['test']:
@@ -63,26 +63,29 @@ def main():
 
     elif arguments['validate-omt']:
         print('OMT validation not implemented yet!')
+        exit(1)
 
     elif arguments['install']:
+        common.inout.__VERBOSITY__ = 1
         engine = arguments['<engine>']
         if engine not in OMVEngines:
             print('Engine ' + engine + ' unknown!')
         else:
             eng = arguments['<engine>']
-            print('Will install: %s'% eng)
+            print('Trying to install: %s'% eng)
             if eng == 'NEURON':
                 from engines.neuron import NeuronEngine
                 if not NeuronEngine.is_installed(''):
                     from engines.getnrn import install_neuron
                     install_neuron()
                 else:
-                    print("%s was already installed!"%eng)
+                    print("%s has already been installed!"%eng)
             elif eng == 'jLEMS':
                 from engines.getjnml import install_jnml
                 install_jnml()
             else:
                 print('Code not implemented yet for installing %s!'%eng)
+                exit(1)
             
 
     elif arguments['list-engines']:
