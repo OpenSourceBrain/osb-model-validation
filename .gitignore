@@ -1,4 +1,14 @@
 /utilities/tests/test_octave.dat
+/utilities/tests/x86_64
+
+/utilities/tests/*.mod
+/utilities/tests/*.hoc
+/utilities/tests/*.dat
+/utilities/tests/*nrn.py
+/utilities/tests/*brian.py
+
+
+
 /utilities/AllTests.jpg
 /utilities/github.info
 # Byte-compiled / optimized / DLL files

@@ -58,7 +58,7 @@ class OMVEngine(object):
     def set_path(self):
         if self.path:
             environ['PATH'] = ':'.join((environ['PATH'], self.path))
-            inform('Setting path', environ['PATH'], indent=2, verbosity=1)
+            inform('Setting PATH: ', environ['PATH'], indent=2, verbosity=1)
 
     def register_query(self, name, cmd=''):
         query = self.build_query_string(name, cmd)
