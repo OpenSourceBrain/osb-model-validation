@@ -5,7 +5,7 @@ from common.inout import load_yaml, inform, trim_path, is_verbose
 from tally import TallyHolder
 
 
-def test_all(do_not_run=False):
+def test_all(do_not_run=False, only_this_engine=None):
     cwd = Path(getcwd())
     all_omts = [p.as_posix() for p in cwd.glob('**/*.omt')]
     th = TallyHolder()
@@ -17,6 +17,12 @@ def test_all(do_not_run=False):
             tallies = [parse_omt(t)
                        for t in all_omts
                        if load_yaml(t)['engine'].lower() == engine]
+    elif only_this_engine:
+        
+        inform('Only running tests for engine: %s'%only_this_engine)
+        tallies = [parse_omt(t)
+                   for t in all_omts
+                   if load_yaml(t)['engine'].lower() == only_this_engine.lower()]
     else:
         tallies = [parse_omt(t, do_not_run) for t in all_omts]
         

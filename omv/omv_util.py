@@ -2,7 +2,7 @@
 ============================================
 
   Usage:
-    omv all [-V | --verbose]
+    omv all [-V | --verbose] [--engine=engine]
     omv test <testMe.omt> [-V | --verbose]
     omv autogen [options]
     omv install <engine>
@@ -46,7 +46,7 @@ def main():
 
     elif arguments['all']:
         try:
-            test_all()
+            test_all(only_this_engine=arguments['--engine'])
         except AssertionError:
             print("Failed due to non passing tests")
             exit(1)
