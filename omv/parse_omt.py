@@ -15,7 +15,7 @@ def parse_omt(omt_path, do_not_run=False):
     
     mepomt = OMVTestParser(omt_path)
     if not OMVEngines.has_key(mepomt.engine):
-        inform("Error! Unrecognised engine: %s (try running: omv find-engines)"%mepomt.engine)
+        inform("Error! Unrecognised engine: %s (try running: omv list-engines)"%mepomt.engine)
         exit(1)
     engine = OMVEngines[mepomt.engine](mepomt.modelpath, do_not_run)
     experiments = [exp for exp in mepomt.generate_exps(engine)]

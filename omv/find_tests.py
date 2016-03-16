@@ -26,6 +26,8 @@ def test_all(do_not_run=False, only_this_engine=None):
     else:
         tallies = [parse_omt(t, do_not_run) for t in all_omts]
         
+    tallies.sort()
+        
     if not do_not_run:
         for t in tallies:
             th.add(t)

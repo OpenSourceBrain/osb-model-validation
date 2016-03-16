@@ -45,7 +45,10 @@ class PyNNNRNEngine(PyNNEngine):
         
         print check_output(['ls', pynn_mod_dir], cwd=pynn_mod_dir)
         
-        print check_output([NeuronEngine.environment_vars['NEURON_HOME']+'/bin/nrnivmodl'], cwd=pynn_mod_dir)
+        environment_vars, path = NeuronEngine.get_nrn_environment()
+        inform("Using NEURON with env %s at %s..."%(environment_vars, path), indent=2, verbosity =1)
+        
+        print check_output([environment_vars['NEURON_HOME']+'/bin/nrnivmodl'], cwd=pynn_mod_dir)
 
 
     def run(self):
