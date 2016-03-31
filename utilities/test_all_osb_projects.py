@@ -33,13 +33,15 @@ if fresh_clones:
 
 os.makedirs(test_dir)
 
-ignores = ['neurosciences-repository', 'brunel2000', 'drosophila-acc-l3-motoneuron-gunay-et-al-2014']
+ignores = ['neurosciences-repository', 'drosophila-acc-l3-motoneuron-gunay-et-al-2014','d-olfactory-bulb-network']
 
 if '-q' in sys.argv:
     ignores.append('pospischiletal2008')  # Slow...
     ignores.append('blue-brain-project-showcase')  # Slow...
     ignores.append('acnet2')  # Slow...
     ignores.append('granulecell')  # Slow...
+
+ignores.append('l23dendriticspikes')
 
 all_repos = {  }
 
@@ -61,7 +63,7 @@ if __name__ == "__main__":
             project_num = int(sys.argv[1])
         except:
             print "ignoring..."
-    for project in osb.get_projects(min_curation_level="Low",
+    for project in osb.get_projects(min_curation_level="None",
                                     limit=project_num):
 
         print("\n%sPre checking OSB project: %s (%s)\n" %
