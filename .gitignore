@@ -76,3 +76,12 @@ docs/_build/
 utilities/local_test
 
 .venv
+/utilities/tests/LEMS_2007One.py
+/utilities/tests/LEMS_2007One.py_main.json
+/utilities/tests/RS.cell.json
+/utilities/tests/RS_Iext.input.json
+/utilities/tests/RS_Iext_inputdefinition.py
+/utilities/tests/RS_celldefinition.py
+/utilities/tests/exIzh.dat0
+/utilities/tests/LEMS_2007One_pynn.py
+/utilities/tests/LEMS_2007One_pynn.py_main.json

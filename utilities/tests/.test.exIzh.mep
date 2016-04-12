@@ -1,0 +1,6 @@
+system: Test ExIzh
+
+experiments:
+    v:
+        expected:
+            spike times: [47.03, 120.39, 196.433, 272.382, 348.333, 424.285, 500.236]
