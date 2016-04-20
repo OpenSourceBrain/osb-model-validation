@@ -17,17 +17,17 @@ class TimeSeriesAnalyzer(OMVAnalyzer):
         return ts
 
     def parse_expected(self):
-	to_parse = self.expected
+        to_parse = self.expected
         if isinstance(to_parse, list):
             ts = to_parse
         elif 'file' in to_parse:
-		f = fn.FileNodeHelper(to_parse['file'], self.mep_root)
-		ts = f.get_timeseries()
-		inform('Reading timeseries from: ', f, indent=1, verbosity=1)
-	return ts
+            f = fn.FileNodeHelper(to_parse['file'], self.mep_root)
+            ts = f.get_timeseries()
+            inform('Reading timeseries from: ', f, indent=1, verbosity=1)
+        return ts
 
     def parse_observable(self):
-	to_parse = self.observable
+        to_parse = self.observable
         if isinstance(to_parse, list):
             ts = to_parse
         elif 'file' in to_parse:

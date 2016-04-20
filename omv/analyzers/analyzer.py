@@ -24,7 +24,23 @@ class OMVAnalyzer(object):
         
         try:
             obs = self.parse_observable()
+
+            if obs is None:
+                    inform("Could not determine observed values")
+                    return False
+            for o in obs:
+                if not o:
+                    inform("Could not determine observed values")
+                    return False
             exp = self.parse_expected()
+            
+            if exp is None:
+                    inform("Could not determine expected values")
+                    return False
+            for e in exp:
+                if not e:
+                    inform("Could not determine expected values")
+                    return False
         except IOError as e:
             inform("Input/output error when\
                    checking for observable data: %s" % e)
