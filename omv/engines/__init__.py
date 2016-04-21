@@ -4,6 +4,7 @@ from engine import OMVEngine
 from neuron import NeuronEngine
 from jneuroml import JNeuroMLEngine
 from jneuromlnrn import JNeuroMLNRNEngine
+from jneuromlpynnnrn import JNeuroMLPyNNNRNEngine
 from jneuromlbrian import JNeuroMLBrianEngine
 from jneuromlvalidate import JNeuroMLValidateEngine
 from jneuromlvalidatev1 import JNeuroMLValidateV1Engine
