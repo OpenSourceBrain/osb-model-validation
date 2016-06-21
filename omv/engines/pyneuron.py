@@ -43,7 +43,7 @@ class PyNRNEngine(NeuronEngine):
     def run(self):
         
         try:
-            self.stdout = self.compile_modfiles()
+            self.stdout = NeuronEngine.compile_modfiles(self.modelpath)
         except sp.CalledProcessError as err:
             self.stderr = err.output
             self.returncode = err.returncode

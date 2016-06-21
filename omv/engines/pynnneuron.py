@@ -52,8 +52,16 @@ class PyNNNRNEngine(PyNNEngine):
 
 
     def run(self):
+        
+        
         try:
-                                          
+            self.stdout = NeuronEngine.compile_modfiles(self.modelpath)
+        except sp.CalledProcessError as err:
+            self.stderr = err.output
+            self.returncode = err.returncode
+            inform('Error compiling modfiles:', self.stderr, indent=2)
+        
+        try:            
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
             self.stdout = check_output(['python', self.modelpath, 'neuron'],
                                           cwd=os.path.dirname(self.modelpath))

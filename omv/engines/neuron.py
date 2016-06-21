@@ -77,11 +77,12 @@ class NeuronEngine(OMVEngine):
         getnrn.install_neuron()
 
 
-    def compile_modfiles(self):
-        with working_dir(dirname(self.modelpath)):
+    @classmethod
+    def compile_modfiles(cls, modelpath):
+        with working_dir(dirname(modelpath)):
             out = 0
             if len(glob('*.mod')) > 0:
-                inform('Compiling modfiles', indent=1)
+                inform('Compiling all modfiles in: %s'%modelpath, indent=1)
                 out = sp.check_output(['nrnivmodl'])
                 inform(out, indent=2)
         return out
@@ -90,7 +91,7 @@ class NeuronEngine(OMVEngine):
     def run(self):
         
         try:
-            self.stdout = self.compile_modfiles()
+            self.stdout = self.compile_modfiles(self.modelpath)
         except sp.CalledProcessError as err:
             self.stderr = err.output
             self.returncode = err.returncode
