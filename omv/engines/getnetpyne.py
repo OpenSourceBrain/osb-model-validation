@@ -10,11 +10,11 @@ def install_netpyne():
 
         with working_dir(install_root):
             check_output(['git', 'clone', 'https://github.com/Neurosim-lab/netpyne.git'])
-            check_output(['git', 'checkout', 'neuroml_export'])
 
         path = os.path.join(install_root,'netpyne')
 
         with working_dir(path):
+            check_output(['git', 'checkout', 'neuroml_export'])
             check_output(['python', 'setup.py', 'install'])
         import netpyne
         m = 'Successfully installed NetPyNE...'
