@@ -34,7 +34,7 @@ class NetPyNEEngine(OMVEngine):
     def install(version):
         if not NeuronEngine.is_installed(None):
             NeuronEngine.install(None)
-            inform("%s installed NEURON..." % PyNNNRNEngine.name, indent=2, verbosity =1)
+            inform("%s installed NEURON..." % NetPyNEEngine.name, indent=2, verbosity =1)
             
             
         from getnetpyne import install_netpyne
