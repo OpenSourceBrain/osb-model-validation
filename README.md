@@ -15,13 +15,25 @@ To see this framework in action, click on some of the green buttons below:
 |[Auditory cortex network](http://www.opensourcebrain.org/projects/acnet2)|[![Build Status](https://travis-ci.org/OpenSourceBrain/ACnet2.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/ACnet2)|[.travis.yml](https://github.com/OpenSourceBrain/ACnet2/blob/master/.travis.yml)|
 | [SBML Showcase](http://www.opensourcebrain.org/projects/sbmlshowcase) | [![Build Status](https://travis-ci.org/OpenSourceBrain/SBMLShowcase.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/SBMLShowcase) | [.travis.yml](https://github.com/OpenSourceBrain/SBMLShowcase/blob/master/.travis.yml)|
 
+Installation
+------------
+
+Quick install:
+ 
+    sudo pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+    
+Install from cloned repository:
+
+    git clone https://github.com/OpenSourceBrain/osb-model-validation.git
+    cd osb-model-validation
+    sudo python setup.py install 
 
 Instructions
 ------------
 
-Any _OSB_ project can have automated testing incorporated (currently,
-only _LEMS_ and _NEURON_ implementations can be tested thoroughly,
-though). In order to enable it:
+Any _OSB_ project can have automated testing incorporated. For an overview of the various OSB projects with OMV tests, see https://travis-ci.org/OpenSourceBrain (note not all of these use OMV yet).
+
+In order to enable it:
 
 - create a dry-run <b>O</b>SB <b>M</b>odel <b>T</b>est (_omt_) file, containing the
   target model file and the simulator, e.g.
