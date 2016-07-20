@@ -19,7 +19,7 @@ class OMVEngine(object):
 
     def __init__(self, target, do_not_check_install, engine_version=None):
         if not do_not_check_install:
-            inform("Checking whether %s is already installed..." % self.name,
+            inform("Checking whether OMVEngine: %s is already installed..." % self.name,
                    indent=1, verbosity=1)
             if not self.is_installed(engine_version):
                 try:
@@ -27,8 +27,13 @@ class OMVEngine(object):
                     self.set_environment()
                     self.set_path()
                 except Exception as e:
-                    inform(e)
+                    inform("Installation err: %s"%e)
                     raise(EngineInstallationError(e))
+                
+            if not self.is_installed(engine_version):  # Still
+                inform("Fatal installation error for: %s"%self.name)
+                exit(1)
+            
 
         self.modelpath = realpath(target)
         self.extra_pars = []

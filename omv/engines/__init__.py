@@ -22,7 +22,7 @@ from pyneuron import PyNRNEngine
 from pynnbrian1 import PyNNBrian1Engine
 from pynnnest import PyNNNestEngine
 from octave import OctaveEngine
-from netpyne import NetPyNEEngine
+from netpyne_ import NetPyNEEngine
 
 
 OMVEngines = {be.name: be for be in locals().values()

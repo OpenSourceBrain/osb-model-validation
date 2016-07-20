@@ -20,6 +20,7 @@ class NetPyNEEngine(OMVEngine):
         ret = True
         try:
             import netpyne
+            
             if is_verbose():
                 inform("%s version %s is correctly installed..." % (NetPyNEEngine.name,netpyne.__version__), indent=2)
         except Exception as err:

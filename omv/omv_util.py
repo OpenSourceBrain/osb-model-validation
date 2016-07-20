@@ -87,7 +87,7 @@ def main():
                 from engines.getbrian1 import install_brian
                 install_brian()
             else:
-                print('Code not implemented yet for installing %s!'%eng)
+                print('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)
                 exit(1)
             
 
