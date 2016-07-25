@@ -2,7 +2,7 @@ import os
 import subprocess as sp
 
 from jneuroml import JNeuroMLEngine
-from neuron import NeuronEngine
+from neuron_ import NeuronEngine
 from ..common.inout import inform, trim_path, check_output, is_verbose
 from engine import EngineExecutionError
 

@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from neuron import NeuronEngine
+from pyneuron import PyNRNEngine
 
 from ..common.inout import inform, trim_path, check_output, is_verbose
 from engine import OMVEngine, EngineExecutionError
@@ -14,7 +14,7 @@ class NetPyNEEngine(OMVEngine):
     @staticmethod
     def is_installed(version):
         if is_verbose():
-            inform("Checking whether %s is installed correctly..." %
+            inform("Checking whether the engine %s is installed correctly..." %
                    NetPyNEEngine.name, indent=1)
     
         ret = True
@@ -27,38 +27,32 @@ class NetPyNEEngine(OMVEngine):
             inform("Couldn't import netpyne into Python: ", err, indent=1)
             ret = False
             
-        installed = ret and NeuronEngine.is_installed(None)
+        installed = ret and PyNRNEngine.is_installed(None)
         
         return installed
         
     @staticmethod
     def install(version):
-        if not NeuronEngine.is_installed(None):
-            NeuronEngine.install(None)
-            inform("%s installed NEURON..." % NetPyNEEngine.name, indent=2, verbosity =1)
+        if not PyNRNEngine.is_installed(None):
+            PyNRNEngine.install(None)
+            inform("%s installed PyNEURON..." % NetPyNEEngine.name, indent=2, verbosity =1)
             
             
         from getnetpyne import install_netpyne
         home = os.environ['HOME']
-        inform('Will fetch and install the latest NetPyNE', indent=2)
+        inform('Will fetch and install the latest NetPyNE..', indent=2)
         install_netpyne()
         inform('Done, NetPyNE is correctly installed...', indent=2)
 
-        NetPyNEEngine.path = NeuronEngine.path
+        NetPyNEEngine.path = PyNRNEngine.path
         NetPyNEEngine.environment_vars = {}
         NetPyNEEngine.environment_vars.update(
-            NeuronEngine.environment_vars)
+            PyNRNEngine.environment_vars)
             
         inform("PATH: " + NetPyNEEngine.path, indent=2, verbosity =1)
         inform("Env vars: %s" % NetPyNEEngine.environment_vars, indent=2, verbosity =1)
-        '''
-        import pyNN
-        pynn_mod_dir = os.path.dirname(pyNN.__file__)+'/neuron/nmodl/'
-        inform("Attempting to compile PyNN mod files for standard models in %s..."%pynn_mod_dir, indent=2, verbosity =1)
         
-        print check_output(['ls', pynn_mod_dir], cwd=pynn_mod_dir)'''
-        
-        environment_vars, path = NeuronEngine.get_nrn_environment()
+        environment_vars, path = PyNRNEngine.get_nrn_environment()
         inform("Using NEURON with env %s at %s..."%(environment_vars, path), indent=2, verbosity =1)
         
         #print check_output([environment_vars['NEURON_HOME']+'/bin/nrnivmodl'], cwd=pynn_mod_dir)
@@ -68,7 +62,7 @@ class NetPyNEEngine(OMVEngine):
         
         
         try:
-            self.stdout = NeuronEngine.compile_modfiles(self.modelpath)
+            self.stdout = PyNRNEngine.compile_modfiles(self.modelpath)
         except sp.CalledProcessError as err:
             self.stderr = err.output
             self.returncode = err.returncode

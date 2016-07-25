@@ -29,10 +29,10 @@ class OMVEngine(object):
                 except Exception as e:
                     inform("Installation err: %s"%e)
                     raise(EngineInstallationError(e))
-                
+            '''
             if not self.is_installed(engine_version):  # Still
                 inform("Fatal installation error for: %s"%self.name)
-                exit(1)
+                exit(1)'''
             
 
         self.modelpath = realpath(target)

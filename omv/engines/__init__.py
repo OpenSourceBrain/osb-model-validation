@@ -1,7 +1,7 @@
 import inspect
 
 from engine import OMVEngine
-from neuron import NeuronEngine
+from neuron_ import NeuronEngine
 from jneuroml import JNeuroMLEngine
 from jneuromlnrn import JNeuroMLNRNEngine
 from jneuromlpynnnrn import JNeuroMLPyNNNRNEngine

@@ -4,7 +4,7 @@ from textwrap import dedent
 from utils.wdir import working_dir
 from os.path import dirname
 
-from neuron import NeuronEngine
+from neuron_ import NeuronEngine
 
 from ..common.inout import inform, is_verbose
 from engine import EngineExecutionError
@@ -16,12 +16,16 @@ class PyNRNEngine(NeuronEngine):
 
     @staticmethod
     def is_installed(version):
-        if is_verbose():
-            inform("Checking whether %s is installed correctly..." %
-                   PyNRNEngine.name, indent=1)
-        installed = NeuronEngine.is_installed(None)
-        
-        return installed
+        ret = True
+        try:
+            import neuron
+            if is_verbose():
+                inform("PyNEURON version %s is correctly installed..." % neuron.sys.version, indent=2)
+            
+        except Exception as err:
+            inform("Couldn't import NEURON into Python: ", err, indent=1)
+            ret = False
+        return ret
         
     @staticmethod
     def install(version):

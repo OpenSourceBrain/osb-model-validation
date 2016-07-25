@@ -85,3 +85,8 @@ utilities/local_test
 /utilities/tests/exIzh.dat0
 /utilities/tests/LEMS_2007One_pynn.py
 /utilities/tests/LEMS_2007One_pynn.py_main.json
+/docx
+/utilities/tests/LEMS_NML2_Ex9_FN_netpyne.py
+/utilities/tests/LEMS_NML2_Ex9_FN_netpyne.py_main.json
+/utilities/tests/fn1.cell.json
+/utilities/tests/fn1_celldefinition.py

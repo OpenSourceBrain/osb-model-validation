@@ -3,7 +3,7 @@ import subprocess as sp
 
 from jneuroml import JNeuroMLEngine
 from pynnneuron import PyNNNRNEngine
-from neuron import NeuronEngine
+from neuron_ import NeuronEngine
 from pynn import PyNNEngine
 
 from ..common.inout import inform, trim_path, check_output, is_verbose
