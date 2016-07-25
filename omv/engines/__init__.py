@@ -5,6 +5,7 @@ from neuron_ import NeuronEngine
 from jneuroml import JNeuroMLEngine
 from jneuromlnrn import JNeuroMLNRNEngine
 from jneuromlpynnnrn import JNeuroMLPyNNNRNEngine
+from jneuromlnetpyne import JNeuroMLNetPyNEEngine
 from jneuromlbrian import JNeuroMLBrianEngine
 from jneuromlvalidate import JNeuroMLValidateEngine
 from jneuromlvalidatev1 import JNeuroMLValidateV1Engine
