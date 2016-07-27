@@ -18,6 +18,8 @@ class PyNRNEngine(NeuronEngine):
     def is_installed(version):
         ret = True
         try:
+            if is_verbose():
+                inform("Checking whether %s is installed..." % PyNRNEngine.name, indent=1)
             import neuron
             if is_verbose():
                 inform("PyNEURON version %s is correctly installed..." % neuron.sys.version, indent=2)
