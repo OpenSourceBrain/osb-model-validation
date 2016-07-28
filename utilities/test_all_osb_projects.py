@@ -33,7 +33,7 @@ if fresh_clones:
 
 os.makedirs(test_dir)
 
-ignores = ['neurosciences-repository', 'drosophila-acc-l3-motoneuron-gunay-et-al-2014','d-olfactory-bulb-network']
+ignores = ['neurosciences-repository', 'drosophila-acc-l3-motoneuron-gunay-et-al-2014','d-olfactory-bulb-network','zetterbergjansenritmodel']
 
 if '-q' in sys.argv:
     ignores.append('pospischiletal2008')  # Slow...
@@ -54,6 +54,8 @@ all_repos.update(additional_repos)
 
 projects = len(all_repos.keys())
 
+bad_projects_found = {}
+
 if __name__ == "__main__":
     start = datetime.datetime.now()
 
@@ -63,8 +65,11 @@ if __name__ == "__main__":
             project_num = int(sys.argv[1])
         except:
             print "ignoring..."
-    for project in osb.get_projects(min_curation_level="None",
-                                    limit=project_num):
+            
+    all_projs = osb.get_projects(min_curation_level="None",
+                                    limit=project_num)
+            
+    for project in all_projs:
 
         print("\n%sPre checking OSB project: %s (%s)\n" %
               ("-" * 8, project.name, project.identifier))
@@ -83,16 +88,35 @@ if __name__ == "__main__":
                     print("  .travis.yml found at %s\n" % raw_url)
                     contents = osb.utils.get_page(raw_url)
                     if 'omv' not in contents:
-                        print("That .travis.yml does not look like it uses OMV...")
+                        error = "  (That .travis.yml does not look like it uses OMV...)"
+                        print(error)
+                        
+                        bad_projects_found[project.identifier] = error
                     else:
+                        print("  Possible .travis.yml with OMV tests found!")
                         all_repos[project.identifier] = project.github_repo
+                        
+                else:
+                    error = "  (No .travis.yml)"
+                    print(error)
+
+                    bad_projects_found[project.identifier] = error
+                        
                 
             else:
-                print("  (No GitHub repository)")
+                error = "  (No GitHub repository)"
+                print(error)
+                bad_projects_found[project.identifier] = error
         else:
-            print("  (Ignoring...)")
-            
+            error = "  (Ignoring...)"
+            print(error)
+            bad_projects_found[project.identifier] = error
+          
+    print("\nFound %i/%i projects with possible OMV tests"%(len(all_repos),len(all_projs)))
     pp.pprint(all_repos)
+    print("\nFound %i/%i projects without OMV tests"%(len(bad_projects_found),len(all_projs)))
+    pp.pprint(bad_projects_found)
+    
                 
     for proj_id in all_repos.keys():
         
