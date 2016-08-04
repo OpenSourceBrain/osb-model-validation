@@ -8,7 +8,7 @@ experiments:
     observables:
       spike times:
         file: 
-          path: Vsoma_cell_0.dat
+          path: exIzh.dat
           columns: [0,1]
           scaling: [1000, 1000]
         spike detection: 
