@@ -14,21 +14,24 @@ class NetPyNEEngine(OMVEngine):
     @staticmethod
     def is_installed(version):
         if is_verbose():
-            inform("Checking whether the engine %s is installed correctly..." %
+            inform("Checking whether the engine %s has been installed correctly..." %
                    NetPyNEEngine.name, indent=1)
     
         ret = True
         try:
-            import netpyne
             
-            if is_verbose():
-                inform("%s version %s is correctly installed..." % (NetPyNEEngine.name,netpyne.__version__), indent=2)
+            ret_str = sp.check_output(['python -c "import netpyne; print(netpyne.__version__)"'], shell=True,stderr=sp.STDOUT)
+            ret = len(ret_str) > 0
+            
+            if ret and is_verbose():
+                inform("%s is correctly installed..." % (NetPyNEEngine.name), indent=2)
         except Exception as err:
             inform("Couldn't import netpyne into Python: ", err, indent=1)
             ret = False
             
         installed = ret and PyNRNEngine.is_installed(None)
         
+        inform("NetPyNE is_installed: %s"%ret, "", indent=1)
         return installed
         
     @staticmethod
