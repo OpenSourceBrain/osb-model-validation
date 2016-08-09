@@ -24,6 +24,7 @@ from pynnbrian1 import PyNNBrian1Engine
 from pynnnest import PyNNNestEngine
 from octave import OctaveEngine
 from netpyne_ import NetPyNEEngine
+from pyneuroconstruct import PyneuroConstruct
 
 
 OMVEngines = {be.name: be for be in locals().values()
