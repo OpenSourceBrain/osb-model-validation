@@ -96,3 +96,7 @@ utilities/local_test
 /utilities/tests/NET_2007Onenet.nml
 /utilities/tests/NET_NML2_Ex9_FNnet.nml
 /utilities/tests/NET_2007One.net.nml
+
+
+/utilities/tests/TestProject/generated*
+/utilities/tests/TestProject/simulations
