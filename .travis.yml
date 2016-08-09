@@ -40,6 +40,9 @@ env:
 
 install:
     - python setup.py install
+    #  Temporary...
+    - pip install git+https://github.com/NeuralEnsemble/libNeuroML.git@development
+    - pip install git+https://github.com/NeuroML/pyNeuroML
 
 script:
     - omv list-engines
