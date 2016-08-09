@@ -10,6 +10,9 @@ addons:
     - python-sympy
         # Requirements for Octave
     - octave
+        # Requirements for NetPyNE & libNeuroML
+    - python-tk
+    - python-lxml
     
     
 language: python
