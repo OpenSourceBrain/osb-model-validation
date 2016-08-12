@@ -86,6 +86,11 @@ def main():
             elif eng == 'jNeuroML':
                 from engines.getjnml import install_jnml
                 install_jnml()
+            elif eng == 'PyLEMS_NeuroML2':
+                from engines.getpylems import install_pylems
+                install_pylems()
+                from engines.getnml2 import install_nml2
+                install_nml2()
             elif eng == 'genesis':
                 from engines.getgenesis import install_genesis
                 install_genesis()
