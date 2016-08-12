@@ -100,6 +100,9 @@ def main():
             elif eng == 'Brian':
                 from engines.getbrian1 import install_brian
                 install_brian()
+            elif eng == 'Brian2':
+                from engines.getbrian2 import install_brian2
+                install_brian2()
             else:
                 print('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)
                 exit(1)

@@ -5,7 +5,7 @@ from getbrian1 import check_scipy_dev
 def install_brian2():
     try:
         check_scipy_dev()
-        pip.main(['install', 'brian2'])
+        pip.main(['install', '--pre', 'brian2'])
         import brian2
         m = 'Successfully installed Brian2...'
     except Exception as e:
