@@ -46,6 +46,7 @@ env:
     - OMV_ENGINE=jNeuroML_PyNN_NEURON
     - OMV_ENGINE=jNeuroML_validate
     - OMV_ENGINE=jNeuroML_validatev1
+    - OMV_ENGINE=Py_neuroConstruct
 
 install:
     - python setup.py install
