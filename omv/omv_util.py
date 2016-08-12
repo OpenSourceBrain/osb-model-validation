@@ -89,6 +89,9 @@ def main():
             elif eng == 'genesis':
                 from engines.getgenesis import install_genesis
                 install_genesis()
+            elif eng == 'NetPyNE':
+                from engines.getnetpyne import install_netpyne
+                install_netpyne()
             elif eng == 'Brian':
                 from engines.getbrian1 import install_brian
                 install_brian()
