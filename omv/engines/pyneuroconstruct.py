@@ -54,12 +54,8 @@ class PyneuroConstructEngine(OMVEngine):
             self.stdout = co([nC_sh, '-python', self.modelpath, '-nogui'],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
-        except sp.CalledProcessError as err:
-            self.returncode = err.returncode
-            self.stdout = err.output
-            raise EngineExecutionError
         except Exception as err:
-            inform("Another error with running Py_neuroConstruct:", err, indent=1)
+            inform("Error with running Py_neuroConstruct:", err, indent=1)
             self.returncode = -1
             self.stdout = "???"
 
