@@ -9,7 +9,7 @@ from ..common.inout import inform, is_verbose
 from engine import OMVEngine
 
 
-class PyneuroConstruct(OMVEngine):
+class PyneuroConstructEngine(OMVEngine):
     
     name = "Py_neuroConstruct"
 

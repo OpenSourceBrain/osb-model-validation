@@ -73,19 +73,48 @@ def main():
         else:
             eng = arguments['<engine>']
             print('Trying to install: %s'% eng)
+            already_installed = False
+            
             if eng == 'NEURON':
                 from engines.neuron import NeuronEngine
                 if not NeuronEngine.is_installed(''):
                     from engines.getnrn import install_neuron
                     install_neuron()
                 else:
-                    print("%s has already been installed!"%eng)
+                    already_installed = True
+                    
             elif eng == 'jLEMS':
-                from engines.getjlems import install_jlems
-                install_jlems()
+                from engines.jlems import JLemsEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from engines.getjlems import install_jlems
+                    install_jlems()
+                    
             elif eng == 'jNeuroML':
-                from engines.getjnml import install_jnml
-                install_jnml()
+                from engines.jneuroml import JNeuroMLEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from engines.getjnml import install_jnml
+                    install_jnml()
+                    
+            elif eng == 'jNeuroML':
+                from engines.jneuroml import JNeuroMLEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from engines.getjnml import install_jnml
+                    install_jnml()
+                    
+            elif eng == 'neuroConstruct' or eng == 'Py_neuroConstruct':
+                from engines.pyneuroconstruct import PyneuroConstructEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from engines.getneuroconstruct import install_neuroconstruct
+                    install_neuroconstruct()
+                    
             elif eng == 'PyLEMS_NeuroML2':
                 from engines.getpylems import install_pylems
                 install_pylems()
@@ -103,9 +132,16 @@ def main():
             elif eng == 'Brian2':
                 from engines.getbrian2 import install_brian2
                 install_brian2()
+            elif eng == 'Py_neuroConstruct' or eng == 'neuroConstruct':
+                from engines.getneuroconstruct import install_neuroconstruct
+                install_neuroconstruct()
             else:
                 print('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)
                 exit(1)
+            if already_installed:
+                print('Engine %s was already installed'%eng)
+                
+                
             
 
     elif arguments['list-engines']:

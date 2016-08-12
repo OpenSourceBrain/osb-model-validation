@@ -1,16 +1,21 @@
 import os
-import pip
-from ..common.inout import inform, check_output
+from ..common.inout import inform, check_output as co
 from utils.wdir import working_dir
 
 def install_neuroconstruct():
     try:
         
         install_root = os.environ['HOME']
+
+        with working_dir(install_root):
+                print co(['git', 'clone', 'https://github.com/NeuralEnsemble/neuroConstruct.git'])
+                
+        path = os.path.join(install_root,'neuroConstruct')
         
-        # Install nC by:
-        # 1) cloning local copy of https://github.com/NeuralEnsemble/neuroConstruct.git
-        # 2) running: ./nC.sh -make 
+        with working_dir(path):
+            print co(['./updatenC.sh'])
+            print co(['./nC.sh', '-make'])
+            m = 'Successfully installed neuroConstruct...'
         
         
     except Exception as e:
