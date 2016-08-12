@@ -81,8 +81,8 @@ def main():
                 else:
                     print("%s has already been installed!"%eng)
             elif eng == 'jLEMS':
-                from engines.getjnml import install_jnml
-                install_jnml()
+                from engines.getjlems import install_jlems
+                install_jlems()
             elif eng == 'jNeuroML':
                 from engines.getjnml import install_jnml
                 install_jnml()
