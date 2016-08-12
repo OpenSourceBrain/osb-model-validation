@@ -23,23 +23,29 @@ virtualenv:
     system_site_packages: true
 
 env:
-    - OMV_ENGINE=NEST
-    - OMV_ENGINE=PyNEST
-    - OMV_ENGINE=PyNN_Brian1
     - OMV_ENGINE=Brian
     - OMV_ENGINE=Brian2
-    - OMV_ENGINE=PyNN_NEURON
+    - OMV_ENGINE=NEST
+    - OMV_ENGINE=PyNEST
+    - OMV_ENGINE=Octave
+    - OMV_ENGINE=genesis
+    - OMV_ENGINE=NEURON
     - OMV_ENGINE=PyNEURON
     - OMV_ENGINE=PyNN
+    - OMV_ENGINE=PyNN_NEURON
+    - OMV_ENGINE=PyNN_Brian1
     - OMV_ENGINE=PyNN_Nest
-    - OMV_ENGINE=Octave
-    - OMV_ENGINE=jNeuroML
-    - OMV_ENGINE=PyLEMS_NeuroML2
-    - OMV_ENGINE=jNeuroML_NEURON
-    - OMV_ENGINE=jNeuroML_Brain
-    - OMV_ENGINE=jNeuroML_PyNN_NEURON
     - OMV_ENGINE=NetPyNE
+    - OMV_ENGINE=PyLEMS
+    - OMV_ENGINE=PyLEMS_NeuroML2
+    - OMV_ENGINE=jLEMS
+    - OMV_ENGINE=jNeuroML
+    - OMV_ENGINE=jNeuroML_Brain
+    - OMV_ENGINE=jNeuroML_NEURON
     - OMV_ENGINE=jNeuroML_NetPyNE
+    - OMV_ENGINE=jNeuroML_PyNN_NEURON
+    - OMV_ENGINE=jNeuroML_validate
+    - OMV_ENGINE=jNeuroML_validatev1
 
 install:
     - python setup.py install
