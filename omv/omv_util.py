@@ -99,14 +99,6 @@ def main():
                     from engines.getjnml import install_jnml
                     install_jnml()
                     
-            elif eng == 'jNeuroML':
-                from engines.jneuroml import JNeuroMLEngine as ee
-                if ee.is_installed(None):
-                    already_installed = True
-                else:
-                    from engines.getjnml import install_jnml
-                    install_jnml()
-                    
             elif eng == 'neuroConstruct' or eng == 'Py_neuroConstruct':
                 from engines.pyneuroconstruct import PyneuroConstructEngine as ee
                 if ee.is_installed(None):
