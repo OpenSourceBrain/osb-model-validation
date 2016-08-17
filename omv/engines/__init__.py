@@ -25,6 +25,7 @@ from pynnnest import PyNNNestEngine
 from octave import OctaveEngine
 from netpyne_ import NetPyNEEngine
 from pyneuroconstruct import PyneuroConstructEngine
+from pyneuroml_ import PyNeuroMLEngine
 
 
 OMVEngines = {be.name: be for be in locals().values()
