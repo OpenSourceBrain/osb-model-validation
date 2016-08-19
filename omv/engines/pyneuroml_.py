@@ -26,7 +26,7 @@ class PyNeuroMLEngine(OMVEngine):
     def install(version):
         from getpyneuroml import install_pynml
         home = os.environ['HOME']
-        p = os.path.join(home, 'test.sh/pyNeuroML')
+        p = os.path.join(home, 'pyNeuroML')
         PyNeuroMLEngine.path = p
         PyNeuroMLEngine.environment_vars = {'PYNML_HOME': p}
         inform('Will fetch and install the latest pyNeuroML', indent=2)
