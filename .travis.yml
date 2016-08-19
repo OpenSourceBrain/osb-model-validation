@@ -41,6 +41,7 @@ env:
     - OMV_ENGINE=jLEMS
     - OMV_ENGINE=jNeuroML
     - OMV_ENGINE=jNeuroML_Brain
+    - OMV_ENGINE=jNeuroML_Brain2
     - OMV_ENGINE=jNeuroML_NEURON
     - OMV_ENGINE=jNeuroML_NetPyNE
     - OMV_ENGINE=jNeuroML_PyNN_NEURON

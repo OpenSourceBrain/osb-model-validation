@@ -7,6 +7,7 @@ from jneuromlnrn import JNeuroMLNRNEngine
 from jneuromlpynnnrn import JNeuroMLPyNNNRNEngine
 from jneuromlnetpyne import JNeuroMLNetPyNEEngine
 from jneuromlbrian import JNeuroMLBrianEngine
+from jneuromlbrian2 import JNeuroMLBrian2Engine
 from jneuromlvalidate import JNeuroMLValidateEngine
 from jneuromlvalidatev1 import JNeuroMLValidateV1Engine
 from jlems import JLemsEngine
