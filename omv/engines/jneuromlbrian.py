@@ -27,12 +27,12 @@ class JNeuroMLBrianEngine(JNeuroMLEngine):
             Brian1Engine.install(None)
 
         JNeuroMLBrianEngine.path = JNeuroMLEngine.path + \
-            ":" + BrianEngine.path
+            ":" + Brian1Engine.path
         JNeuroMLBrianEngine.environment_vars = {}
         JNeuroMLBrianEngine.environment_vars.update(
             JNeuroMLEngine.environment_vars)
         JNeuroMLBrianEngine.environment_vars.update(
-            BrianEngine.environment_vars)
+            Brian1Engine.environment_vars)
         inform("PATH: " + JNeuroMLBrianEngine.path)
         inform("Env vars: %s" % JNeuroMLBrianEngine.environment_vars)
 
