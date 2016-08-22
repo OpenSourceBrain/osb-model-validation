@@ -2,6 +2,7 @@ import os
 import subprocess as sp
 
 from pyneuron import PyNRNEngine
+from pyneuroml_ import PyNeuroMLEngine
 
 from omv.common.inout import inform, trim_path, check_output, is_verbose
 from engine import OMVEngine, EngineExecutionError
@@ -36,9 +37,14 @@ class NetPyNEEngine(OMVEngine):
         
     @staticmethod
     def install(version):
+        
         if not PyNRNEngine.is_installed(None):
             PyNRNEngine.install(None)
             inform("%s installed PyNEURON..." % NetPyNEEngine.name, indent=2, verbosity =1)
+        
+        if not PyNeuroMLEngine.is_installed(None):
+            PyNeuroMLEngine.install(None)
+            inform("%s installed PyNeuroML..." % NetPyNEEngine.name, indent=2, verbosity =1)
             
             
         from getnetpyne import install_netpyne
