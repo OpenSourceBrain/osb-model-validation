@@ -1,5 +1,5 @@
 import os
-from subprocess import check_output as co
+from omv.common.inout import check_output as co
 
 from utils.wdir import working_dir
 
@@ -13,4 +13,5 @@ def install_pynml():
         print(co(['python', 'setup.py', 'install']))
         print(co(['cd', '..']))
         print(co(['git', 'clone', 'https://github.com/NeuroML/pyNeuroML.git']))
+        print(co(['cd', 'pyNeuroML']))
         print(co(['python', 'setup.py', 'install']))
