@@ -14,4 +14,4 @@ def install_pynml():
         print(co(['python', 'setup.py', 'install']))
         
     with working_dir(os.path.join(os.environ['HOME'],'pyNeuroML')):
-        print(co(['python', 'setup.py', 'install']))
+        print(co(['pip', 'install', '.', '-r', 'requirements.txt']))
