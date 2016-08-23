@@ -106,6 +106,14 @@ def main():
                 else:
                     from engines.getneuroconstruct import install_neuroconstruct
                     install_neuroconstruct()
+
+            elif eng == 'pyNeuroML':
+                from engines.pyneuroml_ import PyNeuroMLEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from engines.getpyneuroml import install_pynml
+                    install_pynml()            
                     
             elif eng == 'PyLEMS_NeuroML2':
                 from engines.getpylems import install_pylems

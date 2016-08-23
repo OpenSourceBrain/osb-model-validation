@@ -7,6 +7,7 @@ from jneuromlnrn import JNeuroMLNRNEngine
 from jneuromlpynnnrn import JNeuroMLPyNNNRNEngine
 from jneuromlnetpyne import JNeuroMLNetPyNEEngine
 from jneuromlbrian import JNeuroMLBrianEngine
+from jneuromlbrian2 import JNeuroMLBrian2Engine
 from jneuromlvalidate import JNeuroMLValidateEngine
 from jneuromlvalidatev1 import JNeuroMLValidateV1Engine
 from jlems import JLemsEngine
@@ -25,6 +26,7 @@ from pynnnest import PyNNNestEngine
 from octave import OctaveEngine
 from netpyne_ import NetPyNEEngine
 from pyneuroconstruct import PyneuroConstructEngine
+from pyneuroml_ import PyNeuroMLEngine
 
 
 OMVEngines = {be.name: be for be in locals().values()

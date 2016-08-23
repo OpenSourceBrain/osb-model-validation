@@ -76,5 +76,15 @@ def trim_path(fname):
         return fname
     
 def check_output(cmds, cwd='.', verbosity=0):
-    inform("Running commands: %s in %s"%(cmds, cwd), indent=2, verbosity=verbosity)
-    return sp.check_output(cmds, cwd=cwd)
+    inform("Running the commands: %s in (%s; cwd=%s)"%(cmds, cwd, os.getcwd()), indent=2, verbosity=verbosity)
+    try:
+        ret_string = sp.check_output(cmds, cwd=cwd)
+        inform("Commands: %s completed successfully"%(cmds), indent=2, verbosity=verbosity)
+        return ret_string
+        
+    except sp.CalledProcessError as err:
+        inform("Error running commands: %s in %s (return code: %s)\n%s"%(cmds, cwd,err.returncode,err.output), indent=2, verbosity=verbosity)
+        raise err
+    except Exception as err:
+        inform("Error running commands: %s in (%s)!\nError: %s"%(cmds, cwd,err), indent=2, verbosity=verbosity)
+        raise err

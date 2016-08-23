@@ -18,7 +18,7 @@ addons:
 language: python
 
 python: 2.7
-
+ 
 virtualenv:
     system_site_packages: true
 
@@ -40,19 +40,18 @@ env:
     - OMV_ENGINE=PyLEMS_NeuroML2
     - OMV_ENGINE=jLEMS
     - OMV_ENGINE=jNeuroML
-    - OMV_ENGINE=jNeuroML_Brain
+    - OMV_ENGINE=jNeuroML_Brian
+    - OMV_ENGINE=jNeuroML_Brian2
     - OMV_ENGINE=jNeuroML_NEURON
     - OMV_ENGINE=jNeuroML_NetPyNE
     - OMV_ENGINE=jNeuroML_PyNN_NEURON
     - OMV_ENGINE=jNeuroML_validate
     - OMV_ENGINE=jNeuroML_validatev1
     - OMV_ENGINE=Py_neuroConstruct
+    - OMV_ENGINE=pyNeuroML
 
 install:
     - python setup.py install
-    #  Temporary...
-    - pip install git+https://github.com/NeuralEnsemble/libNeuroML.git@development
-    - pip install git+https://github.com/NeuroML/pyNeuroML
 
 script:
     - omv list-engines
