@@ -58,7 +58,7 @@ install:
 script:
     - omv list-engines
     - cd utilities/tests
-    - omv all -V
+    - omv all -V; export OMV_SUCCESS=$?; echo $OMV_SUCCESS
     - omv list-engines
     
     - echo "Finished all OMV tests on *.omt files which have been found"
