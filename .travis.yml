@@ -49,6 +49,8 @@ env:
     - OMV_ENGINE=jNeuroML_validatev1
     - OMV_ENGINE=Py_neuroConstruct
     - OMV_ENGINE=pyNeuroML
+    
+    - OMV_ENGINE=DIRECT_ENGINE_INSTALL
 
 install:
     - python setup.py install
@@ -58,4 +60,11 @@ script:
     - cd utilities/tests
     - omv all -V
     - omv list-engines
+    
+    - echo "Finished all OMV tests on *.omt files which have been found"
+    - if [[ ${OMV_ENGINE} == "DIRECT_ENGINE_INSTALL" ]]; then echo "Continuing..."; else exit $OMV_SUCCESS; fi
+    
+    - echo "Testing direct installation of some simulators..."
+    - omv install Brian
+    - omv install NEURON
 

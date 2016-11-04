@@ -76,7 +76,7 @@ def main():
             already_installed = False
             
             if eng == 'NEURON':
-                from engines.neuron import NeuronEngine
+                from engines.neuron_ import NeuronEngine
                 if not NeuronEngine.is_installed(''):
                     from engines.getnrn import install_neuron
                     install_neuron()
