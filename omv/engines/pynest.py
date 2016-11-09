@@ -18,15 +18,15 @@ class PyNestEngine(OMVEngine):
         
         ret = True
         try:
-            import nest
-            try:
-                version = nest.version()
-            except:
-                version = '???'
+            
+            ret_str = sp.check_output(['python -c "import nest; print(nest.version())"'], shell=True,stderr=sp.STDOUT)
+            ret = len(ret_str) > 0
+            
+            if ret and is_verbose():
+                inform("%s is correctly installed..." % (PyNestEngine.name), indent=2)
             
             if is_verbose():
-                inform("NEST version: %s is installed with Python support..." 
-                    % version, indent=2)
+                inform("NEST is installed with Python support...", indent=2)
                 inform("Env vars: %s" % PyNestEngine.environment_vars, indent=2)
             
         except Exception as err:
