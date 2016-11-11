@@ -6,6 +6,7 @@ from textwrap import dedent
 from utils.wdir import working_dir
 from engine import OMVEngine, EngineExecutionError
 from os.path import dirname
+from omv.common.inout import check_output
 
 from ..common.inout import inform, is_verbose
 
@@ -51,7 +52,7 @@ class NeuronEngine(OMVEngine):
         ret = True
         
         try:
-            output = sp.check_output(['nrniv', '--version'])
+            output = check_output(['nrniv', '--version'])
             if is_verbose():
                 inform('%s was already installed locally'%output.strip(), indent=2)
         except OSError:
@@ -59,7 +60,7 @@ class NeuronEngine(OMVEngine):
                 environment_vars, path = NeuronEngine.get_nrn_environment()
                 
                 inform('Testing NEURON with env: %s and path: %s'%(environment_vars, path), indent=2)
-                output = sp.check_output([path+'/nrniv', '--version'])
+                output = check_output([path+'/nrniv', '--version'])
                 if is_verbose():
                     inform('%s was already installed (by OMV..?)'%output.strip(), indent=2)
             except OSError:
@@ -82,8 +83,8 @@ class NeuronEngine(OMVEngine):
         with working_dir(dirname(modelpath)):
             out = 0
             if len(glob('*.mod')) > 0:
-                inform('Compiling all modfiles in: %s'%modelpath, indent=1)
-                out = sp.check_output(['nrnivmodl'])
+                inform('Compiling all mod files in directory: %s'%dirname(modelpath), indent=1)
+                out = check_output(['nrnivmodl'])
                 inform(out, indent=2)
         return out
 
