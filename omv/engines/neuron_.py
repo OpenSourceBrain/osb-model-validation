@@ -83,8 +83,9 @@ class NeuronEngine(OMVEngine):
         with working_dir(dirname(modelpath)):
             out = 0
             if len(glob('*.mod')) > 0:
+                environment_vars, path = NeuronEngine.get_nrn_environment()
                 inform('Compiling all mod files in directory: %s'%dirname(modelpath), indent=1)
-                out = check_output(['nrnivmodl'])
+                out = check_output([path+'/nrnivmodl'])
                 inform(out, indent=2)
         return out
 
