@@ -30,7 +30,7 @@ class NetPyNEEngine(OMVEngine):
             inform("Couldn't import netpyne into Python: ", err, indent=1)
             ret = False
             
-        installed = ret and PyNRNEngine.is_installed(None)
+        installed = ret and PyNRNEngine.is_installed(None) and PyNeuroMLEngine.is_installed(None)
         
         inform("NetPyNE is_installed: %s"%ret, "", indent=1)
         return installed
