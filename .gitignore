@@ -4,7 +4,6 @@
 /utilities/tests/x86_64
 
 /utilities/tests/*.mod
-/utilities/tests/*.hoc
 /utilities/tests/*.dat
 /utilities/tests/*nrn.py
 /utilities/tests/*brian.py
