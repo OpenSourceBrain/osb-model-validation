@@ -56,9 +56,12 @@ class OMVEngine(object):
     def set_environment(self):
         if self.environment_vars:
             for name, val in self.environment_vars.iteritems():
-                inform('Setting env var %s: ' % name, val,
-                       indent=2, verbosity=1)
-                environ[name] = val
+                if environ.has_key(name) and not 'HOME' in name:
+                    if not ':%s:'%val in environ[name]:
+                        environ[name] = '%s:%s'%(environ[name],val)
+                else:
+                    environ[name] = val
+                inform('Set env var %s: ' % name, environ[name],indent=2, verbosity=1)
 
     def set_path(self):
         if self.path:

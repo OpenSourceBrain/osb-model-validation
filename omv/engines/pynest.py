@@ -19,7 +19,7 @@ class PyNestEngine(OMVEngine):
         ret = True
         try:
             
-            ret_str = sp.check_output(['python -c "import nest; print(nest.version())"'], shell=True,stderr=sp.STDOUT)
+            ret_str = check_output(['python -c "import nest; print(nest.version())"'],cwd='/home/padraig', shell=True)
             ret = len(ret_str) > 0
             
             if ret and is_verbose():
@@ -31,6 +31,7 @@ class PyNestEngine(OMVEngine):
             
         except Exception as err:
             inform("Couldn't import NEST into Python: ", err, indent=1)
+            inform("NEST env vars: %s" % PyNestEngine.environment_vars, indent=1)
             ret = False
         return ret
         
