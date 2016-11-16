@@ -19,7 +19,7 @@ class PyNestEngine(OMVEngine):
         ret = True
         try:
             
-            ret_str = check_output(['python -c "import nest; print(nest.version())"'],cwd='/home/padraig', shell=True)
+            ret_str = check_output(['python -c "import nest; print(nest.version())"'], shell=True)
             ret = len(ret_str) > 0
             
             if ret and is_verbose():
