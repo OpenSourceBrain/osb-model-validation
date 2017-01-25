@@ -3,6 +3,7 @@
 
   Usage:
     omv all [-V | --verbose] [--engine=engine]
+    omv all_ [-V | --verbose] [--engine=engine]
     omv test <testMe.omt> [-V | --verbose]
     omv autogen [options]
     omv install <engine>
@@ -31,7 +32,6 @@ import common.inout
 
 def main():
     arguments = docopt(__doc__, version='OpenSourceBrain Model Validation 0.0')
-
     set_env_vars()
 
     if arguments['--verbose']:
@@ -47,6 +47,14 @@ def main():
     elif arguments['all']:
         try:
             test_all(only_this_engine=arguments['--engine'])
+        except AssertionError:
+            print("Failed due to non passing tests")
+            exit(1)
+
+    # Includes *.omt_, i.e. temporary test files
+    elif arguments['all_']:
+        try:
+            test_all(only_this_engine=arguments['--engine'],include_temp_tests=True)
         except AssertionError:
             print("Failed due to non passing tests")
             exit(1)

@@ -5,9 +5,12 @@ from common.inout import load_yaml, inform, trim_path, is_verbose
 from tally import TallyHolder
 
 
-def test_all(do_not_run=False, only_this_engine=None):
+def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
     cwd = Path(getcwd())
     all_omts = [p.as_posix() for p in cwd.glob('**/*.omt')]
+    if include_temp_tests:
+        all_omts += [p.as_posix() for p in cwd.glob('**/*.omt_')]
+    
     th = TallyHolder()
     if environ.get('TRAVIS'):
         if not environ.get('OMV_ENGINE'):

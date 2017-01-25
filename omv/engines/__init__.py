@@ -6,6 +6,7 @@ from jneuroml import JNeuroMLEngine
 from jneuromlnrn import JNeuroMLNRNEngine
 from jneuromlpynnnrn import JNeuroMLPyNNNRNEngine
 from jneuromlnetpyne import JNeuroMLNetPyNEEngine
+from jneuromlnetpyne_np4 import JNeuroMLNetPyNENP4Engine
 from jneuromlbrian import JNeuroMLBrianEngine
 from jneuromlbrian2 import JNeuroMLBrian2Engine
 from jneuromlvalidate import JNeuroMLValidateEngine
@@ -25,6 +26,7 @@ from pynnbrian1 import PyNNBrian1Engine
 from pynnnest import PyNNNestEngine
 from octave import OctaveEngine
 from netpyne_ import NetPyNEEngine
+from netpyne__np4 import NetPyNENP4Engine
 from pyneuroconstruct import PyneuroConstructEngine
 from pyneuroml_ import PyNeuroMLEngine
 
