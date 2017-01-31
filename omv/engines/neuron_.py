@@ -92,6 +92,18 @@ class NeuronEngine(OMVEngine):
                 inform('Compiling all mod files in directory: %s'%dirname(modelpath), indent=1)
                 out = check_output([path+'/nrnivmodl'])
                 inform(out, indent=2)
+            elif len(glob('modfiles/*.mod')) > 0:
+                environment_vars, path = NeuronEngine.get_nrn_environment()
+                mod_file_path = dirname(modelpath)+"/modfiles"
+                inform('Compiling all mod files in directory: %s'%mod_file_path, indent=1)
+                out = check_output([path+'/nrnivmodl','modfiles'])
+                inform(out, indent=2)
+            elif len(glob('mod_files/*.mod')) > 0:
+                environment_vars, path = NeuronEngine.get_nrn_environment()
+                mod_file_path = dirname(modelpath)+"/mod_files"
+                inform('Compiling all mod files in directory: %s'%mod_file_path, indent=1)
+                out = check_output([path+'/nrnivmodl','mod_files'])
+                inform(out, indent=2)
         return out
 
 
