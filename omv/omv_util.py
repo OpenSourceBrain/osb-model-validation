@@ -91,6 +91,14 @@ def main():
                 else:
                     already_installed = True
                     
+            elif eng == 'PyNEURON':
+                from engines.pyneuron import PyNRNEngine
+                if not PyNRNEngine.is_installed(''):
+                    from engines.getnrn import install_neuron
+                    install_neuron()
+                else:
+                    already_installed = True
+                    
             elif eng == 'jLEMS':
                 from engines.jlems import JLemsEngine as ee
                 if ee.is_installed(None):
