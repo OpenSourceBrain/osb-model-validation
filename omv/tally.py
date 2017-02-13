@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from common.inout import trim_path
+from omv.common.inout import trim_path
 
 
 class Tallyman(object):

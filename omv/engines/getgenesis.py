@@ -1,7 +1,7 @@
 import os
 from subprocess import check_output as co
 
-from utils.wdir import working_dir
+from omv.engines.utils.wdir import working_dir
 
 simrc = """
 // .simrc file to go in the home directory of all GENESIS users
@@ -39,13 +39,13 @@ def install_genesis(get_latest=False):
     genpath = os.path.join(os.environ['HOME'], 'genesis')
     os.mkdir(genpath)
     with working_dir(genpath):
-        print co(['wget',
-                  'https://github.com/borismarin/genesis2.4gamma/archive/master.zip'])
-        print co(['unzip', 'master.zip'])
-        print co(['ls', '-la', 'genesis2.4gamma-master'])
+        print(co(['wget',
+                  'https://github.com/borismarin/genesis2.4gamma/archive/master.zip']))
+        print(co(['unzip', 'master.zip']))
+        print(co(['ls', '-la', 'genesis2.4gamma-master']))
         os.chdir('genesis2.4gamma-master/src')
-        print co(['./configure'])
-        print co(['make'])
+        print(co(['./configure']))
+        print(co(['make']))
         open(os.path.join(os.environ['HOME'], '.simrc'), 'w').write(simrc)
 
 

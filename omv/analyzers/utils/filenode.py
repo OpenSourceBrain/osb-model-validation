@@ -1,4 +1,4 @@
-from timeseries import load_data_file
+from omv.analyzers.utils.timeseries import load_data_file
 from os.path import join, getmtime
 from os.path import exists as os_exists
 

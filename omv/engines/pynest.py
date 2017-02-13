@@ -1,10 +1,10 @@
 import os
 import subprocess as sp
 
-from ..common.inout import inform, trim_path, check_output, is_verbose
-from engine import OMVEngine, EngineExecutionError
+from omv.common.inout import inform, trim_path, check_output, is_verbose
+from omv.engines.engine import OMVEngine, EngineExecutionError
 
-from nestsli import NestEngine
+from omv.engines.nestsli import NestEngine
 
 
 class PyNestEngine(OMVEngine):

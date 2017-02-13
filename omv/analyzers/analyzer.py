@@ -1,5 +1,5 @@
-import utils.timeseries as ts
-from ..common.inout import inform
+from omv.analyzers.utils.timeseries import *
+from omv.common.inout import inform
 
 
 class OMVAnalyzer(object):
@@ -53,10 +53,10 @@ class OMVAnalyzer(object):
         except (TypeError, KeyError):  # observable can be None
             tolerance = 1e-1
 
-        are_close, best_tol = ts.compare_arrays((obs, exp), tolerance)
+        are_close, best_tol = compare_arrays((obs, exp), tolerance)
 
         if not are_close:
-	    pretty_obs, pretty_exp = ts.pretty_print_copypaste(obs,exp)
+            pretty_obs, pretty_exp = pretty_print_copypaste(obs,exp)
             inform("Comparison of \n\
                     (observed data): %s\n\
                     and\n\

@@ -1,8 +1,9 @@
-from engines import OMVEngines
-from engines.engine import EngineInstallationError, EngineExecutionError
-from omt_mep_parser import OMVTestParser
-from common.inout import inform, check, trim_path
-from tally import Tallyman
+from omv.engines import OMVEngines
+from omv.engines.engine import EngineInstallationError, EngineExecutionError
+from omv.omt_mep_parser import OMVTestParser
+from omv.common.inout import inform, check, trim_path
+from omv.tally import Tallyman
+import sys
 
 
 def parse_omt(omt_path, do_not_run=False):
@@ -14,7 +15,7 @@ def parse_omt(omt_path, do_not_run=False):
            underline='=', center=False)
     
     mepomt = OMVTestParser(omt_path)
-    if not OMVEngines.has_key(mepomt.engine):
+    if not mepomt.engine in OMVEngines:
         inform("Error! Unrecognised engine: %s (try running: omv list-engines)"%mepomt.engine)
         exit(1)
     engine = OMVEngines[mepomt.engine](mepomt.modelpath, do_not_run)
@@ -34,7 +35,10 @@ def parse_omt(omt_path, do_not_run=False):
                 inform('{:<30}{:^20}'.format('Observable', 'Test Passed'),
                        underline='-', indent=3)
                 for rn, rv in results.iteritems():
-                    inform(u'{:<30}{:^20}'.format(rn, check(rv)), indent=3)
+                    if sys.version_info >= (3,0):
+                        inform('{:<30}{:^20}'.format(rn, check(rv)), indent=3)
+                    else:
+                        inform(u'{:<30}{:^20}'.format(rn, check(rv)), indent=3)
                 tally.add_experiment(exp, results)
 
         except (EngineInstallationError, EngineExecutionError):

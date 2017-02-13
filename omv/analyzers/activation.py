@@ -1,7 +1,7 @@
-from analyzer import OMVAnalyzer
-from utils import timeseries as ts
-from utils import filenode as fn
-from ..common.inout import inform
+from omv.analyzers.analyzer import OMVAnalyzer
+from omv.analyzers.utils import timeseries as ts
+from omv.analyzers.utils import filenode as fn
+from omv.common.inout import inform
 
 
 class ActivationVariableAnalyzer(OMVAnalyzer):

@@ -3,7 +3,7 @@ from os.path import splitext, basename, normpath
 
 def walk_testdir(root, validator):
     for f in glob.glob(root + '/test/*.yaml'):
-        print 'found test document', f
+        print('found test document', f)
         fname = splitext(basename(f))[0]
         try:
             target = fname[:fname.rindex('.')]
@@ -11,9 +11,9 @@ def walk_testdir(root, validator):
             target = fname
 
         schema_src = normpath(''.join([root, '/', target , '.yaml']))
-        print 'using schema', schema_src
+        print('using schema', schema_src)
         assert validator.validate(schema_src, f)
-        print 'valid!\n'
+        print('valid!\n')
 
 def test_base():
     from ..validation.rx_validator import RXSchemaValidator as v

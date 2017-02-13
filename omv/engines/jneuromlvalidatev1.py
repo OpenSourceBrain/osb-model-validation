@@ -1,10 +1,10 @@
 import os
 import subprocess as sp
 
-from jneuroml import JNeuroMLEngine, EngineExecutionError
-from jneuromlvalidate import resolve_paths
+from omv.engines.jneuroml import JNeuroMLEngine, EngineExecutionError
+from omv.engines.jneuromlvalidate import resolve_paths
 
-from ..common.inout import inform
+from omv.common.inout import inform
 
 
 class JNeuroMLValidateV1Engine(JNeuroMLEngine):

@@ -1,8 +1,8 @@
 import os
 import subprocess as sp
 
-from jneuroml import JNeuroMLEngine, EngineExecutionError
-from ..common.inout import inform
+from omv.engines.jneuroml import JNeuroMLEngine, EngineExecutionError
+from omv.common.inout import inform
 
 # Make explicit list from: '*.nml myfile.xml' etc.
 def resolve_paths(path_s):

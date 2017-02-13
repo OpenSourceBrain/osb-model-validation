@@ -1,5 +1,5 @@
-from analyzer import OMVAnalyzer
-from ..common.inout import inform
+from omv.analyzers.analyzer import OMVAnalyzer
+from omv.common.inout import inform
 
 
 class DryRunAnalyzer(OMVAnalyzer):

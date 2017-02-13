@@ -1,8 +1,8 @@
 import os
 import subprocess as sp
 
-from ..common.inout import inform, trim_path, check_output, is_verbose
-from engine import OMVEngine, EngineExecutionError
+from omv.common.inout import inform, trim_path, check_output, is_verbose
+from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
 class Brian1Engine(OMVEngine):

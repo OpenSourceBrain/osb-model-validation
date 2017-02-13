@@ -1,8 +1,8 @@
 import os
 import subprocess as sp
 
-from ..common.inout import inform, trim_path, check_output
-from engine import OMVEngine, EngineExecutionError
+from omv.common.inout import inform, trim_path, check_output
+from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
 class Brian2Engine(OMVEngine):
@@ -14,7 +14,7 @@ class Brian2Engine(OMVEngine):
         ret = True
         try:
             import brian2
-            print brian2.__file__
+            print(brian2.__file__)
             inform("Brian2 version %s is correctly installed..." % brian2.__version__, indent=2)
             
         except Exception as err:

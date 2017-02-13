@@ -1,13 +1,13 @@
 
 import subprocess as sp
 from textwrap import dedent
-from utils.wdir import working_dir
+from omv.engines.utils.wdir import working_dir
 from os.path import dirname
 
-from neuron_ import NeuronEngine
+from omv.engines.neuron_ import NeuronEngine
 
-from ..common.inout import inform, is_verbose
-from engine import EngineExecutionError
+from omv.common.inout import inform, is_verbose
+from omv.engines.engine import EngineExecutionError
 
 
 class PyNRNEngine(NeuronEngine):

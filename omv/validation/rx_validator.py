@@ -7,7 +7,7 @@ class RXSchemaValidator(object):
         
     def generate_schema(self, schema_src):
         schema = self.parse_yaml_file(schema_src)
-        print 'generating schema from', schema
+        print('generating schema from'+ schema)
         return self.rx.make_schema(schema) 
 
     def parse_yaml_file(self, fname):
@@ -17,7 +17,7 @@ class RXSchemaValidator(object):
         
     def validate(self, schema_src, doc_src):
         doc = self.parse_yaml_file(doc_src)
-        print 'validating document', doc
+        print('validating document'+ doc)
         return self.generate_schema(schema_src).check(doc)
 
 if __name__ == '__main__':
@@ -25,9 +25,9 @@ if __name__ == '__main__':
     try:
         schema_src, doc_src = sys.argv[1:]
     except:
-        print 'usage: validate_rx.py schema.yaml document.yaml'
+        print('usage: validate_rx.py schema.yaml document.yaml')
         sys.exit(1)
 
 
     s = RXSchemaValidator()
-    print s.validate(schema_src, doc_src)
+    print(s.validate(schema_src, doc_src))

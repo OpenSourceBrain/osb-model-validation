@@ -1,11 +1,11 @@
-from spikes import SpikeAnalyzer
-from dryrun import DryRunAnalyzer
-from resting import RestingAnalyzer
-from morphology import MorphologyAnalyzer
-from temperature import TemperatureAnalyzer
-from activation import ActivationVariableAnalyzer
-from input_resistance import InputResAnalyzer
-from timeseries import TimeSeriesAnalyzer
+from omv.analyzers.spikes import SpikeAnalyzer
+from omv.analyzers.dryrun import DryRunAnalyzer
+from omv.analyzers.resting import RestingAnalyzer
+from omv.analyzers.morphology import MorphologyAnalyzer
+from omv.analyzers.temperature import TemperatureAnalyzer
+from omv.analyzers.activation import ActivationVariableAnalyzer
+from omv.analyzers.input_resistance import InputResAnalyzer
+from omv.analyzers.timeseries import TimeSeriesAnalyzer
 
 OMVAnalyzers = {
     'spike times' : SpikeAnalyzer,

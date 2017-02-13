@@ -1,13 +1,13 @@
 import os
 import subprocess as sp
 
-from jneuroml import JNeuroMLEngine
-from pynnneuron import PyNNNRNEngine
-from neuron_ import NeuronEngine
-from pynn import PyNNEngine
+from omv.engines.jneuroml import JNeuroMLEngine
+from omv.engines.pynnneuron import PyNNNRNEngine
+from omv.engines.neuron_ import NeuronEngine
+from omv.engines.pynn import PyNNEngine
 
-from ..common.inout import inform, trim_path, check_output, is_verbose
-from engine import EngineExecutionError
+from omv.common.inout import inform, trim_path, check_output, is_verbose
+from omv.engines.engine import EngineExecutionError
 
 
 class JNeuroMLPyNNNRNEngine(JNeuroMLEngine):

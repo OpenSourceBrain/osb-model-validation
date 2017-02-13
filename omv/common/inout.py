@@ -1,6 +1,7 @@
 import yaml
 from collections import deque
 import os
+import sys
 # import textwrap
 import subprocess as sp
 
@@ -9,6 +10,9 @@ __PROMPT__ = '[omv] '
 __INDENT__ = '  '
 __VERBOSITY__ = 0
 
+def set_verbosity(v):
+    global __VERBOSITY__
+    __VERBOSITY__ = v
 
 def omvify(x):
     # return textwrap.TextWrapper(initial_indent=__PROMPT__,
@@ -18,7 +22,10 @@ def omvify(x):
 
 
 def check(b):
-    tick = u'\u2714' if b else u'\u2718'
+    if sys.version_info >= (3,0):
+        tick = '\u2714' if b else '\u2718'
+    else:
+        tick = u'\u2714' if b else u'\u2718'
     return tick
 
 
@@ -45,7 +52,7 @@ def inform(msg, pars=None, indent=0, underline=False,
     else:
         p = pars if pars else ''
         #print("msg is %s"%msg.__class__)
-        msgstr = msg.encode('utf-8') if isinstance(msg, unicode) else str(msg)
+        msgstr = msg.encode('utf-8') if sys.version_info[0]==2 and isinstance(msg, unicode) else str(msg)
         infostr = msgstr + str(p)
         block = deque([infostr])
 
@@ -59,7 +66,7 @@ def inform(msg, pars=None, indent=0, underline=False,
     if indent:
         block = map(lambda l: __INDENT__ * indent + l, block)
           
-    print '\n'.join(map(omvify, block))
+    print('\n'.join(map(omvify, block)))
 
 
 def load_yaml(fname):

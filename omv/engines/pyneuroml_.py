@@ -2,7 +2,7 @@ import os
 import subprocess as sp
 
 from omv.common.inout import inform, trim_path, is_verbose, check_output as co
-from engine import OMVEngine, EngineExecutionError
+from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
 class PyNeuroMLEngine(OMVEngine):

@@ -1,10 +1,10 @@
 import os
 import subprocess as sp
 
-from jneuromlnetpyne import JNeuroMLNetPyNEEngine
+from omv.engines.jneuromlnetpyne import JNeuroMLNetPyNEEngine
 
-from ..common.inout import inform, trim_path, check_output
-from engine import EngineExecutionError
+from omv.common.inout import inform, trim_path, check_output
+from omv.engines.engine import EngineExecutionError
 
 '''
     A temporary engine for testing running jNeuroML_NetPyNE models in parallel mode.

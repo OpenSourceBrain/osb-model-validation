@@ -1,6 +1,6 @@
 import pip
 
-from getbrian1 import check_scipy_dev
+from omv.engines.getbrian1 import check_scipy_dev
 
 def install_brian2():
     try:

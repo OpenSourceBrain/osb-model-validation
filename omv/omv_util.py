@@ -22,20 +22,21 @@
     -y            Auto-select default options (non-interactive mode)
 """
 from docopt import docopt
-from find_tests import test_all, test_one
-from validation import validate_mep
-from autogen import autogen
-from engines import OMVEngines
+from omv.find_tests import test_all, test_one
+from omv.validation import validate_mep
+from omv.autogen import autogen
+from omv.engines import OMVEngines
 import os
 
-import common.inout
+from omv.common.inout import set_verbosity
+
 
 def main():
     arguments = docopt(__doc__, version='OpenSourceBrain Model Validation 0.0')
     set_env_vars()
 
     if arguments['--verbose']:
-        common.inout.__VERBOSITY__ = 1
+        set_verbosity(1)
 
     if arguments['test']:
         try:
@@ -74,7 +75,7 @@ def main():
         exit(1)
 
     elif arguments['install']:
-        common.inout.__VERBOSITY__ = 1
+        set_verbosity(1)
         engine = arguments['<engine>']
         if engine not in OMVEngines:
             print('Engine ' + engine + ' unknown!')

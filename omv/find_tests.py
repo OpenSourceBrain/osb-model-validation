@@ -1,8 +1,8 @@
 from os import environ, getcwd
 from pathlib import Path
-from parse_omt import parse_omt
-from common.inout import load_yaml, inform, trim_path, is_verbose
-from tally import TallyHolder
+from omv.parse_omt import parse_omt
+from omv.common.inout import load_yaml, inform, trim_path, is_verbose
+from omv.tally import TallyHolder
 
 
 def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):

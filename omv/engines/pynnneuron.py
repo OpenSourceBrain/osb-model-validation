@@ -1,11 +1,11 @@
 import os
 import subprocess as sp
 
-from neuron_ import NeuronEngine
-from pynn import PyNNEngine
+from omv.engines.neuron_ import NeuronEngine
+from omv.engines.pynn import PyNNEngine
 
-from ..common.inout import inform, trim_path, check_output, is_verbose
-from engine import OMVEngine, EngineExecutionError
+from omv.common.inout import inform, trim_path, check_output, is_verbose
+from omv.engines.engine import EngineExecutionError
 
 
 class PyNNNRNEngine(PyNNEngine):
@@ -43,12 +43,12 @@ class PyNNNRNEngine(PyNNEngine):
         pynn_mod_dir = os.path.dirname(pyNN.__file__)+'/neuron/nmodl/'
         inform("Attempting to compile PyNN mod files for standard models in %s..."%pynn_mod_dir, indent=2, verbosity =1)
         
-        print check_output(['ls', pynn_mod_dir], cwd=pynn_mod_dir)
+        print(check_output(['ls', pynn_mod_dir], cwd=pynn_mod_dir))
         
         environment_vars, path = NeuronEngine.get_nrn_environment()
         inform("Using NEURON with env %s at %s..."%(environment_vars, path), indent=2, verbosity =1)
         
-        print check_output([environment_vars['NEURON_HOME']+'/bin/nrnivmodl'], cwd=pynn_mod_dir)
+        print(check_output([environment_vars['NEURON_HOME']+'/bin/nrnivmodl'], cwd=pynn_mod_dir))
 
 
     def run(self):

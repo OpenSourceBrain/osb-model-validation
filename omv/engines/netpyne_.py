@@ -1,11 +1,11 @@
 import os
 import subprocess as sp
 
-from pyneuron import PyNRNEngine
-from pyneuroml_ import PyNeuroMLEngine
+from omv.engines.pyneuron import PyNRNEngine
+from omv.engines.pyneuroml_ import PyNeuroMLEngine
 
 from omv.common.inout import inform, trim_path, check_output, is_verbose
-from engine import OMVEngine, EngineExecutionError
+from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
 class NetPyNEEngine(OMVEngine):
@@ -64,7 +64,7 @@ class NetPyNEEngine(OMVEngine):
         environment_vars, path = PyNRNEngine.get_nrn_environment()
         inform("Using NEURON with env %s at %s..."%(environment_vars, path), indent=2, verbosity =1)
         
-        #print check_output([environment_vars['NEURON_HOME']+'/bin/nrnivmodl'], cwd=pynn_mod_dir)
+        #print(check_output([environment_vars['NEURON_HOME']+'/bin/nrnivmodl'], cwd=pynn_mod_dir)
 
 
     def run(self):

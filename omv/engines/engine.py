@@ -1,6 +1,6 @@
 from os.path import realpath
 from os import environ
-from ..common.inout import inform
+from omv.common.inout import inform
 
 
 class EngineInstallationError(Exception):

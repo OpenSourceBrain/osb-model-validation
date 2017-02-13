@@ -1,8 +1,8 @@
 import os
 import subprocess as sp
 
-from ..common.inout import inform, trim_path
-from engine import OMVEngine, EngineExecutionError
+from omv.common.inout import inform, trim_path
+from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
 class PyLemsEngine(OMVEngine):

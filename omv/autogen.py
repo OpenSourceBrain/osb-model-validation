@@ -14,7 +14,7 @@ yaml.add_representer(UnsortableOrderedDict, yaml.representer.SafeRepresenter.rep
 
 def read_option(options, default=0):
     for i, opt in enumerate(options):
-        print '\t\t', i, opt
+        print('\t\t', i, opt)
     opt = None
     while opt is None:
         try:
@@ -22,9 +22,9 @@ def read_option(options, default=0):
                 raw_input('Select option number [default: %s]: ' % default))
             opt = options[sel]
         except IndexError:
-            print 'invalid index!'
+            print('invalid index!')
         except ValueError:
-            print 'selecting default: ', default
+            print('selecting default: '+ default)
             opt = options[default]
     return opt
 
@@ -37,12 +37,12 @@ def find_targets(auto=False):
         if isdir(d):
             engine = dirs_to_engines_exts[d]['engine']
             ext = dirs_to_engines_exts[d]['extension']
-            print 'Default directory for {0} engine found.'.format(engine)
-            print '  Will look for scripts with {0} extension'.format(ext)
+            print('Default directory for {0} engine found.'.format(engine))
+            print('  Will look for scripts with {0} extension'.format(ext))
             scripts = glob(join(d, '*' + ext))
             if scripts:
                 if auto:
-                    print 'selecting default: ', scripts[0]
+                    print('selecting default: ', scripts[0])
                     script = scripts[0]
                 else:
                     script = read_option(scripts)
@@ -51,8 +51,8 @@ def find_targets(auto=False):
 
 
 def create_dryrun(engine, target):
-    print ' '.join(('Generating dry run test for file', target,
-                    ', using engine', engine))
+    print(' '.join(('Generating dry run test for file', target,
+                    ', using engine', engine)))
     dirname, fname = split(target)
     omt = {'target': fname, 'engine': engine}
     with open(target + '.dry.omt', 'w') as fh:
@@ -85,7 +85,7 @@ def autogen(auto=False, dry=True):
                 create_dryrun(engine, target)
         generate_dottravis(targets)
     else:
-        print 'No target scripts found!'
+        print('No target scripts found!')
 
 
 if __name__ == '__main__':

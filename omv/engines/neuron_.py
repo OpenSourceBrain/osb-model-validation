@@ -3,12 +3,10 @@ from glob import glob
 import platform
 import subprocess as sp
 from textwrap import dedent
-from utils.wdir import working_dir
-from engine import OMVEngine, EngineExecutionError
+from omv.engines.utils.wdir import working_dir
+from omv.engines.engine import OMVEngine, EngineExecutionError
 from os.path import dirname
-from omv.common.inout import check_output
-
-from ..common.inout import inform, is_verbose
+from omv.common.inout import check_output, inform, is_verbose
 
 
 class NeuronEngine(OMVEngine):

@@ -1,6 +1,6 @@
-from experiment import OMVExperiment
+from omv.experiment import OMVExperiment
 from os.path import join, dirname
-from common.inout import load_yaml
+from omv.common.inout import load_yaml
 
 
 class OMVParseError(BaseException):

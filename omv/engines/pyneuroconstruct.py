@@ -1,9 +1,9 @@
 import os
 
-from utils.wdir import working_dir
+from omv.engines.utils.wdir import working_dir
 
-from ..common.inout import inform, check_output as co, trim_path
-from engine import OMVEngine
+from omv.common.inout import inform, check_output as co, trim_path
+from omv.engines.engine import OMVEngine
 
 
 class PyneuroConstructEngine(OMVEngine):
@@ -28,7 +28,7 @@ class PyneuroConstructEngine(OMVEngine):
         ret = True
         try:
             with working_dir(PyneuroConstructEngine.get_nC_environment()['NC_HOME']):
-                print co(['./nC.sh','-v'])
+                print(co(['./nC.sh','-v']))
         except Exception as err:
             inform("Couldn't execute neuroConstruct:", err, indent=1)
             ret = False

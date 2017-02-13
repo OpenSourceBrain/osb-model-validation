@@ -1,10 +1,10 @@
 import os
 import subprocess as sp
 
-from pyneuron import PyNRNEngine
-from netpyne_ import NetPyNEEngine
+from omv.engines.pyneuron import PyNRNEngine
+from omv.engines.netpyne_ import NetPyNEEngine
 
-from engine import EngineExecutionError
+from omv.engines.engine import EngineExecutionError
 
 '''
     A temporary engine for testing running NetPyNE models in parallel mode.

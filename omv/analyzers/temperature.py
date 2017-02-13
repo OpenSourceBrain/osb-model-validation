@@ -1,4 +1,4 @@
-from analyzer import OMVAnalyzer
+from omv.analyzers.analyzer import OMVAnalyzer
 
 
 class TemperatureAnalyzer(OMVAnalyzer):

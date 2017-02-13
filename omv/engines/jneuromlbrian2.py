@@ -1,10 +1,10 @@
 import os
 import subprocess as sp
 
-from jneuroml import JNeuroMLEngine
-from brian2_ import Brian2Engine
-from ..common.inout import inform, trim_path, check_output, is_verbose
-from engine import EngineExecutionError
+from omv.engines.jneuroml import JNeuroMLEngine
+from omv.engines.brian2_ import Brian2Engine
+from omv.common.inout import inform, trim_path, check_output, is_verbose
+from omv.engines.engine import EngineExecutionError
 
 
 class JNeuroMLBrian2Engine(JNeuroMLEngine):

@@ -1,4 +1,4 @@
-from analyzers import OMVAnalyzers
+from omv.analyzers import OMVAnalyzers
 
 
 class OMVExperiment(object):

@@ -3,9 +3,9 @@ import os
 import subprocess as sp
 from tempfile import NamedTemporaryFile
 
-from engine import OMVEngine, EngineExecutionError
-from utils.wdir import working_dir
-from ..common.inout import inform
+from omv.engines.engine import OMVEngine, EngineExecutionError
+from omv.engines.utils.wdir import working_dir
+from omv.common.inout import inform
 
 
 class GenesisEngine(OMVEngine):
