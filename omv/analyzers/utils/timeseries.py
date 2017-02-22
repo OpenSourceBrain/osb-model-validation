@@ -107,9 +107,11 @@ def pretty_print_copypaste(obs, exp):
         pretty_obs = [float(el) for el in ob]
         pretty_exp = [float(el) for el in ex]
         suggest_tol = len(ob) == len(ex)
-    except TypeError: # obs, exp can be rank > 1. Not sure if we would ever c&p those
+        
+    except Exception as e: # obs, exp can be rank > 1. Not sure if we would ever c&p those
         pretty_obs, pretty_exp = (str(ob), str(ex))
-        return pretty_obs, pretty_exp
+        
+    return pretty_obs, pretty_exp
 
 
 def test_detect_spikes():
