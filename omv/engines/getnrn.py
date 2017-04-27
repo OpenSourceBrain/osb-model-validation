@@ -18,9 +18,9 @@ def install_neuron(get_latest=False):
             os.chdir('nrn')
             print(co(['./build.sh']))
         else:
-            print(co(['wget', 'http://www.neuron.yale.edu/ftp/neuron/versions/v7.3/nrn-7.3.tar.gz']))
-            print(co(['tar', 'xzvf', 'nrn-7.3.tar.gz']))
-            print(co(['mv', 'nrn-7.3', 'nrn']))
+            print(co(['wget', 'http://www.neuron.yale.edu/ftp/neuron/versions/v7.4/nrn-7.4.tar.gz']))
+            print(co(['tar', 'xzvf', 'nrn-7.4.tar.gz']))
+            print(co(['mv', 'nrn-7.4', 'nrn']))
             os.chdir('nrn')
             
         path = os.getcwd()
