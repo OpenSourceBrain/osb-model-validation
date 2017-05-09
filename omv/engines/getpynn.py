@@ -17,7 +17,7 @@ def install_pynn():
         path = os.path.join(install_root,'PyNN')
 
         with working_dir(path):
-            check_output(['git','checkout','tags/0.8.3'])
+            check_output(['git','checkout','tags/0.8.2'])
             check_output(['python', 'setup.py', 'install'])
         import pyNN
         m = 'Successfully installed pyNN...'
