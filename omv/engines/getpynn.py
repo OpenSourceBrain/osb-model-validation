@@ -7,7 +7,7 @@ def install_pynn():
     try:
         
         pip.main(['install', 'lazyarray'])  # This should ideally be automatically installed with PyNN...
-        pip.main(['install', 'neo==0.4.1'])  # This should ideally be automatically installed with PyNN...
+        pip.main(['install', 'neo==0.5.1'])  # This should ideally be automatically installed with PyNN...
 
         install_root = os.environ['HOME']
 
@@ -17,7 +17,7 @@ def install_pynn():
         path = os.path.join(install_root,'PyNN')
 
         with working_dir(path):
-            check_output(['git','checkout','tags/0.8.2'])
+            check_output(['git','checkout','tags/0.9.0'])
             check_output(['python', 'setup.py', 'install'])
         import pyNN
         m = 'Successfully installed pyNN...'

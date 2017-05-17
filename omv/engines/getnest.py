@@ -12,7 +12,7 @@ def install_nest():
     os.mkdir(nestpath)
     
     with working_dir(nestpath):
-        version='2.10.0'
+        version='2.12.0'
         check_output(['wget', 'https://github.com/nest/nest-simulator/releases/download/v%s/nest-%s.tar.gz'%(version,version)])
         #check_output(['cp', '/home/padraig/temp/nest-2.4.2.tar.gz', '.'])
         check_output(['tar', 'xzvf', 'nest-%s.tar.gz'%version])
