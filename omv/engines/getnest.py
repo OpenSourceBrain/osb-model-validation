@@ -13,11 +13,13 @@ def install_nest():
     
     with working_dir(nestpath):
         version='2.12.0'
+        version='2.10.0'
         check_output(['wget', 'https://github.com/nest/nest-simulator/releases/download/v%s/nest-%s.tar.gz'%(version,version)])
-        #check_output(['cp', '/home/padraig/temp/nest-2.4.2.tar.gz', '.'])
+        
         check_output(['tar', 'xzvf', 'nest-%s.tar.gz'%version])
         check_output(['mv', 'nest-%s'%version, 'nest'], cwd=nestpath)
             
+        # TODO: This will have to be updated to Cmake for 2.12.0...
         check_output(["./configure", "--prefix=%s"%(nestpath2)], cwd=nestpath2)
         check_output(['make'], cwd=nestpath2)
         check_output(['make', 'install'], cwd=nestpath2)
