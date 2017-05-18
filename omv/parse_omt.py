@@ -28,6 +28,7 @@ def parse_omt(omt_path, do_not_run=False):
     if not do_not_run:
         try:
             engine.run()
+            some_failed = False
             for exp in experiments:
                 inform('Running checks for experiment: ', exp.name, indent=1)
                 inform('')
@@ -39,7 +40,16 @@ def parse_omt(omt_path, do_not_run=False):
                         inform('{:<30}{:^20}'.format(rn, check(rv)), indent=3)
                     else:
                         inform(u'{:<30}{:^20}'.format(rn, check(rv)), indent=3)
+                    if not rv:
+                        some_failed = True
                 tally.add_experiment(exp, results)
+
+            if some_failed:
+                inform("+++++++++++++++++++++ Error info ++++++++++++++++++", indent=3)
+                inform(" Return code: %s"%engine.returncode, indent=3)
+                if hasattr(engine,'stdout'):
+                    inform(" Output: %s"%engine.stdout.replace('\n','\n       '), indent=3)
+                inform("+++++++++++++++++++++++++++++++++++++++++++++++++++", indent=3)
 
         except (EngineInstallationError, EngineExecutionError):
             # TODO: serialize exception info
