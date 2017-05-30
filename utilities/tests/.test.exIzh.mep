@@ -3,4 +3,4 @@ system: Test ExIzh
 experiments:
     v:
         expected:
-            spike times: [47.03, 120.39, 196.433, 272.382, 348.333, 424.285, 500.236]
+            spike times: [47.03, 120.49, 196.609, 272.638, 348.67, 424.701, 500.733]
