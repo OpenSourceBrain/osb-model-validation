@@ -67,5 +67,5 @@ class OMVAnalyzer(object):
                 inform("A better tolerance to try is: ", best_tol, indent=1)
         else:
             if best_tol and best_tol < tolerance:
-                inform("Passed, but an even better tolerance might be: %f, as opposed to: %f" % (best_tol, tolerance), indent=3, verbosity=1)
+                inform("Passed, but an even better tolerance might be: %s, as opposed to: %s (diff: %s)" % (best_tol, tolerance,(tolerance-best_tol)), indent=3, verbosity=1)
         return are_close
