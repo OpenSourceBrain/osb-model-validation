@@ -7,6 +7,7 @@ from omv.engines.jneuromlnrn import JNeuroMLNRNEngine
 from omv.engines.jneuromlpynnnrn import JNeuroMLPyNNNRNEngine
 from omv.engines.jneuromlnetpyne import JNeuroMLNetPyNEEngine
 from omv.engines.jneuromlnetpyne_np4 import JNeuroMLNetPyNENP4Engine
+from omv.engines.jneuromlnetpyne_np2 import JNeuroMLNetPyNENP2Engine
 from omv.engines.jneuromlbrian import JNeuroMLBrianEngine
 from omv.engines.jneuromlbrian2 import JNeuroMLBrian2Engine
 from omv.engines.jneuromlvalidate import JNeuroMLValidateEngine
@@ -27,6 +28,7 @@ from omv.engines.pynnnest import PyNNNestEngine
 from omv.engines.octave import OctaveEngine
 from omv.engines.netpyne_ import NetPyNEEngine
 from omv.engines.netpyne__np4 import NetPyNENP4Engine
+from omv.engines.netpyne__np2 import NetPyNENP2Engine
 from omv.engines.pyneuroconstruct import PyneuroConstructEngine
 from omv.engines.pyneuroml_ import PyNeuroMLEngine
 
