@@ -4,6 +4,7 @@ import subprocess as sp
 from omv.engines.pyneuron import PyNRNEngine
 from omv.engines.netpyne_ import NetPyNEEngine
 
+from omv.common.inout import inform, trim_path, check_output
 from omv.engines.engine import EngineExecutionError
 
 '''
