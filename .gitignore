@@ -101,3 +101,4 @@ utilities/local_test
 /utilities/tests/TestProject/generated*
 /utilities/tests/TestProject/simulations
 /utilities/tests/lems/simp.dat
+/utilities/coreprojects
