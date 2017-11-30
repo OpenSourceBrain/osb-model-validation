@@ -25,6 +25,7 @@ from omv.engines.pynnneuron import PyNNNRNEngine
 from omv.engines.pyneuron import PyNRNEngine
 from omv.engines.pynnbrian1 import PyNNBrian1Engine
 from omv.engines.pynnnest import PyNNNestEngine
+from omv.engines.pynnneuroml import PyNNNeuroMLEngine
 from omv.engines.octave import OctaveEngine
 from omv.engines.netpyne_ import NetPyNEEngine
 from omv.engines.netpyne__np4 import NetPyNENP4Engine

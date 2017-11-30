@@ -171,6 +171,7 @@ standardGHProject 'muscle_model' 'coreprojects' 'openworm'
 standardGHProject 'PyloricNetwork' 'coreprojects'
 
 standardGHProject 'NeuroMorpho' 'coreprojects'
+standardGHProject 'MouseLightShowcase' 'coreprojects'
 
 cd $startDir
 
