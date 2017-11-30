@@ -37,6 +37,7 @@ env:
     - OMV_ENGINE=PyNN_NEURON
     - OMV_ENGINE=PyNN_Brian1
     - OMV_ENGINE=PyNN_Nest
+    - OMV_ENGINE=PyNN_NeuroML
     - OMV_ENGINE=NetPyNE
     - OMV_ENGINE=PyLEMS
     - OMV_ENGINE=PyLEMS_NeuroML2
