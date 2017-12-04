@@ -21,5 +21,5 @@ def install_moose():
         print(check_output(['pwd']))
         print(check_output(['python', 'setup.py', 'install']))
 
-    m = 'Successfully installed NetPyNE...' 
+    m = 'Successfully installed Moose...' 
         
