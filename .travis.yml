@@ -15,6 +15,11 @@ addons:
         # Requirements for NetPyNE & libNeuroML
     - python-tk
     - python-lxml
+        # Requirements for Moose
+    - python-dev
+    - libhdf5-dev
+    - libgsl0-dev 
+    - g++
     
     
 language: python
