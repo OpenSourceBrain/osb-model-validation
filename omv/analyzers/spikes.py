@@ -28,7 +28,13 @@ class SpikeAnalyzer(OMVAnalyzer):
                        % self.f.filename, indent=2, verbosity=0, underline='-')
                 spikes = None
             elif self.f.has_changed():
-                tv = self.f.get_timeseries()
+                try:
+                    tv = self.f.get_timeseries()
+                except Exception as e:
+                    inform('ERROR! Could not read spikes from datafile %s (%s)!'
+                       % (self.f.filename,e), indent=2, verbosity=0, underline='-')
+                    spikes = []
+                    return spikes
                 inform('Reading timeseries from: ', self.f,
                        indent=1, verbosity=1)
                 if 'spike detection' in to_parse:

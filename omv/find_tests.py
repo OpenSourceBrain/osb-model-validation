@@ -40,7 +40,9 @@ def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
         inform("%i test(s) run" % len(tallies),
                overline='-', underline='-', center=True)
         inform('')
-        if all(results):
+        if len(results)==0:
+            inform("No tests found!", underline='=', center=True)
+        elif all(results):
             inform("All tests passing!", underline='=', center=True)
         else:
             failed = [trim_path(t.omt) for t in tallies if not t.all_passed()]
@@ -49,6 +51,7 @@ def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
         if is_verbose():
             print('\n'+th.summary()+'\n')
 
+        assert len(results)>0
         assert all(results)
 
 
