@@ -102,3 +102,7 @@ utilities/local_test
 /utilities/tests/TestProject/simulations
 /utilities/tests/lems/simp.dat
 /utilities/coreprojects
+/utilities/tests/LEMS_NML2_Ex5_DetCell_moose.py
+/utilities/tests/LEMS_NML2_Ex5_DetCell_moose.py_main.json
+/utilities/tests/hhcell.cell.json
+/utilities/tests/pulseGen1.input.json

@@ -10,6 +10,7 @@ from omv.engines.jneuromlnetpyne_np4 import JNeuroMLNetPyNENP4Engine
 from omv.engines.jneuromlnetpyne_np2 import JNeuroMLNetPyNENP2Engine
 from omv.engines.jneuromlbrian import JNeuroMLBrianEngine
 from omv.engines.jneuromlbrian2 import JNeuroMLBrian2Engine
+from omv.engines.jneuromlmoose import JNeuroMLMooseEngine
 from omv.engines.jneuromlvalidate import JNeuroMLValidateEngine
 from omv.engines.jneuromlvalidatev1 import JNeuroMLValidateV1Engine
 from omv.engines.jlems import JLemsEngine
@@ -20,6 +21,7 @@ from omv.engines.brian1 import Brian1Engine
 from omv.engines.brian2_ import Brian2Engine
 from omv.engines.nestsli import NestEngine
 from omv.engines.pynest import PyNestEngine
+from omv.engines.moose_ import MooseEngine
 from omv.engines.pynn import PyNNEngine
 from omv.engines.pynnneuron import PyNNNRNEngine
 from omv.engines.pyneuron import PyNRNEngine

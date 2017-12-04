@@ -140,6 +140,9 @@ def main():
             elif eng == 'genesis':
                 from engines.getgenesis import install_genesis
                 install_genesis()
+            elif eng == 'Moose':
+                from engines.getmoose import install_moose
+                install_moose()
             elif eng == 'NetPyNE':
                 from engines.getnetpyne import install_netpyne
                 install_netpyne()
