@@ -10,6 +10,7 @@ addons:
     - python-scipy 
     - python-matplotlib 
     - python-sympy
+    - cython
         # Requirements for Octave
     - octave
         # Requirements for NetPyNE & libNeuroML
