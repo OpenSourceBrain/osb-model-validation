@@ -152,6 +152,9 @@ def main():
             elif eng == 'Brian2':
                 from engines.getbrian2 import install_brian2
                 install_brian2()
+            elif eng == 'NEST':
+                from engines.getnest import install_nest
+                install_nest()
             elif eng == 'Py_neuroConstruct' or eng == 'neuroConstruct':
                 from engines.getneuroconstruct import install_neuroconstruct
                 install_neuroconstruct()

@@ -9,20 +9,25 @@ def install_nest():
     inform('Installing NEST', indent=2, verbosity=1)
     nestpath = os.path.join(os.environ['HOME'],'nest')
     nestpath2 = os.path.join(os.environ['HOME'],'nest/nest')
+    nestinstallpath = os.path.join(os.environ['HOME'],'nest/nest')
+    if os.environ.has_key('NEST_INSTALL_DIR'):
+            nestinstallpath = os.environ['NEST_INSTALL_DIR']+'/'
+            
+    inform('Installing NEST (src: %s), (tgt: %s)'%(nestpath, nestinstallpath), indent=2, verbosity=1)
     os.mkdir(nestpath)
     
     with working_dir(nestpath):
         version='2.12.0'
-        version='2.10.0'
+        #version='2.10.0'
         check_output(['wget', 'https://github.com/nest/nest-simulator/releases/download/v%s/nest-%s.tar.gz'%(version,version)])
         
         check_output(['tar', 'xzvf', 'nest-%s.tar.gz'%version])
         check_output(['mv', 'nest-%s'%version, 'nest'], cwd=nestpath)
             
-        # TODO: This will have to be updated to Cmake for 2.12.0...
-        check_output(["./configure", "--prefix=%s"%(nestpath2)], cwd=nestpath2)
-        check_output(['make'], cwd=nestpath2)
-        check_output(['make', 'install'], cwd=nestpath2)
+    with working_dir(nestpath2):
+        check_output(["cmake", "-DCMAKE_INSTALL_PREFIX:PATH=%s"%(nestinstallpath)])
+        check_output(['make'])
+        check_output(['make', 'install'])
         
 
 if __name__ == '__main__':
