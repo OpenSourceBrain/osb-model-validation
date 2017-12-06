@@ -19,13 +19,16 @@ def check_scipy_dev():
 
 
 def install_brian():
-    try:
-        check_scipy_dev()
-        pip.main(['install', 'brian'])
-        import brian
-        m = 'Successfully installed Brian...'
-    except Exception as e:
-        m = 'ERROR installing Brian: ' + str(e)
-    finally:
-        print(m)
-        
+    
+    install_root = os.environ['HOME']
+    
+    with working_dir(install_root):
+        check_output(['git', 'clone', 'https://github.com/brian-team/brian.git'])
+        inform('Successfully cloned Brian', indent=2, verbosity=1)
+    
+    path = os.path.join(install_root,'brian')
+    
+    with working_dir(path):
+        check_output(['git','checkout','master'])
+        check_output(['python', 'setup.py', 'install'])
+        inform('Successfully installed Brian', indent=2, verbosity=1)
