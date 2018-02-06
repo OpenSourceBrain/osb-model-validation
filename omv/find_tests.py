@@ -27,7 +27,12 @@ def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
                    for t in all_omts
                    if load_yaml(t)['engine'].lower() == only_this_engine.lower()]
     else:
-        tallies = [parse_omt(t, do_not_run) for t in all_omts]
+        tallies = []
+        for i in range(len(all_omts)):
+            t = all_omts[i]
+            inform('')
+            inform('  Test (%i/%i)'%(i+1,len(all_omts)))
+            tallies.append(parse_omt(t, do_not_run))
         
     tallies.sort()
         
@@ -35,7 +40,10 @@ def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
         for t in tallies:
             th.add(t)
 
-        results = [t.all_passed() for t in tallies]
+        results = []
+        for i in range(len(tallies)):
+            t = tallies[i]
+            results.append(t.all_passed())
         inform('')
         inform("%i test(s) run" % len(tallies),
                overline='-', underline='-', center=True)

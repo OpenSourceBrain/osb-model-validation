@@ -11,7 +11,7 @@ def parse_omt(omt_path, do_not_run=False):
     action = 'Running'
     if do_not_run:
         action = 'Checking'
-    inform(action+" tests defined in ", trim_path(omt_path),
+    inform(action+" the tests defined in ", trim_path(omt_path),
            underline='=', center=False)
     
     mepomt = OMVTestParser(omt_path)

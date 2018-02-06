@@ -42,15 +42,18 @@ if '-q' in sys.argv:
     ignores.append('granulecell')  # Slow...
     ignores.append('thalamocortical')  # Slow...
     ignores.append('cerebellum--cerebellar-golgi-cell--solinasetal-golgicell')  # Slow...
+    ignores.append('potjansdiesmann2014') 
+    ignores.append('nc_ca1')
 
 ignores.append('l23dendriticspikes')
+#ignores.append('izhikevichmodel')
 
 all_repos = {  }
 
 additional_repos = { 'NeuroML2':             GitHubRepository.create('https://github.com/NeuroML/NeuroML2') ,
                      'osb-model-validation': GitHubRepository.create('https://github.com/OpenSourceBrain/osb-model-validation') }
                      
-branches = { 'NeuroML2': 'development' }
+branches = { 'neuroml2': 'development', 'nc_ca1': 'development' }
 
 all_repos.update(additional_repos)
 
@@ -66,7 +69,7 @@ if __name__ == "__main__":
         try:
             project_num = int(sys.argv[1])
         except:
-            print "ignoring..."
+            print("ignoring...")
             
     all_projs = osb.get_projects(min_curation_level="None",
                                     limit=project_num)
@@ -150,12 +153,13 @@ if __name__ == "__main__":
             
         if test_it:
             target_dir = '%s/%s' % (test_dir, proj_id)
-            print co(['git', 'clone', str(github_repo.clone_url), target_dir])
+            print(co(['git', 'clone', str(github_repo.clone_url), target_dir]))
             
             with working_dir(target_dir):
-                if proj_id in branches.keys():
-                    print co(['git', 'checkout', branches[proj_id]])
-                print "Running 'omv all' on", target_dir
+                for key in branches.keys():
+                    if proj_id.lower() == key: 
+                        print(co(['git', 'checkout', branches[key]]))
+                print("Running 'omv all' on"+ target_dir)
                 test_all()
             passing_projects += 1
 
