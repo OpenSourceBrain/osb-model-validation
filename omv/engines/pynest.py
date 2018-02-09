@@ -52,7 +52,7 @@ class PyNestEngine(OMVEngine):
         
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
-            self.stdout = check_output(['python', self.modelpath],
+            self.stdout = check_output(['python', self.modelpath, '-nogui'],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
