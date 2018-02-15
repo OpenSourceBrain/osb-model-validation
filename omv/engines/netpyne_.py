@@ -13,7 +13,7 @@ class NetPyNEEngine(OMVEngine):
     name = "NetPyNE"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed(version, silent=False):
         if is_verbose():
             inform("Checking whether the engine %s has been installed correctly..." %
                    NetPyNEEngine.name, indent=1)
@@ -32,7 +32,8 @@ class NetPyNEEngine(OMVEngine):
             
         installed = ret and PyNRNEngine.is_installed(None) and PyNeuroMLEngine.is_installed(None)
         
-        inform("NetPyNE is_installed: %s"%ret, "", indent=1)
+        if not silent:
+            inform("NetPyNE is_installed: %s"%ret, "", indent=1)
         return installed
         
     @staticmethod

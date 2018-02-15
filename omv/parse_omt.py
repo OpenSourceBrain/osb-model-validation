@@ -35,7 +35,7 @@ def parse_omt(omt_path, do_not_run=False):
                 results = exp.check_all()
                 inform('{:<30}{:^20}'.format('Observable', 'Test Passed'),
                        underline='-', indent=3)
-                for rn, rv in results.iteritems():
+                for rn, rv in results.items():
                     if sys.version_info >= (3,0):
                         inform('{:<30}{:^20}'.format(rn, check(rv)), indent=3)
                     else:

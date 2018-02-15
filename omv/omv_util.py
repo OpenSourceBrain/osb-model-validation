@@ -26,6 +26,7 @@ from omv.find_tests import test_all, test_one
 from omv.validation import validate_mep
 from omv.autogen import autogen
 from omv.engines import OMVEngines
+from omv.common.inout import inform
 import os
 
 from omv.common.inout import set_verbosity
@@ -42,14 +43,14 @@ def main():
         try:
             test_one(arguments['<testMe.omt>'])
         except AssertionError:
-            print("Failed due to non passing tests")
+            inform("Failed due to non passing tests")
             exit(1)
 
     elif arguments['all']:
         try:
             test_all(only_this_engine=arguments['--engine'])
         except AssertionError:
-            print("Failed due to non passing tests")
+            inform("Failed due to non passing tests")
             exit(1)
 
     # Includes *.omt_, i.e. temporary test files
@@ -57,31 +58,31 @@ def main():
         try:
             test_all(only_this_engine=arguments['--engine'],include_temp_tests=True)
         except AssertionError:
-            print("Failed due to non passing tests")
+            inform("Failed due to non passing tests")
             exit(1)
             
     elif arguments['find']:
         try:
             test_all(do_not_run=True)
         except AssertionError:
-            print("Failed due to non passing tests")
+            inform("Failed due to non passing tests")
             exit(1)
 
     elif arguments['validate-mep']:
         validate_mep.validate(arguments['<mepfile>'])
 
     elif arguments['validate-omt']:
-        print('OMT validation not implemented yet!')
+        inform('OMT validation not implemented yet!')
         exit(1)
 
     elif arguments['install']:
         set_verbosity(1)
         engine = arguments['<engine>']
         if engine not in OMVEngines:
-            print('Engine ' + engine + ' unknown!')
+            inform('Engine ' + engine + ' unknown!')
         else:
             eng = arguments['<engine>']
-            print('Trying to install: %s'% eng)
+            inform('Trying to install: %s'% eng)
             already_installed = False
             
             if eng == 'NEURON':
@@ -159,10 +160,10 @@ def main():
                 from engines.getneuroconstruct import install_neuroconstruct
                 install_neuroconstruct()
             else:
-                print('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)
+                inform('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)
                 exit(1)
             if already_installed:
-                print('Engine %s was already installed'%eng)
+                inform('Engine %s was already installed'%eng)
                 
                 
             
@@ -174,13 +175,15 @@ def main():
         for engine in engines:
             installed[engine] = OMVEngines[engine].is_installed('')
             
-        print('\n\nThe following engines are currently supported by OMV:\n')
+        inform('')
+        inform('The following engines are currently supported by OMV:')
+        inform('')
         for engine in engines:
-            print('  %s%s(installed: %s)'%(engine, ' '*(30-len(engine)), installed[engine]))
-        print('')
+            inform('  %s%s(installed: %s)'%(engine, ' '*(30-len(engine)), installed[engine]))
+        inform('')
 
     elif arguments['autogen']:
-        print('Automatically generating model validation files')
+        inform('Automatically generating model validation files')
         dry = arguments['--dryrun']
         auto = arguments['-y']
         autogen(auto, dry)

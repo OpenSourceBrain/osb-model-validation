@@ -55,8 +55,8 @@ class OMVEngine(object):
 
     def set_environment(self):
         if self.environment_vars:
-            for name, val in self.environment_vars.iteritems():
-                if environ.has_key(name) and not 'HOME' in name:
+            for name, val in self.environment_vars.items():
+                if name in environ and not 'HOME' in name:
                     if not ':%s:'%val in environ[name]:
                         environ[name] = '%s:%s'%(environ[name],val)
                 else:

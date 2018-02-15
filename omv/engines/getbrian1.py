@@ -9,7 +9,7 @@ def check_scipy_dev():
         import scipy
     except ImportError:
         # Compiling from source is terribly slow, and requires Blas/Lapack...
-        #print 'Installing scipy dev...'
+        #print('Installing scipy dev...')
         #pip.main(['install', 'cython'])
         #pip.main(['install', 'git+http://github.com/scipy/scipy/'])
         print("\n***************************************************************************************")

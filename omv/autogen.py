@@ -33,7 +33,7 @@ def find_targets(auto=False):
     dirs_to_engines_exts = {'NEURON': {'engine': 'NEURON', 'extension': '.hoc'},
                             'NeuroML2': {'engine': 'jNeuroML', 'extension': '.nml'}}
     targets = []
-    for d, eng_ext in dirs_to_engines_exts.iteritems():
+    for d, eng_ext in dirs_to_engines_exts.items():
         if isdir(d):
             engine = dirs_to_engines_exts[d]['engine']
             ext = dirs_to_engines_exts[d]['extension']

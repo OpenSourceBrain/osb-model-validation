@@ -18,6 +18,10 @@ class Tallyman(object):
         
     def add_experiment(self, exp, results):
         self.experiments[exp.name] = results
+            
+    def __lt__(self, other):
+        if other.mep==None: return True
+        return self.omt < other.omt
 
     def serialize(self):
         s = OrderedDict({'engine': self.engine})
@@ -45,12 +49,12 @@ class TallyHolder(object):
             
         mp = trim_path(tally.modelpath)
         
-        if not self.tallies.has_key(mp):
+        if not mp in self.tallies:
             self.tallies[mp] = {}
         
         mptallies = self.tallies[mp]
         
-        if not mptallies.has_key(tally.engine):
+        if not tally.engine in mptallies:
             mptallies[tally.engine] = []
             
         mptallies[tally.engine].append(tally)
@@ -82,7 +86,7 @@ class TallyHolder(object):
             mptallies = self.tallies[mp]
             
             for engine in self.all_engines:
-                if not mptallies.has_key(engine):
+                if not engine in mptallies:
                     
                     info = "%s"%(' ')
                     summary += ' '*(len(engine)-len(info)-2)+info+" |   "

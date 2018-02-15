@@ -61,6 +61,22 @@ def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
 
         assert len(results)>0
         assert all(results)
+        
+    else:
+        engs ={}
+        tot_tests = 0
+        for t in tallies:
+            if not t.engine in engs:
+                engs[t.engine]=0
+            engs[t.engine]+=1
+            tot_tests+=1
+        inform('')
+        for e in sorted(engs):
+            inform('  Engine %s has %s tests'%(e, engs[e]))
+        inform('')
+        inform('  %s OMV tests in total'%(tot_tests))
+        inform('')
+            
 
 
 def test_one(omt_fname):

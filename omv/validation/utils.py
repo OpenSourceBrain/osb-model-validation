@@ -25,7 +25,7 @@ def topological_sort(source):
         
 
 def all_types_in_schema(d):
-    for k,v in d.iteritems():
+    for k,v in d.items():
         if isinstance(v, dict):
             for x in all_types_in_schema(v):
                 yield x

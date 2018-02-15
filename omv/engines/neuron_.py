@@ -39,7 +39,7 @@ class NeuronEngine(OMVEngine):
         pp = os.path.join(home, 'local/lib/python/site-packages')
         
         environment_vars = {'PYTHONPATH': pp}
-        if not os.environ.has_key('NEURON_HOME'):
+        if not 'NEURON_HOME' in os.environ:
             environment_vars['NEURON_HOME'] = os.path.join(home, 'neuron/nrn/', arch)
             path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
         else:

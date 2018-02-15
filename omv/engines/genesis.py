@@ -19,11 +19,11 @@ class GenesisEngine(OMVEngine):
         ret = True
         try:
             temp = NamedTemporaryFile(suffix='.g')
-            temp.writelines(['echo "version: "{version} \n', 'quit \n'])
+            temp.writelines([b'echo "version: "{version} \n', b'quit \n'])
             temp.seek(0)
             out = sp.check_output(
                 ['genesis', '-nox', '-batch', '-notty', temp.name])
-            m = re.search('version:' + '\s*([0-9]*\.?[0-9]+)\s*', out)
+            m = re.search(b'version:\s*([0-9]*\.?[0-9]+)\s*', out)
             if m:
                 ret = m.groups()[0]
                 inform("Found GENESIS in path, version %s" % ret,

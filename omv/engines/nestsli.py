@@ -14,7 +14,7 @@ class NestEngine(OMVEngine):
     def get_nest_environment():
 
         nestpath = os.path.join(os.environ['HOME'],'nest/nest/')
-        if os.environ.has_key('NEST_INSTALL_DIR'):
+        if 'NEST_INSTALL_DIR' in os.environ:
             nestpath = os.environ['NEST_INSTALL_DIR']+'/'
 
         environment_vars = {'NEST_HOME': nestpath,

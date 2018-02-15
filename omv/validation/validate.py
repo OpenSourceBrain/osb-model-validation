@@ -34,7 +34,7 @@ class OMVValidator(RXSchemaValidator):
     def sort_types_by_dependencies(self, tag_schema_map):
 
         alldeps = []
-        for tag, schema in tag_schema_map.iteritems():
+        for tag, schema in tag_schema_map.items():
             depset = set([self.prefix + v[5:]
                          for v in all_types_in_schema(schema)])
             alldeps.append((tag, depset))

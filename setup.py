@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name='OSBModelValidation',
-    version='0.1.2',
+    version='0.1.3',
     author='Boris Marin',
     author_email='borismarin@gmail.com',
     packages=find_packages(),

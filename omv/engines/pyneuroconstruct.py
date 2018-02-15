@@ -14,7 +14,7 @@ class PyneuroConstructEngine(OMVEngine):
     def get_nC_environment():
 
         nc_path = os.path.join(os.environ['HOME'],'neuroConstruct')
-        if os.environ.has_key('NC_HOME'):
+        if 'NC_HOME' in os.environ:
             nc_path = os.environ['NC_HOME']+'/'
 
         environment_vars = {'NC_HOME': nc_path}

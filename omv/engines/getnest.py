@@ -10,7 +10,7 @@ def install_nest():
     nestpath = os.path.join(os.environ['HOME'],'nest')
     nestpath2 = os.path.join(os.environ['HOME'],'nest/nest')
     nestinstallpath = os.path.join(os.environ['HOME'],'nest/nest')
-    if os.environ.has_key('NEST_INSTALL_DIR'):
+    if 'NEST_INSTALL_DIR' in os.environ:
             nestinstallpath = os.environ['NEST_INSTALL_DIR']+'/'
             
     inform('Installing NEST (src: %s), (tgt: %s)'%(nestpath, nestinstallpath), indent=2, verbosity=1)
