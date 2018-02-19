@@ -44,6 +44,7 @@ if '-q' in sys.argv:
     ignores.append('cerebellum--cerebellar-golgi-cell--solinasetal-golgicell')  # Slow...
     ignores.append('potjansdiesmann2014') 
     ignores.append('nc_ca1')
+    ignores.append('miglioreetal14_olfactorybulb3d')
 
 ignores.append('l23dendriticspikes')
 #ignores.append('izhikevichmodel')

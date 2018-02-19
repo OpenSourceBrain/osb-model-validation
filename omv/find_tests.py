@@ -28,11 +28,17 @@ def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
                    if load_yaml(t)['engine'].lower() == only_this_engine.lower()]
     else:
         tallies = []
+        failed = 0
         for i in range(len(all_omts)):
             t = all_omts[i]
             inform('')
-            inform('  Test (%i/%i)'%(i+1,len(all_omts)))
-            tallies.append(parse_omt(t, do_not_run))
+            tally = parse_omt(t, do_not_run)
+            if not tally.all_passed(): failed+=1
+            if not do_not_run:
+                inform('')
+                inform('')
+                inform('      [ Test %i of %i complete - failed so far: %s ]'%(i+1,len(all_omts),failed))
+            tallies.append(tally)
         
     tallies.sort()
         
