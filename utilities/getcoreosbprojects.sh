@@ -146,6 +146,8 @@ standardGHProject 'Thalamocortical' 'coreprojects'
 standardGHProject 'Brunel2000' 'coreprojects'
 standardGHProject 'PospischilEtAl2008' 'coreprojects'
 standardGHProject 'M1NetworkModel' 'coreprojects'
+standardGHProject 'SadehEtAl2017-InhibitionStabilizedNetworks' 'coreprojects'
+
 
 standardGHProject 'SolinasEtAl-GolgiCell' 'coreprojects'
 standardGHProject 'GranCellLayer' 'coreprojects'
