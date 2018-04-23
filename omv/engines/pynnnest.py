@@ -2,7 +2,7 @@ import os
 import subprocess as sp
 
 from omv.engines.nestsli import NestEngine
-from omv.engines.nestsli import PyNestEngine
+from omv.engines.pynest import PyNestEngine
 from omv.engines.pynn import PyNNEngine
 
 from omv.common.inout import inform, trim_path, check_output, is_verbose
