@@ -159,6 +159,9 @@ def main():
             elif eng == 'PyNN':
                 from engines.getpynn import install_pynn
                 install_pynn()
+            elif eng == 'PyNN':
+                from engines.getpynn import install_pynn
+                install_pynn()
             elif eng == 'Py_neuroConstruct' or eng == 'neuroConstruct':
                 from engines.getneuroconstruct import install_neuroconstruct
                 install_neuroconstruct()
