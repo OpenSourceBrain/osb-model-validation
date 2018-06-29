@@ -23,8 +23,12 @@ def load_data_file(fname, columns=(0, 1), header_lines=0, scaling=1):
 
 def compare_arrays(arrays, tolerance):
     from numpy import allclose, array, max, abs, atleast_1d
-
+    
     a1, a2 = array(arrays)
+    
+    if len(a1)!=len(a2):  # Different lengths!!
+        return (False, 0)
+    
     best_tol = None
     try:
         comp = allclose(a1, a2, tolerance)
