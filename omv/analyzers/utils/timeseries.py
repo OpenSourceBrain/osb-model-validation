@@ -26,7 +26,7 @@ def compare_arrays(arrays, tolerance):
     
     a1, a2 = array(arrays)
     
-    if len(a1)!=len(a2):  # Different lengths!!
+    if (hasattr(a1, '__len__') or hasattr(a2, '__len__')) and len(a1)!=len(a2):  # Different lengths!!
         return (False, 0)
     
     best_tol = None
