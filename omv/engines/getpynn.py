@@ -17,7 +17,7 @@ def install_pynn():
         path = os.path.join(install_root,'PyNN')
 
         with working_dir(path):
-            check_output(['git','checkout','tags/0.9.2'])
+            check_output(['git','checkout','neuroml'])  # neuroml branch has the latest NML2 import/export code!
             #check_output(['git','checkout','master'])
             check_output(['python', 'setup.py', 'install'])
         import pyNN
