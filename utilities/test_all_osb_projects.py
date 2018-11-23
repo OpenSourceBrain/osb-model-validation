@@ -45,6 +45,7 @@ if '-q' in sys.argv:
     ignores.append('potjansdiesmann2014') 
     ignores.append('nc_ca1')
     ignores.append('miglioreetal14_olfactorybulb3d')
+    ignores.append('sadehetal2017-inhibitionstabilizednetworks')
 
 ignores.append('l23dendriticspikes')
 #ignores.append('izhikevichmodel')

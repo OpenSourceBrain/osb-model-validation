@@ -17,9 +17,9 @@ def install_pynn():
         path = os.path.join(install_root,'PyNN')
 
         with working_dir(path):
-            check_output(['git','checkout','neuroml'])  # neuroml branch has the latest NML2 import/export code!
+            print(check_output(['git','checkout','neuroml']))  # neuroml branch has the latest NML2 import/export code!
             #check_output(['git','checkout','master'])
-            check_output(['python', 'setup.py', 'install'])
+            print(check_output(['python', 'setup.py', 'install']))
         import pyNN
         m = 'Successfully installed pyNN...'
     except Exception as e:
