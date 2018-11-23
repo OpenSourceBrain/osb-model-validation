@@ -20,10 +20,11 @@ def install_pynn():
             print(check_output(['git','checkout','neuroml']))  # neuroml branch has the latest NML2 import/export code!
             #check_output(['git','checkout','master'])
             print(check_output(['python', 'setup.py', 'install']))
+            print("Finished attempting to install PyNN")
         import pyNN
         m = 'Successfully installed pyNN...'
     except Exception as e:
-        m = 'ERROR installing pyNN: ' + str(e)
+        m = 'ERROR during install_pynn: %s'%e
     finally:
         inform(m)
         
