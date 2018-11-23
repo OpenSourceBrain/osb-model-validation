@@ -11,17 +11,19 @@ def install_pynn():
 
         install_root = os.environ['HOME']
 
+        pyNN_src = 'PyNN_src'
         with working_dir(install_root):
-            check_output(['git', 'clone', 'https://github.com/NeuralEnsemble/PyNN.git'])
+            check_output(['git', 'clone', 'https://github.com/NeuralEnsemble/PyNN.git', pyNN_src])
 
-        path = os.path.join(install_root,'PyNN')
+        path = os.path.join(install_root, pyNN_src)
 
         with working_dir(path):
             print(check_output(['git','checkout','neuroml']))  # neuroml branch has the latest NML2 import/export code!
             #check_output(['git','checkout','master'])
             print(check_output(['python', 'setup.py', 'install']))
+            print(check_output(['pwd']))
             print("Finished attempting to install PyNN")
-        import pyNN
+        #import pyNN
         m = 'Successfully installed pyNN...'
     except Exception as e:
         m = 'ERROR during install_pynn: %s'%e
