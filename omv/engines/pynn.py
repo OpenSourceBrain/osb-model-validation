@@ -13,10 +13,13 @@ class PyNNEngine(OMVEngine):
     def is_installed(version):
         ret = True
         try:
-            import pyNN
+            
+            ret_str = sp.check_output(['python -c "import pyNN; print(pyNN.__version__)"'], shell=True,stderr=sp.STDOUT)
+            ret = len(ret_str) > 0
+            
             if is_verbose():
                 inform("pyNN version %s is correctly installed..." % pyNN.__version__, indent=2)
-            ret = 'v%s'%pyNN.__version__
+            ret = 'v%s'%ret_str.strip()
             
         except Exception as err:
             inform("Couldn't import pyNN into Python: ", err, indent=1)

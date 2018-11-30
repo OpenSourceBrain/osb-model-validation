@@ -67,6 +67,8 @@ class NeuronEngine(OMVEngine):
                 output = check_output([path+'/nrniv', '--version'])
                 if is_verbose():
                     inform('%s was already installed (by OMV..?)'%output.strip(), indent=2)
+                    
+                ret = output.split()
             except OSError:
                     inform('NEURON not currently installed', indent=2)
                     ret = False

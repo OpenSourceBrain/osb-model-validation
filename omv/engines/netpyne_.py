@@ -29,7 +29,7 @@ class NetPyNEEngine(OMVEngine):
                 
             if ret:
                 import netpyne
-                ret = netpyne.__version__
+                ret = 'v%s'%netpyne.__version__
                 
         except Exception as err:
             inform("Couldn't import netpyne into Python: ", err, indent=1)
