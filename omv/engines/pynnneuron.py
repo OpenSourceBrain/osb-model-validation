@@ -23,12 +23,12 @@ class PyNNNRNEngine(PyNNEngine):
         
     @staticmethod
     def install(version):
-        if not PyNNEngine.is_installed(None):
-            PyNNEngine.install(None)
-            inform("%s installed PyNN..." % PyNNNRNEngine.name, indent=2, verbosity =1)
         if not NeuronEngine.is_installed(None):
             NeuronEngine.install(None)
             inform("%s installed NEURON..." % PyNNNRNEngine.name, indent=2, verbosity =1)
+        if not PyNNEngine.is_installed(None):
+            PyNNEngine.install(None)
+            inform("%s installed PyNN..." % PyNNNRNEngine.name, indent=2, verbosity =1)
 
         PyNNNRNEngine.path = PyNNEngine.path + \
             ":" + NeuronEngine.path
