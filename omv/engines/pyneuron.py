@@ -6,7 +6,7 @@ from os.path import dirname
 
 from omv.engines.neuron_ import NeuronEngine
 
-from omv.common.inout import inform, is_verbose
+from omv.common.inout import inform, is_verbose, check_output
 from omv.engines.engine import EngineExecutionError
 
 
@@ -18,13 +18,19 @@ class PyNRNEngine(NeuronEngine):
     def is_installed(version):
         ret = True
         try:
-            if is_verbose():
-                inform("Checking whether %s is installed..." % PyNRNEngine.name, indent=1)
-            import neuron
-            if is_verbose():
-                inform("PyNEURON version %s is correctly installed..." % neuron.sys.version, indent=2)
+            inform("Checking whether %s is installed..." % PyNRNEngine.name, indent=1, verbosity=2)
             
-        except Exception as err:
+            ### Prints to stderr!!
+            #ret_str = check_output(['python -c "import neuron; print(neuron.h.nrnversion())"'], shell=True, verbosity=2)
+            import neuron
+            ret_str = neuron.h.nrnversion()
+            
+            ret = 'v%s'%ret_str.split()[3]
+            if is_verbose():
+                inform("PyNEURON version %s is correctly installed..." % ret, indent=2)
+                
+            
+        except Exception as err: 
             inform("Couldn't import NEURON into Python: ", err, indent=1)
             ret = False
         return ret

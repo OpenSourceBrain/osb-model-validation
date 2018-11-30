@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from omv.common.inout import inform, trim_path, is_verbose
+from omv.common.inout import inform, trim_path, is_verbose, check_output
 from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
@@ -17,7 +17,8 @@ class JNeuroMLEngine(OMVEngine):
                 inform("Checking whether %s is installed..." %
                    JNeuroMLEngine.name, indent=1)
             FNULL = open(os.devnull, 'w')
-            sp.check_call(['jnml' if os.name != 'nt' else 'jnml.bat', '-h'], stdout=FNULL)
+            r = check_output(['jnml' if os.name != 'nt' else 'jnml.bat', '-v'], verbosity=2)
+            ret = '%s'%r.split()[1]
         except OSError:
             ret = False
         return ret

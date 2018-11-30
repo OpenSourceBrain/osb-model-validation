@@ -55,9 +55,10 @@ class NeuronEngine(OMVEngine):
         ret = True
         
         try:
-            output = check_output(['nrniv', '--version'])
+            output = check_output(['nrniv', '--version'],verbosity=1)
             if is_verbose():
                 inform('%s was already installed locally'%output.strip(), indent=2)
+            ret = 'v%s'%output.split()[3]
         except OSError:
             try:
                 environment_vars, path = NeuronEngine.get_nrn_environment()

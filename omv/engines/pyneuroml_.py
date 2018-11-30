@@ -18,6 +18,8 @@ class PyNeuroMLEngine(OMVEngine):
                    PyNeuroMLEngine.name, indent=1)
             FNULL = open(os.devnull, 'w')
             sp.check_call(['pynml' if os.name != 'nt' else 'pynml.bat', '-h'], stdout=FNULL)
+            import pyneuroml
+            ret = 'v%s'%pyneuroml.__version__
         except OSError:
             ret = False
         return ret

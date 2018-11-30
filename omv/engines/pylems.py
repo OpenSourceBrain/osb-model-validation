@@ -15,6 +15,8 @@ class PyLemsEngine(OMVEngine):
         try:
             FNULL = open(os.devnull, 'w')
             sp.check_call(['pylems', '-h'], stdout=FNULL)
+            import lems
+            ret = 'v%s'%lems.__version__
         except Exception as err:
             inform("Couldn't execute PyLEMS: ", err, indent=1)
             ret = False

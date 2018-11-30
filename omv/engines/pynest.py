@@ -19,8 +19,11 @@ class PyNestEngine(OMVEngine):
         ret = True
         try:
             
-            ret_str = check_output(['python -c "import nest; print(nest.version())"'], shell=True)
+            ret_str = check_output(['python -c "import nest; print(nest.version())"'], shell=True, verbosity=2)
             ret = len(ret_str) > 0
+            
+            if ret:
+                ret = 'v%s'%ret_str.split('Version')[-1].split()[0]
             
             if ret and is_verbose():
                 inform("%s is correctly installed..." % (PyNestEngine.name), indent=2)

@@ -14,11 +14,12 @@ class Brian2Engine(OMVEngine):
         ret = True
         try:
             import brian2
-            print(brian2.__file__)
-            inform("Brian2 version %s is correctly installed..." % brian2.__version__, indent=2)
+            inform("Brian2 version %s is correctly installed..." % brian2.__version__, indent=2, verbosity=2)
+            
+            ret = 'v%s'%brian2.__version__
             
         except Exception as err:
-            inform("Couldn't import Brian2 into Python: ", err, indent=1)
+            inform("Couldn't import Brian2 into Python: ", err, indent=1, verbosity=1)
             ret = False
         return ret
         

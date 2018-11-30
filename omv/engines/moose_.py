@@ -25,14 +25,18 @@ class MooseEngine(OMVEngine):
             
             if ret and is_verbose():
                 inform("%s is correctly installed..." % (MooseEngine.name), indent=2)
+            if ret:    
+                import moose
+                ret = 'v%s'%moose.__version__
+            
         except Exception as err:
             inform("Couldn't import moose into Python: ", err, indent=1)
             ret = False
-            
-        installed = ret and PyNeuroMLEngine.is_installed(None)
+        if not ret or not PyNeuroMLEngine.is_installed(None):
+            ret = False
         
-        inform("Moose is_installed: %s"%ret, "", indent=1)
-        return installed
+        inform("Moose is_installed(): %s"%ret, "", indent=1, verbosity=2)
+        return ret
         
     @staticmethod
     def install(version):

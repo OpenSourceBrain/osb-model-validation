@@ -8,7 +8,7 @@
     omv autogen [options]
     omv install <engine>
     omv find
-    omv list-engines
+    omv (list-engines | list)
     omv validate-mep <mepfile>
     omv validate-omt <omtfile>
     omv (-h | --help)
@@ -33,7 +33,7 @@ from omv.common.inout import set_verbosity
 
 
 def main():
-    arguments = docopt(__doc__, version='OpenSourceBrain Model Validation 0.0')
+    arguments = docopt(__doc__, version='OpenSourceBrain Model Validation 0.1.3')
     set_env_vars()
 
     if arguments['--verbose']:
@@ -174,7 +174,10 @@ def main():
                 
             
 
-    elif arguments['list-engines']:
+    elif arguments['list-engines'] or arguments['list']:
+        
+        inform('OMV is checking which engines are currently installed...')
+        
         engines = sorted(OMVEngines.keys())
         
         installed = {}

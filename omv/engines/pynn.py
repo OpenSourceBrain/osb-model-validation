@@ -16,6 +16,7 @@ class PyNNEngine(OMVEngine):
             import pyNN
             if is_verbose():
                 inform("pyNN version %s is correctly installed..." % pyNN.__version__, indent=2)
+            ret = 'v%s'%pyNN.__version__
             
         except Exception as err:
             inform("Couldn't import pyNN into Python: ", err, indent=1)

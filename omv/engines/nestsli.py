@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from omv.common.inout import inform, trim_path, check_output, is_verbose
+from omv.common.inout import inform, trim_path, check_output
 from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
@@ -32,7 +32,8 @@ class NestEngine(OMVEngine):
         try:
             FNULL = open(os.devnull, 'w')
 
-            check_output([environment_vars['NEST_HOME']+'bin/nest', '-v'], verbosity=is_verbose())
+            r = check_output([environment_vars['NEST_HOME']+'bin/nest', '-v'], verbosity=2)
+            ret = 'v%s'%r.split('version')[1].split()[0][:-1]
         except OSError as err:
             inform("Couldn't execute NEST: ", err, indent=1)
             ret = False

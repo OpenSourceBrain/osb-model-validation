@@ -15,7 +15,8 @@ class OctaveEngine(OMVEngine):
         ret = True
         
         try:
-            print(check_output(['octave', '-v']))
+            r = check_output(['octave', '-v'], verbosity=1)
+            ret = 'v%s'%str(r).split()[3]
         except OSError as err:
             inform("Couldn't execute Octave!", err, indent=1)
             ret = False
