@@ -39,8 +39,10 @@ class PyNNNRNEngine(PyNNEngine):
             NeuronEngine.environment_vars)
         inform("PATH: " + PyNNNRNEngine.path, indent=2, verbosity =1)
         inform("Env vars: %s" % PyNNNRNEngine.environment_vars, indent=2, verbosity =1)
-        import pyNN
-        pynn_mod_dir = os.path.dirname(pyNN.__file__)+'/neuron/nmodl/'
+        
+        pynn_loc = sp.check_output(['python -c "import pyNN,os; print(os.path.dirname(pyNN.__file__))"'], shell=True,stderr=sp.STDOUT).strip()
+        pynn_mod_dir = '%s/neuron/nmodl/'%pynn_loc
+        
         inform("Attempting to compile PyNN mod files for standard models in %s..."%pynn_mod_dir, indent=2, verbosity =1)
         
         print(check_output(['ls', pynn_mod_dir], cwd=pynn_mod_dir))
