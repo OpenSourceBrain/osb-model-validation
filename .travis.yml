@@ -8,7 +8,7 @@ addons:
        # Requirements for Brian & NEST
     - python-numpy 
     - python-scipy 
-    - python-matplotlib 
+    #- python-matplotlib 
     - python-sympy
     - python-tornado
     - cython
@@ -48,6 +48,7 @@ install:
 script:
     - omv list-engines
     - cd utilities/tests
+    - pip install matplotlib
     - omv all -V; export OMV_SUCCESS=$?; echo $OMV_SUCCESS
     - omv list-engines
     
