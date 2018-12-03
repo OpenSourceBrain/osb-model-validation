@@ -12,7 +12,7 @@ def install_netpyne():
     path = os.path.join(install_root,'netpyneInstall')
 
     with working_dir(path):
-        print(check_output(['git', 'checkout', 'neuroml_export']))
+        print(check_output(['git', 'checkout', 'neuroml_updates']))
         print(check_output(['pwd']))
         print(check_output(['python', 'setup.py', 'install']))
 
