@@ -1,7 +1,6 @@
-import os
-import pip
-from omv.common.inout import inform, check_output
+from omv.common.inout import check_output
 from omv.engines.utils.wdir import working_dir
+import os
 
 def install_netpyne():
     install_root = os.environ['HOME']

@@ -1,13 +1,12 @@
 import os
-import pip
 from omv.common.inout import inform, check_output
 from omv.engines.utils.wdir import working_dir
 
 def install_pynn():
     try:
         
-        pip.main(['install', 'lazyarray'])  # This should ideally be automatically installed with PyNN...
-        pip.main(['install', 'neo==0.5.1'])  # This should ideally be automatically installed with PyNN...
+        print(check_output(['pip', 'install', 'lazyarray']))  # This should ideally be automatically installed with PyNN...
+        print(check_output(['pip', 'install', 'neo==0.5.1']))  # This should ideally be automatically installed with PyNN...
 
         install_root = os.environ['HOME']
 

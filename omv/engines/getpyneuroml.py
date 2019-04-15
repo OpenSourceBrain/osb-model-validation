@@ -1,10 +1,9 @@
-import pip
-from omv.common.inout import inform
+from omv.common.inout import check_output, inform
 
 def install_pynml():
     
     try:
-        pip.main(['install', 'pyneuroml'])
+        print(check_output(['pip', 'install', 'pyneuroml']))
         import neuroml
         import pyneuroml
         m = 'Successfully installed pyNeuroML...'

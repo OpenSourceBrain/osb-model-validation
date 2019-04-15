@@ -78,14 +78,14 @@ def main():
     elif arguments['install']:
         set_verbosity(1)
         engine = arguments['<engine>']
-        if engine not in OMVEngines:
+        if engine.lower() not in [e.lower() for e in OMVEngines]:
             inform('Engine ' + engine + ' unknown!')
         else:
             eng = arguments['<engine>']
             inform('Trying to install: %s'% eng)
             already_installed = False
             
-            if eng == 'NEURON':
+            if eng.lower() == 'NEURON'.lower():
                 from engines.neuron_ import NeuronEngine
                 if not NeuronEngine.is_installed(''):
                     from engines.getnrn import install_neuron
@@ -93,7 +93,7 @@ def main():
                 else:
                     already_installed = True
                     
-            elif eng == 'PyNEURON':
+            elif eng.lower() == 'PyNEURON'.lower():
                 from engines.pyneuron import PyNRNEngine
                 if not PyNRNEngine.is_installed(''):
                     from engines.getnrn import install_neuron
@@ -101,7 +101,7 @@ def main():
                 else:
                     already_installed = True
                     
-            elif eng == 'jLEMS':
+            elif eng.lower() == 'jLEMS'.lower():
                 from engines.jlems import JLemsEngine as ee
                 if ee.is_installed(None):
                     already_installed = True
@@ -109,7 +109,7 @@ def main():
                     from engines.getjlems import install_jlems
                     install_jlems()
                     
-            elif eng == 'jNeuroML':
+            elif eng.lower() == 'jNeuroML'.lower():
                 from engines.jneuroml import JNeuroMLEngine as ee
                 if ee.is_installed(None):
                     already_installed = True
@@ -117,7 +117,7 @@ def main():
                     from engines.getjnml import install_jnml
                     install_jnml()
                     
-            elif eng == 'neuroConstruct' or eng == 'Py_neuroConstruct':
+            elif eng.lower() == 'neuroConstruct' or eng == 'Py_neuroConstruct'.lower():
                 from engines.pyneuroconstruct import PyneuroConstructEngine as ee
                 if ee.is_installed(None):
                     already_installed = True
@@ -125,7 +125,7 @@ def main():
                     from engines.getneuroconstruct import install_neuroconstruct
                     install_neuroconstruct()
 
-            elif eng == 'pyNeuroML':
+            elif eng.lower() == 'pyNeuroML'.lower():
                 from engines.pyneuroml_ import PyNeuroMLEngine as ee
                 if ee.is_installed(None):
                     already_installed = True
@@ -133,38 +133,32 @@ def main():
                     from engines.getpyneuroml import install_pynml
                     install_pynml()            
                     
-            elif eng == 'PyLEMS_NeuroML2':
+            elif eng.lower() == 'PyLEMS_NeuroML2'.lower():
                 from engines.getpylems import install_pylems
                 install_pylems()
                 from engines.getnml2 import install_nml2
                 install_nml2()
-            elif eng == 'genesis':
+            elif eng.lower() == 'genesis'.lower():
                 from engines.getgenesis import install_genesis
                 install_genesis()
-            elif eng == 'Moose':
+            elif eng.lower() == 'Moose'.lower():
                 from engines.getmoose import install_moose
                 install_moose()
-            elif eng == 'NetPyNE':
+            elif eng.lower() == 'NetPyNE'.lower():
                 from engines.getnetpyne import install_netpyne
                 install_netpyne()
-            elif eng == 'Brian':
+            elif eng.lower() == 'Brian'.lower():
                 from engines.getbrian1 import install_brian
                 install_brian()
-            elif eng == 'Brian2':
+            elif eng.lower() == 'Brian2'.lower():
                 from engines.getbrian2 import install_brian2
                 install_brian2()
-            elif eng == 'NEST':
+            elif eng.lower() == 'NEST'.lower():
                 from engines.getnest import install_nest
                 install_nest()
-            elif eng == 'PyNN':
+            elif eng.lower() == 'PyNN'.lower():
                 from engines.getpynn import install_pynn
                 install_pynn()
-            elif eng == 'PyNN':
-                from engines.getpynn import install_pynn
-                install_pynn()
-            elif eng == 'Py_neuroConstruct' or eng == 'neuroConstruct':
-                from engines.getneuroconstruct import install_neuroconstruct
-                install_neuroconstruct()
             else:
                 inform('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)
                 exit(1)
