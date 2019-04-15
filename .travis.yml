@@ -66,6 +66,7 @@ env:
 
 install:
     - python setup.py install
+    - pip install matplotlib --upgrade # To ensure matplotlib 2.x
 
 script:
     - omv list-engines
