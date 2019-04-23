@@ -34,7 +34,9 @@ virtualenv:
 env:
     - OMV_ENGINE=Brian
     - OMV_ENGINE=Brian2:2.2.2.1
-    - OMV_ENGINE=Brian2:2.1
+    - OMV_ENGINE=NEST
+    - OMV_ENGINE=NEST:2.14.0
+    - OMV_ENGINE=NEST:2.16.0
     
     - OMV_ENGINE=DIRECT_ENGINE_INSTALL
    

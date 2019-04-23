@@ -44,7 +44,7 @@ class NestEngine(OMVEngine):
     def install(version):
 
         from getnest import install_nest
-        install_nest()
+        install_nest(version)
         inform('Done...', indent=2)
 
 
