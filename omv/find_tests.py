@@ -17,7 +17,11 @@ def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
             tallies = [parse_omt(t) for t in all_omts]
         else:
             engine = environ.get('OMV_ENGINE').lower()
-            tallies = [parse_omt(t)
+            engine_version=None
+            if ':' in engine:
+                engine = engine.split(':')[0]
+                engine_version = engine.split(':')[1]
+            tallies = [parse_omt(t, engine_version=engine_version)
                        for t in all_omts
                        if load_yaml(t)['engine'].lower() == engine]
     elif only_this_engine:

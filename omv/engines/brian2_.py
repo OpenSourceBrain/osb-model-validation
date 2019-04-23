@@ -28,7 +28,7 @@ class Brian2Engine(OMVEngine):
         from getbrian2 import install_brian2
         home = os.environ['HOME']
         inform('Will fetch and install the latest Brian (version 2.x)', indent=2)
-        install_brian2()
+        install_brian2(version)
         inform('Done...', indent=2)
         
     def run(self):
