@@ -77,11 +77,19 @@ def main():
 
     elif arguments['install']:
         set_verbosity(1)
-        engine = arguments['<engine>']
-        if engine.lower() not in [e.lower() for e in OMVEngines]:
-            inform('Engine ' + engine + ' unknown!')
+        eng = arguments['<engine>']
+        engine_version=None
+        
+        if ':' in eng:
+            ee = eng.split(':')
+            eng = ee[0]
+            engine_version = ee[1]
+            inform('Engine %s version %s will be used...'%(eng, engine_version))
+            
+        if eng.lower() not in [e.lower() for e in OMVEngines]:
+            inform('Engine ' + eng + ' unknown!')
         else:
-            eng = arguments['<engine>']
+            
             inform('Trying to install: %s'% eng)
             already_installed = False
             
@@ -152,7 +160,7 @@ def main():
                 install_brian()
             elif eng.lower() == 'Brian2'.lower():
                 from engines.getbrian2 import install_brian2
-                install_brian2()
+                install_brian2(engine_version)
             elif eng.lower() == 'NEST'.lower():
                 from engines.getnest import install_nest
                 install_nest()
