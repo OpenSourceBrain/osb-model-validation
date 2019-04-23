@@ -50,7 +50,7 @@ class NeuronEngine(OMVEngine):
         
         return environment_vars, path
 
-    @classmethod
+    @staticmethod
     def is_installed(version):
         ret = True
         
