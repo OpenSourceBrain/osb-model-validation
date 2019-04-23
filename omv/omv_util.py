@@ -97,7 +97,7 @@ def main():
             
             if eng.lower() == 'NEURON'.lower():
                 from engines.neuron_ import NeuronEngine
-                if not NeuronEngine.is_installed(''):
+                if not NeuronEngine.is_installed():
                     from engines.getnrn import install_neuron
                     install_neuron(engine_version)
                 else:
@@ -105,7 +105,7 @@ def main():
                     
             elif eng.lower() == 'PyNEURON'.lower():
                 from engines.pyneuron import PyNRNEngine
-                if not PyNRNEngine.is_installed(''):
+                if not PyNRNEngine.is_installed():
                     from engines.getnrn import install_neuron
                     install_neuron(engine_version)
                 else:

@@ -57,8 +57,7 @@ script:
     - echo "Testing direct installation of some simulators..."
     - omv install Brian
     - omv install Brian2:2.2
-    - omv install PyNEURON
-    - omv install NEURON:7.6
+    - omv install PyNEURON:7.6
     - omv install PyLEMS_NeuroML2
     - omv install NetPyNE
     - omv list-engines
