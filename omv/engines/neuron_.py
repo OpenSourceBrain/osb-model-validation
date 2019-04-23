@@ -68,7 +68,7 @@ class NeuronEngine(OMVEngine):
                 if is_verbose():
                     inform('%s was already installed (by OMV..?)'%output.strip(), indent=2)
                     
-                ret = output.split()
+                ret = 'v%s'%output.split()[3]
             except OSError:
                     inform('NEURON not currently installed', indent=2)
                     ret = False

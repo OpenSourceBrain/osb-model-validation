@@ -35,11 +35,35 @@ env:
     - OMV_ENGINE=Brian
     - OMV_ENGINE=Brian2:2.2.2.1
     - OMV_ENGINE=NEST:2.14.0
+    - OMV_ENGINE=PyNEST
+    - OMV_ENGINE=Octave
+    - OMV_ENGINE=genesis
+    - OMV_ENGINE=Moose
     - OMV_ENGINE=NEURON:7.5
     - OMV_ENGINE=PyNEURON:7.6
+    - OMV_ENGINE=PyNN
+    - OMV_ENGINE=PyNN_NEURON
+    - OMV_ENGINE=PyNN_Brian1
+    - OMV_ENGINE=PyNN_Nest
+    - OMV_ENGINE=PyNN_NeuroML
+    - OMV_ENGINE=NetPyNE
+    - OMV_ENGINE=PyLEMS
+    - OMV_ENGINE=PyLEMS_NeuroML2
+    - OMV_ENGINE=jLEMS
+    - OMV_ENGINE=jNeuroML
+    - OMV_ENGINE=jNeuroML_Brian
+    - OMV_ENGINE=jNeuroML_Brian2
+    - OMV_ENGINE=jNeuroML_Moose
+    - OMV_ENGINE=jNeuroML_NEURON
+    - OMV_ENGINE=jNeuroML_NetPyNE
+    - OMV_ENGINE=jNeuroML_PyNN_NEURON
+    - OMV_ENGINE=jNeuroML_validate
+    - OMV_ENGINE=jNeuroML_validatev1
+    - OMV_ENGINE=Py_neuroConstruct
+    - OMV_ENGINE=pyNeuroML
     
     - OMV_ENGINE=DIRECT_ENGINE_INSTALL
-   
+
 
 install:
     - python setup.py install
