@@ -35,6 +35,8 @@ env:
     - OMV_ENGINE=Brian
     - OMV_ENGINE=Brian2:2.2.2.1
     - OMV_ENGINE=Brian2:2.1
+    
+    - OMV_ENGINE=DIRECT_ENGINE_INSTALL
    
 
 install:
@@ -52,6 +54,7 @@ script:
     
     - echo "Testing direct installation of some simulators..."
     - omv install Brian
+    - omv install Brian2:2.2
     - omv install PyNEURON
     - omv install NEURON
     - omv install PyLEMS_NeuroML2
