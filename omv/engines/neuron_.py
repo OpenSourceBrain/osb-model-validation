@@ -14,9 +14,9 @@ class NeuronEngine(OMVEngine):
     name = "NEURON"
 
     def __init__(self, target, do_not_check_install=False, engine_version=None):
-        super(NeuronEngine, self).__init__(target, do_not_check_install)
+        super(NeuronEngine, self).__init__(target, do_not_check_install, engine_version)
         
-        inform("Checking whether %s is already installed..." % self.name,
+        inform("Checking whether %s (v %s) is already installed..." % (self.name, engine_version),
                    indent=1, verbosity=1)
         if not self.is_installed(engine_version):
             try:

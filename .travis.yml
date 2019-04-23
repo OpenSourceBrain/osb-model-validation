@@ -58,7 +58,7 @@ script:
     - omv install Brian
     - omv install Brian2:2.2
     - omv install PyNEURON
-    - omv install NEURON
+    - omv install NEURON:7.6
     - omv install PyLEMS_NeuroML2
     - omv install NetPyNE
     - omv list-engines

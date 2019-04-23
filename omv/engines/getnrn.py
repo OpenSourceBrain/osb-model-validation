@@ -13,7 +13,7 @@ def install_neuron(version):
         
     nrnpath = os.path.join(os.environ['HOME'],'neuron')
     
-    inform('Installing NEURON into %s'%nrnpath, indent=1)
+    inform('Installing NEURON %s into %s'%(version, nrnpath), indent=1)
     os.mkdir(nrnpath)
     with working_dir(nrnpath):
         print(co(['wget', 'https://www.neuron.yale.edu/ftp/neuron/versions/v%s/nrn-%s.tar.gz'%(version, version)]))
