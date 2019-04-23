@@ -51,7 +51,7 @@ class NeuronEngine(OMVEngine):
         return environment_vars, path
 
     @classmethod
-    def is_installed():
+    def is_installed(version):
         ret = True
         
         try:
