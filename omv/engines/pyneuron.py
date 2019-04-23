@@ -37,7 +37,7 @@ class PyNRNEngine(NeuronEngine):
         
     @staticmethod
     def install(version):
-        if not NeuronEngine.is_installed():
+        if not NeuronEngine.is_installed(None):
             NeuronEngine.install(version)
             inform("%s installed NEURON..." % PyNRNEngine.name, indent=2, verbosity =1)
 

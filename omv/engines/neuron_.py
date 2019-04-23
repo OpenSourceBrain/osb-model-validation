@@ -18,7 +18,7 @@ class NeuronEngine(OMVEngine):
         
         inform("Checking whether %s (v %s) is already installed..." % (self.name, engine_version),
                    indent=1, verbosity=1)
-        if not self.is_installed(engine_version):
+        if not self.is_installed(''):
             try:
                 self.install(engine_version)
             except Exception as e:
