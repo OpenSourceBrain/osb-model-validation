@@ -75,13 +75,13 @@ class NeuronEngine(OMVEngine):
         return ret
  
     @classmethod
-    def install(cls, engine_version):
+    def install(cls, version):
         import getnrn
         
         cls.environment_vars, cls.path = NeuronEngine.get_nrn_environment()
         
         inform('Will fetch and install the latest NEURON version', indent=2)
-        getnrn.install_neuron()
+        getnrn.install_neuron(version)
 
 
     @classmethod

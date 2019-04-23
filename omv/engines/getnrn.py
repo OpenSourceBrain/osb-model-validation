@@ -7,21 +7,19 @@ from omv.common.inout import inform
 from omv.engines.utils.wdir import working_dir
 
 
-def install_neuron(get_latest=False):
+def install_neuron(version):
+    if not version:
+        version='7.4'
+        
     nrnpath = os.path.join(os.environ['HOME'],'neuron')
     
     inform('Installing NEURON into %s'%nrnpath, indent=1)
     os.mkdir(nrnpath)
     with working_dir(nrnpath):
-        if get_latest:
-            print(co(['hg', 'clone', 'http://www.neuron.yale.edu/hg/neuron/nrn']))
-            os.chdir('nrn')
-            print(co(['./build.sh']))
-        else:
-            print(co(['wget', 'https://www.neuron.yale.edu/ftp/neuron/versions/v7.4/nrn-7.4.tar.gz']))
-            print(co(['tar', 'xzvf', 'nrn-7.4.tar.gz']))
-            print(co(['mv', 'nrn-7.4', 'nrn']))
-            os.chdir('nrn')
+        print(co(['wget', 'https://www.neuron.yale.edu/ftp/neuron/versions/v%s/nrn-%s.tar.gz'%(version, version)]))
+        print(co(['tar', 'xzvf', 'nrn-%s.tar.gz'%version]))
+        print(co(['mv', 'nrn-%s'%version, 'nrn']))
+        os.chdir('nrn')
             
         path = os.getcwd()
         pyexec = sys.executable
