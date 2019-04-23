@@ -2,7 +2,9 @@ from omv.common.inout import check_output
 
 from omv.engines.getbrian1 import check_scipy_dev
 
-def install_brian2(version='2.2.2.1'):
+def install_brian2(version):
+    if not version:
+        version='2.2.2.1'
     try:
         check_scipy_dev()
         # Tested with v2.2.2.1     

@@ -4,8 +4,11 @@ from omv.common.inout import inform, check_output
 from omv.engines.utils.wdir import working_dir
 
 
-def install_nest(version='2.12.0'):
+def install_nest(version):
     
+    if not version:
+        version='2.12.0'
+        
     inform('Installing NEST', indent=2, verbosity=1)
     nestpath = os.path.join(os.environ['HOME'],'nest')
     nestpath2 = os.path.join(os.environ['HOME'],'nest/nest')
@@ -20,8 +23,8 @@ def install_nest(version='2.12.0'):
         #version='2.10.0'
         check_output(['wget', 'https://github.com/nest/nest-simulator/archive/v%s.tar.gz'%(version)])
         
-        check_output(['tar', 'xzvf', 'nest-%s.tar.gz'%version])
-        check_output(['mv', 'nest-%s'%version, 'nest'], cwd=nestpath)
+        check_output(['tar', 'xzvf', 'v%s.tar.gz'%version])
+        check_output(['mv', 'nest-simulator-%s'%version, 'nest'], cwd=nestpath)
             
     with working_dir(nestpath2):
         check_output(["cmake", "-DCMAKE_INSTALL_PREFIX:PATH=%s"%(nestinstallpath)])

@@ -85,6 +85,8 @@ def main():
             eng = ee[0]
             engine_version = ee[1]
             inform('Engine %s version %s will be used...'%(eng, engine_version))
+        else:
+            inform('Engine %s, default version will be used...'%(eng))
             
         if eng.lower() not in [e.lower() for e in OMVEngines]:
             inform('Engine ' + eng + ' unknown!')
@@ -163,7 +165,7 @@ def main():
                 install_brian2(engine_version)
             elif eng.lower() == 'NEST'.lower():
                 from engines.getnest import install_nest
-                install_nest()
+                install_nest(engine_version)
             elif eng.lower() == 'PyNN'.lower():
                 from engines.getpynn import install_pynn
                 install_pynn()
