@@ -28,7 +28,7 @@ class NetPyNEEngine(OMVEngine):
                 inform("%s is correctly installed..." % (NetPyNEEngine.name), indent=2)
                 
             if ret:
-                ret = 'v%s'%ret_str
+                ret = 'v%s'%ret_str.strip()
                 
         except Exception as err:
             inform("Couldn't import netpyne into Python: ", err, indent=1)

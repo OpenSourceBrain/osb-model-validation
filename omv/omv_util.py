@@ -8,7 +8,7 @@
     omv autogen [options]
     omv install <engine>
     omv find
-    omv (list-engines | list)
+    omv (list-engines | list) [-V | --verbose]
     omv validate-mep <mepfile>
     omv validate-omt <omtfile>
     omv (-h | --help)
@@ -181,7 +181,7 @@ def main():
     elif arguments['list-engines'] or arguments['list']:
         
         inform('OMV is checking which engines are currently installed...')
-        
+        set_verbosity(0)
         engines = sorted(OMVEngines.keys())
         
         installed = {}
@@ -194,6 +194,18 @@ def main():
         for engine in engines:
             inform('  %s%s(installed: %s)'%(engine, ' '*(30-len(engine)), installed[engine]))
         inform('')
+        if arguments['--verbose']:
+            inform('Additional Python packages:')
+            inform('')
+            for m in ['matplotlib','numpy','pandas','scipy','sympy','tables','neo','lazyarray','pyelectro','pyneuroml','neuroml']:
+                installed_ver = False
+                try:
+                    exec('import %s'%m)
+                    installed_ver = eval('%s.__version__'%m)
+                except:
+                    pass
+                inform('  %s%s(installed: %s)'%(m, ' '*(30-len(m)), installed_ver))
+            inform('')
 
     elif arguments['autogen']:
         inform('Automatically generating model validation files')

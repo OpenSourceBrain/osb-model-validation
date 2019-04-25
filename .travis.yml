@@ -70,10 +70,10 @@ install:
     - pip install matplotlib --upgrade # To ensure matplotlib 2.x
 
 script:
-    - omv list-engines
+    - omv list-engines -V
     - cd utilities/tests
     - omv all -V; export OMV_SUCCESS=$?; echo $OMV_SUCCESS
-    - omv list-engines
+    - omv list-engines -V
     
     - echo "Finished all OMV tests on *.omt files which have been found"
     - if [[ ${OMV_ENGINE} == "DIRECT_ENGINE_INSTALL" ]]; then echo "Continuing..."; else exit $OMV_SUCCESS; fi
@@ -84,6 +84,6 @@ script:
     - omv install PyNEURON:7.6
     - omv install PyLEMS_NeuroML2
     - omv install NetPyNE
-    - omv list-engines
+    - omv list-engines -V
     
 

@@ -23,7 +23,7 @@ class PyNNNestEngine(PyNNEngine):
     @staticmethod
     def install(version):
         if not PyNestEngine.is_installed(None):
-            PyNestEngine.install(None)
+            PyNestEngine.install(version)  # interpret version as version of NEST!
             inform("%s installed PyNest..." % PyNNNestEngine.name, indent=2, verbosity =1)
         if not PyNNEngine.is_installed(None):
             PyNNEngine.install(None)
