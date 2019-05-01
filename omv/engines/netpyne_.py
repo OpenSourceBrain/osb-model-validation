@@ -53,7 +53,7 @@ class NetPyNEEngine(OMVEngine):
             inform("%s installed PyNeuroML..." % NetPyNEEngine.name, indent=2, verbosity =1)
             
             
-        from getnetpyne import install_netpyne
+        from omv.engines.getnetpyne import install_netpyne
         home = os.environ['HOME']
         inform('Will fetch and install the latest NetPyNE..', indent=2)
         install_netpyne()

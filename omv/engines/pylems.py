@@ -24,7 +24,7 @@ class PyLemsEngine(OMVEngine):
         
     @staticmethod
     def install(version):
-        from getpylems import install_pylems
+        from omv.engines.getpylems import install_pylems
         home = os.environ['HOME']
         p = os.path.join(home, 'pylems')
         PyLemsEngine.path = p

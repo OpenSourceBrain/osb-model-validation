@@ -28,7 +28,7 @@ class PyNNEngine(OMVEngine):
         
     @staticmethod
     def install(version):
-        from getpynn import install_pynn
+        from omv.engines.getpynn import install_pynn
         home = os.environ['HOME']
         inform('Will fetch and install the latest pyNN', indent=2)
         install_pynn()

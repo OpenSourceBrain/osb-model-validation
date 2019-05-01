@@ -26,7 +26,7 @@ class PyNeuroMLEngine(OMVEngine):
         
     @staticmethod
     def install(version):
-        from getpyneuroml import install_pynml
+        from omv.engines.getpyneuroml import install_pynml
         inform('Will fetch and install the latest pyNeuroML', indent=2)
         install_pynml()
 

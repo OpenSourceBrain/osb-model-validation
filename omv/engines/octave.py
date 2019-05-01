@@ -24,7 +24,7 @@ class OctaveEngine(OMVEngine):
         
     @staticmethod
     def install(version):
-        from getoctave import install_octave
+        from omv.engines.getoctave import install_octave
         
         inform('Will fetch and install the latest Octave', indent=2)
         install_octave()

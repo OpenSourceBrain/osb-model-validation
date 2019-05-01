@@ -21,7 +21,7 @@ class JLemsEngine(OMVEngine):
         return ret
         
     def install(self, version):
-        from getjlems import install_jlems
+        from omv.engines.getjlems import install_jlems
         home = os.environ['HOME']
         p = os.path.join(home, 'jLEMS')
         self.path = p

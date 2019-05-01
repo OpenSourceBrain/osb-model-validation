@@ -43,7 +43,7 @@ class NestEngine(OMVEngine):
     @staticmethod
     def install(version):
 
-        from getnest import install_nest
+        from omv.engines.getnest import install_nest
         install_nest(version)
         inform('Done...', indent=2)
 

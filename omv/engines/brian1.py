@@ -26,7 +26,7 @@ class Brian1Engine(OMVEngine):
         
     @staticmethod
     def install(version):
-        from getbrian1 import install_brian
+        from omv.engines.getbrian1 import install_brian
         home = os.environ['HOME']
         inform('Will fetch and install the latest Brian (version 1.x)', indent=2)
         install_brian()

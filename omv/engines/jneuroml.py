@@ -25,7 +25,7 @@ class JNeuroMLEngine(OMVEngine):
         
     @staticmethod
     def install(version):
-        from getjnml import install_jnml
+        from omv.engines.getjnml import install_jnml
         home = os.environ['HOME']
         p = os.path.join(home, 'jnml/jNeuroMLJar')
         JNeuroMLEngine.path = p

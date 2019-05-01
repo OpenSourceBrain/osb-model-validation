@@ -39,7 +39,7 @@ class PyneuroConstructEngine(OMVEngine):
     @staticmethod
     def install(version):
 
-        from getneuroconstruct import install_neuroconstruct
+        from omv.engines.getneuroconstruct import install_neuroconstruct
         
         inform('Will fetch and install the latest neuroConstruct', indent=2)
         install_neuroconstruct()

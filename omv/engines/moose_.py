@@ -45,7 +45,7 @@ class MooseEngine(OMVEngine):
             PyNeuroMLEngine.install(None)
             inform("%s installed PyNeuroML..." % MooseEngine.name, indent=2, verbosity =1)
             
-        from getmoose import install_moose
+        from omv.engines.getmoose import install_moose
         home = os.environ['HOME']
         inform('Will fetch and install the latest Moose..', indent=2)
         install_moose()
