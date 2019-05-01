@@ -10,6 +10,7 @@ addons:
     - python-scipy 
     - python-matplotlib 
     - python-sympy
+    - python-tornado
     - cython
         # Requirements for Octave
     - octave
@@ -34,14 +35,14 @@ virtualenv:
 
 env:
     - OMV_ENGINE=Brian
-    - OMV_ENGINE=Brian2
-    - OMV_ENGINE=NEST
+    - OMV_ENGINE=Brian2:2.2.2.1
+    - OMV_ENGINE=NEST:2.14.0
     - OMV_ENGINE=PyNEST
     - OMV_ENGINE=Octave
     - OMV_ENGINE=genesis
     - OMV_ENGINE=Moose
-    - OMV_ENGINE=NEURON
-    - OMV_ENGINE=PyNEURON
+    - OMV_ENGINE=NEURON:7.5
+    - OMV_ENGINE=PyNEURON:7.6
     - OMV_ENGINE=PyNN
     - OMV_ENGINE=PyNN_NEURON
     - OMV_ENGINE=PyNN_Brian1
@@ -65,24 +66,26 @@ env:
     
     - OMV_ENGINE=DIRECT_ENGINE_INSTALL
 
+
 install:
     - python setup.py install
+    - pip install matplotlib --upgrade # To ensure matplotlib 2.x
 
 script:
-    - omv list-engines
+    - omv list-engines -V
     - cd utilities/tests
     - omv all -V; export OMV_SUCCESS=$?; echo $OMV_SUCCESS
-    - omv list-engines
+    - omv list-engines -V
     
     - echo "Finished all OMV tests on *.omt files which have been found"
     - if [[ ${OMV_ENGINE} == "DIRECT_ENGINE_INSTALL" ]]; then echo "Continuing..."; else exit $OMV_SUCCESS; fi
     
     - echo "Testing direct installation of some simulators..."
     - omv install Brian
-    - omv install PyNEURON
-    - omv install NEURON
+    - omv install Brian2:2.2
+    - omv install PyNEURON:7.6
     - omv install PyLEMS_NeuroML2
     - omv install NetPyNE
-    - omv list-engines
+    - omv list-engines -V
     
 

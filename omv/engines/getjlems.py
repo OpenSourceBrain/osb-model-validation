@@ -15,5 +15,6 @@ def install_jlems():
     path = os.path.join(install_root,'jLEMS')
     
     with working_dir(path):
+        print(co(['git', 'checkout', 'development']))
         print(co(['mvn', 'install']))
         inform('Successfully installed jLEMS', indent=2, verbosity=1)

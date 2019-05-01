@@ -13,7 +13,7 @@ class NetPyNEEngine(OMVEngine):
     name = "NetPyNE"
 
     @staticmethod
-    def is_installed(version, silent=False):
+    def is_installed(version, silent=True):
         if is_verbose():
             inform("Checking whether the engine %s has been installed correctly..." %
                    NetPyNEEngine.name, indent=1)
@@ -26,15 +26,20 @@ class NetPyNEEngine(OMVEngine):
             
             if ret and is_verbose():
                 inform("%s is correctly installed..." % (NetPyNEEngine.name), indent=2)
+                
+            if ret:
+                ret = 'v%s'%ret_str.strip()
+                
         except Exception as err:
             inform("Couldn't import netpyne into Python: ", err, indent=1)
             ret = False
             
-        installed = ret and PyNRNEngine.is_installed(None) and PyNeuroMLEngine.is_installed(None)
+        if not PyNRNEngine.is_installed(None) or not PyNeuroMLEngine.is_installed(None):
+            ret = False
         
         if not silent:
             inform("NetPyNE is_installed: %s"%ret, "", indent=1)
-        return installed
+        return ret
         
     @staticmethod
     def install(version):

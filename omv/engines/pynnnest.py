@@ -2,6 +2,7 @@ import os
 import subprocess as sp
 
 from omv.engines.nestsli import NestEngine
+from omv.engines.pynest import PyNestEngine
 from omv.engines.pynn import PyNNEngine
 
 from omv.common.inout import inform, trim_path, check_output, is_verbose
@@ -17,13 +18,13 @@ class PyNNNestEngine(PyNNEngine):
         if is_verbose():
             inform("Checking whether %s is installed..." %
                    PyNNNestEngine.name, indent=1)
-        return PyNNEngine.is_installed(None) and NestEngine.is_installed(None)
+        return PyNNEngine.is_installed(None) and PyNestEngine.is_installed(None)
         
     @staticmethod
     def install(version):
-        if not NestEngine.is_installed(None):
-            NestEngine.install(None)
-            inform("%s installed Nest..." % PyNNNestEngine.name, indent=2, verbosity =1)
+        if not PyNestEngine.is_installed(None):
+            PyNestEngine.install(version)  # interpret version as version of NEST!
+            inform("%s installed PyNest..." % PyNNNestEngine.name, indent=2, verbosity =1)
         if not PyNNEngine.is_installed(None):
             PyNNEngine.install(None)
             inform("%s installed PyNN..." % PyNNNestEngine.name, indent=2, verbosity =1)

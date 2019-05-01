@@ -22,7 +22,7 @@ class PyNNBrian1Engine(PyNNEngine):
     @staticmethod
     def install(version):
         if not Brian1Engine.is_installed(None):
-            Brian1Engine.install(None)
+            Brian1Engine.install(version)  # interpret version as version of Brian!
             inform("%s installed Brian..." % PyNNBrian1Engine.name, indent=2, verbosity =1)
         if not PyNNEngine.is_installed(None):
             PyNNEngine.install(None)

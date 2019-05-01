@@ -11,11 +11,13 @@ class Brian1Engine(OMVEngine):
 
     @staticmethod
     def is_installed(version):
-        ret = True
+        ret = False
         try:
             import brian
             if is_verbose():
                 inform("Brian version %s is correctly installed..." % brian.__version__, indent=2)
+                
+            ret = 'v%s'%brian.__version__
             
         except Exception as err:
             inform("Couldn't import Brian into Python: ", err, indent=1)

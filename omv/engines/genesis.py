@@ -25,7 +25,7 @@ class GenesisEngine(OMVEngine):
                 ['genesis', '-nox', '-batch', '-notty', temp.name])
             m = re.search(b'version:\s*([0-9]*\.?[0-9]+)\s*', out)
             if m:
-                ret = m.groups()[0]
+                ret = 'v%s'%m.groups()[0]
                 inform("Found GENESIS in path, version %s" % ret,
                         verbosity=1, indent=2)
         except OSError:

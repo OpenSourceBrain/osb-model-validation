@@ -14,11 +14,11 @@ class NeuronEngine(OMVEngine):
     name = "NEURON"
 
     def __init__(self, target, do_not_check_install=False, engine_version=None):
-        super(NeuronEngine, self).__init__(target, do_not_check_install)
+        super(NeuronEngine, self).__init__(target, do_not_check_install, engine_version)
         
-        inform("Checking whether %s is already installed..." % self.name,
+        inform("Checking whether %s (v %s) is already installed..." % (self.name, engine_version),
                    indent=1, verbosity=1)
-        if not self.is_installed(engine_version):
+        if not self.is_installed(''):
             try:
                 self.install(engine_version)
             except Exception as e:
@@ -50,14 +50,15 @@ class NeuronEngine(OMVEngine):
         
         return environment_vars, path
 
-    @classmethod
-    def is_installed(cls, version):
+    @staticmethod
+    def is_installed(version):
         ret = True
         
         try:
-            output = check_output(['nrniv', '--version'])
+            output = check_output(['nrniv', '--version'],verbosity=1)
             if is_verbose():
                 inform('%s was already installed locally'%output.strip(), indent=2)
+            ret = 'v%s'%output.split()[3]
         except OSError:
             try:
                 environment_vars, path = NeuronEngine.get_nrn_environment()
@@ -66,19 +67,21 @@ class NeuronEngine(OMVEngine):
                 output = check_output([path+'/nrniv', '--version'])
                 if is_verbose():
                     inform('%s was already installed (by OMV..?)'%output.strip(), indent=2)
+                    
+                ret = 'v%s'%output.split()[3]
             except OSError:
                     inform('NEURON not currently installed', indent=2)
                     ret = False
         return ret
  
     @classmethod
-    def install(cls, engine_version):
+    def install(cls, version):
         import getnrn
         
         cls.environment_vars, cls.path = NeuronEngine.get_nrn_environment()
         
         inform('Will fetch and install the latest NEURON version', indent=2)
-        getnrn.install_neuron()
+        getnrn.install_neuron(version)
 
 
     @classmethod

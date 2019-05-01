@@ -6,7 +6,7 @@ from omv.tally import Tallyman
 import sys
 
 
-def parse_omt(omt_path, do_not_run=False):
+def parse_omt(omt_path, do_not_run=False, engine_version=None):
     inform('')
     action = 'Running'
     if do_not_run:
@@ -18,7 +18,10 @@ def parse_omt(omt_path, do_not_run=False):
     if not mepomt.engine in OMVEngines:
         inform("Error! Unrecognised engine: %s (try running: omv list-engines)"%mepomt.engine)
         exit(1)
-    engine = OMVEngines[mepomt.engine](mepomt.modelpath, do_not_run)
+    engine = OMVEngines[mepomt.engine](mepomt.modelpath, 
+                                       do_not_check_install=do_not_run, 
+                                       engine_version=engine_version)
+                                       
     experiments = [exp for exp in mepomt.generate_exps(engine)]
     
     tally = Tallyman(mepomt)

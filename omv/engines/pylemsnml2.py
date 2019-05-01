@@ -21,7 +21,10 @@ class PyLemsNeuroML2Engine(OMVEngine):
                
         nml2_installed = os.path.isdir(default_nml2_dir)
                
-        return PyLemsEngine.is_installed(None) and nml2_installed
+        if nml2_installed and PyLemsEngine.is_installed(None):
+            return PyLemsEngine.is_installed(None)
+        else:
+            return False
         
     def install(self, version):
         

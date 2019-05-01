@@ -19,7 +19,8 @@ class OMVEngine(object):
 
     def __init__(self, target, do_not_check_install, engine_version=None):
         if not do_not_check_install:
-            inform("Checking whether OMVEngine: %s is already installed..." % self.name,
+            inform("Checking whether OMVEngine: %s (version: %s) is already installed..." % (self.name,
+            engine_version if engine_version else 'DEFAULT'),
                    indent=1, verbosity=1)
             if not self.is_installed(engine_version):
                 try:
