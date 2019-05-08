@@ -76,7 +76,7 @@ class NeuronEngine(OMVEngine):
  
     @classmethod
     def install(cls, version):
-        import getnrn
+        import omv.engines.getnrn
         
         cls.environment_vars, cls.path = NeuronEngine.get_nrn_environment()
         
