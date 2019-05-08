@@ -37,12 +37,12 @@ class GenesisEngine(OMVEngine):
 
     @classmethod
     def install(cls, engine_version):
-        import omv.engines.getgenesis
+        from omv.engines.getgenesis import install_genesis
         home = os.environ['HOME']
         cls.path = os.path.join(home, 'genesis',
                                 'genesis2.4gamma-master', 'src')
         inform('Will fetch and install genesis-2.4', indent=1)
-        getgenesis.install_genesis()
+        install_genesis()
 
     def run(self):
         from pkg_resources import resource_filename
