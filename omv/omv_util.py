@@ -51,6 +51,8 @@ def main():
 
     elif arguments['all']:
         try:
+            if platform.python_version_tuple()[0]=='3':
+                inform("Python 3. Ignoring tests for non Py3 compatible engines: %s"%arguments['--ignore-non-py3'])
             test_all(only_this_engine=arguments['--engine'], ignore_non_py3=arguments['--ignore-non-py3'])
         except AssertionError:
             inform("Failed due to non passing tests")

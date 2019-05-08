@@ -10,6 +10,8 @@ from omv.engines.engine import EngineExecutionError
 class JNeuroMLBrianEngine(JNeuroMLEngine):
 
     name = "jNeuroML_Brian"
+    
+    python3_compatible = False
 
     @staticmethod
     def is_installed(version):

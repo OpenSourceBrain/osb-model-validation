@@ -32,12 +32,14 @@ python:
 
 env:
     - OMV_ENGINE=PyNN_Brian1
+    - OMV_ENGINE=jNeuroML
     - OMV_ENGINE=jNeuroML_validate
 
 
 install:
     - python setup.py install
-    - pip install matplotlib --upgrade # To ensure matplotlib 2.x
+    - pip install matplotlib --upgrade # To ensure matplotlib 2.x 
+    - pip install numpy scipy # Why is this needed? Scipy doesn't seem to get installed correctly on trusty with addons above...
 
 script:
     - omv list-engines -V
