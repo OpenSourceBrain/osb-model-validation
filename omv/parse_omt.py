@@ -4,9 +4,10 @@ from omv.omt_mep_parser import OMVTestParser
 from omv.common.inout import inform, check, trim_path
 from omv.tally import Tallyman
 import sys
+import platform
 
 
-def parse_omt(omt_path, do_not_run=False, engine_version=None):
+def parse_omt(omt_path, do_not_run=False, engine_version=None, ignore_non_py3=False):
     inform('')
     action = 'Running'
     if do_not_run:
@@ -27,8 +28,16 @@ def parse_omt(omt_path, do_not_run=False, engine_version=None):
     tally = Tallyman(mepomt)
     
     inform('Found %i experiment(s) to run on engine: %s '%(len(experiments), engine.name), indent=1)
+    #print('%s, %s, %s'%(platform.python_version_tuple()[0],ignore_non_py3,engine.python3_compatible))
     
-    if not do_not_run:
+    if platform.python_version_tuple()[0]=='3' and \
+       ignore_non_py3 and \
+       not engine.python3_compatible:
+           
+        inform('Not running experiment(s) on: %s, as this is Python %s and engine is not Python 3 compatible...'%(engine.name, platform.python_version()), indent=1)
+        tally.report_passing_if_no_exps = True
+    
+    elif not do_not_run:
         try:
             engine.run()
             some_failed = False

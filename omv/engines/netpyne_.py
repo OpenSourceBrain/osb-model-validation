@@ -22,13 +22,14 @@ class NetPyNEEngine(OMVEngine):
         try:
             
             ret_str = sp.check_output(['python -c "import netpyne; print(netpyne.__version__)"'], shell=True,stderr=sp.STDOUT)
+            
             ret = len(ret_str) > 0
             
             if ret and is_verbose():
                 inform("%s is correctly installed..." % (NetPyNEEngine.name), indent=2)
                 
             if ret:
-                ret = 'v%s'%ret_str.strip()
+                ret = 'v%s'%str(ret_str.strip())
                 
         except Exception as err:
             inform("Couldn't import netpyne into Python: ", err, indent=1)

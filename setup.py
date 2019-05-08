@@ -1,7 +1,11 @@
 from setuptools import setup, find_packages
+
+import omv
+version = omv.__version__
+
 setup(
     name='OSBModelValidation',
-    version='0.1.3',
+    version=version,
     author='Boris Marin',
     author_email='borismarin@gmail.com',
     packages=find_packages(),

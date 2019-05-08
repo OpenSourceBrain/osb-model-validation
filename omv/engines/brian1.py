@@ -8,6 +8,8 @@ from omv.engines.engine import OMVEngine, EngineExecutionError
 class Brian1Engine(OMVEngine):
     
     name = "Brian"
+    
+    python3_compatible = False
 
     @staticmethod
     def is_installed(version):

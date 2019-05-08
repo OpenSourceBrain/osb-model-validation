@@ -5,7 +5,7 @@ from omv.common.inout import load_yaml, inform, trim_path, is_verbose
 from omv.tally import TallyHolder
 
 
-def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
+def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False, ignore_non_py3=False):
     cwd = Path(getcwd())
     all_omts = [p.as_posix() for p in cwd.glob('**/*.omt')]
     if include_temp_tests:
@@ -14,7 +14,7 @@ def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
     th = TallyHolder()
     if environ.get('TRAVIS'):
         if not environ.get('OMV_ENGINE'):
-            tallies = [parse_omt(t) for t in all_omts]
+            tallies = [parse_omt(t, ignore_non_py3=ignore_non_py3) for t in all_omts]
         else:
             engine = environ.get('OMV_ENGINE').lower()
             engine_version=None
@@ -22,13 +22,13 @@ def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
                 ee = engine.split(':')
                 engine = ee[0]
                 engine_version = ee[1]
-            tallies = [parse_omt(t, engine_version=engine_version)
+            tallies = [parse_omt(t, engine_version=engine_version, ignore_non_py3=ignore_non_py3)
                        for t in all_omts
                        if load_yaml(t)['engine'].lower() == engine]
     elif only_this_engine:
         
         inform('Only running tests for engine: %s'%only_this_engine)
-        tallies = [parse_omt(t)
+        tallies = [parse_omt(t, ignore_non_py3=ignore_non_py3)
                    for t in all_omts
                    if load_yaml(t)['engine'].lower() == only_this_engine.lower()]
     else:
@@ -37,7 +37,7 @@ def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False):
         for i in range(len(all_omts)):
             t = all_omts[i]
             inform('')
-            tally = parse_omt(t, do_not_run)
+            tally = parse_omt(t, do_not_run, ignore_non_py3=ignore_non_py3)
             if not tally.all_passed(): failed+=1
             if not do_not_run:
                 inform('')

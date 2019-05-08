@@ -42,7 +42,10 @@ install:
 script:
     - omv list-engines -V
     - cd utilities/tests
-    - omv all -V; export OMV_SUCCESS=$?; echo $OMV_SUCCESS
+    
+    # Note --ignore-non-py3  --> doesn't install simulator or run tests or cause failure if simulator itself is not Python 3 compatible...
+    - omv all -V --ignore-non-py3; export OMV_SUCCESS=$?; echo $OMV_SUCCESS
+    
     - omv list-engines -V
     
     - echo "Finished all OMV tests on *.omt files which have been found"

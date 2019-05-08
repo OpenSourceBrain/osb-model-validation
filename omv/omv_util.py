@@ -2,7 +2,7 @@
 ============================================
 
   Usage:
-    omv all [-V | --verbose] [--engine=engine]
+    omv all [-V | --verbose] [--engine=engine] [--ignore-non-py3]
     omv all_ [-V | --verbose] [--engine=engine]
     omv test <testMe.omt> [-V | --verbose]
     omv autogen [options]
@@ -15,11 +15,12 @@
     omv --version
 
   Options:
-    -h --help     Show this screen.
-    -d --dryrun   Generate dry-run tests only [default: False].
-    -V --verbose  Display additional diagnosis messages [default: False].
-    --version     Show version.
-    -y            Auto-select default options (non-interactive mode)
+    -h --help         Show this screen.
+    -d --dryrun       Generate dry-run tests only [default: False].
+    -V --verbose      Display additional diagnosis messages [default: False].
+    --version         Show version.
+    --ignore-non-py3  If Python 3, ignore tests on non Py3 compatible engines [default: False]
+    -y                Auto-select default options (non-interactive mode)
 """
 from docopt import docopt
 from omv.find_tests import test_all, test_one
@@ -28,14 +29,16 @@ from omv.autogen import autogen
 from omv.engines import OMVEngines
 from omv.common.inout import inform
 import os
+import platform
 
 from omv.common.inout import set_verbosity
 
+from omv import __version__ as version
 
 def main():
-    arguments = docopt(__doc__, version='OpenSourceBrain Model Validation 0.1.3')
+    arguments = docopt(__doc__, version='OpenSourceBrain Model Validation %s'%version)
     set_env_vars()
-
+    
     if arguments['--verbose']:
         set_verbosity(1)
 
@@ -48,7 +51,7 @@ def main():
 
     elif arguments['all']:
         try:
-            test_all(only_this_engine=arguments['--engine'])
+            test_all(only_this_engine=arguments['--engine'], ignore_non_py3=arguments['--ignore-non-py3'])
         except AssertionError:
             inform("Failed due to non passing tests")
             exit(1)
@@ -56,7 +59,7 @@ def main():
     # Includes *.omt_, i.e. temporary test files
     elif arguments['all_']:
         try:
-            test_all(only_this_engine=arguments['--engine'],include_temp_tests=True)
+            test_all(only_this_engine=arguments['--engine'],include_temp_tests=True, ignore_non_py3=arguments['--ignore-non-py3'])
         except AssertionError:
             inform("Failed due to non passing tests")
             exit(1)
@@ -192,10 +195,11 @@ def main():
         inform('The following engines are currently supported by OMV:')
         inform('')
         for engine in engines:
-            inform('  %s%s(installed: %s)'%(engine, ' '*(30-len(engine)), installed[engine]))
+            py3_info = '' if OMVEngines[engine].python3_compatible else '; non Py3 compatible'
+            inform('  %s%s(installed: %s%s)'%(engine, ' '*(30-len(engine)), installed[engine], py3_info))
         inform('')
         if arguments['--verbose']:
-            inform('Additional Python packages:')
+            inform('Additional Python (v%s) packages:'%platform.python_version())
             inform('')
             for m in ['matplotlib','numpy','pandas','scipy','sympy','tables','neo','lazyarray','pyelectro','pyneuroml','neuroml']:
                 installed_ver = False

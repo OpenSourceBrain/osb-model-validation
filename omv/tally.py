@@ -9,9 +9,10 @@ class Tallyman(object):
         self.engine = mepomt.engine
         self.modelpath = mepomt.modelpath
         self.experiments = {}
+        self.report_passing_if_no_exps = False
 
     def all_passed(self):
-        alltrue = True if any(self.experiments) else False
+        alltrue = True if any(self.experiments) else self.report_passing_if_no_exps
         for res in self.experiments.values():
             alltrue = alltrue and all(res.values())
         return alltrue

@@ -1,6 +1,7 @@
 from os.path import realpath
 from os import environ
 from omv.common.inout import inform
+import platform
 
 
 class EngineInstallationError(Exception):
@@ -16,6 +17,8 @@ class OMVEngine(object):
     name = 'Name not yet set!'
     environment_vars = {}
     path = ''
+    
+    python3_compatible = True # Most are so override only in those that aren't
 
     def __init__(self, target, do_not_check_install, engine_version=None):
         if not do_not_check_install:
@@ -24,9 +27,13 @@ class OMVEngine(object):
                    indent=1, verbosity=1)
             if not self.is_installed(engine_version):
                 try:
-                    self.install(engine_version)
-                    self.set_environment()
-                    self.set_path()
+                    if platform.python_version_tuple()[0]=='3' and \
+                        not self.python3_compatible:
+                        inform("Not installing %s due to Python 3 incompatibility. Tests will throw error unless option --ignore-non-py3 specified"%self.name)
+                    else:
+                        self.install(engine_version)
+                        self.set_environment()
+                        self.set_path()
                 except Exception as e:
                     inform("Installation err: %s"%e)
                     raise(EngineInstallationError(e))
