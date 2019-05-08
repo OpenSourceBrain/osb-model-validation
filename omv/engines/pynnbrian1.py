@@ -11,6 +11,7 @@ from omv.engines.engine import EngineExecutionError
 class PyNNBrian1Engine(PyNNEngine):
     
     name = "PyNN_Brian1"
+    python3_compatible = Brian1Engine.python3_compatible
 
     @staticmethod
     def is_installed(version):
