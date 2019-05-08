@@ -35,6 +35,7 @@ env:
     - OMV_ENGINE=PyNEURON
     - OMV_ENGINE=NetPyNE
     - OMV_ENGINE=jNeuroML_NEURON
+    - OMV_ENGINE=DIRECT_ENGINE_INSTALL
     
 
 install:
