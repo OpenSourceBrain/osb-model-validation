@@ -194,7 +194,7 @@ def main():
             installed[engine] = OMVEngines[engine].is_installed('')
             
         inform('')
-        inform('The following engines are currently supported by OMV:')
+        inform('The following engines are currently supported by OMV (v%s):'%version)
         inform('')
         for engine in engines:
             py3_info = '' if OMVEngines[engine].python3_compatible else '; non Py3 compatible'

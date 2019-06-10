@@ -161,7 +161,7 @@ def get_spike_rate(spikes):
         isis.append(isi)
         tot_isi+=isi
         
-    rate = tot_isi/len(isis)
+    rate = 1/ (tot_isi/len(isis))
     #print('Spikes: %s, ISIs: %s, rate: %s'%(spikes, isis, rate))
 
     return rate
