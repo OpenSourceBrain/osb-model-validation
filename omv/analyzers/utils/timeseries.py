@@ -21,6 +21,20 @@ def load_data_file(fname, columns=(0, 1), header_lines=0, scaling=1):
     return ts * scaling
 
 
+def load_spike_file(fname, format='ID_TIME', id=0):
+    from numpy import loadtxt
+    ts = loadtxt(fname)
+    spikes = []
+    for l in ts:
+        if format=='ID_TIME':
+            if l[0]==id:
+                spikes.append(l[1])
+        elif format=='TIME_ID':
+            if l[1]==id:
+                spikes.append(l[0])
+    return spikes
+
+
 def compare_arrays(arrays, tolerance):
     from numpy import allclose, array, max, abs, atleast_1d
     
@@ -134,5 +148,22 @@ def test_detect_spikes():
 
     spk_idx = detect_spikes(xx, method='threshold', threshold=0.1)
     assert all(spk_idx == arange(4, len(xx), 4))
+    
+    
+def get_spike_rate(spikes):
+    
+    if spikes == []:
+        return 0
+    isis = []
+    tot_isi = 0
+    for si in range(len(spikes)-1):
+        isi = spikes[si+1] - spikes[si]
+        isis.append(isi)
+        tot_isi+=isi
+        
+    rate = tot_isi/len(isis)
+    #print('Spikes: %s, ISIs: %s, rate: %s'%(spikes, isis, rate))
+
+    return rate
 
 

@@ -36,7 +36,7 @@ class OMVAnalyzer(object):
             exp = self.parse_expected()
             
             if exp is None:
-                    inform("Could not determine expected values")
+                    inform("Could not determine expected values, value None")
                     return False
             if isinstance(exp, list):
                 for e in exp:

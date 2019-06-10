@@ -107,3 +107,4 @@ utilities/local_test
 /utilities/tests/hhcell.cell.json
 /utilities/tests/pulseGen1.input.json
 /testenv.sh
+*py.class

@@ -1,29 +1,19 @@
-from omv.analyzers.analyzer import OMVAnalyzer
+from omv.analyzers.spikes import SpikeAnalyzer
 from omv.analyzers.utils import timeseries as ts
-from omv.analyzers.utils import filenode as fn
 from omv.common.inout import inform
 from os import getcwd
 
 
-class SpikeAnalyzer(OMVAnalyzer):
+class RateAnalyzer(SpikeAnalyzer):
 
-    def before_running(self):
-        if 'file' in self.observable:
-            self.f = fn.FileNodeHelper(self.observable['file'], self.omt_root)
-            if self.f.tstamp:
-                inform('Attention! Preexistent datafile: ', self.f.filename,
-                       indent=2, verbosity=1)
-        if 'spiketimes file' in self.observable:
-            self.f = fn.SpikeFileNodeHelper(self.observable['spiketimes file'], self.omt_root)
-            if self.f.tstamp:
-                inform('Attention! Preexistent datafile: ', self.f.filename,
-                       indent=2, verbosity=1)
-
-    def parse_spikes(self, to_parse):
-        spikes = []
-        if isinstance(to_parse, list):
-            spikes = to_parse
+    def parse_spike_rates(self, to_parse):
+        
+        if isinstance(to_parse, float) or isinstance(to_parse, int):
+            rate = to_parse
+            
         elif 'file' in to_parse or 'spiketimes file' in to_parse:
+            
+            spikes = []
             if not self.f.exists():
                 inform('ERROR! Datafile %s does not exist (relative to %s)!'%
                         (self.f.filename, getcwd()), indent=2, verbosity=0, underline='-')
@@ -59,17 +49,22 @@ class SpikeAnalyzer(OMVAnalyzer):
                            indent=1, verbosity=1)
                            
                     spikes = self.f.get_spike_times()
+                    
+                rate = ts.get_spike_rate(spikes)
             else:
                 inform('ERROR! Preexistent datafile %s has not been updated!'
                        % self.f.filename, indent=2, verbosity=0, underline='-')
-                spikes = []
-        return spikes
+                rate = -1
+                
+        return rate
 
     def parse_expected(self):
-        return self.parse_spikes(self.expected)
+        print 'parse_expected'
+        return self.parse_spike_rates(self.expected)
 
     def parse_observable(self):
-        return self.parse_spikes(self.observable)
+        print 'parse_observable'
+        return self.parse_spike_rates(self.observable)
 
 
 
