@@ -1,0 +1,34 @@
+# Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
+ 
+target: LEMS_Tests.xml 
+engine: jNeuroML
+mep: .test.tests.mep
+experiments:
+    
+  spikeGenRegular50:
+    observables:
+      spike times:
+        spiketimes file: 
+          path: regular.all.spikes
+          format: ID_TIME
+          id: 0
+        tolerance: 3.4e-6
+        
+  spikeGenRegular50_rate:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: regular.all.spikes
+          format: ID_TIME
+          id: 0
+        tolerance: 3.4e-6
+
+  spikeGenRegular5_rate:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: regular.all.spikes
+          format: ID_TIME
+          id: 1
+        tolerance: 2.5640959896122696e-06
+

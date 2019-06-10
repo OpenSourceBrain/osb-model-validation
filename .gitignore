@@ -108,3 +108,9 @@ utilities/local_test
 /utilities/tests/pulseGen1.input.json
 /testenv.sh
 *py.class
+*_nrn.py
+/utilities/tests/spikes/*.spikes
+report*.txt
+/utilities/tests/spikes/*.mod
+/utilities/tests/spikes/*.dat
+/utilities/tests/spikes/x86_64
