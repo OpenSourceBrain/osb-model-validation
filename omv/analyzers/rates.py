@@ -59,11 +59,9 @@ class RateAnalyzer(SpikeAnalyzer):
         return rate
 
     def parse_expected(self):
-        print 'parse_expected'
         return self.parse_spike_rates(self.expected)
 
     def parse_observable(self):
-        print 'parse_observable'
         return self.parse_spike_rates(self.observable)
 
 

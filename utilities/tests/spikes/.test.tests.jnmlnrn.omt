@@ -27,5 +27,5 @@ experiments:
           path: regular.all.spikes
           format: ID_TIME
           id: 1
-        tolerance:  1.499998347753717e-11
+        tolerance:  2.49997875016561e-06
 
