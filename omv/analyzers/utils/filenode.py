@@ -58,6 +58,7 @@ class SpikeFileNodeHelper(FileNode):
         self.tstamp = self.get_timestamp()
         self.format = fn.get('format', 0)
         self.id = fn.get('id', 0)
+        self.scaling = fn.get('scaling', 1)
 
 
     def __str__(self):
@@ -66,7 +67,7 @@ class SpikeFileNodeHelper(FileNode):
                     'id': str(self.id)})
     
     def get_spike_times(self):
-        return load_spike_file(self.filename, self.format, self.id)
+        return load_spike_file(self.filename, self.format, self.id, self.scaling)
 
 
 

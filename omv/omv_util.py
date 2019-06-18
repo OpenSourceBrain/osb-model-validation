@@ -171,6 +171,9 @@ def main():
             elif eng.lower() == 'NEST'.lower():
                 from omv.engines.getnest import install_nest
                 install_nest(engine_version)
+            elif eng.lower() == 'PyNEST'.lower():
+                from omv.engines.getnest import install_nest
+                install_nest(engine_version)
             elif eng.lower() == 'PyNN'.lower():
                 from omv.engines.getpynn import install_pynn
                 install_pynn()
@@ -210,7 +213,7 @@ def main():
                     installed_ver = eval('%s.__version__'%m)
                 except:
                     pass
-                inform('  %s%s(installed: %s)'%(m, ' '*(30-len(m)), installed_ver))
+                inform('  %s%s(installed: v%s)'%(m, ' '*(30-len(m)), installed_ver))
             inform('')
 
     elif arguments['autogen']:

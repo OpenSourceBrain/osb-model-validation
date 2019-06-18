@@ -21,17 +21,17 @@ def load_data_file(fname, columns=(0, 1), header_lines=0, scaling=1):
     return ts * scaling
 
 
-def load_spike_file(fname, format='ID_TIME', id=0):
+def load_spike_file(fname, format='ID_TIME', id=0, scaling=1.0):
     from numpy import loadtxt
     ts = loadtxt(fname)
     spikes = []
     for l in ts:
         if format=='ID_TIME':
             if l[0]==id:
-                spikes.append(l[1])
+                spikes.append(l[1]*scaling)
         elif format=='TIME_ID':
             if l[1]==id:
-                spikes.append(l[0])
+                spikes.append(l[0]*scaling)
     return spikes
 
 
