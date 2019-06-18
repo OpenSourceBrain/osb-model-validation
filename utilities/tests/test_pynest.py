@@ -1,4 +1,4 @@
 import nest
 
-print("Test 2: NEST version: %s"%nest.version())
+print("Test 1: NEST version: %s"%nest.version())
 

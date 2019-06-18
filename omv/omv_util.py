@@ -171,6 +171,9 @@ def main():
             elif eng.lower() == 'NEST'.lower():
                 from omv.engines.getnest import install_nest
                 install_nest(engine_version)
+            elif eng.lower() == 'PyNEST'.lower():
+                from omv.engines.getnest import install_nest
+                install_nest(engine_version)
             elif eng.lower() == 'PyNN'.lower():
                 from omv.engines.getpynn import install_pynn
                 install_pynn()
