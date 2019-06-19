@@ -1,3 +1,6 @@
+
+from omv.common.inout import inform
+
 def detect_spikes(v, method='threshold', threshold=0.):
     from numpy import flatnonzero, bitwise_and, roll, diff, array
 
@@ -21,18 +24,23 @@ def load_data_file(fname, columns=(0, 1), header_lines=0, scaling=1):
     return ts * scaling
 
 
-def load_spike_file(fname, format='ID_TIME', id=0, scaling=1.0):
+
+def load_spike_file(fname, format='ID_TIME', ids=0, scaling=1.0):
     from numpy import loadtxt
     ts = loadtxt(fname)
-    spikes = []
+    spike_map = {}
     for l in ts:
         if format=='ID_TIME':
-            if l[0]==id:
-                spikes.append(l[1]*scaling)
+            t = l[1]*scaling
+            id = l[0]
         elif format=='TIME_ID':
-            if l[1]==id:
-                spikes.append(l[0]*scaling)
-    return spikes
+            t = l[0]*scaling
+            id = l[1]
+        if ids==id or ids=='*':
+            if not id in spike_map:
+                spike_map[id] = []
+            spike_map[id].append(t)
+    return spike_map
 
 
 def compare_arrays(arrays, tolerance):
@@ -150,20 +158,47 @@ def test_detect_spikes():
     assert all(spk_idx == arange(4, len(xx), 4))
     
     
-def get_spike_rate(spikes):
+def _get_single_spike_rate(spikes):
     
-    if spikes == []:
+    if len(spikes)==0:
         return 0
     isis = []
     tot_isi = 0
     for si in range(len(spikes)-1):
         isi = spikes[si+1] - spikes[si]
         isis.append(isi)
-        tot_isi+=isi
-        
-    rate = 1/ (tot_isi/len(isis))
-    #print('Spikes: %s, ISIs: %s, rate: %s'%(spikes, isis, rate))
-
+        tot_isi+=isi  
+    rate = 1/ (float(tot_isi)/len(isis))
+    inform('Spikes: %s, ISIs: %s, rate: %s'%(spikes, isis, rate),verbosity=2, indent=2)
     return rate
+    
+def get_spike_rate(spikes):
+        
+    if len(spikes)==0:
+        return 0
+    
+    if isinstance(spikes, list):
+        return _get_single_spike_rate(spikes)
+    
+    if isinstance(spikes, dict):
+        tot_rates = 0 
+        for s in spikes.values():
+            tot_rates += _get_single_spike_rate(s)
+        avg_rate = tot_rates/len(spikes)
+        inform('Calculated average of %i spike rate(s): %s'%(len(spikes), avg_rate),verbosity=1, indent=2)
+        return avg_rate
+
+
+if __name__ == '__main__':
+    
+    from omv.common.inout import set_verbosity
+    set_verbosity(2)
+    ts1 = [0.1,0.2,0.3,0.40]
+    ts2 = [0.1,0.3,0.50]
+    
+    print 'Rate: %s\n'%get_spike_rate(ts1)
+    print 'Rate: %s\n'%get_spike_rate(ts2)
+    print 'Rate: %s\n'%get_spike_rate({'0':ts1})
+    print 'Rate: %s\n'%get_spike_rate({'0':ts1, '1':ts2})
 
 

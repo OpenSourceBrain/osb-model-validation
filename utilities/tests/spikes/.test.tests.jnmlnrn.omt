@@ -10,7 +10,7 @@ experiments:
         spiketimes file: 
           path: regular.all.spikes
           format: ID_TIME
-          id: 0
+          ids: 0
         tolerance: 2.0000001999948003e-05
   spikeGenRegular50_rate:
     observables:
@@ -19,7 +19,7 @@ experiments:
           path: regular.all.spikes
           format: ID_TIME
           scaling: 1
-          id: 0
+          ids: 0
         tolerance: 1.9999582580076946e-05
   spikeGenRegular5_rate:
     observables:
@@ -28,6 +28,6 @@ experiments:
           path: regular.all.spikes
           format: ID_TIME
           scaling: 1
-          id: 1
+          ids: 1
         tolerance:  2.49997875016561e-06
 

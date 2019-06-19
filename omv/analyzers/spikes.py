@@ -57,8 +57,13 @@ class SpikeAnalyzer(OMVAnalyzer):
                 elif 'spiketimes file' in to_parse:
                     inform('Reading spiketimes from: ', self.f,
                            indent=1, verbosity=1)
-                           
-                    spikes = self.f.get_spike_times()
+                    all_spikes = self.f.get_spike_times()
+                    if len(all_spikes)!=1:
+                        inform('ERROR! Spike times file %s should contain only spikes for one cell!'
+                           % (self.f.filename), indent=2, verbosity=0, underline='-')
+                        return None
+                    
+                    spikes = all_spikes.values()[0]
             else:
                 inform('ERROR! Preexistent datafile %s has not been updated!'
                        % self.f.filename, indent=2, verbosity=0, underline='-')
