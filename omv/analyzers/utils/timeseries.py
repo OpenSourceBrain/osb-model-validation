@@ -196,9 +196,9 @@ if __name__ == '__main__':
     ts1 = [0.1,0.2,0.3,0.40]
     ts2 = [0.1,0.3,0.50]
     
-    print 'Rate: %s\n'%get_spike_rate(ts1)
-    print 'Rate: %s\n'%get_spike_rate(ts2)
-    print 'Rate: %s\n'%get_spike_rate({'0':ts1})
-    print 'Rate: %s\n'%get_spike_rate({'0':ts1, '1':ts2})
+    print('Rate: %s\n'%get_spike_rate(ts1))
+    print('Rate: %s\n'%get_spike_rate(ts2))
+    print('Rate: %s\n'%get_spike_rate({'0':ts1}))
+    print('Rate: %s\n'%get_spike_rate({'0':ts1, '1':ts2}))
 
 

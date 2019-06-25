@@ -210,10 +210,10 @@ def main():
                 installed_ver = False
                 try:
                     exec('import %s'%m)
-                    installed_ver = eval('%s.__version__'%m)
+                    installed_ver = 'v%s'%eval('%s.__version__'%m)
                 except:
                     pass
-                inform('  %s%s(installed: v%s)'%(m, ' '*(30-len(m)), installed_ver))
+                inform('  %s%s(installed: %s)'%(m, ' '*(30-len(m)), installed_ver))
             inform('')
 
     elif arguments['autogen']:

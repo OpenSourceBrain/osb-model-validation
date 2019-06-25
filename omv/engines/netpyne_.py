@@ -25,6 +25,9 @@ class NetPyNEEngine(OMVEngine):
             
             ret = len(ret_str) > 0
             
+            if isinstance(ret_str, bytes):
+                ret_str = ret_str.decode('utf-8')
+            
             if ret and is_verbose():
                 inform("%s is correctly installed..." % (NetPyNEEngine.name), indent=2)
                 

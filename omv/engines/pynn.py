@@ -17,6 +17,9 @@ class PyNNEngine(OMVEngine):
             ret_str = sp.check_output(['python -c "import pyNN; print(pyNN.__version__)"'], shell=True,stderr=sp.STDOUT)
             ret = len(ret_str) > 0
             
+            if isinstance(ret_str, bytes):
+                ret_str = ret_str.decode('utf-8')
+            
             ret = 'v%s'%ret_str.strip()
             if is_verbose():
                 inform("pyNN %s is correctly installed..." % ret, indent=2)
