@@ -206,7 +206,7 @@ def main():
         if arguments['--verbose']:
             inform('Additional Python (v%s) packages:'%platform.python_version())
             inform('')
-            for m in ['matplotlib','numpy','pandas','scipy','sympy','tables','neo','lazyarray','pyelectro','pyneuroml','neuroml']:
+            for m in ['matplotlib','numpy','pandas','scipy','sympy','tables','neo','lazyarray','pyelectro','pyneuroml','neuroml','neuromllite']:
                 installed_ver = False
                 try:
                     exec('import %s'%m)
