@@ -87,7 +87,9 @@ def check_output(cmds, cwd='.', shell=False, verbosity=0):
     try:
         ret_string = sp.check_output(cmds, cwd=cwd, shell=shell)
         inform("Commands: %s completed successfully"%(cmds), indent=2, verbosity=verbosity)
-        return str(ret_string) # For Python 3...
+        if isinstance(ret_string, bytes):
+                ret_string = ret_string.decode('utf-8') # For Python 3...
+        return ret_string
         
     except sp.CalledProcessError as err:
         inform("Error running commands: %s in %s (return code: %s)"%(cmds, cwd,err.returncode), indent=2, verbosity=verbosity)

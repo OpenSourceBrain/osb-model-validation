@@ -7,6 +7,9 @@ experiments:
     spikeGenRegular50_rate:
         expected:
             spike rate: 20
+    spikeGenRegular_rate_all:
+        expected:
+            spike rate: 110
     spikeGenRegular5_rate:
         expected:
             spike rate: 200

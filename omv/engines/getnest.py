@@ -28,7 +28,7 @@ def install_nest(version):
             
     with working_dir(nestpath2):
         check_output(["cmake", "-DCMAKE_INSTALL_PREFIX:PATH=%s"%(nestinstallpath)])
-        check_output(['make'])
+        check_output(['make','-j4'])
         check_output(['make', 'install'])
         
 

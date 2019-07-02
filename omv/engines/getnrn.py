@@ -24,7 +24,7 @@ def install_neuron(version):
         path = os.getcwd()
         pyexec = sys.executable
         co(["./configure --prefix=%s --without-iv --with-nrnpython=%s"%(path,pyexec)], shell=True)
-        print(co(['make']))
+        print(co(['make','-j4']))
         print(co(['make', 'install']))
 
         os.chdir('src/nrnpython')

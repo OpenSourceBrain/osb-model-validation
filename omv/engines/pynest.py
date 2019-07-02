@@ -23,7 +23,12 @@ class PyNestEngine(OMVEngine):
             ret = len(ret_str) > 0
             
             if ret:
-                ret = 'v%s'%ret_str.split('Version')[-1].split()[0]
+                ret_str = ret_str.strip().split('\n')[-1]
+                #print('NEST info: %s; <<%s>>'%(ret, ret_str))
+                if 'Version' in ret_str:
+                    ret = 'v%s'%ret_str.split('Version')[-1].split()[0]
+                else:
+                    ret = 'v%s'%ret_str.split()[-1]
             
             if ret and is_verbose():
                 inform("%s is correctly installed..." % (PyNestEngine.name), indent=2)

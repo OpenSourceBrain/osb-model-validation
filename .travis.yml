@@ -35,7 +35,9 @@ virtualenv:
 
 env:
 
+    - OMV_ENGINE=Moose
     - OMV_ENGINE=PyNEST
+    - OMV_ENGINE=PyNEURON:7.6
     
     - OMV_ENGINE=PyNN_Nest
     

@@ -14,7 +14,7 @@ def install_moose():
         
     with working_dir(os.path.join(install_root,'moose-core/build_')):
         print(check_output(['cmake', '..']))
-        print(check_output(['make']))
+        print(check_output(['make','-j4']))
         print(check_output(['make', 'install']))
         
     with working_dir(os.path.join(install_root,'moose-core/build_/python')):
