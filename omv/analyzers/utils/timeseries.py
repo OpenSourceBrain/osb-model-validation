@@ -162,6 +162,8 @@ def _get_single_spike_rate(spikes):
     
     if len(spikes)==0:
         return 0
+    if len(spikes)==1:
+        return 0
     isis = []
     tot_isi = 0
     for si in range(len(spikes)-1):
@@ -182,10 +184,13 @@ def get_spike_rate(spikes):
     
     if isinstance(spikes, dict):
         tot_rates = 0 
+        all_rates = []
         for s in spikes.values():
-            tot_rates += _get_single_spike_rate(s)
+            r = _get_single_spike_rate(s)
+            all_rates.append(r)
+            tot_rates += r
         avg_rate = tot_rates/len(spikes)
-        inform('Calculated average of %i spike rate(s): %s'%(len(spikes), avg_rate),verbosity=1, indent=2)
+        inform('Calculated average of %i spike rate(s): %s %s'%(len(spikes), avg_rate, all_rates),verbosity=1, indent=2)
         return avg_rate
 
 
