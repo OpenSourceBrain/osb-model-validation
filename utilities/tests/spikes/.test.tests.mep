@@ -23,3 +23,6 @@ experiments:
     spike_iaf2:
         expected:
             spike rate: 0
+    spike_iaf_all:
+        expected:
+            spike rate: 143.19776723927868

@@ -55,4 +55,12 @@ experiments:
           format: ID_TIME
           ids: 2
         tolerance: 0
+  spike_iaf_all:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: iafs.spikes
+          format: ID_TIME
+          ids: '*'
+        tolerance: 0
 

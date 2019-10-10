@@ -158,11 +158,13 @@ def test_detect_spikes():
     assert all(spk_idx == arange(4, len(xx), 4))
     
     
-def _get_single_spike_rate(spikes):
+def _get_single_spike_rate(spikes, method, start_time, end_time):
     
     if len(spikes)==0:
+        inform('No spikes! rate: 0',verbosity=2, indent=2)
         return 0
     if len(spikes)==1:
+        inform('Only 1 spike! rate: 0',verbosity=2, indent=2)
         return 0
     isis = []
     tot_isi = 0
@@ -171,26 +173,29 @@ def _get_single_spike_rate(spikes):
         isis.append(isi)
         tot_isi+=isi  
     rate = 1/ (float(tot_isi)/len(isis))
-    inform('Spikes: %s, ISIs: %s, rate: %s'%(spikes, isis, rate),verbosity=2, indent=2)
+    inform('Spikes (%i): %s, ISIs: %s, rate: %s'%(len(spikes), spikes, isis, rate),verbosity=2, indent=2)
     return rate
     
-def get_spike_rate(spikes):
+ISI_BASED_SPIKERATE_CALC = 'isi based'
+DURATION_BASED_SPIKERATE_CALC = 'duration based'
+
+def get_spike_rate(spikes, method=ISI_BASED_SPIKERATE_CALC, start_time=None, end_time=None):
         
     if len(spikes)==0:
         return 0
     
     if isinstance(spikes, list):
-        return _get_single_spike_rate(spikes)
+        return _get_single_spike_rate(spikes, method, start_time, end_time)
     
     if isinstance(spikes, dict):
         tot_rates = 0 
         all_rates = []
         for s in spikes.values():
-            r = _get_single_spike_rate(s)
+            r = _get_single_spike_rate(s, method, start_time, end_time)
             all_rates.append(r)
             tot_rates += r
         avg_rate = float(tot_rates)/len(spikes)
-        inform('Calculated average of %i spike rate(s): %s %s'%(len(spikes), avg_rate, all_rates),verbosity=1, indent=2)
+        inform('Calculated average of %i spike rate(s) with method "%s": %s %s'%(len(spikes), method, avg_rate, all_rates),verbosity=1, indent=2)
         return avg_rate
 
 
@@ -198,12 +203,24 @@ if __name__ == '__main__':
     
     from omv.common.inout import set_verbosity
     set_verbosity(2)
+    
+    tsNone = []
+    tsA = [0.1]
+    tsB = [0.1, 0.2]
+    
     ts1 = [0.1,0.2,0.3,0.40]
     ts2 = [0.1,0.3,0.50]
     
-    print('Rate: %s\n'%get_spike_rate(ts1))
-    print('Rate: %s\n'%get_spike_rate(ts2))
-    print('Rate: %s\n'%get_spike_rate({'0':ts1}))
-    print('Rate: %s\n'%get_spike_rate({'0':ts1, '1':ts2}))
+    methods = [ISI_BASED_SPIKERATE_CALC, DURATION_BASED_SPIKERATE_CALC]
+    
+    for method in methods:
+
+        inform(' > Rate: %s\n'%get_spike_rate(tsNone, method), indent=2)
+        inform(' > Rate: %s\n'%get_spike_rate(tsA, method), indent=2)
+        inform(' > Rate: %s\n'%get_spike_rate(tsB, method), indent=2)
+        inform(' > Rate: %s\n'%get_spike_rate(ts1, method), indent=2)
+        inform(' > Rate: %s\n'%get_spike_rate(ts2, method), indent=2)
+        inform(' > Rate: %s\n'%get_spike_rate({'0':ts1}, method), indent=2)
+        inform(' > Rate: %s\n'%get_spike_rate({'0':ts1, '1':ts2}, method), indent=2)
 
 
