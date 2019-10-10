@@ -189,7 +189,7 @@ def get_spike_rate(spikes):
             r = _get_single_spike_rate(s)
             all_rates.append(r)
             tot_rates += r
-        avg_rate = tot_rates/len(spikes)
+        avg_rate = float(tot_rates)/len(spikes)
         inform('Calculated average of %i spike rate(s): %s %s'%(len(spikes), avg_rate, all_rates),verbosity=1, indent=2)
         return avg_rate
 

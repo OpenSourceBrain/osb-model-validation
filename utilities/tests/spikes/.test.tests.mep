@@ -13,3 +13,13 @@ experiments:
     spikeGenRegular5_rate:
         expected:
             spike rate: 200
+
+    spike_iaf0:
+        expected:
+            spike rate: 196.23233909252195
+    spike_iaf1:
+        expected:
+            spike rate: 90.1631953860354
+    spike_iaf2:
+        expected:
+            spike rate: 0

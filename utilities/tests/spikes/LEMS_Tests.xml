@@ -15,6 +15,12 @@
 
     <spikeGenerator id="spikeGenRegular50" period="50 ms"/>
     <spikeGenerator id="spikeGenRegular5" period="5 ms"/>
+    
+    <iafCell id="iaf" leakConductance="0.2nS" leakReversal="-65mV"
+             thresh="-55mV" reset="-70mV" C="3.2pF"/>
+    
+    <pulseGenerator id="pg0" delay="100ms" duration="200ms" amplitude="10pA" />
+    <pulseGenerator id="pg1" delay="200ms" duration="200ms" amplitude="5pA" />
 
 
     <network id="net1">
@@ -29,7 +35,26 @@
                 <location x="0" y="0" z="0"/>
             </instance>
         </population>
+        
+        <population id="iafPop" component="iaf" type="populationList" size="3">
+            <instance id="0">
+                <location x="0" y="0" z="0"/>
+            </instance>
+            <instance id="1">
+                <location x="10" y="0" z="0"/>
+            </instance>
+            <instance id="2">
+                <location x="20" y="0" z="0"/>
+            </instance>
+        </population>
        
+        <inputList id="stimInput0" component="pg0" population="iafPop">
+            <input id="0" target="../iafPop/0/iaf" destination="synapses"/>
+        </inputList>
+        
+        <inputList id="stimInput1" component="pg1" population="iafPop">
+            <input id="0" target="../iafPop/1/iaf" destination="synapses"/>
+        </inputList>
         
     </network>
 
@@ -43,14 +68,25 @@
             <Line id ="Regular50" quantity="spikeGenRegularPop50/0/spikeGenRegular50/tsince" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
         </Display>
         
+        <Display id="d1" title="E..." timeScale="1ms" xmin="-50" xmax="500" ymin="-75" ymax="-55">
+            <Line id ="iaf0" quantity="iafPop/0/iaf/v" scale="1ms"  color="#3fffaa" timeScale="1ms"/>
+            <Line id ="iaf1" quantity="iafPop/1/iaf/v" scale="1ms"  color="#111faa" timeScale="1ms"/>
+            <Line id ="iaf2" quantity="iafPop/2/iaf/v" scale="1ms"  color="#399999" timeScale="1ms"/>
+        </Display>
+        
         <OutputFile id="of1" fileName="timesince2.dat">
             <OutputColumn id="t0" quantity="spikeGenRegularPop50/0/spikeGenRegular50/tsince" />
-            <!--<OutputColumn id="t1" quantity="spikeGenRegularPop50/0/spikeGenRegular50/tnextf" />-->
         </OutputFile>
         
         <EventOutputFile id="spikes50" fileName="regular.all.spikes" format="ID_TIME">
             <EventSelection id="0" select="spikeGenRegularPop50/0/spikeGenRegular50" eventPort="spike"/>
             <EventSelection id="1" select="spikeGenRegularPop5/0/spikeGenRegular5" eventPort="spike"/>
+        </EventOutputFile>
+        
+        <EventOutputFile id="iafs" fileName="iafs.spikes" format="ID_TIME">
+            <EventSelection id="0" select="iafPop/0/iaf" eventPort="spike"/>
+            <EventSelection id="1" select="iafPop/1/iaf" eventPort="spike"/>
+            <EventSelection id="2" select="iafPop/2/iaf" eventPort="spike"/>
         </EventOutputFile>
 
     </Simulation>
