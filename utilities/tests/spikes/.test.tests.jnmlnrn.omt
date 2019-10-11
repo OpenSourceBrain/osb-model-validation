@@ -39,7 +39,7 @@ experiments:
           format: ID_TIME
           ids: 0
         tolerance: 0
-  spike_iaf1:
+  spike_iaf1_isi:
     observables:
       spike rate:
         spiketimes file: 

@@ -160,14 +160,9 @@ def test_detect_spikes():
     
 def _get_single_spike_rate(spiketimes, method, start_time, end_time):
     
-    if len(spiketimes)==0:
-        inform('No spikes! rate: 0',verbosity=2, indent=2)
-        return 0
     
     if method==ISI_BASED_SPIKERATE_CALC:
-        if len(spiketimes)==1:
-            inform('Only 1 spike! rate: 0',verbosity=2, indent=2)
-            return 0
+
         isis = []
         tot_isi = 0
         for si in range(len(spiketimes)-1):
@@ -180,7 +175,7 @@ def _get_single_spike_rate(spiketimes, method, start_time, end_time):
             rate = len(isis)/ float(tot_isi)
         else:
             rate=0
-        inform('Spikes (%i): %s, qualifying ISIs: %s, rate: %s'%(len(spiketimes), spiketimes, isis, rate),verbosity=2, indent=2)
+        inform('Spikes (%i): %s, qualifying ISIs: %s, rate: %s'%(len(spiketimes), spiketimes, isis, rate),verbosity=1, indent=2)
         
     elif method==DURATION_BASED_SPIKERATE_CALC:
         dur = float(end_time-start_time)
@@ -188,7 +183,12 @@ def _get_single_spike_rate(spiketimes, method, start_time, end_time):
         for s in spiketimes:
             if s>=start_time and s<=end_time:
                 spikes_in+=1
-        return spikes_in/dur
+        rate = spikes_in/dur
+        inform('Spikes %i of %i inside range %s->%s, so rate %s'%(spikes_in, len(spiketimes), start_time, end_time, rate),verbosity=1, indent=2)
+        return rate
+    
+    else:
+       raise Exception('Unknown method for calculating rates: %s'%method) 
         
     return rate
     
@@ -198,9 +198,7 @@ DURATION_BASED_SPIKERATE_CALC = 'duration based'
 
 
 def get_spike_rate(spikes, method=ISI_BASED_SPIKERATE_CALC, start_time=0, end_time=float('inf')):
-        
-    if len(spikes)==0:
-        return 0
+    inform('Calculating average of %i spike rate(s) with method "%s" from %s->%s'%(len(spikes), method,start_time,end_time),verbosity=1, indent=2)
     
     if isinstance(spikes, list):
         return _get_single_spike_rate(spikes, method, start_time, end_time)
@@ -208,11 +206,14 @@ def get_spike_rate(spikes, method=ISI_BASED_SPIKERATE_CALC, start_time=0, end_ti
     if isinstance(spikes, dict):
         tot_rates = 0 
         all_rates = []
-        for s in spikes.values():
-            r = _get_single_spike_rate(s, method, start_time, end_time)
-            all_rates.append(r)
-            tot_rates += r
-        avg_rate = float(tot_rates)/len(spikes)
+        if len(spikes)==0:
+            avg_rate=0
+        else:
+            for s in spikes.values():
+                r = _get_single_spike_rate(s, method, start_time, end_time)
+                all_rates.append(r)
+                tot_rates += r
+            avg_rate = float(tot_rates)/len(spikes)
         inform('Calculated average of %i spike rate(s) with method "%s": %s %s'%(len(spikes), method, avg_rate, all_rates),verbosity=1, indent=2)
         return avg_rate
 

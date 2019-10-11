@@ -17,9 +17,15 @@ experiments:
     spike_iaf0:
         expected:
             spike rate: 196.23233909252195
-    spike_iaf1:
+    spike_iaf1_isi:
         expected:
             spike rate: 90.1631953860354
+    spike_iaf1_durA:
+        expected:
+            spike rate: 43.90243902439025
+    spike_iaf1_durB:
+        expected:
+            spike rate: 90
     spike_iaf2:
         expected:
             spike rate: 0
