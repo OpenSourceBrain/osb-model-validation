@@ -83,6 +83,10 @@ script:
     - echo "Finished all OMV tests on *.omt files which have been found"
     - if [[ ${OMV_ENGINE} == "DIRECT_ENGINE_INSTALL" ]]; then echo "Continuing..."; else exit $OMV_SUCCESS; fi
     
+    - cd omv/test
+    - nosetests -vs
+    - cd -
+    
     - echo "Testing direct installation of some simulators..."
     - omv install Brian2:2.2
     - omv install PyNEURON:7.6

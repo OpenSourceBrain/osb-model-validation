@@ -158,28 +158,46 @@ def test_detect_spikes():
     assert all(spk_idx == arange(4, len(xx), 4))
     
     
-def _get_single_spike_rate(spikes, method, start_time, end_time):
+def _get_single_spike_rate(spiketimes, method, start_time, end_time):
     
-    if len(spikes)==0:
+    if len(spiketimes)==0:
         inform('No spikes! rate: 0',verbosity=2, indent=2)
         return 0
-    if len(spikes)==1:
-        inform('Only 1 spike! rate: 0',verbosity=2, indent=2)
-        return 0
-    isis = []
-    tot_isi = 0
-    for si in range(len(spikes)-1):
-        isi = spikes[si+1] - spikes[si]
-        isis.append(isi)
-        tot_isi+=isi  
-    rate = 1/ (float(tot_isi)/len(isis))
-    inform('Spikes (%i): %s, ISIs: %s, rate: %s'%(len(spikes), spikes, isis, rate),verbosity=2, indent=2)
+    
+    if method==ISI_BASED_SPIKERATE_CALC:
+        if len(spiketimes)==1:
+            inform('Only 1 spike! rate: 0',verbosity=2, indent=2)
+            return 0
+        isis = []
+        tot_isi = 0
+        for si in range(len(spiketimes)-1):
+            if spiketimes[si+1]>=start_time and spiketimes[si+1]<=end_time and \
+               spiketimes[si]>=start_time and spiketimes[si]<=end_time:
+                isi = spiketimes[si+1] - spiketimes[si]
+                isis.append(isi)
+                tot_isi+=isi 
+        if len(isis)>0:
+            rate = len(isis)/ float(tot_isi)
+        else:
+            rate=0
+        inform('Spikes (%i): %s, qualifying ISIs: %s, rate: %s'%(len(spiketimes), spiketimes, isis, rate),verbosity=2, indent=2)
+        
+    elif method==DURATION_BASED_SPIKERATE_CALC:
+        dur = float(end_time-start_time)
+        spikes_in = 0
+        for s in spiketimes:
+            if s>=start_time and s<=end_time:
+                spikes_in+=1
+        return spikes_in/dur
+        
     return rate
+    
     
 ISI_BASED_SPIKERATE_CALC = 'isi based'
 DURATION_BASED_SPIKERATE_CALC = 'duration based'
 
-def get_spike_rate(spikes, method=ISI_BASED_SPIKERATE_CALC, start_time=None, end_time=None):
+
+def get_spike_rate(spikes, method=ISI_BASED_SPIKERATE_CALC, start_time=0, end_time=float('inf')):
         
     if len(spikes)==0:
         return 0
@@ -215,12 +233,10 @@ if __name__ == '__main__':
     
     for method in methods:
 
-        inform(' > Rate: %s\n'%get_spike_rate(tsNone, method), indent=2)
-        inform(' > Rate: %s\n'%get_spike_rate(tsA, method), indent=2)
-        inform(' > Rate: %s\n'%get_spike_rate(tsB, method), indent=2)
-        inform(' > Rate: %s\n'%get_spike_rate(ts1, method), indent=2)
-        inform(' > Rate: %s\n'%get_spike_rate(ts2, method), indent=2)
-        inform(' > Rate: %s\n'%get_spike_rate({'0':ts1}, method), indent=2)
-        inform(' > Rate: %s\n'%get_spike_rate({'0':ts1, '1':ts2}, method), indent=2)
+        opts = [tsNone, tsA, tsB, ts1, ts2, {'0':ts1}, {'0':ts1, '1':ts2}]
+        for opt in opts:
+            start_time = 0
+            end_time = 0.25
+            inform(' > Rate in %s->%s (%s) for %s: %s\n'%(start_time, end_time, method, opt,get_spike_rate(opt, method, start_time, end_time)), indent=2)
 
 
