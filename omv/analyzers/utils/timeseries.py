@@ -175,7 +175,7 @@ def _get_single_spike_rate(spiketimes, method, start_time, end_time):
             rate = len(isis)/ float(tot_isi)
         else:
             rate=0
-        inform('Spikes (%i): %s, qualifying ISIs: %s, rate: %s'%(len(spiketimes), spiketimes, isis, rate),verbosity=1, indent=2)
+        inform('Spikes (%i): %s, qualifying ISIs: %s, rate: %s'%(len(spiketimes), spiketimes, isis, rate),verbosity=2, indent=2)
         
     elif method==DURATION_BASED_SPIKERATE_CALC:
         dur = float(end_time-start_time)
@@ -184,7 +184,7 @@ def _get_single_spike_rate(spiketimes, method, start_time, end_time):
             if s>=start_time and s<=end_time:
                 spikes_in+=1
         rate = spikes_in/dur
-        inform('Spikes %i of %i inside range %s->%s, so rate %s'%(spikes_in, len(spiketimes), start_time, end_time, rate),verbosity=1, indent=2)
+        inform('Spikes %i of %i inside range %s->%s, so rate %s'%(spikes_in, len(spiketimes), start_time, end_time, rate),verbosity=2, indent=2)
         return rate
     
     else:
