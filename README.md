@@ -15,6 +15,8 @@ To see this framework in action, click on some of the green buttons below:
 |[Auditory cortex network](http://www.opensourcebrain.org/projects/acnet2)|[![Build Status](https://travis-ci.org/OpenSourceBrain/ACnet2.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/ACnet2)|[.travis.yml](https://github.com/OpenSourceBrain/ACnet2/blob/master/.travis.yml)|
 | [SBML Showcase](http://www.opensourcebrain.org/projects/sbmlshowcase) | [![Build Status](https://travis-ci.org/OpenSourceBrain/SBMLShowcase.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/SBMLShowcase) | [.travis.yml](https://github.com/OpenSourceBrain/SBMLShowcase/blob/master/.travis.yml)|
 
+This framework has been used to test the 25+ NeuroML and PyNN models described in the [Open Source Brain paper (Gleeson et al. 2019)](https://www.cell.com/neuron/fulltext/S0896-6273(19)30444-1). 
+
 Installation
 ------------
 
