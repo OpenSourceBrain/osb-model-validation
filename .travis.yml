@@ -1,5 +1,5 @@
 
-dist: trusty
+dist: xenial
 sudo: false
 
 addons:
@@ -66,6 +66,8 @@ script:
     - if [[ ${OMV_ENGINE} == "DIRECT_ENGINE_INSTALL" ]]; then echo "Continuing..."; else exit $OMV_SUCCESS; fi
     
     - omv install PyNEST
+    
+    - omv list-engines -V
     
     - python test_pynest.py
     
