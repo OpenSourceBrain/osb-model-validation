@@ -158,34 +158,63 @@ def test_detect_spikes():
     assert all(spk_idx == arange(4, len(xx), 4))
     
     
-def _get_single_spike_rate(spikes):
+def _get_single_spike_rate(spiketimes, method, start_time, end_time):
     
-    if len(spikes)==0:
-        return 0
-    isis = []
-    tot_isi = 0
-    for si in range(len(spikes)-1):
-        isi = spikes[si+1] - spikes[si]
-        isis.append(isi)
-        tot_isi+=isi  
-    rate = 1/ (float(tot_isi)/len(isis))
-    inform('Spikes: %s, ISIs: %s, rate: %s'%(spikes, isis, rate),verbosity=2, indent=2)
+    
+    if method==ISI_BASED_SPIKERATE_CALC:
+
+        isis = []
+        tot_isi = 0
+        for si in range(len(spiketimes)-1):
+            if spiketimes[si+1]>=start_time and spiketimes[si+1]<=end_time and \
+               spiketimes[si]>=start_time and spiketimes[si]<=end_time:
+                isi = spiketimes[si+1] - spiketimes[si]
+                isis.append(isi)
+                tot_isi+=isi 
+        if len(isis)>0:
+            rate = len(isis)/ float(tot_isi)
+        else:
+            rate=0
+        inform('Spikes (%i): %s, qualifying ISIs: %s, rate: %s'%(len(spiketimes), spiketimes, isis, rate),verbosity=2, indent=2)
+        
+    elif method==DURATION_BASED_SPIKERATE_CALC:
+        dur = float(end_time-start_time)
+        spikes_in = 0
+        for s in spiketimes:
+            if s>=start_time and s<=end_time:
+                spikes_in+=1
+        rate = spikes_in/dur
+        inform('Spikes %i of %i inside range %s->%s, so rate %s'%(spikes_in, len(spiketimes), start_time, end_time, rate),verbosity=2, indent=2)
+        return rate
+    
+    else:
+       raise Exception('Unknown method for calculating rates: %s'%method) 
+        
     return rate
     
-def get_spike_rate(spikes):
-        
-    if len(spikes)==0:
-        return 0
+    
+ISI_BASED_SPIKERATE_CALC = 'isi based'
+DURATION_BASED_SPIKERATE_CALC = 'duration based'
+
+
+def get_spike_rate(spikes, method=ISI_BASED_SPIKERATE_CALC, start_time=0, end_time=float('inf')):
+    inform('Calculating average of %i spike rate(s) with method "%s" from %s->%s'%(len(spikes), method,start_time,end_time),verbosity=1, indent=2)
     
     if isinstance(spikes, list):
-        return _get_single_spike_rate(spikes)
+        return _get_single_spike_rate(spikes, method, start_time, end_time)
     
     if isinstance(spikes, dict):
         tot_rates = 0 
-        for s in spikes.values():
-            tot_rates += _get_single_spike_rate(s)
-        avg_rate = tot_rates/len(spikes)
-        inform('Calculated average of %i spike rate(s): %s'%(len(spikes), avg_rate),verbosity=1, indent=2)
+        all_rates = []
+        if len(spikes)==0:
+            avg_rate=0
+        else:
+            for s in spikes.values():
+                r = _get_single_spike_rate(s, method, start_time, end_time)
+                all_rates.append(r)
+                tot_rates += r
+            avg_rate = float(tot_rates)/len(spikes)
+        inform('Calculated average of %i spike rate(s) with method "%s": %s %s'%(len(spikes), method, avg_rate, all_rates),verbosity=1, indent=2)
         return avg_rate
 
 
@@ -193,12 +222,22 @@ if __name__ == '__main__':
     
     from omv.common.inout import set_verbosity
     set_verbosity(2)
+    
+    tsNone = []
+    tsA = [0.1]
+    tsB = [0.1, 0.2]
+    
     ts1 = [0.1,0.2,0.3,0.40]
     ts2 = [0.1,0.3,0.50]
     
-    print('Rate: %s\n'%get_spike_rate(ts1))
-    print('Rate: %s\n'%get_spike_rate(ts2))
-    print('Rate: %s\n'%get_spike_rate({'0':ts1}))
-    print('Rate: %s\n'%get_spike_rate({'0':ts1, '1':ts2}))
+    methods = [ISI_BASED_SPIKERATE_CALC, DURATION_BASED_SPIKERATE_CALC]
+    
+    for method in methods:
+
+        opts = [tsNone, tsA, tsB, ts1, ts2, {'0':ts1}, {'0':ts1, '1':ts2}]
+        for opt in opts:
+            start_time = 0
+            end_time = 0.25
+            inform(' > Rate in %s->%s (%s) for %s: %s\n'%(start_time, end_time, method, opt,get_spike_rate(opt, method, start_time, end_time)), indent=2)
 
 

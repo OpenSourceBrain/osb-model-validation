@@ -41,3 +41,51 @@ experiments:
           ids: 1
         tolerance: 2.5640959896122696e-06
 
+  spike_iaf0:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: iafs.spikes
+          format: ID_TIME
+          ids: 0
+        tolerance: 0
+  spike_iaf1_isi:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: iafs.spikes
+          format: ID_TIME
+          ids: 1
+        method: isi based
+        tolerance: 0
+  spike_iaf1_durA:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: iafs.spikes
+          format: ID_TIME
+          ids: 1
+        method: duration based
+        start_time: 0
+        end_time: 0.410
+        tolerance: 0
+  spike_iaf1_durB:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: iafs.spikes
+          format: ID_TIME
+          ids: 1
+        method: duration based
+        start_time: 0.2
+        end_time: 0.4
+        tolerance: 0
+  spike_iaf2:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: iafs.spikes
+          format: ID_TIME
+          ids: 2
+        tolerance: 0
+

@@ -30,4 +30,37 @@ experiments:
           scaling: 1
           ids: 1
         tolerance:  2.49997875016561e-06
+        
+  spike_iaf0:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: iafs.spikes
+          format: ID_TIME
+          ids: 0
+        tolerance: 0
+  spike_iaf1_isi:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: iafs.spikes
+          format: ID_TIME
+          ids: 1
+        tolerance: 0
+  spike_iaf2:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: iafs.spikes
+          format: ID_TIME
+          ids: 2
+        tolerance: 0
+  spike_iaf_all:
+    observables:
+      spike rate:
+        spiketimes file: 
+          path: iafs.spikes
+          format: ID_TIME
+          ids: '*'
+        tolerance: 0
 

@@ -28,19 +28,18 @@ language: python
 
 python: 
   - "2.7"
-  - "3.5"
+  #- "3.5"
   
 virtualenv:
     system_site_packages: true
 
 env:
 
-    - OMV_ENGINE=Moose
+    #- OMV_ENGINE=Moose
     - OMV_ENGINE=PyNEST
-    - OMV_ENGINE=PyNEURON:7.6
+    #- OMV_ENGINE=PyNEURON:7.6
     
     - OMV_ENGINE=PyNN_Nest
-    
     
     - OMV_ENGINE=DIRECT_ENGINE_INSTALL
 
@@ -55,7 +54,7 @@ script:
     - cd utilities/tests
     
     # Note --ignore-non-py3  --> doesn't install simulator or run tests or cause failure if simulator itself is not Python 3 compatible...
-    - omv all -V --ignore-non-py3; export OMV_SUCCESS=$?; echo $OMV_SUCCESS
+    - omv all -V --ignore-non-py3; export OMV_SUCCESS=$?; echo "Success of OMV: "$OMV_SUCCESS
     
     - omv list-engines -V
     

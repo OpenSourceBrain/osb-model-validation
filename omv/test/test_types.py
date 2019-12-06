@@ -1,7 +1,7 @@
 import glob
 from os.path import splitext, basename, normpath
 
-def walk_testdir(root, validator):
+def _walk_testdir(root, validator):
     for f in glob.glob(root + '/test/*.yaml'):
         print('found test document', f)
         fname = splitext(basename(f))[0]
@@ -17,12 +17,12 @@ def walk_testdir(root, validator):
 
 def test_base():
     from ..validation.rx_validator import RXSchemaValidator as v
-    walk_testdir('../schemata/types/base', v())
+    _walk_testdir('../schemata/types/base', v())
         
 
 def test_derived():
     from ..validation.validate import OMVValidator as o
-    walk_testdir('../schemata/types', o())
+    _walk_testdir('../schemata/types', o())
 
 
 

@@ -50,7 +50,20 @@ class RateAnalyzer(SpikeAnalyzer):
                            
                     spikes = self.f.get_spike_times()
                     
-                rate = ts.get_spike_rate(spikes)
+                if 'method' in to_parse:
+                    method = to_parse['method']
+                    if 'start_time' in to_parse:
+                        start_time = to_parse['start_time']
+                    else:
+                        start_time=0
+                    if 'end_time' in to_parse:
+                        end_time = to_parse['end_time']
+                    else:
+                        end_time=float('inf')
+                    rate = ts.get_spike_rate(spikes, method, start_time, end_time)
+                    
+                else:
+                    rate = ts.get_spike_rate(spikes)
             else:
                 inform('ERROR! Preexistent datafile %s has not been updated!'
                        % self.f.filename, indent=2, verbosity=0, underline='-')
