@@ -114,3 +114,4 @@ report*.txt
 /utilities/tests/spikes/*.mod
 /utilities/tests/spikes/*.dat
 /utilities/tests/spikes/x86_64
+/xenial_test.sh
