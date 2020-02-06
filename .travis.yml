@@ -69,6 +69,8 @@ script:
     - omv install Brian2
     
     - omv list-engines -V
+    - export PYTHONPATH=$TRAVIS_HOME/nest/nest/lib/python2.7/site-packages/
+    - export NEST_HOME=$TRAVIS_HOME/nest/nest/
     
     - python test_pynest.py
     - python test_brian2.py
