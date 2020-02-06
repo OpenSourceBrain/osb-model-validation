@@ -29,14 +29,8 @@ def install_nest(version):
     with working_dir(nestpath2):
         check_output(["cmake", "-DCMAKE_INSTALL_PREFIX:PATH=%s"%(nestinstallpath)])
         check_output(['make','-j4'])
-        print(check_output(['make', 'install']))
-        print(check_output(['echo', 'DoneNesting']))
-        print(check_output(['pwd']))
-        print(check_output(['ls','-alt']))
+        check_output(['make', 'install'])
         
-    nestpath3 = os.path.join(os.environ['HOME'],'nest/nest/pynest')
-    with working_dir(nestpath3):
-        print(check_output(['python', 'setup.py', 'install']))
         
 
 if __name__ == '__main__':
