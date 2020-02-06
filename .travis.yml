@@ -29,6 +29,8 @@ language: python
 python: 
   - "2.7"
   - "3.5"
+  - "3.6"
+  - "3.7"
   
 virtualenv:
     system_site_packages: true
@@ -38,6 +40,7 @@ env:
     #- OMV_ENGINE=Moose
     - OMV_ENGINE=PyNEST
     #- OMV_ENGINE=PyNEURON:7.6
+    - OMV_ENGINE=jNeuroML_NetPyNE
     
     - OMV_ENGINE=PyNN_Nest
     
