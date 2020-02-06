@@ -46,12 +46,9 @@ if '-q' in sys.argv:
     ignores.append('nc_ca1')
     ignores.append('miglioreetal14_olfactorybulb3d')
     ignores.append('sadehetal2017-inhibitionstabilizednetworks')
-    ignores.append('fitzhugh-nagumo-fitzhugh-1969')
-    ignores.append('brianshowcase')
-    ignores.append('netpyneshowcase')
 
 ignores.append('l23dendriticspikes')
-ignores.append('izhikevichmodel')
+#ignores.append('izhikevichmodel')
 ignores.append('ionl-testing')
 ignores.append('test')
 ignores.append('salomon-muller')
