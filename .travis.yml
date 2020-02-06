@@ -66,10 +66,15 @@ script:
     - if [[ ${OMV_ENGINE} == "DIRECT_ENGINE_INSTALL" ]]; then echo "Continuing..."; else exit $OMV_SUCCESS; fi
     
     - omv install PyNEST
+    - omv install Brian2
     
     - omv list-engines -V
     
     - python test_pynest.py
+    - python test_brian2.py
+    - which omv
+    - which python
+    - env
     
     
 
