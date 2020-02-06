@@ -9,7 +9,7 @@ from omv.engines.utils.wdir import working_dir
 
 def install_neuron(version):
     if not version:
-        version='7.4'
+        version='7.6'
         
     nrnpath = os.path.join(os.environ['HOME'],'neuron')
     
