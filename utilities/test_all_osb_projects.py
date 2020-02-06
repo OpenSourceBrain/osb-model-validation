@@ -33,7 +33,7 @@ if fresh_clones:
 
 os.makedirs(test_dir)
 
-ignores = ['neurosciences-repository', 'drosophila-acc-l3-motoneuron-gunay-et-al-2014','d-olfactory-bulb-network','zetterbergjansenritmodel']
+ignores = ['neurosciences-repository', 'drosophila-acc-l3-motoneuron-gunay-et-al-2014','d-olfactory-bulb-network','zetterbergjansenritmodel','test_net']
 
 if '-q' in sys.argv:
     ignores.append('pospischiletal2008')  # Slow...
@@ -46,9 +46,17 @@ if '-q' in sys.argv:
     ignores.append('nc_ca1')
     ignores.append('miglioreetal14_olfactorybulb3d')
     ignores.append('sadehetal2017-inhibitionstabilizednetworks')
+    ignores.append('fitzhugh-nagumo-fitzhugh-1969')
+    ignores.append('brianshowcase')
+    ignores.append('netpyneshowcase')
 
 ignores.append('l23dendriticspikes')
-#ignores.append('izhikevichmodel')
+ignores.append('izhikevichmodel')
+ignores.append('ionl-testing')
+ignores.append('test')
+ignores.append('salomon-muller')
+ignores.append('slow-oscillation')
+ignores.append('swrs')
 
 all_repos = {  }
 
