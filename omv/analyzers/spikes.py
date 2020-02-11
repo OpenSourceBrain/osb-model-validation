@@ -63,7 +63,7 @@ class SpikeAnalyzer(OMVAnalyzer):
                            % (self.f.filename), indent=2, verbosity=0, underline='-')
                         return None
                     
-                    spikes = all_spikes.values()[0]
+                    spikes = list(all_spikes.values())[0]
             else:
                 inform('ERROR! Preexistent datafile %s has not been updated!'
                        % self.f.filename, indent=2, verbosity=0, underline='-')

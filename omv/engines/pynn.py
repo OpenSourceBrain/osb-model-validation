@@ -22,10 +22,10 @@ class PyNNEngine(OMVEngine):
             
             ret = 'v%s'%ret_str.strip()
             if is_verbose():
-                inform("pyNN %s is correctly installed..." % ret, indent=2)
+                inform("pyNN %s is correctly installed..." % ret, indent=2, verbosity=2)
             
         except Exception as err:
-            inform("Couldn't import pyNN into Python: ", err, indent=1)
+            inform("Couldn't import pyNN into Python: ", err, indent=1, verbosity=2)
             ret = False
         return ret
         

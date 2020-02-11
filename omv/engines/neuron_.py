@@ -55,7 +55,7 @@ class NeuronEngine(OMVEngine):
         ret = True
         
         try:
-            output = check_output(['nrniv', '--version'],verbosity=1)
+            output = check_output(['nrniv', '--version'],verbosity=2)
             if is_verbose():
                 inform('%s was already installed locally'%output.strip(), indent=2)
             ret = 'v%s'%output.split()[3]
