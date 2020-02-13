@@ -3,6 +3,7 @@ import subprocess as sp
 from textwrap import dedent
 from omv.engines.utils.wdir import working_dir
 from os.path import dirname
+import sys
 
 from omv.engines.neuron_ import NeuronEngine
 
@@ -70,7 +71,11 @@ class PyNRNEngine(NeuronEngine):
             cmd = '''\
             %s
             ''' % ('\n'.join(self.extra_pars))
-            stdout, stderr = p.communicate(dedent(cmd))
+            if sys.version_info[0]==3:
+                c = dedent(cmd).encode()
+            else:
+                c = dedent(cmd)
+            stdout, stderr = p.communicate(c)
             # with open('/tmp/omv_test.nrn.stdout', 'w') as f:
             #     f.write(stdout)
             self.stdout = stdout
@@ -78,7 +83,7 @@ class PyNRNEngine(NeuronEngine):
             
             inform("OUT: ", stdout, verbosity=1, indent=2)
             inform("ERR: ", stderr, verbosity=1, indent=2)
-            inform("returncode: ", p.returncode, verbosity=1, indent=2)
+            inform("returncode: [%s]"% p.returncode, verbosity=1, indent=2)
 
             self.returncode = p.returncode
             if self.returncode is not 0:
