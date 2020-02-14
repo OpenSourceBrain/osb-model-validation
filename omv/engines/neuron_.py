@@ -137,12 +137,12 @@ class NeuronEngine(OMVEngine):
             stdout, stderr = p.communicate(c)
             # with open('/tmp/omv_test.nrn.stdout', 'w') as f:
             #     f.write(stdout)
-            self.stdout = stdout
-            self.stderr = stderr
+            self.stdout = str(stdout.decode())
+            self.stderr = str(stderr.decode())
             
-            inform("OUT: ", stdout, verbosity=1, indent=2)
-            inform("ERR: ", stderr, verbosity=1, indent=2)
-            inform("returncode: ", p.returncode, verbosity=1, indent=2)
+            inform("OUT: %s"% self.stdout, verbosity=1, indent=2)
+            inform("ERR: %s"% self.stderr, verbosity=1, indent=2)
+            inform("returncode: [%s]"% p.returncode, verbosity=1, indent=2)
 
             self.returncode = p.returncode
             if self.returncode is not 0:
