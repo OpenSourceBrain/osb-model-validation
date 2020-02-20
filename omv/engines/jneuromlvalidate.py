@@ -2,7 +2,7 @@ import os
 import subprocess as sp
 
 from omv.engines.jneuroml import JNeuroMLEngine, EngineExecutionError
-from omv.common.inout import inform
+from omv.common.inout import inform, check_output
 
 # Make explicit list from: '*.nml myfile.xml' etc.
 def resolve_paths(path_s):
@@ -49,15 +49,13 @@ class JNeuroMLValidateEngine(JNeuroMLEngine):
             inform("Running with %s, using %s..." % (JNeuroMLValidateEngine.name,
                    cmds),
                    indent=1)
-            self.stdout = sp.check_output(cmds,
+            self.stdout = check_output(cmds,
                 cwd=os.path.dirname(self.modelpath))
             inform("Success with running ", JNeuroMLValidateEngine.name,
                    indent=1, verbosity=1)
             self.returncode = 0
         except sp.CalledProcessError as err:
             inform("Error with ",  JNeuroMLValidateEngine.name,
-                   indent=1, verbosity=1)
-            inform(err.output.replace('\n', '\n  >   '),  '',
                    indent=1, verbosity=1)
             self.returncode = err.returncode
             self.stdout = err.output

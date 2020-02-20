@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from omv.common.inout import inform, trim_path
+from omv.common.inout import inform, trim_path, check_output
 from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
@@ -36,12 +36,12 @@ class PyLemsEngine(OMVEngine):
     def run(self):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
-            self.stdout = sp.check_output(['pylems', self.modelpath, '-nogui'],
+            self.stdout = check_output(['pylems', self.modelpath, '-nogui'],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
+            inform("Process error with %s: "%self.name, err, indent=1)
             self.returncode = err.returncode
-            self.stdout = err.output
             raise EngineExecutionError
         except Exception as err:
             inform("Another error with running %s: "%self.name, err, indent=1)
