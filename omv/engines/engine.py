@@ -1,5 +1,6 @@
 from os.path import realpath
 from os import environ
+import sys
 from omv.common.inout import inform
 import platform
 
@@ -85,7 +86,11 @@ class OMVEngine(object):
     def fetch_query(self, key):
         import re
         match_float = '\s*([0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)\s*'
-        m = re.search(key+':' + match_float, self.stdout)
+        
+        l = key+':' + match_float
+        if sys.version_info[0]==3:
+            l = l.encode()
+        m = re.search(l, self.stdout)
         if m:
             return m.groups()[0]
         else:
