@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from omv.common.inout import inform, trim_path, check_output
+from omv.common.inout import inform, trim_path, check_output, is_verbose
 from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
@@ -13,10 +13,19 @@ class PyLemsEngine(OMVEngine):
     def is_installed(version):
         ret = True
         try:
-            FNULL = open(os.devnull, 'w')
-            sp.check_call(['pylems', '-h'], stdout=FNULL)
-            import lems
-            ret = 'v%s'%lems.__version__
+            ret_str = sp.check_output(['python -c "import lems; print(lems.__version__)"'], shell=True,stderr=sp.STDOUT)
+            
+            ret = len(ret_str) > 0
+            
+            if isinstance(ret_str, bytes):
+                ret_str = ret_str.decode('utf-8')
+            
+            if ret and is_verbose():
+                inform("%s is correctly installed..." % (PyLemsEngine.name), indent=2)
+                
+            if ret:
+                ret = 'v%s'%str(ret_str.strip())
+
         except Exception as err:
             inform("Couldn't execute PyLEMS: ", err, indent=1)
             ret = False
