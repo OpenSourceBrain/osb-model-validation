@@ -58,11 +58,7 @@ script:
     
     - echo "Testing direct installation of some simulators..."
     - omv install Brian2:2.2
-    - omv install PyNEURON:7.6
-    - omv install PyLEMS_NeuroML2
-    - omv install NetPyNE
     - omv install PyNEST
-    - omv install Brian2
     
     # Set NEST variables
     - source $TRAVIS_HOME/nest/nest/bin/nest_vars.sh
@@ -74,6 +70,7 @@ script:
     - which omv
     - which python
     - env
+    - python -c "from sysconfig import get_paths as gp; print(gp())"
 
     
 
