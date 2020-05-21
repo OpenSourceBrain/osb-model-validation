@@ -50,6 +50,7 @@ script:
     - omv list-engines -V
     
     - python -c "from sysconfig import get_paths as gp; print(gp())"
+    - env
     - echo "Finished all OMV tests on *.omt files which have been found"
     - if [[ ${OMV_ENGINE} == "DIRECT_ENGINE_INSTALL" ]]; then echo "Continuing..."; else exit $OMV_SUCCESS; fi
     

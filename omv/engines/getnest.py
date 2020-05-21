@@ -2,7 +2,7 @@ import os
 from omv.common.inout import inform, check_output
 
 from omv.engines.utils.wdir import working_dir
-
+from sysconfig import get_paths
 
 def install_nest(version):
     
@@ -17,6 +17,9 @@ def install_nest(version):
             nestinstallpath = os.environ['NEST_INSTALL_DIR']+'/'
             
     inform('Installing NEST (src: %s), (tgt: %s)'%(nestpath, nestinstallpath), indent=2, verbosity=1)
+    pypaths = get_paths()
+    inform('Python lib info: %s'%(pypaths), indent=2, verbosity=1)
+    
     os.mkdir(nestpath)
     
     with working_dir(nestpath):
