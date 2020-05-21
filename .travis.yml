@@ -10,13 +10,13 @@ addons:
     - python-sympy
     - python-tornado
     - cython
+    - python-all-dev
         # Requirements for Octave
     - octave
         # Requirements for NetPyNE & libNeuroML
     - python-tk
     - python-lxml
         # Requirements for Moose
-    - python-dev
     - libgsl0-dev 
     - g++
     
@@ -30,9 +30,9 @@ python:
 env:
     - OMV_ENGINE=PyNN_Nest
 
-    - OMV_ENGINE=jNeuroML_NetPyNE
+    #- OMV_ENGINE=jNeuroML_NetPyNE
     
-    - OMV_ENGINE=DIRECT_ENGINE_INSTALL
+    #- OMV_ENGINE=DIRECT_ENGINE_INSTALL
 
 
 install:
