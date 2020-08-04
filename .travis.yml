@@ -74,6 +74,7 @@ install:
     - python setup.py install
     - pip install matplotlib --upgrade # To ensure matplotlib 2.x
     - pip install numpy scipy # Why is this needed? Scipy doesn't seem to get installed correctly on trusty with addons above...
+    - pip install bokeh==1.4.0 # for NetPyNE & py2...
 
 script:
     - omv list-engines -V

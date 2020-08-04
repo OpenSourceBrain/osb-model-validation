@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from omv.common.inout import inform, trim_path, is_verbose, check_output as co
+from omv.common.inout import inform, trim_path, is_verbose, check_output 
 from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
@@ -16,11 +16,10 @@ class PyNeuroMLEngine(OMVEngine):
             if is_verbose():
                 inform("Checking whether %s is installed..." %
                    PyNeuroMLEngine.name, indent=1)
-            FNULL = open(os.devnull, 'w')
-            sp.check_call(['pynml' if os.name != 'nt' else 'pynml.bat', '-h'], stdout=FNULL)
+            check_output(['pynml' if os.name != 'nt' else 'pynml.bat', '-h'], verbosity=2)
             import pyneuroml
             ret = 'v%s'%pyneuroml.__version__
-        except OSError:
+        except:
             ret = False
         return ret
         
@@ -34,7 +33,7 @@ class PyNeuroMLEngine(OMVEngine):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name),
                    indent=1)
-            self.stdout = co(['pynml' if os.name != 'nt' else 'pynml.bat', self.modelpath, '-nogui'],
+            self.stdout = check_output(['pynml' if os.name != 'nt' else 'pynml.bat', self.modelpath, '-nogui'],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
         except sp.CalledProcessError as err:
