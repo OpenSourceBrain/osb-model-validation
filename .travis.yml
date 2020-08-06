@@ -6,9 +6,6 @@ addons:
   apt:
     packages:
        # Requirements for Brian & NEST
-    - python-numpy 
-    - python-scipy 
-    - python-matplotlib 
     - python-sympy
     - python-tornado
     - cython
@@ -32,9 +29,6 @@ python:
   # - "3.6"  see below
   #- "3.7"
   
-# remove this for py3..?
-virtualenv:
-    system_site_packages: true
 
 env:
     - OMV_ENGINE=Brian
