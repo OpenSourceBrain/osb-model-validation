@@ -59,7 +59,7 @@ class PyNestEngine(OMVEngine):
         inform("Env vars: %s" % self.environment_vars, indent=2)
         
         try:
-            inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
+            inform("Running the file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
             self.stdout = check_output(['python', self.modelpath, '-nogui'],
                                           cwd=os.path.dirname(self.modelpath))
             self.returncode = 0
