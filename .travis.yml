@@ -28,11 +28,11 @@ python:
   
 
 env:
-    - OMV_ENGINE=PyNN_Nest
-
-    #- OMV_ENGINE=jNeuroML_NetPyNE
+    #- OMV_ENGINE=PyNN_Nest
+    - OMV_ENGINE=jNeuroML_NetPyNE
+    - OMV_ENGINE=NetPyNE
     
-    #- OMV_ENGINE=DIRECT_ENGINE_INSTALL
+    - OMV_ENGINE=DIRECT_ENGINE_INSTALL
 
 
 install:
@@ -61,14 +61,14 @@ script:
     
     - echo "Testing direct installation of some simulators..."
     - omv install Brian2:2.2
-    - omv install PyNEST
+    #####- omv install PyNEST
     
     # Set NEST variables
-    - source $TRAVIS_HOME/nest/nest/bin/nest_vars.sh
+    ####- source $TRAVIS_HOME/nest/nest/bin/nest_vars.sh
     
     - omv list-engines -V
     
-    - python test_pynest.py
+    ####- python test_pynest.py
     - python test_brian2.py
     - which omv
     - which python
