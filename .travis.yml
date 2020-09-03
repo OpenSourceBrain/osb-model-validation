@@ -29,6 +29,11 @@ python:
   # - "3.6"  see below
   #- "3.7"
   
+  
+# remove this for py3..?
+virtualenv:
+    system_site_packages: true
+
 
 env:
     - OMV_ENGINE=Brian
@@ -100,7 +105,6 @@ script:
     - omv list-engines -V
     
     - pwd
-    - cd utilities/tests
     - python test_pynest.py
     - python test_brian2.py
     - which omv
