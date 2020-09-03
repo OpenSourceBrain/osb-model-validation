@@ -38,8 +38,8 @@ virtualenv:
 
 env:
 
-    - OMV_ENGINE=NEST:2.14.0
     - OMV_ENGINE=NEST:2.18.0
+    - OMV_ENGINE=NEST:2.20.0
     - OMV_ENGINE=PyNEST
     - OMV_ENGINE=PyNN_NEURON
     - OMV_ENGINE=PyNN_Nest
@@ -73,7 +73,6 @@ script:
     - omv install Brian2:2.2
     - omv install PyNEURON:7.6
     - omv install PyLEMS_NeuroML2
-    - omv install NetPyNE
     - omv install PyNEST
     - omv install Brian2
     
@@ -82,6 +81,8 @@ script:
     
     - omv list-engines -V
     
+    - pwd
+    - cd utilities/tests
     - python test_pynest.py
     - python test_brian2.py
     - which omv
