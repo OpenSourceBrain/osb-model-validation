@@ -7,7 +7,7 @@ from omv.engines.utils.wdir import working_dir
 def install_nest(version):
     
     if not version:
-        version='2.16.0'
+        version='2.18.0'
         
     inform('Installing NEST', indent=2, verbosity=1)
     nestpath = os.path.join(os.environ['HOME'],'nest')
