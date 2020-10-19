@@ -60,7 +60,10 @@ def parse_omt(omt_path, do_not_run=False, engine_version=None, ignore_non_py3=Fa
                 inform("+++++++++++++++++++++ Error info ++++++++++++++++++", indent=3)
                 inform(" Return code: %s"%engine.returncode, indent=3)
                 if hasattr(engine,'stdout'):
-                    out = str(engine.stdout.decode())
+                    if isinstance(engine.stdout, str):
+                        out = engine.stdout
+                    else:
+                        out = str(engine.stdout.decode())
                     inform(" Output: %s"%out.replace('\n','\n[omv] %s:%s > '%(mepomt.omt_path,exp.name)), indent=3)
                 inform("+++++++++++++++++++++++++++++++++++++++++++++++++++", indent=3)
 
