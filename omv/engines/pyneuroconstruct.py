@@ -23,11 +23,11 @@ class PyneuroConstructEngine(OMVEngine):
 
     @staticmethod
     def is_installed(version):
-        
-        inform('Checking whether neuroConstruct is installed', indent=2, verbosity=2)
+        nChome = PyneuroConstructEngine.get_nC_environment()['NC_HOME']
+        inform('Checking whether neuroConstruct is installed (in %s)'%nChome, indent=2, verbosity=2)
         ret = True
         try:
-            with working_dir(PyneuroConstructEngine.get_nC_environment()['NC_HOME']):
+            with working_dir(nChome):
                 r = co(['./nC.sh','-v'], verbosity=1)
                 ret = 'v%s'%r.split('neuroConstruct, version: ')[-1].split()[0]
         except Exception as err:

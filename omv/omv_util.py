@@ -170,12 +170,22 @@ def main():
                     install_pylems()
                     
                 from omv.engines.getnml2 import install_nml2, is_nml2_installed
-                if is_nml2_installed:
+                if is_nml2_installed():
                     nml2_already_installed = True
                 else:
                     install_nml2()
                     
                 already_installed = nml2_already_installed and pylems_already_installed
+                
+                
+            elif eng.lower() == 'Py_neuroConstruct'.lower():
+                
+                from omv.engines.pyneuroconstruct import PyneuroConstructEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from omv.engines.getneuroconstruct import install_neuroconstruct
+                    install_neuroconstruct()
                 
             elif eng.lower() == 'genesis'.lower():
                 from omv.engines.getgenesis import install_genesis

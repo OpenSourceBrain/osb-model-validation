@@ -13,13 +13,12 @@ class PyNeuroMLEngine(OMVEngine):
     def is_installed(version):
         ret = True
         try:
-            if is_verbose():
-                inform("Checking whether %s is installed..." %
-                   PyNeuroMLEngine.name, indent=1)
-            check_output(['pynml' if os.name != 'nt' else 'pynml.bat', '-h'], verbosity=2)
+            inform("Checking whether %s is installed..." % PyNeuroMLEngine.name, indent=1, verbosity=2)
             import pyneuroml
             ret = 'v%s'%pyneuroml.__version__
-        except:
+        
+        except Exception as err:
+            inform("Couldn't import %s into Python: "% PyNeuroMLEngine.name, err, indent=1, verbosity=1)
             ret = False
         return ret
         
