@@ -99,3 +99,8 @@ def check_output(cmds, cwd='.', shell=False, verbosity=0):
         inform("Error running commands: %s in (%s)!"%(cmds, cwd), indent=2, verbosity=verbosity)
         inform("Error: %s"%(err), indent=2, verbosity=verbosity)
         raise err
+    
+def pip_install(package):
+    
+    pip = 'pip3' if sys.version_info.major == 3 else 'pip' 
+    print(check_output([pip, 'install', package]))

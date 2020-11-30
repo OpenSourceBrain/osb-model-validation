@@ -1,4 +1,4 @@
-from omv.common.inout import check_output
+from omv.common.inout import pip_install
 
 from omv.engines.getbrian1 import check_scipy_dev
 
@@ -8,7 +8,8 @@ def install_brian2(version):
     try:
         check_scipy_dev()
         # Tested with v2.3     
-        print(check_output(['pip', 'install', 'brian2==%s'%version]))
+        
+        pip_install('brian2==%s'%version)
         import brian2
         m = 'Successfully installed Brian2...'
     except Exception as e:

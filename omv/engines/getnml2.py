@@ -8,6 +8,12 @@ install_root = os.environ['HOME']
 
 default_nml2_dir = os.path.join(install_root,'NeuroML2')
 
+def is_nml2_installed():
+    history_file = os.path.join(install_root,'HISTORY.md')
+    if os.path.exists(default_nml2_dir) and os.path.exists(history_file):
+        return True
+    else:
+        return False
 
 def install_nml2():
     

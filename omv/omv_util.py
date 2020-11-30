@@ -148,11 +148,35 @@ def main():
                     from omv.engines.getpyneuroml import install_pynml
                     install_pynml()            
                     
+            elif eng.lower() == 'PyLEMS'.lower():
+                
+                from omv.engines.pylems import PyLemsEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from omv.engines.getpylems import install_pylems
+                    install_pylems()
+                    
             elif eng.lower() == 'PyLEMS_NeuroML2'.lower():
-                from omv.engines.getpylems import install_pylems
-                install_pylems()
-                from omv.engines.getnml2 import install_nml2
-                install_nml2()
+                
+                pylems_already_installed = False
+                nml2_already_installed = False
+                
+                from omv.engines.pylems import PyLemsEngine as ee
+                if ee.is_installed(None):
+                    pylems_already_installed = True
+                else:
+                    from omv.engines.getpylems import install_pylems
+                    install_pylems()
+                    
+                from omv.engines.getnml2 import install_nml2, is_nml2_installed
+                if is_nml2_installed:
+                    nml2_already_installed = True
+                else:
+                    install_nml2()
+                    
+                already_installed = nml2_already_installed and pylems_already_installed
+                
             elif eng.lower() == 'genesis'.lower():
                 from omv.engines.getgenesis import install_genesis
                 install_genesis()

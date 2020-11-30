@@ -35,6 +35,8 @@ class NestEngine(OMVEngine):
             r = check_output([environment_vars['NEST_HOME']+'bin/nest', '-v'], verbosity=2)
     
             ret = '%s'%r.split('version')[1].split()[0][:-1]
+            if '-' in ret:
+                ret = 'v%s'%ret.split('-')[-1]
         except OSError as err:
             inform("Couldn't execute NEST: ", err, indent=1)
             ret = False

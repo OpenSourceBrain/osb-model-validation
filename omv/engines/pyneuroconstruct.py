@@ -29,7 +29,7 @@ class PyneuroConstructEngine(OMVEngine):
         try:
             with working_dir(PyneuroConstructEngine.get_nC_environment()['NC_HOME']):
                 r = co(['./nC.sh','-v'], verbosity=1)
-                ret = 'v%s'%r.split()[-1]
+                ret = 'v%s'%r.split('neuroConstruct, version: ')[-1].split()[0]
         except Exception as err:
             inform("Couldn't execute neuroConstruct:", err, indent=1)
             ret = False

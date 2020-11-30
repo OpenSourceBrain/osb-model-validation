@@ -27,6 +27,8 @@ class PyNestEngine(OMVEngine):
                 #print('NEST info: %s; <<%s>>'%(ret, ret_str))
                 if 'Version' in ret_str:
                     ret = 'v%s'%ret_str.split('Version')[-1].split()[0]
+                elif '-' in ret_str:
+                    ret = 'v%s'%ret_str.split('-')[-1].split()[0]
                 else:
                     ret = 'v%s'%ret_str.split()[-1]
             
