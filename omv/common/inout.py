@@ -100,7 +100,13 @@ def check_output(cmds, cwd='.', shell=False, verbosity=0, env=None):
         inform("Error: %s"%(err), indent=2, verbosity=verbosity)
         raise err
     
-def pip_install(package):
+def pip_install(packages):
     
     pip = 'pip3' if sys.version_info.major == 3 else 'pip' 
-    print(check_output([pip, 'install', package]))
+    cmds = [pip, 'install']
+    if type(packages)==str:
+        cmds.append(packages)
+    else:
+        for p in packages:
+            cmds.append(p)
+    print(check_output(cmds))
