@@ -86,7 +86,7 @@ class PyNRNEngine(NeuronEngine):
             inform("returncode: [%s]"% p.returncode, verbosity=1, indent=2)
 
             self.returncode = p.returncode
-            if self.returncode is not 0:
+            if self.returncode != 0:
                 raise EngineExecutionError
 
 

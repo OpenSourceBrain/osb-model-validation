@@ -82,10 +82,10 @@ def trim_path(fname):
     else:
         return fname
     
-def check_output(cmds, cwd='.', shell=False, verbosity=0):
+def check_output(cmds, cwd='.', shell=False, verbosity=0, env=None):
     inform("Running the commands: [%s] in (%s; cwd=%s; shell=%s)"%(' '.join(cmds), cwd, os.getcwd(),shell), indent=2, verbosity=verbosity)
     try:
-        ret_string = sp.check_output(cmds, cwd=cwd, shell=shell)
+        ret_string = sp.check_output(cmds, cwd=cwd, shell=shell, env=env)
         inform("Commands: %s completed successfully"%(cmds), indent=2, verbosity=verbosity)
         if isinstance(ret_string, bytes):
                 ret_string = ret_string.decode('utf-8') # For Python 3...

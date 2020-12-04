@@ -28,7 +28,6 @@ class NestEngine(OMVEngine):
         ret = True
 
         environment_vars = NestEngine.get_nest_environment()
-
         try:
             FNULL = open(os.devnull, 'w')
 
@@ -37,6 +36,9 @@ class NestEngine(OMVEngine):
             ret = '%s'%r.split('version')[1].split()[0][:-1]
             if '-' in ret:
                 ret = 'v%s'%ret.split('-')[-1]
+                
+            inform("NEST %s is correctly installed..." % ret, indent=2, verbosity=1)
+            
         except OSError as err:
             inform("Couldn't execute NEST: ", err, indent=1)
             ret = False
