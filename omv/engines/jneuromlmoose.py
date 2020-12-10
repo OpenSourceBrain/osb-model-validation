@@ -39,7 +39,11 @@ class JNeuroMLMooseEngine(JNeuroMLEngine):
     def run(self):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), JNeuroMLMooseEngine.name), indent=1)
-            self.stdout = check_output(['jnml' if os.name != 'nt' else 'jnml.bat', self.modelpath, '-moose'], cwd=os.path.dirname(self.modelpath))
+            
+            from omv.engines.jneuroml import JNeuroMLEngine
+            jnml = JNeuroMLEngine.get_executable()
+            
+            self.stdout = check_output([jnml, self.modelpath, '-moose'], cwd=os.path.dirname(self.modelpath),env=JNeuroMLEngine.get_environment())
             self.stdout += check_output(['python', self.modelpath.replace('.xml', '_moose.py'), '-nogui'], cwd=os.path.dirname(self.modelpath))
             inform("Success with running ", JNeuroMLMooseEngine.name, indent=1)
             self.returncode = 0
