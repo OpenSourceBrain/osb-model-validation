@@ -43,7 +43,7 @@ class JNeuroMLEngine(OMVEngine):
             
             if is_verbose():
                 inform("%s %s is installed..." %
-                       (JNeuroMLEngine.name, ret), indent=1)
+                       (JNeuroMLEngine.name, ret), indent=2)
         except OSError as err:
             inform("Couldn't execute/import jNeuroML: ", err, indent=1)
             ret = False

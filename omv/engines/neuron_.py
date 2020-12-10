@@ -31,7 +31,6 @@ class NeuronEngine(OMVEngine):
         self.set_path()
         
             
-            
     @staticmethod
     def get_nrn_environment():
 
@@ -51,14 +50,17 @@ class NeuronEngine(OMVEngine):
         
         return environment_vars, path
 
+
     @staticmethod
     def is_installed(version):
         ret = True
-        
+        if is_verbose():
+                inform("Checking whether %s is installed..." %
+                   NeuronEngine.name, indent=1)
         try:
             output = check_output(['nrniv', '--version'],verbosity=2)
             if is_verbose():
-                inform('%s was already installed locally'%output.strip(), indent=2)
+                inform('%s is installed'%output.strip(), indent=2)
             ret = 'v%s'%output.split()[3]
         except OSError:
             try:

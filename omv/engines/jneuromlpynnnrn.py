@@ -44,9 +44,13 @@ class JNeuroMLPyNNNRNEngine(JNeuroMLEngine):
     def run(self):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), JNeuroMLPyNNNRNEngine.name), indent=1)
+            
+            from omv.engines.jneuroml import JNeuroMLEngine
+            jnml = JNeuroMLEngine.get_executable()
+            
             self.stdout = check_output(
-                ['jnml' if os.name != 'nt' else 'jnml.bat', self.modelpath, '-pynn', '-run-neuron'],
-                cwd=os.path.dirname(self.modelpath))
+                [jnml, self.modelpath, '-pynn', '-run-neuron'],
+                cwd=os.path.dirname(self.modelpath),env=JNeuroMLEngine.get_environment())
             inform("Success with running ",
                    JNeuroMLPyNNNRNEngine.name, indent=1)
             self.returncode = 0
