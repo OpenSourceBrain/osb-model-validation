@@ -25,9 +25,12 @@ class JNeuroMLNetPyNENP2Engine(JNeuroMLNetPyNEEngine):
 
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), JNeuroMLNetPyNEEngine.name), indent=1)
+            
+            from omv.engines.jneuroml import JNeuroMLEngine
+            jnml = JNeuroMLEngine.get_executable()
             self.stdout = check_output(
-                ['jnml' if os.name != 'nt' else 'jnml.bat', self.modelpath, '-netpyne', '-nogui', '-run', '-np', '%s'%np],
-                cwd=os.path.dirname(self.modelpath))
+                [jnml, self.modelpath, '-netpyne', '-nogui', '-run', '-np', '%s'%np],
+                cwd=os.path.dirname(self.modelpath),env=JNeuroMLEngine.get_environment())
             inform("Success with running ",
                    JNeuroMLNetPyNEEngine.name, indent=1)
             self.returncode = 0

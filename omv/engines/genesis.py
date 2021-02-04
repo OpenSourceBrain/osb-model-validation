@@ -52,7 +52,7 @@ class GenesisEngine(OMVEngine):
         from pkg_resources import resource_filename
         with working_dir(os.path.dirname(self.modelpath)):
             try:
-                temp = NamedTemporaryFile(suffix='.g')
+                temp = NamedTemporaryFile(suffix='.g', mode = "w")
                 temp.write('include %s\n' % self.modelpath)
                 temp.write('include %s\n' %
                            resource_filename('omv', 'engines/utils/genesis_utils.g'))

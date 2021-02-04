@@ -17,21 +17,23 @@ addons:
     - python-tk
     - python-lxml
         # Requirements for Moose
-    - libgsl0-dev 
+    - libgsl0-dev
     - g++
-    
-    
+
+
 language: python
 python:
   - 2.7
   - 3.7
-  
+
 
 env:
+
     #- OMV_ENGINE=PyNN_Nest
+
     - OMV_ENGINE=jNeuroML_NetPyNE
     - OMV_ENGINE=NetPyNE
-    
+
     - OMV_ENGINE=DIRECT_ENGINE_INSTALL
 
 
@@ -44,35 +46,37 @@ install:
 script:
     - omv list-engines -V
     - cd utilities/tests
-    
+
     # Note --ignore-non-py3  --> doesn't install simulator or run tests or cause failure if simulator itself is not Python 3 compatible...
     - omv all -V --ignore-non-py3; export OMV_SUCCESS=$?; echo $OMV_SUCCESS
-    
+
     - omv list-engines -V
-    
+
     - python -c "from sysconfig import get_paths as gp; print(gp())"
     - env
     - echo "Finished all OMV tests on *.omt files which have been found"
     - if [[ ${OMV_ENGINE} == "DIRECT_ENGINE_INSTALL" ]]; then echo "Continuing..."; else exit $OMV_SUCCESS; fi
-    
+
     - cd ../../omv/test
     - nosetests -vs
     - cd -
-    
+
     - echo "Testing direct installation of some simulators..."
     - omv install Brian2:2.2
-    #####- omv install PyNEST
-    
+
+    - omv install PyNEURON:7.6
+    - omv install PyLEMS_NeuroML2
+    - omv install PyNEST
+    - omv install Brian2
+
     # Set NEST variables
     ####- source $TRAVIS_HOME/nest/nest/bin/nest_vars.sh
-    
+
     - omv list-engines -V
     
-    ####- python test_pynest.py
+    - pwd
+    - python test_pynest.py
     - python test_brian2.py
     - which omv
     - which python
     - env
-
-    
-

@@ -26,6 +26,5 @@ setup(
         'numpy',
         'pyrx',
         'pathlib',
-        'watchdog',
         'docopt'],
 )

@@ -30,14 +30,17 @@ class JNeuroMLValidateV1Engine(JNeuroMLEngine):
         try:
             path_s = resolve_paths(self.modelpath)
                 
-            cmds = ['jnml' if os.name != 'nt' else 'jnml.bat', '-validatev1']
+            from omv.engines.jneuroml import JNeuroMLEngine
+            jnml = JNeuroMLEngine.get_executable()
+            cmds = [jnml, '-validatev1']
             for p in path_s: cmds.append(p)
             
             inform("Running with %s, using %s..." % (JNeuroMLValidateV1Engine.name,
                    cmds),
                    indent=1)
             self.stdout = sp.check_output(cmds,
-                cwd=os.path.dirname(self.modelpath))
+                cwd=os.path.dirname(self.modelpath),
+                env=JNeuroMLEngine.get_environment())
             inform("Success with running ",  JNeuroMLValidateV1Engine.name,
                    indent=1, verbosity=1)
             self.returncode = 0

@@ -20,6 +20,7 @@ from osb.Repository import GitHubRepository
 testable_projects = 0
 non_omv_tests = 0
 passing_projects = 0
+failing_projects = 0
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -46,6 +47,7 @@ if '-q' in sys.argv:
     ignores.append('nc_ca1')
     ignores.append('miglioreetal14_olfactorybulb3d')
     ignores.append('sadehetal2017-inhibitionstabilizednetworks')
+    ignores.append('brianshowcase')  # Slow...
 
 ignores.append('l23dendriticspikes')
 #ignores.append('izhikevichmodel')
@@ -54,6 +56,9 @@ ignores.append('test')
 ignores.append('salomon-muller')
 ignores.append('slow-oscillation')
 ignores.append('swrs')
+ignores.append('walnutiq')
+ignores.append('sachin-de-silva')
+ignores.append('test_spatial')
 
 all_repos = {  }
 
@@ -161,16 +166,19 @@ if __name__ == "__main__":
         if test_it:
             target_dir = '%s/%s' % (test_dir, proj_id)
             print(co(['git', 'clone', str(github_repo.clone_url), target_dir]))
-            
             with working_dir(target_dir):
                 for key in branches.keys():
                     if proj_id.lower() == key: 
                         print(co(['git', 'checkout', branches[key]]))
                 print("Running 'omv all' on"+ target_dir)
-                test_all()
-            passing_projects += 1
+                try:
+                    test_all()
+                    passing_projects += 1
+                except:
+                    passed = 0
+                    failing_projects +=1
 
-            print("\nSo far: %i projects with OMV tests which pass\n" % (passing_projects))
+            print("\nSo far: %i projects with OMV tests which pass, %i failed, %i in total to test\n" % (passing_projects, failing_projects, len(all_repos)))
 
     end = datetime.datetime.now()
 

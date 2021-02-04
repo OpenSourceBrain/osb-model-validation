@@ -82,10 +82,17 @@ def trim_path(fname):
     else:
         return fname
     
-def check_output(cmds, cwd='.', shell=False, verbosity=0):
-    inform("Running the commands: [%s] in (%s; cwd=%s; shell=%s)"%(' '.join(cmds), cwd, os.getcwd(),shell), indent=2, verbosity=verbosity)
+def check_output(cmds, cwd='.', shell=False, verbosity=0, env=None):
+    inform("Running the commands: [%s] in (%s; cwd=%s; shell=%s; env=%s)"%(' '.join(cmds), cwd, os.getcwd(),shell,env), indent=2, verbosity=verbosity)
+    joint_env = {}
+    if env:
+        joint_env.update(env)
+    for k in os.environ:
+        if not k in joint_env:
+            joint_env[k] = os.environ[k]
+    
     try:
-        ret_string = sp.check_output(cmds, cwd=cwd, shell=shell)
+        ret_string = sp.check_output(cmds, cwd=cwd, shell=shell, env=joint_env)
         inform("Commands: %s completed successfully"%(cmds), indent=2, verbosity=verbosity)
         if isinstance(ret_string, bytes):
                 ret_string = ret_string.decode('utf-8') # For Python 3...
@@ -99,3 +106,14 @@ def check_output(cmds, cwd='.', shell=False, verbosity=0):
         inform("Error running commands: %s in (%s)!"%(cmds, cwd), indent=2, verbosity=verbosity)
         inform("Error: %s"%(err), indent=2, verbosity=verbosity)
         raise err
+    
+def pip_install(packages):
+    
+    pip = 'pip3' if sys.version_info.major == 3 else 'pip' 
+    cmds = [pip, 'install']
+    if type(packages)==str:
+        cmds.append(packages)
+    else:
+        for p in packages:
+            cmds.append(p)
+    print(check_output(cmds))

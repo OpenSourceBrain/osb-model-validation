@@ -38,7 +38,7 @@ from omv import __version__ as version
 def main():
     arguments = docopt(__doc__, version='OpenSourceBrain Model Validation %s'%version)
     set_env_vars()
-    
+
     if arguments['--verbose']:
         set_verbosity(1)
 
@@ -65,7 +65,7 @@ def main():
         except AssertionError:
             inform("Failed due to non passing tests")
             exit(1)
-            
+
     elif arguments['find']:
         try:
             test_all(do_not_run=True)
@@ -84,7 +84,7 @@ def main():
         set_verbosity(1)
         eng = arguments['<engine>']
         engine_version=None
-        
+
         if ':' in eng:
             ee = eng.split(':')
             eng = ee[0]
@@ -92,14 +92,14 @@ def main():
             inform('Engine %s version %s will be used...'%(eng, engine_version))
         else:
             inform('Engine %s, default version will be used...'%(eng))
-            
+
         if eng.lower() not in [e.lower() for e in OMVEngines]:
             inform('Engine ' + eng + ' unknown!')
         else:
-            
+
             inform('Trying to install: %s'% eng)
             already_installed = False
-            
+
             if eng.lower() == 'NEURON'.lower():
                 from omv.engines.neuron_ import NeuronEngine
                 if not NeuronEngine.is_installed(None):
@@ -107,7 +107,7 @@ def main():
                     install_neuron(engine_version)
                 else:
                     already_installed = True
-                    
+
             elif eng.lower() == 'PyNEURON'.lower():
                 from omv.engines.pyneuron import PyNRNEngine
                 if not PyNRNEngine.is_installed(None):
@@ -115,7 +115,7 @@ def main():
                     install_neuron(engine_version)
                 else:
                     already_installed = True
-                    
+
             elif eng.lower() == 'jLEMS'.lower():
                 from omv.engines.jlems import JLemsEngine as ee
                 if ee.is_installed(None):
@@ -123,7 +123,7 @@ def main():
                 else:
                     from omv.engines.getjlems import install_jlems
                     install_jlems()
-                    
+
             elif eng.lower() == 'jNeuroML'.lower():
                 from omv.engines.jneuroml import JNeuroMLEngine as ee
                 if ee.is_installed(None):
@@ -131,7 +131,7 @@ def main():
                 else:
                     from omv.engines.getjnml import install_jnml
                     install_jnml()
-                    
+
             elif eng.lower() == 'neuroConstruct' or eng == 'Py_neuroConstruct'.lower():
                 from omv.engines.pyneuroconstruct import PyneuroConstructEngine as ee
                 if ee.is_installed(None):
@@ -146,13 +146,47 @@ def main():
                     already_installed = True
                 else:
                     from omv.engines.getpyneuroml import install_pynml
-                    install_pynml()            
-                    
+                    install_pynml()
+
+            elif eng.lower() == 'PyLEMS'.lower():
+
+                from omv.engines.pylems import PyLemsEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from omv.engines.getpylems import install_pylems
+                    install_pylems()
+
             elif eng.lower() == 'PyLEMS_NeuroML2'.lower():
-                from omv.engines.getpylems import install_pylems
-                install_pylems()
-                from omv.engines.getnml2 import install_nml2
-                install_nml2()
+
+                pylems_already_installed = False
+                nml2_already_installed = False
+
+                from omv.engines.pylems import PyLemsEngine as ee
+                if ee.is_installed(None):
+                    pylems_already_installed = True
+                else:
+                    from omv.engines.getpylems import install_pylems
+                    install_pylems()
+
+                from omv.engines.getnml2 import install_nml2, is_nml2_installed
+                if is_nml2_installed():
+                    nml2_already_installed = True
+                else:
+                    install_nml2()
+
+                already_installed = nml2_already_installed and pylems_already_installed
+
+
+            elif eng.lower() == 'Py_neuroConstruct'.lower():
+
+                from omv.engines.pyneuroconstruct import PyneuroConstructEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from omv.engines.getneuroconstruct import install_neuroconstruct
+                    install_neuroconstruct()
+
             elif eng.lower() == 'genesis'.lower():
                 from omv.engines.getgenesis import install_genesis
                 install_genesis()
@@ -190,20 +224,20 @@ def main():
                 exit(1)
             if already_installed:
                 inform('Engine %s was already installed'%eng)
-                
-                
-            
+
+
+
 
     elif arguments['list-engines'] or arguments['list']:
-        
+
         inform('OMV is checking which engines are currently installed...')
         set_verbosity(0)
         engines = sorted(OMVEngines.keys())
-        
+
         installed = {}
         for engine in engines:
             installed[engine] = OMVEngines[engine].is_installed('')
-            
+
         inform('')
         inform('The following engines are currently supported by OMV (v%s):'%version)
         inform('')
@@ -214,7 +248,7 @@ def main():
         if arguments['--verbose']:
             inform('Additional Python (v%s) packages:'%platform.python_version())
             inform('')
-            for m in ['matplotlib','numpy','pandas','scipy','sympy','tables','h5py','neo','lazyarray','pyelectro','pyneuroml','neuroml','neuromllite']:
+            for m in ['matplotlib','numpy','pandas','scipy','sympy','tables','h5py','neo','lazyarray','pyelectro','lems','pyneuroml','neuroml','neuromllite']:
                 installed_ver = False
                 try:
                     exec('import %s'%m)

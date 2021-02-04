@@ -41,7 +41,11 @@ class JNeuroMLBrianEngine(JNeuroMLEngine):
     def run(self):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), JNeuroMLBrianEngine.name), indent=1)
-            self.stdout = check_output(['jnml' if os.name != 'nt' else 'jnml.bat', self.modelpath, '-brian'], cwd=os.path.dirname(self.modelpath))
+            
+            from omv.engines.jneuroml import JNeuroMLEngine
+            jnml = JNeuroMLEngine.get_executable()
+            
+            self.stdout = check_output([jnml, self.modelpath, '-brian'], cwd=os.path.dirname(self.modelpath),env=JNeuroMLEngine.get_environment())
             self.stdout += check_output(['python', self.modelpath.replace('.xml', '_brian.py'), '-nogui'], cwd=os.path.dirname(self.modelpath))
             inform("Success with running ", JNeuroMLBrianEngine.name, indent=1)
             self.returncode = 0

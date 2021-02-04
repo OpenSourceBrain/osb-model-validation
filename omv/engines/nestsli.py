@@ -1,4 +1,6 @@
 import os
+import sys
+
 import subprocess as sp
 
 from omv.common.inout import inform, trim_path, check_output
@@ -18,7 +20,7 @@ class NestEngine(OMVEngine):
             nestpath = os.environ['NEST_INSTALL_DIR']+'/'
 
         environment_vars = {'NEST_HOME': nestpath,
-                            'PYTHONPATH': nestpath+'/lib/python2.7/site-packages/'}
+                            'PYTHONPATH': nestpath+'/lib/python%s.%s/site-packages/'%(sys.version_info.major, sys.version_info.minor)}
 
         return environment_vars
 
@@ -28,13 +30,17 @@ class NestEngine(OMVEngine):
         ret = True
 
         environment_vars = NestEngine.get_nest_environment()
-
         try:
             FNULL = open(os.devnull, 'w')
 
             r = check_output([environment_vars['NEST_HOME']+'bin/nest', '-v'], verbosity=2)
-    
+
             ret = '%s'%r.split('version')[1].split()[0][:-1]
+            if '-' in ret:
+                ret = 'v%s'%ret.split('-')[-1]
+
+            inform("NEST %s is correctly installed..." % ret, indent=2, verbosity=1)
+
         except OSError as err:
             inform("Couldn't execute NEST: ", err, indent=1)
             ret = False
@@ -67,5 +73,3 @@ class NestEngine(OMVEngine):
             inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1
             self.stdout = "???"
-
-
