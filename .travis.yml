@@ -1,3 +1,4 @@
+# Framework for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
 
 dist: bionic
 
@@ -8,14 +9,15 @@ addons:
     - python-sympy
     - python-tornado
     - cython
+    - python-dev
     - python3-dev
         # Requirements for Octave
     - octave
         # Requirements for NetPyNE & libNeuroML
     - python-tk
     - python-lxml
+    - python-tables
         # Requirements for Moose
-    - python-dev
     - libhdf5-dev
     - libgsl0-dev
     - g++
@@ -26,9 +28,9 @@ language: python
 python:
   - "2.7"
   #- "3.5"
-  - "3.6"
-  - "3.7"
-  - "3.8"
+  - "3.6"  # Required so nest has access to python 3.6 libraries outside of venv ...
+  #- "3.7"
+  #- "3.8"
 
 
 
@@ -39,11 +41,14 @@ env:
     - OMV_ENGINE=PyNEST
     #- OMV_ENGINE=PyNN_NEURON
     #- OMV_ENGINE=PyNN_Nest
+    - OMV_ENGINE=NetPyNE
 
-    #- OMV_ENGINE=DIRECT_ENGINE_INSTALL
+    - OMV_ENGINE=DIRECT_ENGINE_INSTALL
 
 
 install:
+    - pip install numpy
+    - pip install scipy matplotlib # Why is this needed? Scipy doesn't seem to get installed correctly on trusty with addons above...
     - python setup.py install
     - pip install matplotlib --upgrade # To ensure matplotlib 2.x
     - pip install numpy scipy # Why is this needed? Scipy doesn't seem to get installed correctly on trusty with addons above...
@@ -57,6 +62,9 @@ script:
 
     - omv list-engines -V
 
+
+    - python -c "from sysconfig import get_paths as gp; print(gp())"
+    - env
     - echo "Finished all OMV tests on *.omt files which have been found"
     - if [[ ${OMV_ENGINE} == "DIRECT_ENGINE_INSTALL" ]]; then echo "Continuing..."; else exit $OMV_SUCCESS; fi
 
@@ -67,6 +75,7 @@ script:
 
     - echo "Testing direct installation of some simulators..."
     - omv install Brian2:2.2
+
     - omv install PyNEURON:7.6
     - omv install PyLEMS_NeuroML2
     - omv install PyNEST
