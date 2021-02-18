@@ -9,6 +9,7 @@ addons:
     - python-sympy
     - python-tornado
     - cython
+    - python3-dev
         # Requirements for Octave
     - octave
         # Requirements for NetPyNE & libNeuroML
