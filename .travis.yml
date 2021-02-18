@@ -16,6 +16,7 @@ addons:
         # Requirements for NetPyNE & libNeuroML
     - python-tk
     - python-lxml
+    - python-tables
         # Requirements for Moose
     - libgsl0-dev
     - g++
@@ -38,7 +39,8 @@ env:
 
 
 install:
-    - pip install numpy scipy matplotlib # Why is this needed? Scipy doesn't seem to get installed correctly on trusty with addons above...
+    - pip install numpy
+    - pip scipy matplotlib # Why is this needed? Scipy doesn't seem to get installed correctly on trusty with addons above...
     - python setup.py install
     #- pip install bokeh==1.4.0 # for NetPyNE & py2...
 
