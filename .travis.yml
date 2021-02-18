@@ -8,7 +8,7 @@ addons:
        # Requirements for Brian & NEST
     - python-sympy
     - python-tornado
-    - cython
+    #- cython
     - python-dev
     - python3-dev
         # Requirements for Octave
@@ -38,20 +38,17 @@ env:
 
     #- OMV_ENGINE=NEST:2.18.0
     #- OMV_ENGINE=NEST:2.20.0
-    - OMV_ENGINE=PyNEST
+    #- OMV_ENGINE=PyNEST
     #- OMV_ENGINE=PyNN_NEURON
     #- OMV_ENGINE=PyNN_Nest
     - OMV_ENGINE=NetPyNE
 
-    - OMV_ENGINE=DIRECT_ENGINE_INSTALL
+    #- OMV_ENGINE=DIRECT_ENGINE_INSTALL
 
 
 install:
-    - pip install numpy
-    - pip install scipy matplotlib # Why is this needed? Scipy doesn't seem to get installed correctly on trusty with addons above...
+    - pip install numpy scipy matplotlib cython # Why is this needed? Scipy doesn't seem to get installed correctly on trusty with addons above...
     - python setup.py install
-    - pip install matplotlib --upgrade # To ensure matplotlib 2.x
-    - pip install numpy scipy # Why is this needed? Scipy doesn't seem to get installed correctly on trusty with addons above...
 
 script:
     - omv list-engines -V
