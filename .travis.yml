@@ -44,11 +44,11 @@ env:
     ##- OMV_ENGINE=genesis  #  No longer supported on OMV...
     ##- OMV_ENGINE=Moose  # Can this be built with py3?
     #- OMV_ENGINE=NEURON:7.8.2
-    - OMV_ENGINE=PyNEURON:7.8.1
+    - OMV_ENGINE=PyNEURON
     #- OMV_ENGINE=PyNN
     - OMV_ENGINE=PyNN_NEURON
     #- OMV_ENGINE=PyNN_Brian1
-    #- OMV_ENGINE=PyNN_Nest
+    - OMV_ENGINE=PyNN_Nest
     #- OMV_ENGINE=PyNN_NeuroML
     #- OMV_ENGINE=NetPyNE
     #- OMV_ENGINE=PyLEMS
