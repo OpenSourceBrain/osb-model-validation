@@ -16,7 +16,7 @@ class NeuronEngine(OMVEngine):
 
     def __init__(self, target, do_not_check_install=False, engine_version=None):
         super(NeuronEngine, self).__init__(target, do_not_check_install, engine_version)
-        
+
         inform("Checking whether %s (v %s) is already installed..." % (self.name, engine_version),
                    indent=1, verbosity=1)
         if not self.is_installed(''):
@@ -25,29 +25,37 @@ class NeuronEngine(OMVEngine):
             except Exception as e:
                 inform(e)
                 raise(EngineInstallationError(e))
-        
+
         self.environment_vars, self.path = NeuronEngine.get_nrn_environment()
         self.set_environment()
         self.set_path()
-        
-            
+
+
     @staticmethod
     def get_nrn_environment():
 
         home = os.environ['HOME']
         arch = platform.machine()
         pp = os.path.join(home, 'local/lib/python/site-packages')
-        
+
         environment_vars = {'PYTHONPATH': pp}
+
         if not 'NEURON_HOME' in os.environ:
-            environment_vars['NEURON_HOME'] = os.path.join(home, 'neuron/nrn/', arch)
-            path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
+            pip_install_dir = '/usr/local'
+            pip_install_nrniv = os.path.join(pip_install_dir, 'bin','nrniv')
+            print('Does file exist: %s'%pip_install_nrniv)
+            if  os.path.isfile(pip_install_nrniv):
+                environment_vars['NEURON_HOME'] = pip_install_dir
+                path = os.path.join(pip_install_dir, 'bin')
+            else:
+                environment_vars['NEURON_HOME'] = os.path.join(home, 'neuron/nrn/', arch)
+                path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
         else:
             environment_vars['NEURON_HOME'] = os.environ['NEURON_HOME']
             path = os.path.join(os.environ['NEURON_HOME'], 'bin')
 
         inform("NEURON environment vars: %s, PATH: %s" % (environment_vars, path),indent=1, verbosity=1)
-        
+
         return environment_vars, path
 
 
@@ -65,24 +73,24 @@ class NeuronEngine(OMVEngine):
         except OSError:
             try:
                 environment_vars, path = NeuronEngine.get_nrn_environment()
-                
+
                 inform('Testing NEURON with env: %s and path: %s'%(environment_vars, path), indent=2)
                 output = check_output([path+'/nrniv', '--version'])
                 if is_verbose():
                     inform('%s was already installed (by OMV..?)'%output.strip(), indent=2)
-                    
+
                 ret = 'v%s'%output.split()[3]
             except OSError:
                     inform('NEURON not currently installed', indent=2)
                     ret = False
         return ret
- 
+
     @classmethod
     def install(cls, version):
         from omv.engines.getnrn import install_neuron
-        
+
         cls.environment_vars, cls.path = NeuronEngine.get_nrn_environment()
-        
+
         inform('Will fetch and install the latest NEURON version', indent=2)
         install_neuron(version)
 
@@ -112,16 +120,16 @@ class NeuronEngine(OMVEngine):
 
 
     def run(self):
-        
+
         try:
             self.stdout = self.compile_modfiles(self.modelpath)
         except sp.CalledProcessError as err:
             self.stderr = err.output
             self.returncode = err.returncode
             inform('Error compiling modfiles:', self.stderr, indent=2)
-        
+
         with working_dir(dirname(self.modelpath)):
-            
+
             inform("Running %s on %s..." % (self.name, self.modelpath),
                    indent=1)
             p = sp.Popen(['nrniv'],
@@ -141,7 +149,7 @@ class NeuronEngine(OMVEngine):
             #     f.write(stdout)
             self.stdout = str(stdout.decode())
             self.stderr = str(stderr.decode())
-            
+
             inform("OUT: %s"% self.stdout, verbosity=1, indent=2)
             inform("ERR: %s"% self.stderr, verbosity=1, indent=2)
             inform("returncode: [%s]"% p.returncode, verbosity=1, indent=2)
@@ -149,7 +157,7 @@ class NeuronEngine(OMVEngine):
             self.returncode = p.returncode
             if self.returncode != 0:
                 raise EngineExecutionError
-            
+
     def build_query_string(self, name, cmd):
         return '{{%s}{print "%s: ", %s}}' % (cmd, name, name)
 
@@ -158,11 +166,6 @@ class NeuronEngine(OMVEngine):
         qcmd = 'forsec "%s" {for (x,0) area_%s+=area(x)}' % (secname, secname)
         name = self.register_query(qname, qcmd)
         return name
-            
+
     def query_temperature(self):
         return self.register_query('temperature', 'temperature=celsius')
-
-
-
-
-

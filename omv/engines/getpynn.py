@@ -1,12 +1,14 @@
 import os
 from omv.common.inout import inform, check_output
+from omv.common.inout import pip_install
+
 from omv.engines.utils.wdir import working_dir
 
 def install_pynn():
     try:
-        
-        print(check_output(['pip', 'install', 'lazyarray']))  # This should ideally be automatically installed with PyNN...
-        print(check_output(['pip', 'install', 'neo==0.5.1']))  # This should ideally be automatically installed with PyNN...
+
+        #pip_install('lazyarray')  # This should ideally be automatically installed with PyNN...
+        #pip_install('neo==0.5.1')  # This should ideally be automatically installed with PyNN...
 
         install_root = os.environ['HOME']
 
@@ -19,7 +21,8 @@ def install_pynn():
         with working_dir(path):
             print(check_output(['git','checkout','neuroml']))  # neuroml branch has the latest NML2 import/export code!
             #check_output(['git','checkout','master'])
-            print(check_output(['python', 'setup.py', 'install']))
+            #print(check_output(['python', 'setup.py', 'install']))
+            pip_install('.')
             print(check_output(['pwd']))
             print("Finished attempting to install PyNN")
         #import pyNN
@@ -28,4 +31,3 @@ def install_pynn():
         m = 'ERROR during install_pynn: %s'%e
     finally:
         inform(m)
-        

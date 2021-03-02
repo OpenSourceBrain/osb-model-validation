@@ -219,6 +219,9 @@ def main():
             elif eng.lower() == 'PyNN'.lower():
                 from omv.engines.getpynn import install_pynn
                 install_pynn()
+            elif eng.lower() == 'PyNN_NEURON'.lower():
+                from omv.engines.pynnneuron import PyNNNRNEngine
+                PyNNNRNEngine.install()
             else:
                 inform('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)
                 exit(1)

@@ -6,29 +6,28 @@ from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
 class PyNNEngine(OMVEngine):
-    
+
     name = "PyNN"
 
     @staticmethod
     def is_installed(version):
         ret = True
+
+        inform("Checking whether %s (v %s) is already installed..." % (PyNNEngine.name, version),
+                   indent=1, verbosity=1)
         try:
-            
-            ret_str = sp.check_output(['python -c "import pyNN; print(pyNN.__version__)"'], shell=True,stderr=sp.STDOUT)
-            ret = len(ret_str) > 0
-            
-            if isinstance(ret_str, bytes):
-                ret_str = ret_str.decode('utf-8')
-            
-            ret = 'v%s'%ret_str.strip()
-            if is_verbose():
-                inform("pyNN %s is correctly installed..." % ret, indent=2, verbosity=2)
-            
+
+            #ret_str = sp.check_output(['python -c "import pyNN; print(pyNN.__version__)"'], shell=True,stderr=sp.STDOUT)
+            import pyNN
+            inform("pyNN version %s is correctly installed..." % pyNN.__version__, indent=2, verbosity=2)
+
+            ret = 'v%s'%pyNN.__version__
+
         except Exception as err:
-            inform("Couldn't import pyNN into Python: ", err, indent=1, verbosity=2)
+            inform("Couldn't import pyNN into Python: ", err, indent=1, verbosity=1)
             ret = False
         return ret
-        
+
     @staticmethod
     def install(version):
         from omv.engines.getpynn import install_pynn
@@ -52,19 +51,3 @@ class PyNNEngine(OMVEngine):
             inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1
             self.stdout = "???"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
