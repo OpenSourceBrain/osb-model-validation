@@ -8,7 +8,7 @@ from omv.engines.utils.wdir import working_dir
 from omv.engines.engine import OMVEngine, EngineExecutionError
 from os.path import dirname
 from omv.common.inout import check_output, inform, is_verbose
-
+from sysconfig import get_paths
 
 class NeuronEngine(OMVEngine):
 
@@ -41,12 +41,18 @@ class NeuronEngine(OMVEngine):
         environment_vars = {'PYTHONPATH': pp}
 
         if not 'NEURON_HOME' in os.environ:
-            pip_install_dir = '/usr/local'
-            pip_install_nrniv = os.path.join(pip_install_dir, 'bin','nrniv')
-            print('Does file exist: %s'%pip_install_nrniv)
-            if  os.path.isfile(pip_install_nrniv):
-                environment_vars['NEURON_HOME'] = pip_install_dir
-                path = os.path.join(pip_install_dir, 'bin')
+            pip_install_dir1 = '/usr/local'
+            pip_install_nrniv1 = os.path.join(pip_install_dir1, 'bin','nrniv')
+            pip_install_dir2 = get_paths()['scripts'][:4]
+            pip_install_nrniv2 = os.path.join(pip_install_dir2, 'bin','nrniv')
+
+            inform("Checking NEURON at: %s or %s" % (pip_install_nrniv1, pip_install_nrniv2),indent=1, verbosity=1)
+            if  os.path.isfile(pip_install_nrniv1):
+                environment_vars['NEURON_HOME'] = pip_install_dir1
+                path = os.path.join(pip_install_dir1, 'bin')
+            elif os.path.isfile(pip_install_nrniv2):
+                environment_vars['NEURON_HOME'] = pip_install_dir2
+                path = os.path.join(pip_install_dir2, 'bin')
             else:
                 environment_vars['NEURON_HOME'] = os.path.join(home, 'neuron/nrn/', arch)
                 path = os.path.join(home, 'neuron/nrn/', arch, 'bin')
@@ -68,7 +74,7 @@ class NeuronEngine(OMVEngine):
         try:
             output = check_output(['nrniv', '--version'],verbosity=2)
             if is_verbose():
-                inform('%s is installed'%output.strip(), indent=2)
+                inform('%s is installed; env: %s'%(output.strip(), NeuronEngine.get_nrn_environment()), indent=2)
             ret = 'v%s'%output.split()[3]
         except OSError:
             try:
