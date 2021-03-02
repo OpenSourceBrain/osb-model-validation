@@ -43,10 +43,11 @@ class NeuronEngine(OMVEngine):
         if not 'NEURON_HOME' in os.environ:
             pip_install_dir1 = '/usr/local'
             pip_install_nrniv1 = os.path.join(pip_install_dir1, 'bin','nrniv')
-            pip_install_dir2 = get_paths()['scripts'][:4]
+            scripts_bin = get_paths()['scripts']
+            pip_install_dir2 = scripts_bin[:scripts_bin.rfind('/')]
             pip_install_nrniv2 = os.path.join(pip_install_dir2, 'bin','nrniv')
 
-            inform("Checking NEURON at: %s or %s" % (pip_install_nrniv1, pip_install_nrniv2),indent=1, verbosity=1)
+            inform("Checking NEURON at: %s or %s (%s)" % (pip_install_nrniv1, pip_install_nrniv2,get_paths()),indent=1, verbosity=1)
             if  os.path.isfile(pip_install_nrniv1):
                 environment_vars['NEURON_HOME'] = pip_install_dir1
                 path = os.path.join(pip_install_dir1, 'bin')
