@@ -203,14 +203,25 @@ def main():
                 from omv.engines.getbrian2 import install_brian2
                 install_brian2(engine_version)
             elif eng.lower() == 'NEST'.lower():
-                from omv.engines.getnest import install_nest
-                install_nest(engine_version)
+                from omv.engines.nestsli import NestEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from omv.engines.getnest import install_nest
+                    install_nest(engine_version)
             elif eng.lower() == 'PyNEST'.lower():
-                from omv.engines.getnest import install_nest
-                install_nest(engine_version)
+                from omv.engines.pynest import PyNestEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from omv.engines.getnest import install_nest
+                    install_nest(engine_version)
             elif eng.lower() == 'PyNN'.lower():
                 from omv.engines.getpynn import install_pynn
                 install_pynn()
+            elif eng.lower() == 'PyNN_NEURON'.lower():
+                from omv.engines.pynnneuron import PyNNNRNEngine
+                PyNNNRNEngine.install()
             else:
                 inform('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)
                 exit(1)

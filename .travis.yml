@@ -1,6 +1,6 @@
+# Framework for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
 
-dist: xenial
-sudo: false
+dist: bionic
 
 addons:
   apt:
@@ -8,47 +8,46 @@ addons:
        # Requirements for Brian & NEST
     - python-sympy
     - python-tornado
-    - cython
+    #- cython
+    - python-dev
+    - python3-dev
         # Requirements for Octave
     - octave
         # Requirements for NetPyNE & libNeuroML
     - python-tk
     - python-lxml
+    - python-tables
         # Requirements for Moose
-    - python-dev
     - libhdf5-dev
-    - libgsl0-dev 
+    - libgsl0-dev
     - g++
-    
-    
+
+
 language: python
 
-python: 
-  - 2.7
+python:
+  #- "2.7"
   #- "3.5"
-  # - "3.6"  see below
+  - "3.6"  # Required so nest has access to python 3.6 libraries outside of venv ...
   #- "3.7"
-  
-  
-# remove this for py3..?
-virtualenv:
-    system_site_packages: true
+  #- "3.8"
+
 
 
 env:
-    - OMV_ENGINE=Brian
+    #- OMV_ENGINE=Brian  # Fails on Py3 - Brian 1 not supported
+    ##- OMV_ENGINE=genesis  #  No longer supported on OMV...
+    ##- OMV_ENGINE=Moose  # Can this be built with py3?
     - OMV_ENGINE=Brian2:2.2.2.1
     - OMV_ENGINE=NEST:2.18.0
     - OMV_ENGINE=NEST:2.20.0
     - OMV_ENGINE=PyNEST
     - OMV_ENGINE=Octave
-    - OMV_ENGINE=genesis
-    - OMV_ENGINE=Moose
-    - OMV_ENGINE=NEURON:7.5
+    - OMV_ENGINE=NEURON
     - OMV_ENGINE=PyNEURON:7.6
     - OMV_ENGINE=PyNN
     - OMV_ENGINE=PyNN_NEURON
-    - OMV_ENGINE=PyNN_Brian1
+    #- OMV_ENGINE=PyNN_Brian1 # Fails on Py3 - Brian 1 not supported
     - OMV_ENGINE=PyNN_Nest
     - OMV_ENGINE=PyNN_NeuroML
     - OMV_ENGINE=NetPyNE
@@ -56,9 +55,9 @@ env:
     - OMV_ENGINE=PyLEMS_NeuroML2
     - OMV_ENGINE=jLEMS
     - OMV_ENGINE=jNeuroML
-    - OMV_ENGINE=jNeuroML_Brian
+    #- OMV_ENGINE=jNeuroML_Brian  # Fails on Py3 - Brian 1 not supported
     - OMV_ENGINE=jNeuroML_Brian2
-    - OMV_ENGINE=jNeuroML_Moose
+    #- OMV_ENGINE=jNeuroML_Moose # Can this be built with py3?
     - OMV_ENGINE=jNeuroML_NEURON
     - OMV_ENGINE=jNeuroML_NetPyNE
     - OMV_ENGINE=jNeuroML_PyNN_NEURON
@@ -66,50 +65,48 @@ env:
     - OMV_ENGINE=jNeuroML_validatev1
     - OMV_ENGINE=Py_neuroConstruct
     - OMV_ENGINE=pyNeuroML
-    
+
     - OMV_ENGINE=DIRECT_ENGINE_INSTALL
 
 
 install:
+    - pip install numpy scipy matplotlib cython # Why is this needed? Scipy doesn't seem to get installed correctly on trusty with addons above...
+    - pip install pandas==1.1.5 # Good with py3.6
     - python setup.py install
-    - pip install matplotlib --upgrade # To ensure matplotlib 2.x
-    - pip install numpy scipy # Why is this needed? Scipy doesn't seem to get installed correctly on trusty with addons above...
-    - pip install bokeh==1.4.0 # for NetPyNE & py2...
 
 script:
     - omv list-engines -V
     - cd utilities/tests
-    
+
     # Note --ignore-non-py3  --> doesn't install simulator or run tests or cause failure if simulator itself is not Python 3 compatible...
     - omv all -V --ignore-non-py3; export OMV_SUCCESS=$?; echo $OMV_SUCCESS
-    
+
     - omv list-engines -V
-    
+
+    - python -c "from sysconfig import get_paths as gp; print(gp())"
+    - env
     - echo "Finished all OMV tests on *.omt files which have been found"
     - if [[ ${OMV_ENGINE} == "DIRECT_ENGINE_INSTALL" ]]; then echo "Continuing..."; else exit $OMV_SUCCESS; fi
-    
+
     - cd ../../omv/test
     - nosetests -vs
     - cd -
-    
+
     - echo "Testing direct installation of some simulators..."
-    - omv install Brian2:2.2
-    - omv install PyNEURON:7.6
-    - omv install PyLEMS_NeuroML2
+    #- omv install Brian2:2.2
+    #- omv install PyNEURON:7.6
+    #- omv install PyLEMS_NeuroML2
     - omv install PyNEST
     - omv install Brian2
-    
+
     # Set NEST variables
     - source $TRAVIS_HOME/nest/nest/bin/nest_vars.sh
-    
+
     - omv list-engines -V
-    
+
     - pwd
     - python test_pynest.py
     - python test_brian2.py
     - which omv
     - which python
     - env
-
-    
-

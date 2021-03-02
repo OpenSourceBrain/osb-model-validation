@@ -9,7 +9,7 @@ from omv.engines.engine import EngineExecutionError
 
 
 class PyNNNRNEngine(PyNNEngine):
-    
+
     name = "PyNN_NEURON"
 
     @staticmethod
@@ -18,11 +18,11 @@ class PyNNNRNEngine(PyNNEngine):
             inform("Checking whether %s is installed correctly..." %
                    PyNNNRNEngine.name, indent=1)
         installed = PyNNEngine.is_installed(None) and NeuronEngine.is_installed(None)
-        
+
         return installed
-        
+
     @staticmethod
-    def install(version):
+    def install(version=None):
         if not NeuronEngine.is_installed(None):
             NeuronEngine.install(None)
             inform("%s installed NEURON..." % PyNNNRNEngine.name, indent=2, verbosity =1)
@@ -30,6 +30,7 @@ class PyNNNRNEngine(PyNNEngine):
             PyNNEngine.install(None)
             inform("%s installed PyNN..." % PyNNNRNEngine.name, indent=2, verbosity =1)
 
+        import pyNN
         PyNNNRNEngine.path = PyNNEngine.path + \
             ":" + NeuronEngine.path
         PyNNNRNEngine.environment_vars = {}
@@ -39,31 +40,32 @@ class PyNNNRNEngine(PyNNEngine):
             NeuronEngine.environment_vars)
         inform("PATH: " + PyNNNRNEngine.path, indent=2, verbosity =1)
         inform("Env vars: %s" % PyNNNRNEngine.environment_vars, indent=2, verbosity =1)
-        
-        pynn_loc = sp.check_output(['python -c "import pyNN,os; print(os.path.dirname(pyNN.__file__))"'], shell=True,stderr=sp.STDOUT).strip()
+
+        #pynn_loc = sp.check_output(['python -c "import pyNN,os; print(os.path.dirname(pyNN.__file__))"'], shell=True,stderr=sp.STDOUT).strip()
+        pynn_loc = pyNN.__file__[:-12]  # remove /__init__.py
         pynn_mod_dir = '%s/neuron/nmodl/'%pynn_loc
-        
+
         inform("Attempting to compile PyNN mod files for standard models in %s..."%pynn_mod_dir, indent=2, verbosity =1)
-        
+
         print(check_output(['ls', pynn_mod_dir], cwd=pynn_mod_dir))
-        
+
         environment_vars, path = NeuronEngine.get_nrn_environment()
         inform("Using NEURON with env %s at %s..."%(environment_vars, path), indent=2, verbosity =1)
-        
+
         print(check_output([environment_vars['NEURON_HOME']+'/bin/nrnivmodl'], cwd=pynn_mod_dir))
 
 
     def run(self):
-        
-        
+
+
         try:
             self.stdout = NeuronEngine.compile_modfiles(self.modelpath)
         except sp.CalledProcessError as err:
             self.stderr = err.output
             self.returncode = err.returncode
             inform('Error compiling modfiles:', self.stderr, indent=2)
-        
-        try:            
+
+        try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
             self.stdout = check_output(['python', self.modelpath, 'neuron'],
                                           cwd=os.path.dirname(self.modelpath))
@@ -76,19 +78,3 @@ class PyNNNRNEngine(PyNNEngine):
             inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1
             self.stdout = "???"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
