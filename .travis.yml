@@ -29,42 +29,42 @@ python:
   #- "2.7"
   #- "3.5"
   - "3.6"  # Required so nest has access to python 3.6 libraries outside of venv ...
-  - "3.7"
+  #- "3.7"
   #- "3.8"
 
 
 
 env:
-    ##- OMV_ENGINE=Brian  # Fails on Py3 - Brian 1 not supported
+    #- OMV_ENGINE=Brian  # Fails on Py3 - Brian 1 not supported
     ##- OMV_ENGINE=genesis  #  No longer supported on OMV...
     ##- OMV_ENGINE=Moose  # Can this be built with py3?
-    #- OMV_ENGINE=Brian2:2.2.2.1
-    #- OMV_ENGINE=NEST:2.18.0
-    #- OMV_ENGINE=NEST:2.20.0
-    #- OMV_ENGINE=PyNEST
-    #- OMV_ENGINE=Octave
+    - OMV_ENGINE=Brian2:2.2.2.1
+    - OMV_ENGINE=NEST:2.18.0
+    - OMV_ENGINE=NEST:2.20.0
+    - OMV_ENGINE=PyNEST
+    - OMV_ENGINE=Octave
     - OMV_ENGINE=NEURON
-    - OMV_ENGINE=PyNEURON
-    #- OMV_ENGINE=PyNN
+    - OMV_ENGINE=PyNEURON:7.6
+    - OMV_ENGINE=PyNN
     - OMV_ENGINE=PyNN_NEURON
     #- OMV_ENGINE=PyNN_Brian1 # Fails on Py3 - Brian 1 not supported
-    #- OMV_ENGINE=PyNN_Nest
-    #- OMV_ENGINE=PyNN_NeuroML
-    #- OMV_ENGINE=NetPyNE
-    #- OMV_ENGINE=PyLEMS
-    #- OMV_ENGINE=PyLEMS_NeuroML2
-    #- OMV_ENGINE=jLEMS
-    #- OMV_ENGINE=jNeuroML
+    - OMV_ENGINE=PyNN_Nest
+    - OMV_ENGINE=PyNN_NeuroML
+    - OMV_ENGINE=NetPyNE
+    - OMV_ENGINE=PyLEMS
+    - OMV_ENGINE=PyLEMS_NeuroML2
+    - OMV_ENGINE=jLEMS
+    - OMV_ENGINE=jNeuroML
     #- OMV_ENGINE=jNeuroML_Brian  # Fails on Py3 - Brian 1 not supported
-    #- OMV_ENGINE=jNeuroML_Brian2
+    - OMV_ENGINE=jNeuroML_Brian2
     #- OMV_ENGINE=jNeuroML_Moose # Can this be built with py3?
-    #- OMV_ENGINE=jNeuroML_NEURON
-    #- OMV_ENGINE=jNeuroML_NetPyNE
-    #- OMV_ENGINE=jNeuroML_PyNN_NEURON
-    #- OMV_ENGINE=jNeuroML_validate
-    #- OMV_ENGINE=jNeuroML_validatev1
-    #- OMV_ENGINE=Py_neuroConstruct
-    #- OMV_ENGINE=pyNeuroML
+    - OMV_ENGINE=jNeuroML_NEURON
+    - OMV_ENGINE=jNeuroML_NetPyNE
+    - OMV_ENGINE=jNeuroML_PyNN_NEURON
+    - OMV_ENGINE=jNeuroML_validate
+    - OMV_ENGINE=jNeuroML_validatev1
+    - OMV_ENGINE=Py_neuroConstruct
+    - OMV_ENGINE=pyNeuroML
 
     - OMV_ENGINE=DIRECT_ENGINE_INSTALL
 
@@ -94,10 +94,19 @@ script:
 
     - echo "Testing direct installation of some simulators..."
     #- omv install Brian2:2.2
-    - omv install PyNEURON
+    #- omv install PyNEURON:7.6
     #- omv install PyLEMS_NeuroML2
-    #- omv install PyNEST
-    - which nrniv
+    - omv install PyNEST
+    - omv install Brian2
 
+    # Set NEST variables
+    - source $TRAVIS_HOME/nest/nest/bin/nest_vars.sh
 
+    - omv list-engines -V
+
+    - pwd
+    - python test_pynest.py
+    - python test_brian2.py
+    - which omv
+    - which python
     - env
