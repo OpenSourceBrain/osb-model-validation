@@ -18,7 +18,7 @@ class OMVEngine(object):
     name = 'Name not yet set!'
     environment_vars = {}
     path = ''
-    
+
     python3_compatible = True # Most are so override only in those that aren't
 
     def __init__(self, target, do_not_check_install, engine_version=None):
@@ -42,7 +42,7 @@ class OMVEngine(object):
             if not self.is_installed(engine_version):  # Still
                 inform("Fatal installation error for: %s"%self.name)
                 exit(1)'''
-            
+
 
         self.modelpath = realpath(target)
         self.extra_pars = []
@@ -58,7 +58,7 @@ class OMVEngine(object):
 
     def install(self, version):
         raise NotImplementedError()
-        
+
     def build_query_string(self, name, cmd):
         raise NotImplementedError()
 
@@ -86,10 +86,9 @@ class OMVEngine(object):
     def fetch_query(self, key):
         import re
         match_float = '\s*([0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)\s*'
-        
+
         l = key+':' + match_float
-        if sys.version_info[0]==3:
-            l = l.encode()
+
         m = re.search(l, self.stdout)
         if m:
             return m.groups()[0]
