@@ -60,7 +60,7 @@ env:
     #- OMV_ENGINE=jNeuroML_Moose # Can this be built with py3?
     #- OMV_ENGINE=jNeuroML_NEURON
     #- OMV_ENGINE=jNeuroML_NetPyNE
-    - OMV_ENGINE=jNeuroML_PyNN_NEURON
+    #- OMV_ENGINE=jNeuroML_PyNN_NEURON
     #- OMV_ENGINE=jNeuroML_validate
     #- OMV_ENGINE=jNeuroML_validatev1
     #- OMV_ENGINE=Py_neuroConstruct
@@ -99,14 +99,5 @@ script:
     #- omv install PyNEST
     - which nrniv
 
-    # Set NEST variables
-    - source $TRAVIS_HOME/nest/nest/bin/nest_vars.sh
 
-    - omv list-engines -V
-
-    - pwd
-    - python test_pynest.py
-    - python test_brian2.py
-    - which omv
-    - which python
     - env
