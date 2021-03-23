@@ -26,7 +26,7 @@ addons:
 language: python
 
 python:
-  #- "2.7"
+  - "2.7"
   #- "3.5"
   - "3.6"  # Required so nest has access to python 3.6 libraries outside of venv ...
   #- "3.7"
@@ -37,36 +37,10 @@ python:
 env:
     #- OMV_ENGINE=Brian  # Fails on Py3 - Brian 1 not supported
     ##- OMV_ENGINE=genesis  #  No longer supported on OMV...
-    ##- OMV_ENGINE=Moose  # Can this be built with py3?
-    - OMV_ENGINE=Brian2:2.2.2.1
-    - OMV_ENGINE=NEST:2.18.0
-    - OMV_ENGINE=NEST:2.20.0
-    - OMV_ENGINE=PyNEST
-    - OMV_ENGINE=Octave
-    - OMV_ENGINE=NEURON
-    - OMV_ENGINE=PyNEURON:7.6
-    - OMV_ENGINE=PyNN
-    - OMV_ENGINE=PyNN_NEURON
-    #- OMV_ENGINE=PyNN_Brian1 # Fails on Py3 - Brian 1 not supported
-    - OMV_ENGINE=PyNN_Nest
-    - OMV_ENGINE=PyNN_NeuroML
-    - OMV_ENGINE=NetPyNE
-    - OMV_ENGINE=PyLEMS
-    - OMV_ENGINE=PyLEMS_NeuroML2
-    - OMV_ENGINE=jLEMS
-    - OMV_ENGINE=jNeuroML
-    #- OMV_ENGINE=jNeuroML_Brian  # Fails on Py3 - Brian 1 not supported
-    - OMV_ENGINE=jNeuroML_Brian2
-    #- OMV_ENGINE=jNeuroML_Moose # Can this be built with py3?
-    - OMV_ENGINE=jNeuroML_NEURON
-    - OMV_ENGINE=jNeuroML_NetPyNE
-    - OMV_ENGINE=jNeuroML_PyNN_NEURON
-    - OMV_ENGINE=jNeuroML_validate
-    - OMV_ENGINE=jNeuroML_validatev1
-    - OMV_ENGINE=Py_neuroConstruct
-    - OMV_ENGINE=pyNeuroML
+    - OMV_ENGINE=Moose  # Can this be built with py3?
 
-    - OMV_ENGINE=DIRECT_ENGINE_INSTALL
+    - OMV_ENGINE=jNeuroML_Moose # Can this be built with py3?
+
 
 
 install:
