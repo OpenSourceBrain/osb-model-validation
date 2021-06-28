@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7]
-        engine: [jNeuroML, Brian2]
+        python-version: [3.7, 3.9]
+        engine: [jNeuroML, Brian2, NEST, jNeuroML_NetPyNE]
 
     steps:
     - uses: actions/checkout@v2
