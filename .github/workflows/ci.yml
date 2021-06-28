@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.7, 3.9]
-        engine: [jNeuroML, Brian2, NEST, jNeuroML_NetPyNE]
+        engine: [Octave, PyNN_NEURON, PyLEMS_NeuroML2, Py_neuroConstruct]
 
     steps:
     - uses: actions/checkout@v2
@@ -25,7 +25,10 @@ jobs:
       run: |
         pip install .
         pip install scipy sympy matplotlib cython pandas==1.1.5
+        apt install octave
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
         omv all -V --engine=${{ matrix.engine }}
-        omv list -V # list installed engines
+    - name: OMV final version info
+      run: |
+        omv list -V # list installed engines  [jNeuroML, Brian2, NEST, jNeuroML_NetPyNE]
