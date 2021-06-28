@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         python-version: [2.7, 3.7]
+        engine: [jNeuroML, Brian2]
 
     steps:
     - uses: actions/checkout@v2
@@ -23,7 +24,7 @@ jobs:
     - name: Install OMV
       run: |
         pip install .
-    - name: Run OMV tests
+    - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
-        #omv all -V
+        omv all -V --engine=${{ matrix.engine }}
         omv list -V # list installed engines
