@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.7, 3.9]
-        engine: [Octave, PyNN_NEURON, PyLEMS_NeuroML2, Py_neuroConstruct]
+        engine: [ PyNN_NEURON, PyLEMS_NeuroML2, Py_neuroConstruct]
 
     steps:
     - uses: actions/checkout@v2
