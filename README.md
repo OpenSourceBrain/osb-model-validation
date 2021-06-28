@@ -1,10 +1,11 @@
 [![Build Status](https://travis-ci.com/OpenSourceBrain/osb-model-validation.svg?branch=master)](https://travis-ci.com/OpenSourceBrain/osb-model-validation)
+[![Continuous builds](https://github.com/OpenSourceBrain/osb-model-validation/actions/workflows/ci.yml/badge.svg)](https://github.com/OpenSourceBrain/osb-model-validation/actions/workflows/ci.yml)
 ------------------------------------------
 
 
 # OSB Model Validation
 
-Tools for automated model validation in [Open Source Brain](http://www.opensourcebrain.org) projects, which can also be used for testing model behaviour on many simulation engines locally and on [Travis-CI](https://travis-ci.com).
+Tools for automated model validation in [Open Source Brain](http://www.opensourcebrain.org) projects, which can also be used for testing model behaviour on many simulation engines locally and on [Travis-CI](https://travis-ci.com)/[GitHub Actions](https://github.com/features/actions).
 
 To see this framework in action, click on some of the green buttons below:
 

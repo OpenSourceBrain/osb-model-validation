@@ -28,6 +28,7 @@ jobs:
         #sudo apt install octave
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
+        # Not yet checked: Octave, genesis, jNeuroML_Moose
         omv all -V --engine=${{ matrix.engine }}
     - name: OMV final version info
       run: |
