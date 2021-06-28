@@ -25,7 +25,7 @@ jobs:
       run: |
         pip install .
         pip install scipy sympy matplotlib cython pandas==1.1.5
-        sudo apt install octave
+        #sudo apt install octave
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
         omv all -V --engine=${{ matrix.engine }}
