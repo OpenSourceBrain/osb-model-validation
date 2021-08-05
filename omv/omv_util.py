@@ -157,6 +157,15 @@ def main():
                     from omv.engines.getpylems import install_pylems
                     install_pylems()
 
+            elif eng.lower() == 'Arbor'.lower():
+
+                from omv.engines.arbor_ import ArborEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from omv.engines.getarbor import install_arbor
+                    install_arbor()
+
             elif eng.lower() == 'PyLEMS_NeuroML2'.lower():
 
                 pylems_already_installed = False
