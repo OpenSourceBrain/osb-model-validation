@@ -166,6 +166,15 @@ def main():
                     from omv.engines.getarbor import install_arbor
                     install_arbor()
 
+            elif eng.lower() == 'EDEN'.lower():
+
+                from omv.engines.eden_ import EdenEngine as ee
+                if ee.is_installed(None):
+                    already_installed = True
+                else:
+                    from omv.engines.geteden import install_eden
+                    install_eden()
+
             elif eng.lower() == 'PyLEMS_NeuroML2'.lower():
 
                 pylems_already_installed = False
