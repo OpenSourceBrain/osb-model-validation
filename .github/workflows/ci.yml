@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.7]
-        engine: [ Arbor, PyNN_NEURON, PyNN_NeuroML, jNeuroML_Brian2, jNeuroML_validate]
+        engine: [ Arbor, Brian2, NEST, PyNEST, NEURON, PyNEURON, PyNN, PyNN_NEURON, PyNN_Nest, PyNN_NeuroML, NetPyNE, PyLEMS, PyLEMS_NeuroML2, jLEMS, jNeuroML, jNeuroML_Brian2, jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_PyNN_NEURON, jNeuroML_validate, jNeuroML_validatev1, Py_neuroConstruct, pyNeuroML]
 
     steps:
     - uses: actions/checkout@v2
