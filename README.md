@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.com/OpenSourceBrain/osb-model-validation.svg?branch=master)](https://travis-ci.com/OpenSourceBrain/osb-model-validation)
 [![Continuous builds](https://github.com/OpenSourceBrain/osb-model-validation/actions/workflows/ci.yml/badge.svg)](https://github.com/OpenSourceBrain/osb-model-validation/actions/workflows/ci.yml)
 ------------------------------------------
 
