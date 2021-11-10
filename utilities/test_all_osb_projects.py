@@ -59,7 +59,8 @@ ignores.append('swrs')
 ignores.append('walnutiq')
 ignores.append('sachin-de-silva')
 ignores.append('test_spatial')
-
+ignores.append('l23-test')
+ignores.append('testing0')
 all_repos = {  }
 
 additional_repos = { 'NeuroML2':             GitHubRepository.create('https://github.com/NeuroML/NeuroML2') ,
