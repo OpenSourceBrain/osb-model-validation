@@ -10,16 +10,12 @@ def install_moose():
         print(check_output(['git', 'clone', 'https://github.com/OpenSourceBrain/moose-core.git']))
 
     with working_dir(os.path.join(install_root,'moose-core')):
-        print(check_output(['git', 'checkout', 'nml2_updates']))
-        print(check_output(['mkdir', 'build_']))
+        print(check_output(['git', 'checkout', 'nml2_updates_2']))
 
-    with working_dir(os.path.join(install_root,'moose-core/build_')):
-        print(check_output(['cmake', '..']))
-        print(check_output(['make','-j4']))
-        print(check_output(['make', 'install']))
 
-    with working_dir(os.path.join(install_root,'moose-core/build_/python')):
+    with working_dir(os.path.join(install_root,'moose-core')):
         print(check_output(['pwd']))
+        print(check_output(['which', 'python']))
         print(check_output(['python', 'setup.py', 'install']))
 
     m = 'Successfully installed Moose...'

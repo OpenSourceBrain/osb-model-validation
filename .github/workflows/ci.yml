@@ -34,3 +34,5 @@ jobs:
     - name: OMV final version info
       run: |
         omv list -V # list installed engines  [jNeuroML, Brian2, NEST, jNeuroML_NetPyNE]
+        env
+        pip list
