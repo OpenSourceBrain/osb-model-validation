@@ -55,8 +55,9 @@ def main():
                 inform("Python 3. Ignoring tests for non Py3 compatible engines: %s"%arguments['--ignore-non-py3'])
                 
             if arguments['--engine'] is not None: 
+                if ':' in arguments['--engine']:
+                    _install_engine(arguments['--engine'])
                 only_this_engine=arguments['--engine'].split(':')[0]
-                _install_engine(arguments['--engine'])
             else:
                 only_this_engine=None
             
@@ -287,9 +288,11 @@ def _install_engine(eng):
         elif eng.lower() == 'PyNN'.lower():
             from omv.engines.getpynn import install_pynn
             install_pynn()
+            
         elif eng.lower() == 'PyNN_NEURON'.lower():
             from omv.engines.pynnneuron import PyNNNRNEngine
             PyNNNRNEngine.install()
+                        
         else:
             inform('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)
             exit(1)
