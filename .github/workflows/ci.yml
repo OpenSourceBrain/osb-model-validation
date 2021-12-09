@@ -11,9 +11,10 @@ jobs:
 
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: [3.7]
-        engine: [ Arbor, Brian2, EDEN, NEST, PyNEST, NEURON, PyNEURON, PyNN, PyNN_NEURON, PyNN_Nest, PyNN_NeuroML, NetPyNE, PyLEMS, PyLEMS_NeuroML2, jLEMS, jNeuroML, jNeuroML_Brian2, jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_PyNN_NEURON, jNeuroML_validate, jNeuroML_validatev1, Py_neuroConstruct, pyNeuroML]
+        engine: [ Arbor, "Brian2:2.4", EDEN, NEST, PyNEST, NEURON, PyNEURON, PyNN, PyNN_NEURON, PyNN_Nest, PyNN_NeuroML, NetPyNE, PyLEMS, PyLEMS_NeuroML2, jLEMS, jNeuroML, jNeuroML_Brian2, jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_PyNN_NEURON, jNeuroML_validate, jNeuroML_validatev1, Py_neuroConstruct, pyNeuroML]
 
     steps:
     - uses: actions/checkout@v2
