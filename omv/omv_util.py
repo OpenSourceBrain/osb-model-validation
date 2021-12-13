@@ -53,14 +53,14 @@ def main():
         try:
             if platform.python_version_tuple()[0]=='3':
                 inform("Python 3. Ignoring tests for non Py3 compatible engines: %s"%arguments['--ignore-non-py3'])
-                
-            if arguments['--engine'] is not None: 
+
+            if arguments['--engine'] is not None:
                 if ':' in arguments['--engine']:
                     _install_engine(arguments['--engine'])
                 only_this_engine=arguments['--engine'].split(':')[0]
             else:
                 only_this_engine=None
-            
+
             test_all(only_this_engine=only_this_engine, ignore_non_py3=arguments['--ignore-non-py3'])
         except AssertionError:
             inform("Failed due to non passing tests")
@@ -91,7 +91,7 @@ def main():
     elif arguments['install']:
         set_verbosity(1)
         eng = arguments['<engine>']
-        
+
         _install_engine(eng)
 
 
@@ -115,7 +115,7 @@ def main():
         if arguments['--verbose']:
             inform('Additional Python (v%s) packages:'%platform.python_version())
             inform('')
-            for m in ['matplotlib','numpy','pandas','scipy','sympy','tables','h5py','neo','lazyarray','pyelectro','lems','pyneuroml','neuroml','neuromllite']:
+            for m in ['matplotlib','numpy','pandas','scipy','sympy','tables','h5py','neo','lazyarray','pyelectro','neurotune','lems','pyneuroml','neuroml','neuromllite']:
                 installed_ver = False
                 try:
                     exec('import %s'%m)
@@ -130,9 +130,9 @@ def main():
         dry = arguments['--dryrun']
         auto = arguments['-y']
         autogen(auto, dry)
-        
-        
-    
+
+
+
 def _install_engine(eng):
 
     engine_version=None
@@ -288,11 +288,11 @@ def _install_engine(eng):
         elif eng.lower() == 'PyNN'.lower():
             from omv.engines.getpynn import install_pynn
             install_pynn()
-            
+
         elif eng.lower() == 'PyNN_NEURON'.lower():
             from omv.engines.pynnneuron import PyNNNRNEngine
             PyNNNRNEngine.install()
-                        
+
         else:
             inform('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)
             exit(1)
