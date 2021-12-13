@@ -13,8 +13,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.7]
-        engine: [ Arbor, "Brian2:2.4", EDEN, NEST, PyNEST, NEURON, PyNEURON, PyNN, PyNN_NEURON, PyNN_Nest, PyNN_NeuroML, NetPyNE, PyLEMS, PyLEMS_NeuroML2, jLEMS, jNeuroML, jNeuroML_Brian2, jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_PyNN_NEURON, jNeuroML_validate, jNeuroML_validatev1, Py_neuroConstruct, pyNeuroML]
+        python-version: [ 3.7 ]
+        engine: [ Arbor, "Brian2:2.4", EDEN, NEST, PyNEST, NEURON, PyNEURON, PyNN, PyNN_NEURON, PyNN_Nest, PyNN_NeuroML, NetPyNE, PyLEMS, PyLEMS_NeuroML2, jLEMS, jNeuroML, jNeuroML_Brian2, jNeuroML_NEURON, jNeuroML_NetPyNE, jNeuroML_PyNN_NEURON, jNeuroML_validate, jNeuroML_validatev1, Py_neuroConstruct, pyNeuroML, jNeuroML_Moose, MOOSE ]
+
 
     steps:
     - uses: actions/checkout@v2
@@ -27,10 +28,14 @@ jobs:
         pip install .
         pip install scipy sympy matplotlib cython pandas==1.1.5
         #sudo apt install octave
+
+
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
         # Not yet checked: Octave, genesis, jNeuroML_Moose
         omv all -V --engine=${{ matrix.engine }}
     - name: OMV final version info
       run: |
-        omv list -V # list installed engines  [jNeuroML, Brian2, NEST, jNeuroML_NetPyNE]
+        omv list -V # list installed engines
+        env
+        pip list
