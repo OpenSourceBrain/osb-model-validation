@@ -28,7 +28,7 @@ jobs:
         pip install scipy sympy matplotlib cython pandas==1.1.5
         #sudo apt install octave
     - name: Install extra dependencies for Moose...
-      if: ${{ matrix.engine == *"Moose"* }}
+      if: ${{ matrix.engine == "Moose" || matrix.engine == "jNeuroML_Moose" }}
       run: |
           # Based on https://github.com/BhallaLab/moose-core/blob/master/.github/workflows/githubaction.yml
           export DEBIAN_FRONTEND=noninteractive
