@@ -5,6 +5,7 @@ from omv.common.inout import inform, trim_path, check_output, is_verbose
 from omv.engines.engine import OMVEngine, EngineExecutionError
 
 from omv.engines.nestsli import NestEngine
+import sys
 
 
 class PyNestEngine(OMVEngine):
@@ -16,10 +17,14 @@ class PyNestEngine(OMVEngine):
 
         PyNestEngine.environment_vars = NestEngine.get_nest_environment()
 
+        sys.path.append(PyNestEngine.environment_vars["PYTHONPATH"])
+
+
         ret = True
         try:
 
-            ret_str = check_output(['python -c "import nest; print(nest.version())"'], shell=True, verbosity=2)
+            #ret_str = check_output(['python -c "import nest; print(nest.version())"'], shell=True, verbosity=2)
+
             ret = len(ret_str) > 0
 
             if ret:
@@ -40,8 +45,9 @@ class PyNestEngine(OMVEngine):
                 inform("Env vars: %s" % PyNestEngine.environment_vars, indent=2)
 
         except Exception as err:
-            inform("Couldn't import NEST into Python: ", err, indent=1)
+            inform("Couldn't import NEST into Python..: ", err, indent=1)
             inform("NEST env vars: %s" % PyNestEngine.environment_vars, indent=1)
+            inform("sys.path: %s" % sys.path, indent=1)
             ret = False
         return ret
 
@@ -58,7 +64,10 @@ class PyNestEngine(OMVEngine):
         self.environment_vars = NestEngine.get_nest_environment()
         self.set_environment()
 
+        sys.path.append(PyNestEngine.environment_vars["PYTHONPATH"])
+
         inform("Env vars: %s" % self.environment_vars, indent=2)
+        inform("sys.path: %s" % sys.path, indent=1)
 
         try:
             inform("Running the file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
