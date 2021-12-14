@@ -22,7 +22,8 @@ class PyNestEngine(OMVEngine):
 
         ret = True
         try:
-
+            import nest
+            ret_str = nest.version()
             #ret_str = check_output(['python -c "import nest; print(nest.version())"'], shell=True, verbosity=2)
 
             ret = len(ret_str) > 0
