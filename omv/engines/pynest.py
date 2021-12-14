@@ -64,7 +64,7 @@ class PyNestEngine(OMVEngine):
         self.environment_vars = NestEngine.get_nest_environment()
         self.set_environment()
 
-        sys.path.append(PyNestEngine.environment_vars["PYTHONPATH"])
+        sys.path.append(self.environment_vars["PYTHONPATH"])
 
         inform("Env vars: %s" % self.environment_vars, indent=2)
         inform("sys.path: %s" % sys.path, indent=1)
