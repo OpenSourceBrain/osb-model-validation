@@ -1,0 +1,17 @@
+<Lems>
+
+    <!-- Example with Simple cell specifying segment details-->
+
+    <!-- This is a file which can be read and executed by the LEMS Interpreter.
+         It imports the LEMS definitions of the core NeuroML 2 Components,
+         imports in "pure" NeuroML 2 and contains some LEMS elements for running
+         a simulation -->
+
+
+    <Target component="sim1"/>
+
+    <Include file="LEMS_NML2_Ex5_DetCell.xml"/>
+    
+
+
+</Lems>

@@ -118,3 +118,4 @@ report*.txt
 /nestinstall
 /getmoose
 /envpy*
+*_moose.py
