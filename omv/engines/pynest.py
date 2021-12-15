@@ -22,9 +22,13 @@ class PyNestEngine(OMVEngine):
 
         ret = True
         try:
+            ret_str_cmd_line = check_output(['python -c "import nest; print(nest.version())"'], shell=True, verbosity=2)
+
+            inform("NEST cmd line test: %s" % (ret_str_cmd_line), indent=2)
+
             import nest
             ret_str = nest.version()
-            #ret_str = check_output(['python -c "import nest; print(nest.version())"'], shell=True, verbosity=2)
+            #
 
             ret = len(ret_str) > 0
 
