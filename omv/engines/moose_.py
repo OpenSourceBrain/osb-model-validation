@@ -24,7 +24,7 @@ class MooseEngine(OMVEngine):
             ret = len(ret_str) > 0
 
             if ret and is_verbose():
-                inform("%s is correctly installed ()..." % (MooseEngine.name, ret_str), indent=2)
+                inform("%s is correctly installed (%s)..." % (MooseEngine.name, ret_str), indent=2)
             if ret:
                 #import moose
                 ret = 'v%s'%ret_str
