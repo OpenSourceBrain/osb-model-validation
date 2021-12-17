@@ -26,7 +26,6 @@ jobs:
     - name: Install OMV
       run: |
         pip install .
-        pip install scipy sympy matplotlib cython pandas==1.1.5
         #sudo apt install octave
 
 
