@@ -26,6 +26,7 @@ jobs:
     - name: Install OMV
       run: |
         pip install .
+        pip install scipy
         pip install cython # needed for NEST
         #sudo apt install octave
 
