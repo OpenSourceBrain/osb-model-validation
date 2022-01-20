@@ -4,17 +4,19 @@
 
 # OSB Model Validation
 
-Tools for automated model validation in [Open Source Brain](http://www.opensourcebrain.org) projects, which can also be used for testing model behaviour on many simulation engines locally and on [Travis-CI](https://travis-ci.com)/[GitHub Actions](https://github.com/features/actions).
+Tools for automated model validation in [Open Source Brain](http://www.opensourcebrain.org) projects, which can also be used for testing model behaviour on many simulation engines locally and on [GitHub Actions](https://github.com/features/actions).
 
 To see this framework in action, click on some of the green buttons below:
 
-|  OSB project   |   Tests on Travis-CI    |  .travis.yml script |
+|  OSB project   |   Tests on GitHub Actions    |  Test workflow script |
 |----------|:-------------:|:------:|
-|[FitzHugh Nagumo](http://www.opensourcebrain.org/projects/fitzhugh-nagumo-fitzhugh-1969) | [![Build Status](https://travis-ci.com/OpenSourceBrain/FitzHugh-Nagumo.svg?branch=master)](https://travis-ci.com/OpenSourceBrain/FitzHugh-Nagumo) | [.travis.yml](https://github.com/borismarin/FitzHugh-Nagumo/blob/master/.travis.yml) |
-|[Auditory cortex network](http://www.opensourcebrain.org/projects/acnet2)|[![Build Status](https://travis-ci.com/OpenSourceBrain/ACnet2.svg?branch=master)](https://travis-ci.com/OpenSourceBrain/ACnet2)|[.travis.yml](https://github.com/OpenSourceBrain/ACnet2/blob/master/.travis.yml)|
-| [SBML Showcase](http://www.opensourcebrain.org/projects/sbmlshowcase) | [![Build Status](https://travis-ci.com/OpenSourceBrain/SBMLShowcase.svg?branch=master)](https://travis-ci.com/OpenSourceBrain/SBMLShowcase) | [.travis.yml](https://github.com/OpenSourceBrain/SBMLShowcase/blob/master/.travis.yml)|
+|[FitzHugh Nagumo](http://www.opensourcebrain.org/projects/fitzhugh-nagumo-fitzhugh-1969) | [![Continuous build using OMV](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/actions/workflows/omv-ci.yml) | [omv-ci.yml](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/blob/master/.github/workflows/omv-ci.yml) |
+|[Auditory cortex network](http://www.opensourcebrain.org/projects/acnet2)| [![Continuous build using OMV](https://github.com/OpenSourceBrain/ACnet2/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/OpenSourceBrain/ACnet2/actions/workflows/omv-ci.yml) | [omv-ci.yml](https://github.com/OpenSourceBrain/ACnet2/blob/master/.github/workflows/omv-ci.yml) |
+| [SBML Showcase](http://www.opensourcebrain.org/projects/sbmlshowcase)| [![Continuous build using OMV](https://github.com/OpenSourceBrain/sbmlshowcase/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/OpenSourceBrain/sbmlshowcase/actions/workflows/omv-ci.yml) | [omv-ci.yml](https://github.com/OpenSourceBrain/sbmlshowcase/blob/master/.github/workflows/omv-ci.yml) |
 
-This framework has been used to test the 25+ NeuroML and PyNN models described in the [Open Source Brain paper (Gleeson et al. 2019)](https://www.cell.com/neuron/fulltext/S0896-6273(19)30444-1).
+This framework has been used to test the 25+ NeuroML and PyNN models described in the [Open Source Brain paper (Gleeson et al. 2019)](https://www.cell.com/neuron/fulltext/S0896-6273(19)30444-1), and [many more](https://github.com/OpenSourceBrain/.github/blob/main/testsheet/README.md).
+
+Note: [Travis-CI](https://travis-ci.com) is no longer the preferred testing platform due to limitations with number of free test runs. 
 
 ## Installation
 
@@ -51,7 +53,7 @@ deactivate
 ## Instructions
 
 Any _Open Source Brain_ project can have automated testing incorporated.
-For an overview of the various Open Source Brain projects with OMV tests, see https://travis-ci.org/OpenSourceBrain (note not all of these use OMV yet).
+For an overview of the various Open Source Brain projects with OMV tests, see https://github.com/OpenSourceBrain/.github/blob/main/testsheet/README.md (note not all of these use OMV yet).
 
 Setting up validation for a model and simulation written in NeuroML2/LEMS requires two additional steps:
 
@@ -65,7 +67,7 @@ Depending on the size of your model, you can run validation on the full fledged 
 Here is an example LEMS file for the FitzHugh-Nagumo model on Open Source Brain: [LEMS_FitzHugNagamo.xml](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/blob/master/NeuroML2/LEMS_FitzHughNagumo.xml).
 
 ``` yaml
-# Script for running automated tests on OSBrain using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
+# Script for running automated tests on OSBrain, see https://github.com/OpenSourceBrain/osb-model-validation
 
 system: The Fitzhugh-Nagumo model, classical parameters
 
@@ -94,7 +96,7 @@ The FitzHugh-Nagumo model on Open Source Brain includes multiple OMT files that 
     For example, the [.test.fhn.jnml.omt](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/blob/master/NeuroML2/.test.fhn.jnml.omt) file uses the `jNeuroML` engine, which implies that the model should be run using plain jNeuroML (and not any of the simulators that jNeuroML supports, like NEURON).
 
 ``` yaml
-# Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
+# Script for running automated tests on OSB, see https://github.com/OpenSourceBrain/osb-model-validation
 
 target: LEMS_FitzHughNagumo.xml
 engine: jNeuroML
@@ -128,7 +130,7 @@ It uses the same MEP file, and observes the same recorded information.
 It only tells OMV to use a different simulation engine:
 
 ``` yaml
-# Script for running automated tests on OSB using Travis-CI, see https://github.com/OpenSourceBrain/osb-model-validation
+# Script for running automated tests on OSB, see https://github.com/OpenSourceBrain/osb-model-validation
 
 target: LEMS_FitzHughNagumo.xml
 engine: jNeuroML_NEURON
@@ -156,7 +158,10 @@ Learn more about the options `omv` can take by running `omv --help`.
 Running validation tests locally ensures that you can quickly check if any changes you have made to the model cause changes to its specific outcomes.
 Since you can run the validation with different engines to use different simulators, this also allows you to quickly verify that your model gives similar results using these different tools.
 
-### Running tests automatically on Travis
+
+### Running tests automatically on ~~Travis-CI~~
+
+**Note: Travis-CI is no longer the preferred platform for testing, [GitHub Actions](https://github.com/features/actions) is. To use OMV with GHA, copy an existing configuration file, e.g. https://github.com/OpenSourceBrain/ACnet2/blob/master/.github/workflows/omv-ci.yml**
 
 To automate these tests using Travis, so that they are run for each git commit, you need to include a `.travis.yml` configuration file in the root directory of the Git repository.
 (Learn more on using Travis for continuous testing/integration [here](https://docs.travis-ci.com/user/tutorial/)).

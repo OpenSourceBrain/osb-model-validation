@@ -49,6 +49,8 @@ if '-q' in sys.argv:
     ignores.append('sadehetal2017-inhibitionstabilizednetworks')
     ignores.append('brianshowcase')  # Slow...
 
+ignores.append('c302')  # problem downloading images?...
+ignores.append('celegans') # ditto..
 ignores.append('l23dendriticspikes')
 #ignores.append('izhikevichmodel')
 ignores.append('ionl-testing')
@@ -61,6 +63,8 @@ ignores.append('sachin-de-silva')
 ignores.append('test_spatial')
 ignores.append('l23-test')
 ignores.append('testing0')
+ignores.append('beta-rhythms')
+ignores.append('my-brain-project')
 all_repos = {  }
 
 additional_repos = { 'NeuroML2':             GitHubRepository.create('https://github.com/NeuroML/NeuroML2') ,
@@ -135,6 +139,7 @@ if __name__ == "__main__":
     print("\nFound %i/%i projects without OMV tests"%(len(bad_projects_found),len(all_projs)))
     pp.pprint(bad_projects_found)
     
+    fails = []
                 
     for proj_id in all_repos.keys():
         
@@ -173,13 +178,16 @@ if __name__ == "__main__":
                         print(co(['git', 'checkout', branches[key]]))
                 print("Running 'omv all' on"+ target_dir)
                 try:
-                    test_all()
+                    test_all(ignore_non_py3=True)
                     passing_projects += 1
                 except:
                     passed = 0
                     failing_projects +=1
+                    fails.append(target_dir)
 
             print("\nSo far: %i projects with OMV tests which pass, %i failed, %i in total to test\n" % (passing_projects, failing_projects, len(all_repos)))
+            for f in fails:
+                print('\n     Failed: %s'%f)
 
     end = datetime.datetime.now()
 

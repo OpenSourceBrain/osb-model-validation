@@ -6,7 +6,7 @@ def install_brian2(version):
     if not version:
         version='2.3'
     try:
-        check_scipy_dev()
+        # check_scipy_dev()
         # Tested with v2.3     
         
         pip_install('brian2==%s'%version)
