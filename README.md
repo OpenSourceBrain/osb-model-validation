@@ -163,46 +163,4 @@ Since you can run the validation with different engines to use different simulat
 
 **Note: Travis-CI is no longer the preferred platform for testing, [GitHub Actions](https://github.com/features/actions) is. To use OMV with GHA, copy an existing configuration file, e.g. https://github.com/OpenSourceBrain/ACnet2/blob/master/.github/workflows/omv-ci.yml**
 
-To automate these tests using Travis, so that they are run for each git commit, you need to include a `.travis.yml` configuration file in the root directory of the Git repository.
-(Learn more on using Travis for continuous testing/integration [here](https://docs.travis-ci.com/user/tutorial/)).
-For example, this is the configuration file for the FitzHugh-Nagumo mode: [.travis.yml](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/blob/master/.travis.yml).
 
-``` yaml
-sudo: false
-
-addons:
-  apt:
-    packages:
-       # Requirements for Brian
-    - python-numpy
-    - python-scipy
-    - python-matplotlib
-    - python-sympy
-
-language: python
-
-python: 2.7
-
-virtualenv:
-    system_site_packages: true
-
-env:
-    - OMV_ENGINE=jNeuroML
-    - OMV_ENGINE=PyLEMS_NeuroML2
-    - OMV_ENGINE=jNeuroML_Brian
-    - OMV_ENGINE=jNeuroML_Brian2
-    - OMV_ENGINE=jNeuroML_NEURON
-    - OMV_ENGINE=jNeuroML_validate
-install:
-  - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
-script:
-  - omv all -V
-```
-
-After installing the necessary software into a virtual environment, the script runs `omv all -V` to run all validation tests.
-Since this project includes tests to be run with different engines, the `OMV_ENGINE` environment variable is used to tell OMV what engine to run with.
-Travis creates a new independent environment for each engine, and OMV installs the engine it needs to run the validation tests.
-
-Once you have added these files to the _GitHub_ repository, Travis will run OMV for each commit that is made to the repository.
-For each project, you can check the results at http://travis-ci.com/OpenSourceBrain/project_name .
-You can also add a Travis build badge to the projects' Readme.md file to show its current build/validation status.
