@@ -23,7 +23,11 @@ jobs:
           - NEURON
           - PyNEURON
           - PyNN
-          - PyNN_NEURON, PyNN_Nest, PyNN_NeuroML, NetPyNE, PyLEMS
+          - PyNN_NEURON
+          - PyNN_Nest
+          - PyNN_NeuroML
+          - NetPyNE
+          - PyLEMS
           - PyLEMS_NeuroML2
           - jLEMS
           - jNeuroML
@@ -37,7 +41,6 @@ jobs:
           - pyNeuroML
           - jNeuroML_Moose
           - MOOSE
-
 
     steps:
     - uses: actions/checkout@v2
