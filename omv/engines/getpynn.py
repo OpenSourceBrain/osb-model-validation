@@ -8,7 +8,7 @@ def install_pynn():
     try:
 
         #pip_install('lazyarray')  # This should ideally be automatically installed with PyNN...
-        #pip_install('neo==0.5.1')  # This should ideally be automatically installed with PyNN...
+        pip_install('neo==0.9.0')  # This should ideally be automatically installed with PyNN, some issues with 0.10.0...
 
         install_root = os.environ['HOME']
 
@@ -19,7 +19,7 @@ def install_pynn():
         path = os.path.join(install_root, pyNN_src)
 
         with working_dir(path):
-            print(check_output(['git','checkout','neuroml']))  # neuroml branch has the latest NML2 import/export code!
+            print(check_output(['git','checkout','0.9.6']))  # neuroml branch has the latest NML2 import/export code!
             #check_output(['git','checkout','master'])
             #print(check_output(['python', 'setup.py', 'install']))
             pip_install('.')

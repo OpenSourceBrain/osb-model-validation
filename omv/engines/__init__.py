@@ -19,6 +19,8 @@ from omv.engines.pylemsnml2 import PyLemsNeuroML2Engine
 from omv.engines.genesis import GenesisEngine
 from omv.engines.brian1 import Brian1Engine
 from omv.engines.brian2_ import Brian2Engine
+from omv.engines.arbor_ import ArborEngine
+from omv.engines.eden_ import EdenEngine
 from omv.engines.nestsli import NestEngine
 from omv.engines.pynest import PyNestEngine
 from omv.engines.moose_ import MooseEngine
@@ -40,4 +42,3 @@ OMVEngines = {be.name: be for be in locals().values()
               if inspect.isclass(be)
               and issubclass(be, OMVEngine)
               and not be.name == 'Name not yet set!'}
-

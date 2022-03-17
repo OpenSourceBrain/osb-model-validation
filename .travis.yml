@@ -83,4 +83,5 @@ script:
     - python test_brian2.py
     - which omv
     - which python
+    - pip freeze
     - env
