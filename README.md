@@ -1,10 +1,9 @@
 [![Continuous builds](https://github.com/OpenSourceBrain/osb-model-validation/actions/workflows/ci.yml/badge.svg)](https://github.com/OpenSourceBrain/osb-model-validation/actions/workflows/ci.yml)
 ------------------------------------------
 
-
 # OSB Model Validation
 
-Tools for automated model validation in [Open Source Brain](http://www.opensourcebrain.org) projects, which can also be used for testing model behaviour on many simulation engines locally and on [GitHub Actions](https://github.com/features/actions).
+Tools for automated model validation in [Open Source Brain](http://www.opensourcebrain.org) projects, which can also be used for testing model behaviour on many [simulation engines](https://github.com/OpenSourceBrain/osb-model-validation/tree/master/omv/engines) on your local machine and on [GitHub Actions](https://github.com/features/actions).
 
 To see this framework in action, click on some of the green buttons below:
 
@@ -14,16 +13,16 @@ To see this framework in action, click on some of the green buttons below:
 |[Auditory cortex network](http://www.opensourcebrain.org/projects/acnet2)| [![Continuous build using OMV](https://github.com/OpenSourceBrain/ACnet2/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/OpenSourceBrain/ACnet2/actions/workflows/omv-ci.yml) | [omv-ci.yml](https://github.com/OpenSourceBrain/ACnet2/blob/master/.github/workflows/omv-ci.yml) |
 | [SBML Showcase](http://www.opensourcebrain.org/projects/sbmlshowcase)| [![Continuous build using OMV](https://github.com/OpenSourceBrain/sbmlshowcase/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/OpenSourceBrain/sbmlshowcase/actions/workflows/omv-ci.yml) | [omv-ci.yml](https://github.com/OpenSourceBrain/sbmlshowcase/blob/master/.github/workflows/omv-ci.yml) |
 
-This framework has been used to test the 25+ NeuroML and PyNN models described in the [Open Source Brain paper (Gleeson et al. 2019)](https://www.cell.com/neuron/fulltext/S0896-6273(19)30444-1), and [many more](https://github.com/OpenSourceBrain/.github/blob/main/testsheet/README.md).
+This framework has been used to test the 30+ NeuroML and PyNN models described in the [Open Source Brain paper (Gleeson et al. 2019)](https://www.cell.com/neuron/fulltext/S0896-6273(19)30444-1), and [many more](https://github.com/OpenSourceBrain/.github/blob/main/testsheet/README.md).
 
-Note: [Travis-CI](https://travis-ci.com) is no longer the preferred testing platform due to limitations with number of free test runs. 
+Note: [Travis-CI](https://travis-ci.com) is no longer the preferred testing platform due to limitations with number of free test runs, all CI testing has been migrated to [GitHub Actions](https://github.com/features/actions).
 
 ## Installation
 
 Quick system-wide install:
 
 ``` bash
-sudo pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+pip install git+https://github.com/OpenSourceBrain/osb-model-validation
 ```
 
 System-wide install from cloned repository:
@@ -92,7 +91,7 @@ The FitzHugh-Nagumo model on Open Source Brain includes multiple OMT files that 
 - Each OMT file specifies a _target_ file, which is the LEMS simulation file to be run.
 
 - Each OMT file specifies an _engine_ that OMV supports.
-    Engines are simulators that OMV should use to run the model.
+    Engines are simulators that OMV should use to run the model. See [here](https://github.com/OpenSourceBrain/osb-model-validation/tree/master/omv/engines) for the current list.
     For example, the [.test.fhn.jnml.omt](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/blob/master/NeuroML2/.test.fhn.jnml.omt) file uses the `jNeuroML` engine, which implies that the model should be run using plain jNeuroML (and not any of the simulators that jNeuroML supports, like NEURON).
 
 ``` yaml
@@ -153,14 +152,16 @@ If you have installed OMV successfully, you can now run all the OMV tests locall
 
     omv all
 
-Learn more about the options `omv` can take by running `omv --help`.
+Adding the `-V` flag prints more details on successful/failed runs. Learn more about the options that `omv` can take by running `omv --help`.
+
+To see what [engines](https://github.com/OpenSourceBrain/osb-model-validation/tree/master/omv/engines) are currently installed (and what their versions are) type:
+
+    omv list -V  
 
 Running validation tests locally ensures that you can quickly check if any changes you have made to the model cause changes to its specific outcomes.
-Since you can run the validation with different engines to use different simulators, this also allows you to quickly verify that your model gives similar results using these different tools.
+Since you can run the validation with different [engines](https://github.com/OpenSourceBrain/osb-model-validation/tree/master/omv/engines) to use different simulators, this also allows you to quickly verify that your model gives similar results using these different tools.
 
 
 ### Running tests automatically on ~~Travis-CI~~
 
 **Note: Travis-CI is no longer the preferred platform for testing, [GitHub Actions](https://github.com/features/actions) is. To use OMV with GHA, copy an existing configuration file, e.g. https://github.com/OpenSourceBrain/ACnet2/blob/master/.github/workflows/omv-ci.yml**
-
-
