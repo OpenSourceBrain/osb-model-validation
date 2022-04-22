@@ -3,7 +3,7 @@ import subprocess as sp
 
 from omv.common.inout import inform, trim_path, check_output
 from omv.engines.engine import OMVEngine, EngineExecutionError
-
+from omv.engines.geteden import DEFAULT_VERSION
 
 class EdenEngine(OMVEngine):
 
@@ -14,7 +14,8 @@ class EdenEngine(OMVEngine):
         ret = True
         try:
             import eden_simulator
-            ver = '???' #'v%s'%eden_simulator.__version__
+
+            ver = 'v%s???'%DEFAULT_VERSION #'v%s'%eden_simulator.__version__
             inform("EDEN version %s is correctly installed..." % ver, indent=2, verbosity=2)
 
             ret = ver
