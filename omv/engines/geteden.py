@@ -2,7 +2,7 @@ from omv.common.inout import pip_install
 
 def install_eden(version=None):
     if not version:
-        version='0.0.1'
+        version='0.2.0'
     try:
 
         pip_install('eden-simulator==%s'%version)
