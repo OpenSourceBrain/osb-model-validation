@@ -32,6 +32,7 @@ jobs:
           - jLEMS
           - jNeuroML
           - jNeuroML_Brian2
+          - jNeuroML_EDEN
           - jNeuroML_NEURON
           - jNeuroML_NetPyNE
           - jNeuroML_PyNN_NEURON
