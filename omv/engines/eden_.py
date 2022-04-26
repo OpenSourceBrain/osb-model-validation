@@ -35,9 +35,11 @@ class EdenEngine(OMVEngine):
 
     def run(self):
         try:
-            inform("Running a file %s with sim %s" % (trim_path(self.modelpath), self.name), indent=1)
+            inform("Running a file %s with the simulator %s" % (trim_path(self.modelpath), self.name), indent=1)
+
             self.stdout = check_output(['python', self.modelpath],
                                           cwd=os.path.dirname(self.modelpath))
+
             self.returncode = 0
         except sp.CalledProcessError as err:
             self.returncode = err.returncode

@@ -119,3 +119,5 @@ report*.txt
 /getmoose
 /envpy*
 *_moose.py
+/utilities/tests/*.gen.c
+/utilities/tests/*_eden.py
