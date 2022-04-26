@@ -9,6 +9,7 @@ from omv.engines.jneuromlnetpyne import JNeuroMLNetPyNEEngine
 from omv.engines.jneuromlnetpyne_np4 import JNeuroMLNetPyNENP4Engine
 from omv.engines.jneuromlnetpyne_np2 import JNeuroMLNetPyNENP2Engine
 #from omv.engines.jneuromlbrian import JNeuroMLBrianEngine
+from omv.engines.jneuromleden import JNeuroMLEdenEngine
 from omv.engines.jneuromlbrian2 import JNeuroMLBrian2Engine
 from omv.engines.jneuromlmoose import JNeuroMLMooseEngine
 from omv.engines.jneuromlvalidate import JNeuroMLValidateEngine
