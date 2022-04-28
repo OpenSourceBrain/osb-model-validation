@@ -12,5 +12,5 @@ def install_jnml():
         os.mkdir(jnmlpath)
     with working_dir(jnmlpath):
 
-        check_output(['wget', 'https://github.com/NeuroML/jNeuroML/releases/download/%s/jNeuroML.zip'%(version)])
+        check_output(['wget', '-nv', 'https://github.com/NeuroML/jNeuroML/releases/download/%s/jNeuroML.zip'%(version)])
         check_output(['unzip', 'jNeuroML.zip'])
