@@ -10,7 +10,7 @@ def install_moose():
         print(check_output(['git', 'clone', 'https://github.com/OpenSourceBrain/moose-core.git']))
 
     with working_dir(os.path.join(install_root,'moose-core')):
-        print(check_output(['git', 'checkout', 'nml2_updates_2']))
+        print(check_output(['git', 'checkout', 'nml2_updates_3']))
 
 
     with working_dir(os.path.join(install_root,'moose-core')):
