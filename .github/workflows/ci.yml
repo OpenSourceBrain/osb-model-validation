@@ -1,6 +1,8 @@
 name: Continuous builds
 
 on:
+  schedule:
+    - cron: "1 1 1 */1 *"  # Run once a month to test...
   push:
     branches: [ master, development, test_* ]
   pull_request:
