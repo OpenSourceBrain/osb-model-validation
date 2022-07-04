@@ -18,8 +18,10 @@ jobs:
         python-version: [ 3.9 ]
         engine:
           - "NEST:2.20.0"
+          - "NEST:2.18.0"
           - PyNEST
           - "PyNEST:2.20.0"
+          - "PyNEST:2.18.0"
           - PyNN_Nest
 
     steps:

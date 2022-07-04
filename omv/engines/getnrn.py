@@ -32,7 +32,7 @@ def install_neuron(version):
             if '7.8' in version or '8.0' in version:
                 nrn_url = 'https://github.com/neuronsimulator/nrn/archive/%s.tar.gz'%(version)
                 dl_file = '%s.tar.gz'%version
-            print(co(['wget', nrn_url]))
+            print(co(['wget', '-nv', nrn_url]))
             print(co(['tar', 'xzvf', dl_file]))
             print(co(['mv', 'nrn-%s'%version, 'nrn']))
             os.chdir('nrn')
