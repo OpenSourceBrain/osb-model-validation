@@ -43,8 +43,13 @@ class OMVEngine(object):
                 inform("Fatal installation error for: %s"%self.name)
                 exit(1)'''
 
-
-        self.modelpath = realpath(target)
+        if ' ' in target:
+            all = ''
+            for mp in target.split():
+                all += realpath(mp)+' '
+            self.modelpath = all[:-1]
+        else:
+            self.modelpath = realpath(target)
         self.extra_pars = []
 
     def __str__(self):
