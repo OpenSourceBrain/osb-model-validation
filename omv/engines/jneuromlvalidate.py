@@ -52,7 +52,7 @@ class JNeuroMLValidateEngine(JNeuroMLEngine):
             for p in path_s: cmds.append(p)
 
 
-            inform("Running with %s, using %s..." % (JNeuroMLValidateEngine.name,
+            inform("Running with %s, using: %s..." % (JNeuroMLValidateEngine.name,
                    cmds),
                    indent=1)
             self.stdout = check_output(cmds,
