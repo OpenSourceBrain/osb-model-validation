@@ -30,7 +30,8 @@ class MooseEngine(OMVEngine):
                 ret = 'v%s'%ret_str
 
         except Exception as err:
-            inform("Couldn't import moose into Python: ", err, indent=1)
+            if is_verbose():
+                inform("Couldn't import moose into Python: ", err, indent=1)
             ret = False
         if not ret or not PyNeuroMLEngine.is_installed(None):
             ret = False

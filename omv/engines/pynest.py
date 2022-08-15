@@ -50,9 +50,10 @@ class PyNestEngine(OMVEngine):
                 inform("Env vars: %s" % PyNestEngine.environment_vars, indent=2)
 
         except Exception as err:
-            inform("Couldn't import NEST into Python..: ", err, indent=1)
-            inform("NEST env vars: %s" % PyNestEngine.environment_vars, indent=1)
-            inform("sys.path: %s" % sys.path, indent=1)
+            if is_verbose():
+                inform("Couldn't import NEST into Python..: ", err, indent=1)
+                inform("NEST env vars: %s" % PyNestEngine.environment_vars, indent=1)
+                inform("sys.path: %s" % sys.path, indent=1)
             ret = False
         return ret
 
