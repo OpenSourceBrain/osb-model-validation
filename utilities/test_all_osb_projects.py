@@ -43,7 +43,7 @@ if '-q' in sys.argv:
     ignores.append('granulecell')  # Slow...
     ignores.append('thalamocortical')  # Slow...
     ignores.append('cerebellum--cerebellar-golgi-cell--solinasetal-golgicell')  # Slow...
-    ignores.append('potjansdiesmann2014') 
+    ignores.append('potjansdiesmann2014')
     ignores.append('nc_ca1')
     ignores.append('miglioreetal14_olfactorybulb3d')
     ignores.append('sadehetal2017-inhibitionstabilizednetworks')
@@ -69,7 +69,7 @@ all_repos = {  }
 
 additional_repos = { 'NeuroML2':             GitHubRepository.create('https://github.com/NeuroML/NeuroML2') ,
                      'osb-model-validation': GitHubRepository.create('https://github.com/OpenSourceBrain/osb-model-validation') }
-                     
+
 branches = { 'neuroml2': 'development', 'nc_ca1': 'development' }
 
 all_repos.update(additional_repos)
@@ -87,44 +87,48 @@ if __name__ == "__main__":
             project_num = int(sys.argv[1])
         except:
             print("ignoring...")
-            
+
     all_projs = osb.get_projects(min_curation_level="None",
                                     limit=project_num)
-            
+
     for project in all_projs:
 
         print("\n%sPre checking OSB project: %s (%s)\n" %
               ("-" * 8, project.name, project.identifier))
-        
+
         if project.identifier not in ignores:
 
-            github_repo = project.github_repo
+            try:
+                github_repo = project.github_repo
 
-            projects += 1
+                projects += 1
 
-            if github_repo is not None:
-                
-                if github_repo.check_file_in_repository(".travis.yml"):
+                if github_repo is not None:
 
-                    raw_url = github_repo.link_to_raw_file_in_repo(".travis.yml")
-                    print("  .travis.yml found at %s\n" % raw_url)
-                    contents = osb.utils.get_page(raw_url)
-                    if 'omv' not in contents:
-                        error = "  (That .travis.yml does not look like it uses OMV...)"
-                        print(error)
-                        
-                        bad_projects_found[project.identifier] = error
+                    if github_repo.check_file_in_repository(".travis.yml"):
+
+                        raw_url = github_repo.link_to_raw_file_in_repo(".travis.yml")
+                        print("  .travis.yml found at %s\n" % raw_url)
+                        contents = osb.utils.get_page(raw_url)
+                        if 'omv' not in contents:
+                            error = "  (That .travis.yml does not look like it uses OMV...)"
+                            print(error)
+
+                            bad_projects_found[project.identifier] = error
+                        else:
+                            print("  Possible .travis.yml with OMV tests found!")
+                            all_repos[project.identifier] = project.github_repo
+
                     else:
-                        print("  Possible .travis.yml with OMV tests found!")
-                        all_repos[project.identifier] = project.github_repo
-                        
-                else:
-                    error = "  (No .travis.yml)"
-                    print(error)
+                        error = "  (No .travis.yml)"
+                        print(error)
 
-                    bad_projects_found[project.identifier] = error
-                        
-                
+                        bad_projects_found[project.identifier] = error
+            except Exception as e:
+                error = "  (Error accessing GitHub repository)"
+                print(e)
+                bad_projects_found[project.identifier] = error
+
             else:
                 error = "  (No GitHub repository)"
                 print(error)
@@ -133,23 +137,23 @@ if __name__ == "__main__":
             error = "  (Ignoring...)"
             print(error)
             bad_projects_found[project.identifier] = error
-          
+
     print("\nFound %i/%i projects with possible OMV tests"%(len(all_repos),len(all_projs)))
     pp.pprint(all_repos)
     print("\nFound %i/%i projects without OMV tests"%(len(bad_projects_found),len(all_projs)))
     pp.pprint(bad_projects_found)
-    
+
     fails = []
-                
+
     for proj_id in all_repos.keys():
-        
+
         github_repo = all_repos[proj_id]
-        
+
         test_it = False
-        
+
         print("\n%sChecking project: %s (%s)\n" %
               ("-" * 8, proj_id, github_repo))
-        
+
         if proj_id in additional_repos.keys():
             test_it = True
             testable_projects += 1
@@ -168,13 +172,13 @@ if __name__ == "__main__":
 
         else:
             print("  (No .travis.yml)")
-            
+
         if test_it:
             target_dir = '%s/%s' % (test_dir, proj_id)
             print(co(['git', 'clone', str(github_repo.clone_url), target_dir]))
             with working_dir(target_dir):
                 for key in branches.keys():
-                    if proj_id.lower() == key: 
+                    if proj_id.lower() == key:
                         print(co(['git', 'checkout', branches[key]]))
                 print("Running 'omv all' on"+ target_dir)
                 try:
