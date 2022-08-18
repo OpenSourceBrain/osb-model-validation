@@ -20,10 +20,8 @@ jobs:
           - "NEST:3.1"
           - "NEST:3.0"
           - "NEST:2.20.0"
-          - "NEST:2.18.0"
-          - PyNEST
           - "PyNEST:2.20.0"
-          - "PyNEST:2.18.0"
+          - "PyNEST:3.0"
           - "PyNEST:3.1"
           - PyNN_Nest
 
