@@ -24,6 +24,7 @@ jobs:
           - PyNEST
           - "PyNEST:2.20.0"
           - "PyNEST:2.18.0"
+          - "PyNEST:3.1"
           - PyNN_Nest
 
     steps:
