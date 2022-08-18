@@ -23,8 +23,11 @@ class PyNestEngine(OMVEngine):
         ret = True
         try:
             print('PN1')
-            ##ret_str_cmd_line = check_output(['python -c "import nest; print(nest.version())"'], shell=True, verbosity=2)
-            ##inform("NEST cmd line test: %s" % (ret_str_cmd_line), indent=2)
+            try:
+                ret_str_cmd_line = check_output(['python -c "import nest; print(nest.version())"'], shell=True, verbosity=2)
+                inform("NEST cmd line test: %s" % (ret_str_cmd_line), indent=2)
+            except:
+                pass
 
             import nest
             print('PN2')
@@ -56,7 +59,7 @@ class PyNestEngine(OMVEngine):
 
         except Exception as err:
             if is_verbose():
-                inform("Couldn't import NEST into Python..: ", err, indent=1)
+                inform("Couldn't import (py)NEST into Python..: ", err, indent=1)
                 inform("NEST env vars: %s" % PyNestEngine.environment_vars, indent=1)
                 inform("sys.path: %s" % sys.path, indent=1)
             ret = False
