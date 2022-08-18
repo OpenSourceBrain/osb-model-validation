@@ -15,7 +15,7 @@ def install_neuron(version):
         else:
             version='7.6'
 
-    if sys.version_info.major == 3 and ('7.8' in version or '8.0' in version):
+    if sys.version_info.major == 3 and ('7.8' in version or '8.' in version):
         pip_install('neuron==%s'%version)
         import neuron
         inform('Successfully installed NEURON v%s using pip..'%version, indent=2)
