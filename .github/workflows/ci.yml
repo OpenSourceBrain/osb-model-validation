@@ -15,8 +15,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.9 ]
+        python-version: [ 3.8, 3.9 ]
         engine:
+          - "NEST:3.1"
+          - "NEST:3.0"
           - "NEST:2.20.0"
           - "NEST:2.18.0"
           - PyNEST
