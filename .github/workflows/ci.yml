@@ -23,7 +23,10 @@ jobs:
           - "PyNEST:2.20.0"
           - "PyNEST:3.0"
           - PyNEST
+          - PyNN_NEURON
           - PyNN_Nest
+          - jNeuroML_NEURON
+          - jNeuroML_NetPyNE
 
     steps:
     - uses: actions/checkout@v2
