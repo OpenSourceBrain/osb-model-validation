@@ -22,7 +22,7 @@ jobs:
           - "NEST:2.20.0"
           - "PyNEST:2.20.0"
           - "PyNEST:3.0"
-          - "PyNEST:3.1"
+          - PyNEST
           - PyNN_Nest
 
     steps:
