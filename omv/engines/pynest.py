@@ -26,17 +26,18 @@ class PyNestEngine(OMVEngine):
             try:
                 ret_str_cmd_line = check_output(['python -c "import nest; print(nest.version())"'], shell=True, verbosity=2)
                 inform("NEST cmd line test: %s" % (ret_str_cmd_line), indent=2)
+                ret_str = ret_str_cmd_line.split('Version: nest-')[1].split('Built:')[0].strip()
             except:
                 pass
 
-            import nest
-            print('PN2')
-            if hasattr(nest,'__version__'):
-                print('PN3')
-                ret_str = nest.__version__
-            else:
-                print('PN4')
-                ret_str = nest.version()
+                import nest
+                print('PN2')
+                if hasattr(nest,'__version__'):
+                    print('PN3')
+                    ret_str = nest.__version__
+                else:
+                    print('PN4')
+                    ret_str = nest.version()
 
             ret = len(ret_str) > 0
 
