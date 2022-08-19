@@ -15,18 +15,36 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.8, 3.9 ]
+        python-version: [ 3.9 ]
         engine:
-          - "NEST:3.1"
-          - "NEST:3.0"
+          - Arbor
+          - "Brian2:2.4"
+          - EDEN
           - "NEST:2.20.0"
-          - "PyNEST:2.20.0"
-          - "PyNEST:3.0"
+          - "NEST:3.3"
           - PyNEST
+          - NEURON
+          - PyNEURON
+          - PyNN
           - PyNN_NEURON
           - PyNN_Nest
+          - PyNN_NeuroML
+          - NetPyNE
+          - PyLEMS
+          - PyLEMS_NeuroML2
+          - jLEMS
+          - jNeuroML
+          - jNeuroML_Brian2
+          - jNeuroML_EDEN
           - jNeuroML_NEURON
           - jNeuroML_NetPyNE
+          - jNeuroML_PyNN_NEURON
+          - jNeuroML_validate
+          - jNeuroML_validatev1
+          - Py_neuroConstruct
+          - pyNeuroML
+          - jNeuroML_Moose
+          - MOOSE
 
     steps:
     - uses: actions/checkout@v2
