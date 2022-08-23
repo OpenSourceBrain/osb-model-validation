@@ -8,7 +8,7 @@ import sys
 def install_nest(version):
 
     if not version:
-        version='3.1'
+        version='2.20.0'
 
     inform('Installing NEST', indent=2, verbosity=1)
     nestpath = os.path.join(os.environ['HOME'],'nest')
