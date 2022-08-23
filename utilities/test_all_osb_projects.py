@@ -65,6 +65,8 @@ ignores.append('l23-test')
 ignores.append('testing0')
 ignores.append('beta-rhythms')
 ignores.append('my-brain-project')
+ignores.append('mytest')
+ignores.append('hodgkin-test')
 all_repos = {  }
 
 additional_repos = { 'NeuroML2':             GitHubRepository.create('https://github.com/NeuroML/NeuroML2') ,
