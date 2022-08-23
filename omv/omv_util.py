@@ -98,7 +98,7 @@ def main():
     elif arguments['list-engines'] or arguments['list']:
 
         inform('OMV is checking which engines are currently installed...')
-        set_verbosity(0)
+        set_verbosity(0) # No need to report failures
         engines = sorted(OMVEngines.keys())
 
         installed = {}

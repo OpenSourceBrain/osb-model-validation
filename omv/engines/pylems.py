@@ -7,7 +7,7 @@ from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
 class PyLemsEngine(OMVEngine):
-    
+
     name = "PyLEMS"
 
     @staticmethod
@@ -19,10 +19,11 @@ class PyLemsEngine(OMVEngine):
             inform("PyLEMS %s is correctly installed..." % ret, indent=2, verbosity=2)
 
         except Exception as err:
-            inform("Couldn't execute/import PyLEMS: ", err, indent=1)
+            if is_verbose():
+                inform("Couldn't execute/import PyLEMS: ", err, indent=1)
             ret = False
         return ret
-        
+
     @staticmethod
     def install(version):
         from omv.engines.getpylems import install_pylems
@@ -33,7 +34,7 @@ class PyLemsEngine(OMVEngine):
         inform('Will fetch and install the latest PyLEMS', indent=2)
         install_pylems()
         inform('Done...', indent=2)
-        
+
     def run(self):
         try:
             inform("Running file %s with %s" % (trim_path(self.modelpath), self.name), indent=1)
@@ -48,21 +49,3 @@ class PyLemsEngine(OMVEngine):
             inform("Another error with running %s: "%self.name, err, indent=1)
             self.returncode = -1
             self.stdout = "???"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

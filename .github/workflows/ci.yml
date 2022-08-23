@@ -21,6 +21,7 @@ jobs:
           - "Brian2:2.4"
           - EDEN
           - "NEST:2.20.0"
+          - "NEST:3.3"
           - PyNEST
           - NEURON
           - PyNEURON
@@ -51,17 +52,18 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version:  ${{ matrix.python-version }}
+
     - name: Install OMV
       run: |
         pip install .
-        pip install scipy sympy matplotlib cython pandas
+        pip install scipy sympy matplotlib cython pandas tables
         #sudo apt install octave
-
 
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
-        # Not yet checked: Octave, genesis, jNeuroML_Moose
+        # Not yet checked: Octave, genesis
         omv all -V --engine=${{ matrix.engine }}
+
     - name: OMV final version info
       run: |
         omv list -V # list installed engines

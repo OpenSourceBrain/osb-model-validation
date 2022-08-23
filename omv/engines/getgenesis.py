@@ -25,7 +25,7 @@ setenv SIMNOTES {getenv HOME}/genesis/genesis2.4gamma-master/.notes
 setenv GENESIS_HELP {getenv HOME}/genesis/genesis2.4gamma-master/Doc
 
 //===========================================================================
-//                             set up tables 
+//                             set up tables
 //===========================================================================
 schedule// default simulation schedule
 
@@ -40,6 +40,7 @@ def install_genesis(get_latest=False):
     os.mkdir(genpath)
     with working_dir(genpath):
         print(co(['wget',
+                  '-nv',
                   'https://github.com/borismarin/genesis2.4gamma/archive/master.zip']))
         print(co(['unzip', 'master.zip']))
         print(co(['ls', '-la', 'genesis2.4gamma-master']))
@@ -47,12 +48,3 @@ def install_genesis(get_latest=False):
         print(co(['./configure']))
         print(co(['make']))
         open(os.path.join(os.environ['HOME'], '.simrc'), 'w').write(simrc)
-
-
-
-
-
-
-
-
-
