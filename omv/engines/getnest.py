@@ -21,7 +21,10 @@ def install_nest(version):
     pypaths = get_paths()
     inform('Python lib info: %s'%(pypaths), indent=2, verbosity=1)
 
-    os.mkdir(nestpath)
+    try:
+        os.mkdir(nestpath)
+    except:
+        pass
 
     with working_dir(nestpath):
         #version='2.10.0'
