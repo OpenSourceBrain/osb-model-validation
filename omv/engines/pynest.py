@@ -22,24 +22,24 @@ class PyNestEngine(OMVEngine):
 
         ret = True
         try:
-            #print('PN1')
+            print('PN1')
             try:
-                #print('PN1a')
+                print('PN1a')
                 ret_str_cmd_line = check_output(['python -c "import nest; print(nest.__version__ if hasattr(nest,\'__version__\') else nest.version())"'], shell=True, verbosity=2)
 
                 if is_verbose():
                     inform("NEST cmd line test: %s" % (ret_str_cmd_line), indent=2)
                 ret_str = ret_str_cmd_line.split('Version: nest-')[1].split('Built:')[0].strip()
             except:
-                #print('PN1b')
+                print('PN1b')
 
                 import nest
-                #print('PN2')
+                print('PN2')
                 if hasattr(nest,'__version__'):
-                    #print('PN3')
+                    print('PN3')
                     ret_str = nest.__version__
                 else:
-                    #print('PN4')
+                    print('PN4')
                     ret_str = nest.version()
 
             ret = len(ret_str) > 0
