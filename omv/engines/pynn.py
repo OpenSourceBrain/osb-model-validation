@@ -33,7 +33,7 @@ class PyNNEngine(OMVEngine):
         from omv.engines.getpynn import install_pynn
         home = os.environ['HOME']
         inform('Will fetch and install the latest pyNN', indent=2)
-        install_pynn()
+        install_pynn(version)
         inform('Done, PyNN is correctly installed...', indent=2)
 
 

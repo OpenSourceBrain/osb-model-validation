@@ -287,7 +287,7 @@ def _install_engine(eng):
                 install_nest(engine_version)
         elif eng.lower() == 'PyNN'.lower():
             from omv.engines.getpynn import install_pynn
-            install_pynn()
+            install_pynn(engine_version)
 
         elif eng.lower() == 'PyNN_NEURON'.lower():
             from omv.engines.pynnneuron import PyNNNRNEngine
