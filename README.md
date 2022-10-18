@@ -3,7 +3,10 @@
 
 # OSB Model Validation
 
-Tools for automated model validation in [Open Source Brain](http://www.opensourcebrain.org) projects, which can also be used for testing model behaviour on many [simulation engines](https://github.com/OpenSourceBrain/osb-model-validation/tree/master/omv/engines) on your local machine and on [GitHub Actions](https://github.com/features/actions).
+Tools for automated model validation in [Open Source Brain](http://www.opensourcebrain.org) projects, which can also be used for testing model behaviour on many [simulation engines](https://github.com/OpenSourceBrain/osb-model-validation/tree/master/omv/engines) both:
+
+- on your local machine when developing models
+- on [GitHub Actions](https://github.com/features/actions), to ensure tests pass on every commit.
 
 To see this framework in action, click on some of the green buttons below:
 
