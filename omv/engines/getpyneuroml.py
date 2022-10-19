@@ -1,8 +1,9 @@
 from omv.common.inout import pip_install, inform
-def install_pynml():
-    
+
+def install_pynml(version=None):
+
     try:
-        pip_install('pyneuroml')
+        pip_install('pyneuroml', version)
         import neuroml
         import pyneuroml
         m = 'Successfully installed pyNeuroML v%s...'%pyneuroml.__version__

@@ -21,7 +21,7 @@ jobs:
           - "NEURON:7.8.2"
           - "PyNEURON:8.0.2"
           - jNeuroML
-          - "jNeuroML_NEURON:7.8.2"
+          - "jNeuroML_NEURON"
           - jNeuroML_NetPyNE
           - jNeuroML_PyNN_NEURON
           -
