@@ -17,14 +17,12 @@ jobs:
       matrix:
         python-version: [ 3.9 ]
         engine:
-
           - "NEURON:7.8.2"
           - "PyNEURON:8.0.2"
           - jNeuroML
-          - "jNeuroML_NEURON"
+          - "jNeuroML_NEURON:8.2.1"
           - jNeuroML_NetPyNE
           - jNeuroML_PyNN_NEURON
-          -
 
     steps:
     - uses: actions/checkout@v2

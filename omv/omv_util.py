@@ -296,6 +296,7 @@ def _install_engine(eng):
             install_pynn(engine_version)
 
         elif eng.lower() == 'PyNN_NEURON'.lower():
+            if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
             from omv.engines.pynnneuron import PyNNNRNEngine
             PyNNNRNEngine.install()
 
@@ -305,7 +306,14 @@ def _install_engine(eng):
             if ee.is_installed(None):
                 already_installed = True
             else:
-                ee.install()
+                ee.install(engine_version)
+
+        elif eng.lower() == 'jNeuroML_NEURON'.lower():
+            from omv.engines.jneuromlnrn import JNeuroMLNRNEngine as ee
+            if ee.is_installed(None):
+                already_installed = True
+            else:
+                ee.install(engine_version)
 
         else:
             inform('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)
