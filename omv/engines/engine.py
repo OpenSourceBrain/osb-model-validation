@@ -4,6 +4,7 @@ import sys
 from omv.common.inout import inform
 import platform
 
+PATH_DELIMITER = ';'
 
 class EngineInstallationError(Exception):
     pass
@@ -46,7 +47,7 @@ class OMVEngine(object):
         if ' ' in target:
             all = ''
             for mp in target.split():
-                all += realpath(mp)+';'
+                all += realpath(mp)+PATH_DELIMITER
             self.modelpath = all[:-1]
         else:
             self.modelpath = realpath(target)
