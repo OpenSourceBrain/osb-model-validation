@@ -46,7 +46,7 @@ class OMVEngine(object):
         if ' ' in target:
             all = ''
             for mp in target.split():
-                all += realpath(mp)+' '
+                all += realpath(mp)+';'
             self.modelpath = all[:-1]
         else:
             self.modelpath = realpath(target)

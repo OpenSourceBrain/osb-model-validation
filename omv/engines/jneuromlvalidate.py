@@ -9,9 +9,9 @@ def resolve_paths(path_s):
 
     if '*' in path_s:
         import glob
-        if ' ' in path_s:
+        if ';' in path_s:
             all = []
-            for p in path_s.split(' '):
+            for p in path_s.split(';'):
                 for g in glob.glob(p):
                     all.append(g)
             path_s = all
