@@ -5,7 +5,7 @@ from omv.engines.utils.wdir import working_dir
 
 def install_jnml():
 
-    version='v0.12.0_rc1'
+    version='v0.12.1'
 
     jnmlpath = os.path.join(os.environ['HOME'],'jnml')
     if not os.path.isdir(jnmlpath):
