@@ -4,7 +4,7 @@ from omv.common.inout import pip_install
 
 from omv.engines.utils.wdir import working_dir
 
-def install_pynn(version):
+def install_pynn(version=None):
 
     if not version:
         version='0.10.0'

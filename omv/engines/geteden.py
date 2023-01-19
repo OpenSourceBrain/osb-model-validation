@@ -7,7 +7,7 @@ def install_eden(version=None):
         version=DEFAULT_VERSION
     try:
 
-        pip_install('eden-simulator==%s'%version)
+        pip_install('eden-simulator',version)
         import eden_simulator
         m = 'Successfully installed EDEN...'
     except Exception as e:

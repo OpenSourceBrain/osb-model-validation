@@ -23,8 +23,8 @@ jobs:
           - "NEST:2.20.0"
           - "NEST:3.3"
           - PyNEST
-          - NEURON
-          - PyNEURON
+          - "NEURON:7.8.2"
+          - "PyNEURON:8.0.2"
           - PyNN
           - PyNN_NEURON
           - PyNN_Nest
@@ -36,7 +36,7 @@ jobs:
           - jNeuroML
           - jNeuroML_Brian2
           - jNeuroML_EDEN
-          - jNeuroML_NEURON
+          - "jNeuroML_NEURON:8.2.1"
           - jNeuroML_NetPyNE
           - jNeuroML_PyNN_NEURON
           - jNeuroML_validate
@@ -57,6 +57,7 @@ jobs:
       run: |
         pip install .
         pip install scipy sympy matplotlib cython pandas tables
+        pip install 'numpy<=1.23.0' # temp fix for https://levelup.gitconnected.com/fix-attributeerror-module-numpy-has-no-attribute-float-d7d68c5a4971
         #sudo apt install octave
 
     - name: Run OMV tests on engine ${{ matrix.engine }}

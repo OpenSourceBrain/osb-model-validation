@@ -7,13 +7,12 @@ def install_brian2(version):
         version='2.3'
     try:
         # check_scipy_dev()
-        # Tested with v2.3     
-        
-        pip_install('brian2==%s'%version)
+        # Tested with v2.3
+
+        pip_install('brian2',version)
         import brian2
         m = 'Successfully installed Brian2...'
     except Exception as e:
         m = 'ERROR installing Brian2: ' + str(e)
     finally:
         print(m)
-        
