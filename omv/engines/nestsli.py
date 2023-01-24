@@ -18,6 +18,8 @@ class NestEngine(OMVEngine):
         nestpath = os.path.join(os.environ['HOME'],'nest/nest/')
         if 'NEST_INSTALL_DIR' in os.environ:
             nestpath = os.environ['NEST_INSTALL_DIR']+'/'
+        elif 'NEST_HOME' in os.environ:
+            nestpath = os.environ['NEST_HOME']+'/'
 
         environment_vars = {'NEST_HOME': nestpath,
                             'PYTHONPATH': nestpath+'/lib/python%s.%s/site-packages/'%(sys.version_info.major, sys.version_info.minor)}
@@ -28,7 +30,6 @@ class NestEngine(OMVEngine):
     @staticmethod
     def is_installed(version):
         ret = True
-
         environment_vars = NestEngine.get_nest_environment()
         try:
             FNULL = open(os.devnull, 'w')
@@ -38,6 +39,8 @@ class NestEngine(OMVEngine):
             ret = '%s'%r.split('version')[1].split()[0][:-1]
             if '-' in ret:
                 ret = 'v%s'%ret.split('-')[-1]
+
+            if not 'v' in ret: ret='v%s'%ret
 
             inform("NEST %s is correctly installed..." % ret, indent=2, verbosity=1)
 
