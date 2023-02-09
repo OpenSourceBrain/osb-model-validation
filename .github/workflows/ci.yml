@@ -19,6 +19,7 @@ jobs:
         engine:
           - Arbor
           - "Brian2:2.4"
+          - Brian2
           - EDEN
           - "NEST:2.20.0"
           - "NEST:3.3"
@@ -47,9 +48,9 @@ jobs:
           - MOOSE
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python  ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version:  ${{ matrix.python-version }}
 
