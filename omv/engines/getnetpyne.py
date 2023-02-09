@@ -22,20 +22,10 @@ def install_netpyne(version=None):
                 print(check_output(['git', 'clone', 'https://github.com/Neurosim-lab/netpyne.git', install_dir]))
 
         with working_dir(path):
-            print(check_output(['git', 'checkout', 'neuroml_updates']))
+            print(check_output(['git', 'checkout', 'sonata_fix']))
             print(check_output(['pwd']))
 
         with working_dir(path):
-            if sys.version_info.major == 2:
-                #pip_install([]'setuptools==42.0.1')
-                pip_install(['kiwisolver==1.0.1',
-                             'matplotlib==2.2.4',
-                             'pandas==0.23.4',
-                             'bokeh==1.4.0',
-                             'Pillow==5.4.1',
-                             'matplotlib-scalebar==0.5.1',
-                             'scipy==1.2.2',
-                             'python-dateutil==2.8.0'])
-            print(check_output([sys.executable, 'setup.py', 'install']))
+            print(check_output([sys.executable, '-m', 'pip', 'install', '.']))
 
         m = 'Successfully installed NetPyNE...'
