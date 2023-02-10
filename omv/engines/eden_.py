@@ -15,7 +15,7 @@ class EdenEngine(OMVEngine):
         try:
             import eden_simulator
 
-            ver = 'v%s???'%DEFAULT_VERSION #'v%s'%eden_simulator.__version__
+            ver = 'v%s' % (eden_simulator.__version__ if hasattr(eden_simulator, "__version__") else "???")
             inform("EDEN version %s is correctly installed..." % ver, indent=2, verbosity=2)
 
             ret = ver
