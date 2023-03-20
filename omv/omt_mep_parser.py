@@ -17,18 +17,24 @@ class OMVTestParser(object):
             self.mep_root = dirname(self.mep_path)
             self.mep = load_yaml(self.mep_path)
         else:
-            self.mep_root = None 
+            self.mep_root = None
             self.mep_path = None
             self.mep = None
-            
+
     @property
     def modelpath(self):
+        #print('Interpreting %s'%self.omt['target'])
+        if ' ' in self.omt['target']: # e.g. target: "*.cell.nml *.channel.nml"
+            all = ''
+            for part in self.omt['target'].split(' '):
+                all += join(self.omt_root, part.strip())+' '
+            return all[:-1]
         return join(self.omt_root, self.omt['target'])
 
     @property
     def engine(self):
         return self.omt['engine']
-    
+
     @property
     def mep_experiments(self):
         return self.mep['experiments']

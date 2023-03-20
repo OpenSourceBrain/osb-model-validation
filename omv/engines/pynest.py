@@ -22,13 +22,25 @@ class PyNestEngine(OMVEngine):
 
         ret = True
         try:
-            ret_str_cmd_line = check_output(['python -c "import nest; print(nest.version())"'], shell=True, verbosity=2)
+            #print('PN1')
+            try:
+                #print('PN1a')
+                ret_str_cmd_line = check_output(['python -c "import nest; print(nest.__version__ if hasattr(nest,\'__version__\') else nest.version())"'], shell=True, verbosity=2)
 
-            inform("NEST cmd line test: %s" % (ret_str_cmd_line), indent=2)
+                if is_verbose():
+                    inform("NEST cmd line test: %s" % (ret_str_cmd_line), indent=2)
+                ret_str = ret_str_cmd_line.split('Version: nest-')[1].split('Built:')[0].strip()
+            except:
+                #print('PN1b')
 
-            import nest
-            ret_str = nest.version()
-            #
+                import nest
+                #print('PN2')
+                if hasattr(nest,'__version__'):
+                    #print('PN3')
+                    ret_str = nest.__version__
+                else:
+                    #print('PN4')
+                    ret_str = nest.version()
 
             ret = len(ret_str) > 0
 
@@ -50,9 +62,10 @@ class PyNestEngine(OMVEngine):
                 inform("Env vars: %s" % PyNestEngine.environment_vars, indent=2)
 
         except Exception as err:
-            inform("Couldn't import NEST into Python..: ", err, indent=1)
-            inform("NEST env vars: %s" % PyNestEngine.environment_vars, indent=1)
-            inform("sys.path: %s" % sys.path, indent=1)
+            if is_verbose():
+                inform("Couldn't import (py)NEST into Python..: ", err, indent=1)
+                inform("NEST env vars: %s" % PyNestEngine.environment_vars, indent=1)
+                inform("sys.path: %s" % sys.path, indent=1)
             ret = False
         return ret
 
@@ -62,6 +75,7 @@ class PyNestEngine(OMVEngine):
         NestEngine.install(version)
         PyNestEngine.path = NestEngine.path
         PyNestEngine.environment_vars = NestEngine.environment_vars
+        inform('Finished installation of PyNEST....', indent=2)
 
 
     def run(self):

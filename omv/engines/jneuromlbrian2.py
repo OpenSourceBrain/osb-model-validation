@@ -19,12 +19,12 @@ class JNeuroMLBrian2Engine(JNeuroMLEngine):
         return JNeuroMLEngine.is_installed(None) and Brian2Engine.is_installed(None)
 
     @staticmethod
-    def install(version):
+    def install(brian2_version):
 
         if not JNeuroMLEngine.is_installed(None):
             JNeuroMLEngine.install(None)
         if not Brian2Engine.is_installed(None):
-            Brian2Engine.install(None)
+            Brian2Engine.install(brian2_version)
 
         JNeuroMLBrian2Engine.path = JNeuroMLEngine.path + \
             ":" + Brian2Engine.path

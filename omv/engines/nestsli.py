@@ -3,7 +3,7 @@ import sys
 
 import subprocess as sp
 
-from omv.common.inout import inform, trim_path, check_output
+from omv.common.inout import inform, trim_path, check_output, is_verbose
 from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
@@ -42,7 +42,8 @@ class NestEngine(OMVEngine):
             inform("NEST %s is correctly installed..." % ret, indent=2, verbosity=1)
 
         except OSError as err:
-            inform("Couldn't execute NEST: ", err, indent=1)
+            if is_verbose():
+                inform("Couldn't execute NEST: ", err, indent=1)
             ret = False
         return ret
 

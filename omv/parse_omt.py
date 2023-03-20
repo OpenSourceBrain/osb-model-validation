@@ -14,29 +14,29 @@ def parse_omt(omt_path, do_not_run=False, engine_version=None, ignore_non_py3=Fa
         action = 'Checking'
     inform(action+" the tests defined in ", trim_path(omt_path),
            underline='=', center=False)
-    
+
     mepomt = OMVTestParser(omt_path)
     if not mepomt.engine in OMVEngines:
         inform("Error! Unrecognised engine: %s (try running: omv list-engines)"%mepomt.engine)
         exit(1)
-    engine = OMVEngines[mepomt.engine](mepomt.modelpath, 
-                                       do_not_check_install=do_not_run, 
+    engine = OMVEngines[mepomt.engine](mepomt.modelpath,
+                                       do_not_check_install=do_not_run,
                                        engine_version=engine_version)
-                                       
+
     experiments = [exp for exp in mepomt.generate_exps(engine)]
-    
+
     tally = Tallyman(mepomt)
-    
+
     inform('Found %i experiment(s) to run on engine: %s '%(len(experiments), engine.name), indent=1)
     #print('%s, %s, %s'%(platform.python_version_tuple()[0],ignore_non_py3,engine.python3_compatible))
-    
+
     if platform.python_version_tuple()[0]=='3' and \
        ignore_non_py3 and \
        not engine.python3_compatible:
-           
+
         inform('Not running experiment(s) on: %s, as this is Python %s and engine is not Python 3 compatible...'%(engine.name, platform.python_version()), indent=1)
         tally.report_passing_if_no_exps = True
-    
+
     elif not do_not_run:
         try:
             engine.run()
@@ -71,9 +71,14 @@ def parse_omt(omt_path, do_not_run=False, engine_version=None, ignore_non_py3=Fa
             # TODO: serialize exception info
             inform('ERROR running engine ', engine.name, indent=1,
                    underline='-', overline='-')
+            inform("+++++++++++++++++++++ Error info ++++++++++++++++++", indent=3)
+            inform(" Return code: %s"%engine.returncode, indent=3)
+            if hasattr(engine,'stdout'):
+               if isinstance(engine.stdout, str):
+                   out = engine.stdout
+               else:
+                   out = str(engine.stdout.decode())
+               inform(" Output: %s"%out.replace('\n','\n[omv] %s > '%(mepomt.omt_path)), indent=3)
+            inform("+++++++++++++++++++++++++++++++++++++++++++++++++++", indent=3)
 
     return tally
-    
-    
-
-

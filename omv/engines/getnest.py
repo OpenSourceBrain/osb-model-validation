@@ -25,7 +25,7 @@ def install_nest(version):
 
     with working_dir(nestpath):
         #version='2.10.0'
-        check_output(['wget', 'https://github.com/nest/nest-simulator/archive/v%s.tar.gz'%(version)])
+        check_output(['wget', '-nv', 'https://github.com/nest/nest-simulator/archive/v%s.tar.gz'%(version)])
         check_output(['tar', 'xzvf', 'v%s.tar.gz'%version])
         check_output(['mv', 'nest-simulator-%s'%version, 'nest'], cwd=nestpath)
 

@@ -23,6 +23,9 @@ class MooseEngine(OMVEngine):
             ret_str = sp.check_output(['python -c "import moose; print(moose.__version__)"'], shell=True,stderr=sp.STDOUT)
             ret = len(ret_str) > 0
 
+            if isinstance(ret_str, bytes):
+                ret_str = ret_str.decode('utf-8').strip()
+
             if ret and is_verbose():
                 inform("%s is correctly installed (%s)..." % (MooseEngine.name, ret_str), indent=2)
             if ret:
@@ -30,7 +33,8 @@ class MooseEngine(OMVEngine):
                 ret = 'v%s'%ret_str
 
         except Exception as err:
-            inform("Couldn't import moose into Python: ", err, indent=1)
+            if is_verbose():
+                inform("Couldn't import moose into Python: ", err, indent=1)
             ret = False
         if not ret or not PyNeuroMLEngine.is_installed(None):
             ret = False

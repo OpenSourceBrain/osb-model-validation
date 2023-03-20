@@ -1,14 +1,14 @@
 import os
 import subprocess as sp
 
-from omv.common.inout import inform, trim_path, is_verbose, check_output 
+from omv.common.inout import inform, trim_path, is_verbose, check_output
 from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
 class PyNeuroMLEngine(OMVEngine):
 
     name = "pyNeuroML"
-        
+
     @staticmethod
     def is_installed(version):
         ret = True
@@ -16,17 +16,17 @@ class PyNeuroMLEngine(OMVEngine):
             inform("Checking whether %s is installed..." % PyNeuroMLEngine.name, indent=1, verbosity=2)
             import pyneuroml
             ret = 'v%s'%pyneuroml.__version__
-        
+
         except Exception as err:
             inform("Couldn't import %s into Python: "% PyNeuroMLEngine.name, err, indent=1, verbosity=1)
             ret = False
         return ret
-        
+
     @staticmethod
     def install(version):
         from omv.engines.getpyneuroml import install_pynml
         inform('Will fetch and install the latest pyNeuroML', indent=2)
-        install_pynml()
+        install_pynml(version)
 
     def run(self):
         try:
