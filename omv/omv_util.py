@@ -266,7 +266,7 @@ def _install_engine(eng):
         elif eng.lower() == 'Moose'.lower():
             if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
             from omv.engines.getmoose import install_moose
-            install_moose()
+            install_moose(engine_version)
         elif eng.lower() == 'NetPyNE'.lower():
             from omv.engines.getnetpyne import install_netpyne
             install_netpyne(engine_version)
