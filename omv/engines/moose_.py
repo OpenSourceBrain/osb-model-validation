@@ -52,7 +52,7 @@ class MooseEngine(OMVEngine):
         from omv.engines.getmoose import install_moose
         home = os.environ['HOME']
         inform('Will fetch and install the latest Moose..', indent=2)
-        install_moose()
+        install_moose(version)
         inform('Done, Moose is correctly installed...', indent=2)
 
 
