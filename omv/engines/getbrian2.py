@@ -6,9 +6,6 @@ def install_brian2(version):
     if not version:
         version='2.5.1'
     try:
-        # check_scipy_dev()
-        # Tested with v2.3
-
         pip_install('brian2',version)
         import brian2
         m = 'Successfully installed Brian2...'
