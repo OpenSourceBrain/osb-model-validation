@@ -14,18 +14,18 @@ class JNeuroMLBrianEngine(JNeuroMLEngine):
     python3_compatible = Brian1Engine.python3_compatible
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         if is_verbose():
             inform("Checking whether %s is installed..." %
                JNeuroMLBrianEngine.name, indent=1)
-        return JNeuroMLEngine.is_installed(None) and Brian1Engine.is_installed(None)
+        return JNeuroMLEngine.is_installed() and Brian1Engine.is_installed()
 
     @staticmethod
     def install(version):
 
-        if not JNeuroMLEngine.is_installed(None):
+        if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
-        if not Brian1Engine.is_installed(None):
+        if not Brian1Engine.is_installed():
             Brian1Engine.install(None)
 
         JNeuroMLBrianEngine.path = JNeuroMLEngine.path + \

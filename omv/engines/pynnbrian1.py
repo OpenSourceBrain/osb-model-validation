@@ -14,18 +14,18 @@ class PyNNBrian1Engine(PyNNEngine):
     python3_compatible = Brian1Engine.python3_compatible
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         if is_verbose():
             inform("Checking whether %s is installed..." %
                    PyNNBrian1Engine.name, indent=1)
-        return PyNNEngine.is_installed(None) and Brian1Engine.is_installed(None)
+        return PyNNEngine.is_installed() and Brian1Engine.is_installed()
         
     @staticmethod
     def install(version):
-        if not Brian1Engine.is_installed(None):
+        if not Brian1Engine.is_installed():
             Brian1Engine.install(version)  # interpret version as version of Brian!
             inform("%s installed Brian..." % PyNNBrian1Engine.name, indent=2, verbosity =1)
-        if not PyNNEngine.is_installed(None):
+        if not PyNNEngine.is_installed():
             PyNNEngine.install(None)
             inform("%s installed PyNN..." % PyNNBrian1Engine.name, indent=2, verbosity =1)
 

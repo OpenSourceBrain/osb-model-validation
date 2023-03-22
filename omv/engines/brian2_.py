@@ -10,7 +10,7 @@ class Brian2Engine(OMVEngine):
     name = "Brian2"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
         try:
             import brian2
