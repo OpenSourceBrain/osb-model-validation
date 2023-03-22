@@ -10,7 +10,7 @@ class EdenEngine(OMVEngine):
     name = "EDEN"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
         try:
             import eden_simulator

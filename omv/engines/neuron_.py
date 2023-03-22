@@ -19,7 +19,7 @@ class NeuronEngine(OMVEngine):
 
         inform("Checking whether %s (v %s) is already installed..." % (self.name, engine_version),
                    indent=1, verbosity=1)
-        if not self.is_installed(''):
+        if not self.is_installed():
             try:
                 self.install(engine_version)
             except Exception as e:
@@ -67,7 +67,7 @@ class NeuronEngine(OMVEngine):
 
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
         if is_verbose():
                 inform("Checking whether %s is installed..." %

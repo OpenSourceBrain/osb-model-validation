@@ -16,7 +16,7 @@ class PyNRNEngine(NeuronEngine):
     name = "PyNEURON"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
         try:
             inform("Checking whether %s is installed..." % PyNRNEngine.name, indent=1, verbosity=2)
@@ -39,7 +39,7 @@ class PyNRNEngine(NeuronEngine):
 
     @staticmethod
     def install(version):
-        if not NeuronEngine.is_installed(None):
+        if not NeuronEngine.is_installed():
             NeuronEngine.install(version)    # interpret version as version of NEURON!
             inform("%s installed NEURON..." % PyNRNEngine.name, indent=2, verbosity =1)
 

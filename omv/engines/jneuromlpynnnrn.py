@@ -15,19 +15,19 @@ class JNeuroMLPyNNNRNEngine(JNeuroMLEngine):
     name = "jNeuroML_PyNN_NEURON"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         if is_verbose():
             inform("Checking whether %s is installed..." %
                JNeuroMLPyNNNRNEngine.name, indent=1)
-        return JNeuroMLEngine.is_installed(None) and PyNNNRNEngine.is_installed(None)
+        return JNeuroMLEngine.is_installed() and PyNNNRNEngine.is_installed()
 
     @staticmethod
     def install(version):
 
-        if not JNeuroMLEngine.is_installed(None):
+        if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
             inform("%s installed JNeuroML..." % JNeuroMLPyNNNRNEngine.name, indent=2, verbosity =1)
-        if not PyNNNRNEngine.is_installed(None):
+        if not PyNNNRNEngine.is_installed():
             PyNNNRNEngine.install(None)
             inform("%s installed PyNN & NRN..." % JNeuroMLPyNNNRNEngine.name, indent=2, verbosity =1)
             
