@@ -103,7 +103,7 @@ def main():
 
         installed = {}
         for engine in engines:
-            installed[engine] = OMVEngines[engine].is_installed('')
+            installed[engine] = OMVEngines[engine].is_installed()
 
         inform('')
         inform('The following engines are currently supported by OMV (v%s):'%omv_version)
