@@ -26,7 +26,7 @@ class NestEngine(OMVEngine):
 
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
 
         environment_vars = NestEngine.get_nest_environment()

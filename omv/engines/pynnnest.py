@@ -14,18 +14,18 @@ class PyNNNestEngine(PyNNEngine):
     name = "PyNN_Nest"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         if is_verbose():
             inform("Checking whether %s is installed..." %
                    PyNNNestEngine.name, indent=1)
-        return PyNNEngine.is_installed(None) and PyNestEngine.is_installed(None)
+        return PyNNEngine.is_installed() and PyNestEngine.is_installed()
         
     @staticmethod
     def install(version):
-        if not PyNestEngine.is_installed(None):
+        if not PyNestEngine.is_installed():
             PyNestEngine.install(version)  # interpret version as version of NEST!
             inform("%s installed PyNest..." % PyNNNestEngine.name, indent=2, verbosity =1)
-        if not PyNNEngine.is_installed(None):
+        if not PyNNEngine.is_installed():
             PyNNEngine.install(None)
             inform("%s installed PyNN..." % PyNNNestEngine.name, indent=2, verbosity =1)
 

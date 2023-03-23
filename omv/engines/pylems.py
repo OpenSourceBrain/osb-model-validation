@@ -11,7 +11,7 @@ class PyLemsEngine(OMVEngine):
     name = "PyLEMS"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
         try:
             import lems

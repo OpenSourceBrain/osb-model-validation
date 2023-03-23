@@ -12,18 +12,18 @@ class JNeuroMLMooseEngine(JNeuroMLEngine):
     name = "jNeuroML_Moose"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         if is_verbose():
             inform("Checking whether %s is installed..." %
                JNeuroMLMooseEngine.name, indent=1)
-        return JNeuroMLEngine.is_installed(None) and MooseEngine.is_installed(None)
+        return JNeuroMLEngine.is_installed() and MooseEngine.is_installed()
 
     @staticmethod
     def install(version):
 
-        if not JNeuroMLEngine.is_installed(None):
+        if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
-        if not MooseEngine.is_installed(None):
+        if not MooseEngine.is_installed():
             MooseEngine.install(None)
 
         JNeuroMLMooseEngine.path = JNeuroMLEngine.path + \
