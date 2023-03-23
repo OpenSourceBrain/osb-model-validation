@@ -10,7 +10,7 @@ class ArborEngine(OMVEngine):
     name = "Arbor"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
         try:
             import arbor

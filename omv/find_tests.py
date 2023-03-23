@@ -3,6 +3,7 @@ from pathlib import Path
 from omv.parse_omt import parse_omt
 from omv.common.inout import load_yaml, inform, trim_path, is_verbose
 from omv.tally import TallyHolder
+from omv.engines import OMVEngines
 
 
 def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False, ignore_non_py3=False):
@@ -82,8 +83,10 @@ def test_all(do_not_run=False, only_this_engine=None, include_temp_tests=False, 
             engs[t.engine]+=1
             tot_tests+=1
         inform('')
+
         for e in sorted(engs):
-            inform('  Engine %s has %s tests'%(e, engs[e]))
+            inform('  Engine %s has %s tests (installed: %s)'%(e, engs[e], OMVEngines[e].is_installed()))
+
         inform('')
         inform('  %s OMV tests in total'%(tot_tests))
         inform('')

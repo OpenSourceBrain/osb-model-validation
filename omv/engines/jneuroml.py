@@ -29,7 +29,7 @@ class JNeuroMLEngine(OMVEngine):
         return jnml
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
         try:
             if is_verbose():

@@ -11,7 +11,7 @@ class OctaveEngine(OMVEngine):
 
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
 
         try:

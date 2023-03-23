@@ -22,7 +22,7 @@ class PyneuroConstructEngine(OMVEngine):
         return environment_vars
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         nChome = PyneuroConstructEngine.get_nC_environment()['NC_HOME']
         inform('Checking whether neuroConstruct is installed (in %s)'%nChome, indent=2, verbosity=2)
         ret = True

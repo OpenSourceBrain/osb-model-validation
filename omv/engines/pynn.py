@@ -10,10 +10,10 @@ class PyNNEngine(OMVEngine):
     name = "PyNN"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
 
-        inform("Checking whether %s (v %s) is already installed..." % (PyNNEngine.name, version),
+        inform("Checking whether %s is already installed..." % (PyNNEngine.name),
                    indent=1, verbosity=1)
         try:
 

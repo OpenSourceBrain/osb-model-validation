@@ -12,13 +12,13 @@ class JNeuroMLValidateV1Engine(JNeuroMLEngine):
     name = "jNeuroML_validatev1"
 
     @staticmethod
-    def is_installed(version):
-        return JNeuroMLEngine.is_installed(None)
+    def is_installed():
+        return JNeuroMLEngine.is_installed()
     
     @staticmethod
     def install(version):
         
-        if not JNeuroMLEngine.is_installed(None):
+        if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
     
         JNeuroMLValidateV1Engine.path = JNeuroMLEngine.path

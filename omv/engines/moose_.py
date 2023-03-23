@@ -12,7 +12,7 @@ class MooseEngine(OMVEngine):
     name = "Moose"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         if is_verbose():
             inform("Checking whether the engine %s has been installed correctly..." %
                    MooseEngine.name, indent=1)
@@ -36,7 +36,7 @@ class MooseEngine(OMVEngine):
             if is_verbose():
                 inform("Couldn't import moose into Python: ", err, indent=1)
             ret = False
-        if not ret or not PyNeuroMLEngine.is_installed(None):
+        if not ret or not PyNeuroMLEngine.is_installed():
             ret = False
 
         inform("Moose is_installed(): %s"%ret, "", indent=1, verbosity=2)
@@ -45,7 +45,7 @@ class MooseEngine(OMVEngine):
     @staticmethod
     def install(version):
 
-        if not PyNeuroMLEngine.is_installed(None):
+        if not PyNeuroMLEngine.is_installed():
             PyNeuroMLEngine.install(None)
             inform("%s installed PyNeuroML..." % MooseEngine.name, indent=2, verbosity =1)
 
