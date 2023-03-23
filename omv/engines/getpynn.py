@@ -5,10 +5,6 @@ from omv.common.inout import pip_install
 from omv.engines.utils.wdir import working_dir
 
 def install_pynn(version=None):
-
-    if not version:
-        version='0.10.0'
-
     try:
 
         #pip_install('lazyarray')  # This should ideally be automatically installed with PyNN...
@@ -23,6 +19,7 @@ def install_pynn(version=None):
         path = os.path.join(install_root, pyNN_src)
 
         with working_dir(path):
+            if version==None: version = '0.9.6'
             print(check_output(['git','checkout',version]))  # neuroml branch has the latest NML2 import/export code!
             #check_output(['git','checkout','master'])
             #print(check_output(['python', 'setup.py', 'install']))
