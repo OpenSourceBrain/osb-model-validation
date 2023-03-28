@@ -27,6 +27,7 @@ jobs:
           - "NEURON:7.8.2"
           - "PyNEURON:8.0.2"
           - PyNN
+          - PyNN_Brian2
           - PyNN_NEURON
           - PyNN_Nest
           - PyNN_NeuroML

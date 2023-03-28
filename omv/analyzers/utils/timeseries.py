@@ -27,10 +27,11 @@ def load_data_file(fname, columns=(0, 1), header_lines=0, scaling=1):
 
 def load_spike_file(fname, format='ID_TIME', ids=0, scaling=1.0):
     from numpy import loadtxt
-    ts = loadtxt(fname)
+    ts = loadtxt(fname, skiprows=3) if format=='ID_TIME_NEST_DAT' else loadtxt(fname)
     spike_map = {}
     for l in ts:
-        if format=='ID_TIME':
+        #print('Interpreting: %s'%l)
+        if format=='ID_TIME' or format=='ID_TIME_NEST_DAT':
             t = l[1]*scaling
             id = l[0]
         elif format=='TIME_ID':
