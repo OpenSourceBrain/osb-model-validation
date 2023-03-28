@@ -12,18 +12,18 @@ class JNeuroMLNRNEngine(JNeuroMLEngine):
     name = "jNeuroML_NEURON"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         if is_verbose():
             inform("Checking whether %s is installed..." %
                JNeuroMLNRNEngine.name, indent=1)
-        return JNeuroMLEngine.is_installed(None) and NeuronEngine.is_installed(None)
+        return JNeuroMLEngine.is_installed() and NeuronEngine.is_installed()
 
     @staticmethod
     def install(nrn_version):
 
-        if not JNeuroMLEngine.is_installed(None):
+        if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
-        if not NeuronEngine.is_installed(None):
+        if not NeuronEngine.is_installed():
             NeuronEngine.install(nrn_version)
 
         JNeuroMLNRNEngine.get_jnmlnrnenv()

@@ -13,7 +13,7 @@ class PyNestEngine(OMVEngine):
     name = "PyNEST"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
 
         PyNestEngine.environment_vars = NestEngine.get_nest_environment()
 

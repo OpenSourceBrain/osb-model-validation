@@ -10,7 +10,7 @@ class JLemsEngine(OMVEngine):
     name = "jLEMS"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
         try:
             ret_str = check_output(['lems', '-h'], verbosity=1)

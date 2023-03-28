@@ -121,3 +121,4 @@ report*.txt
 *_moose.py
 /utilities/tests/*.gen.c
 /utilities/tests/*_eden.py
+arm64

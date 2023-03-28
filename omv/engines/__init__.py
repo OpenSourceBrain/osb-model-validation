@@ -29,6 +29,7 @@ from omv.engines.pynn import PyNNEngine
 from omv.engines.pynnneuron import PyNNNRNEngine
 from omv.engines.pyneuron import PyNRNEngine
 #from omv.engines.pynnbrian1 import PyNNBrian1Engine
+from omv.engines.pynnbrian2 import PyNNBrian2Engine
 from omv.engines.pynnnest import PyNNNestEngine
 from omv.engines.pynnneuroml import PyNNNeuroMLEngine
 from omv.engines.octave import OctaveEngine

@@ -13,7 +13,7 @@ class GenesisEngine(OMVEngine):
     name = "genesis"
 
     @classmethod
-    def is_installed(cls, version):
+    def is_installed(cls, version=None):
         from tempfile import NamedTemporaryFile
 
         ret = True

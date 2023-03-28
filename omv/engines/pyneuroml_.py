@@ -10,7 +10,7 @@ class PyNeuroMLEngine(OMVEngine):
     name = "pyNeuroML"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
         try:
             inform("Checking whether %s is installed..." % PyNeuroMLEngine.name, indent=1, verbosity=2)
