@@ -24,19 +24,19 @@ class PyNNBrian2Engine(PyNNEngine):
     def install(version):
         if not Brian2Engine.is_installed():
             Brian2Engine.install(version)  # interpret version as version of Brian!
-            inform("%s installed Brian..." % PyNNBrain2Engine.name, indent=2, verbosity =1)
+            inform("%s installed Brian..." % PyNNBrian2Engine.name, indent=2, verbosity =1)
         if not PyNNEngine.is_installed():
             PyNNEngine.install(None)
-            inform("%s installed PyNN..." % PyNNBrain2Engine.name, indent=2, verbosity =1)
+            inform("%s installed PyNN..." % PyNNBrian2Engine.name, indent=2, verbosity =1)
 
-        PyNNBrain2Engine.path = PyNNEngine.path + \
-            ":" + Brain2Engine.path
-        PyNNBrain2Engine.environment_vars = {}
-        PyNNBrain2Engine.environment_vars.update(
+        PyNNBrian2Engine.path = PyNNEngine.path + \
+            ":" + Brian2Engine.path
+        PyNNBrian2Engine.environment_vars = {}
+        PyNNBrian2Engine.environment_vars.update(
             PyNNEngine.environment_vars)
-        PyNNBrain2Engine.environment_vars.update(
-            Brain2Engine.environment_vars)
-        inform("PATH: " + PyNNBrain2Engine.path)
+        PyNNBrian2Engine.environment_vars.update(
+            Brian2Engine.environment_vars)
+        inform("PATH: " + PyNNBrian2Engine.path)
 
 
     def run(self):
