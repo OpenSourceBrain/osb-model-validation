@@ -39,15 +39,15 @@ ignores = ['neurosciences-repository', 'drosophila-acc-l3-motoneuron-gunay-et-al
 if '-q' in sys.argv:
     ignores.append('pospischiletal2008')  # Slow...
     ignores.append('blue-brain-project-showcase')  # Slow...
-    ignores.append('acnet2')  # Slow...
+    #ignores.append('acnet2')  # Slow...
     ignores.append('granulecell')  # Slow...
     ignores.append('thalamocortical')  # Slow...
     ignores.append('cerebellum--cerebellar-golgi-cell--solinasetal-golgicell')  # Slow...
     ignores.append('potjansdiesmann2014')
     ignores.append('nc_ca1')
-    ignores.append('miglioreetal14_olfactorybulb3d')
+    #ignores.append('miglioreetal14_olfactorybulb3d')
     ignores.append('sadehetal2017-inhibitionstabilizednetworks')
-    ignores.append('brianshowcase')  # Slow...
+    #ignores.append('brianshowcase')  # Slow...
 
 ignores.append('c302')  # problem downloading images?...
 ignores.append('celegans') # ditto..
@@ -84,12 +84,7 @@ bad_projects_found = {}
 if __name__ == "__main__":
     start = datetime.datetime.now()
 
-    project_num = 1000
-    if len(sys.argv) == 2:
-        try:
-            project_num = int(sys.argv[1])
-        except:
-            print("ignoring...")
+    project_num = 30000
 
     all_projs = osb.get_projects(min_curation_level="None",
                                     limit=project_num)
@@ -122,20 +117,30 @@ if __name__ == "__main__":
                             print("  Possible .travis.yml with OMV tests found!")
                             all_repos[project.identifier] = project.github_repo
 
+                    elif github_repo.check_file_in_repository(".github/workflows/omv-ci.yml"):
+
+                        raw_url = github_repo.link_to_raw_file_in_repo(".github/workflows/omv-ci.yml")
+                        print("  .github/workflows/omv-ci.yml found at %s\n" % raw_url)
+                        #contents = osb.utils.get_page(raw_url)
+                        
+                        print("  omv-ci.yml with OMV tests found!")
+                        all_repos[project.identifier] = project.github_repo
+
                     else:
-                        error = "  (No .travis.yml)"
+                        error = "  (No .travis.yml or omv-ci.yml...)"
                         print(error)
 
                         bad_projects_found[project.identifier] = error
+
             except Exception as e:
                 error = "  (Error accessing GitHub repository)"
                 print(e)
                 bad_projects_found[project.identifier] = error
 
-            else:
-                error = "  (No GitHub repository)"
-                print(error)
-                bad_projects_found[project.identifier] = error
+            #else:
+                #error = "  (No GitHub repository)"
+                #print(error)
+                #bad_projects_found[project.identifier] = error
         else:
             error = "  (Ignoring...)"
             print(error)
@@ -172,6 +177,10 @@ if __name__ == "__main__":
             else:
                 testable_projects += 1
                 test_it = True
+
+        elif github_repo.check_file_in_repository(".github/workflows/omv-ci.yml"):
+            testable_projects += 1
+            test_it = True
 
         else:
             print("  (No .travis.yml)")
