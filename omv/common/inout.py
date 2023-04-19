@@ -92,7 +92,7 @@ def check_output(cmds, cwd='.', shell=False, verbosity=0, env=None):
             joint_env[k] = os.environ[k]
 
     try:
-        ret_string = sp.check_output(cmds, cwd=cwd, shell=shell, env=joint_env)
+        ret_string = sp.check_output(cmds, cwd=cwd, shell=shell, env=joint_env, stderr=sp.STDOUT)
         inform("Commands: %s completed successfully"%(cmds), indent=2, verbosity=verbosity)
         if isinstance(ret_string, bytes):
                 ret_string = ret_string.decode('utf-8') # For Python 3...

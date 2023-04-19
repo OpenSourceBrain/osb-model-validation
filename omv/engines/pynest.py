@@ -16,9 +16,7 @@ class PyNestEngine(OMVEngine):
     def is_installed():
 
         PyNestEngine.environment_vars = NestEngine.get_nest_environment()
-
         sys.path.append(PyNestEngine.environment_vars["PYTHONPATH"])
-
 
         ret = True
         try:
@@ -27,12 +25,12 @@ class PyNestEngine(OMVEngine):
                 #print('PN1a')
                 ret_str_cmd_line = check_output(['python -c "import nest; print(nest.__version__ if hasattr(nest,\'__version__\') else nest.version())"'], shell=True, verbosity=2)
 
-                if is_verbose():
-                    inform("NEST cmd line test: %s" % (ret_str_cmd_line), indent=2)
-                ret_str = ret_str_cmd_line.split('Version: nest-')[1].split('Built:')[0].strip()
-            except:
-                #print('PN1b')
-
+                #if is_verbose():
+                #    inform("NEST cmd line test: <<<%s>>>" % (ret_str_cmd_line), indent=2)
+                ret_str = ret_str_cmd_line.split('Version: ')[1].split('Built:')[0].strip()
+                #print("ret_str: %s"%ret_str)
+            except Exception as e:
+                print('NEST exc: %s'%e)
                 import nest
                 #print('PN2')
                 if hasattr(nest,'__version__'):
