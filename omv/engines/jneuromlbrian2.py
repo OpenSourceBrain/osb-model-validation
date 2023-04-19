@@ -12,19 +12,19 @@ class JNeuroMLBrian2Engine(JNeuroMLEngine):
     name = "jNeuroML_Brian2"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         if is_verbose():
             inform("Checking whether %s is installed..." %
                JNeuroMLBrian2Engine.name, indent=1)
-        return JNeuroMLEngine.is_installed(None) and Brian2Engine.is_installed(None)
+        return JNeuroMLEngine.is_installed() and Brian2Engine.is_installed()
 
     @staticmethod
-    def install(version):
+    def install(brian2_version):
 
-        if not JNeuroMLEngine.is_installed(None):
+        if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
-        if not Brian2Engine.is_installed(None):
-            Brian2Engine.install(None)
+        if not Brian2Engine.is_installed():
+            Brian2Engine.install(brian2_version)
 
         JNeuroMLBrian2Engine.path = JNeuroMLEngine.path + \
             ":" + Brian2Engine.path

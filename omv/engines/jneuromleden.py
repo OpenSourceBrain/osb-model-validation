@@ -12,18 +12,18 @@ class JNeuroMLEdenEngine(JNeuroMLEngine):
     name = "jNeuroML_EDEN"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         if is_verbose():
             inform("Checking whether %s is installed..." %
                JNeuroMLEdenEngine.name, indent=1)
-        return JNeuroMLEngine.is_installed(None) and EdenEngine.is_installed(None)
+        return JNeuroMLEngine.is_installed() and EdenEngine.is_installed()
 
     @staticmethod
     def install(version):
 
-        if not JNeuroMLEngine.is_installed(None):
+        if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
-        if not EdenEngine.is_installed(None):
+        if not EdenEngine.is_installed():
             EdenEngine.install(None)
 
         JNeuroMLEdenEngine.path = JNeuroMLEngine.path + \

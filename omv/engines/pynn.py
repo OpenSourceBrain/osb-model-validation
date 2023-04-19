@@ -10,10 +10,10 @@ class PyNNEngine(OMVEngine):
     name = "PyNN"
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = True
 
-        inform("Checking whether %s (v %s) is already installed..." % (PyNNEngine.name, version),
+        inform("Checking whether %s is already installed..." % (PyNNEngine.name),
                    indent=1, verbosity=1)
         try:
 
@@ -29,10 +29,10 @@ class PyNNEngine(OMVEngine):
         return ret
 
     @staticmethod
-    def install(version):
+    def install(version=None):
         from omv.engines.getpynn import install_pynn
         home = os.environ['HOME']
-        inform('Will fetch and install the latest pyNN', indent=2)
+        inform('Will fetch and install pyNN (version info: %s)'%version, indent=2)
         install_pynn(version)
         inform('Done, PyNN is correctly installed...', indent=2)
 

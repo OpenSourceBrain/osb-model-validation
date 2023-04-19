@@ -12,7 +12,7 @@ class Brian1Engine(OMVEngine):
     python3_compatible = False
 
     @staticmethod
-    def is_installed(version):
+    def is_installed():
         ret = False
         try:
             import brian

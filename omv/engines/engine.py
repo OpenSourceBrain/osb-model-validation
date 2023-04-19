@@ -4,6 +4,7 @@ import sys
 from omv.common.inout import inform
 import platform
 
+PATH_DELIMITER = ';'
 
 class EngineInstallationError(Exception):
     pass
@@ -23,10 +24,9 @@ class OMVEngine(object):
 
     def __init__(self, target, do_not_check_install, engine_version=None):
         if not do_not_check_install:
-            inform("Checking whether OMVEngine: %s (version: %s) is already installed..." % (self.name,
-            engine_version if engine_version else 'DEFAULT'),
+            inform("Checking whether OMVEngine: %s is already installed..." % (self.name),
                    indent=1, verbosity=1)
-            if not self.is_installed(engine_version):
+            if not self.is_installed():
                 try:
                     if platform.python_version_tuple()[0]=='3' and \
                         not self.python3_compatible:
@@ -46,7 +46,7 @@ class OMVEngine(object):
         if ' ' in target:
             all = ''
             for mp in target.split():
-                all += realpath(mp)+' '
+                all += realpath(mp)+PATH_DELIMITER
             self.modelpath = all[:-1]
         else:
             self.modelpath = realpath(target)
@@ -55,7 +55,7 @@ class OMVEngine(object):
     def __str__(self):
         return self.name
 
-    def is_installed(self, version):
+    def is_installed(self):
         raise NotImplementedError()
 
     def run(self):

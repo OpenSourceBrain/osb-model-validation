@@ -3,15 +3,16 @@ import subprocess as sp
 
 from omv.engines.jneuroml import JNeuroMLEngine, EngineExecutionError
 from omv.common.inout import inform, check_output
+from omv.engines.engine import PATH_DELIMITER
 
 # Make explicit list from: '*.nml myfile.xml' etc.
 def resolve_paths(path_s):
 
     if '*' in path_s:
         import glob
-        if ' ' in path_s:
+        if PATH_DELIMITER in path_s:
             all = []
-            for p in path_s.split(' '):
+            for p in path_s.split(PATH_DELIMITER):
                 for g in glob.glob(p):
                     all.append(g)
             path_s = all
@@ -25,13 +26,13 @@ class JNeuroMLValidateEngine(JNeuroMLEngine):
     name = "jNeuroML_validate"
 
     @staticmethod
-    def is_installed(version):
-        return JNeuroMLEngine.is_installed(None)
+    def is_installed():
+        return JNeuroMLEngine.is_installed()
 
     @staticmethod
     def install(version):
 
-        if not JNeuroMLEngine.is_installed(None):
+        if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
 
         JNeuroMLValidateEngine.path = JNeuroMLEngine.path
@@ -51,12 +52,11 @@ class JNeuroMLValidateEngine(JNeuroMLEngine):
             cmds = [jnml, '-validate']
             for p in path_s: cmds.append(p)
 
-
             inform("Running with %s, using: %s..." % (JNeuroMLValidateEngine.name,
                    cmds),
                    indent=1)
             self.stdout = check_output(cmds,
-                cwd=os.path.dirname(self.modelpath.split(' ')[0]),
+                cwd=os.path.dirname(self.modelpath.split(PATH_DELIMITER)[0]),
                 env=JNeuroMLEngine.get_environment())
             inform("Success with running ", JNeuroMLValidateEngine.name,
                    indent=1, verbosity=1)

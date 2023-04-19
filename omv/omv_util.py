@@ -33,10 +33,10 @@ import platform
 
 from omv.common.inout import set_verbosity
 
-from omv import __version__ as version
+from omv import __version__ as omv_version
 
 def main():
-    arguments = docopt(__doc__, version='OpenSourceBrain Model Validation %s'%version)
+    arguments = docopt(__doc__, version='OpenSourceBrain Model Validation %s'%omv_version)
     set_env_vars()
 
     if arguments['--verbose']:
@@ -103,10 +103,10 @@ def main():
 
         installed = {}
         for engine in engines:
-            installed[engine] = OMVEngines[engine].is_installed('')
+            installed[engine] = OMVEngines[engine].is_installed()
 
         inform('')
-        inform('The following engines are currently supported by OMV (v%s):'%version)
+        inform('The following engines are currently supported by OMV (v%s):'%omv_version)
         inform('')
         for engine in engines:
             py3_info = '' if OMVEngines[engine].python3_compatible else '; non Py3 compatible'
@@ -154,7 +154,7 @@ def _install_engine(eng):
 
         if eng.lower() == 'NEURON'.lower():
             from omv.engines.neuron_ import NeuronEngine
-            if not NeuronEngine.is_installed(None):
+            if not NeuronEngine.is_installed():
                 from omv.engines.getnrn import install_neuron
                 install_neuron(engine_version)
             else:
@@ -162,7 +162,7 @@ def _install_engine(eng):
 
         elif eng.lower() == 'PyNEURON'.lower():
             from omv.engines.pyneuron import PyNRNEngine
-            if not PyNRNEngine.is_installed(None):
+            if not PyNRNEngine.is_installed():
                 from omv.engines.getnrn import install_neuron
                 install_neuron(engine_version)
             else:
@@ -170,62 +170,63 @@ def _install_engine(eng):
 
         elif eng.lower() == 'jLEMS'.lower():
             from omv.engines.jlems import JLemsEngine as ee
-            if ee.is_installed(None):
+            if ee.is_installed():
                 already_installed = True
             else:
+                if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
                 from omv.engines.getjlems import install_jlems
                 install_jlems()
 
         elif eng.lower() == 'jNeuroML'.lower():
             from omv.engines.jneuroml import JNeuroMLEngine as ee
-            if ee.is_installed(None):
+            if ee.is_installed():
                 already_installed = True
             else:
+                if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
                 from omv.engines.getjnml import install_jnml
                 install_jnml()
 
         elif eng.lower() == 'neuroConstruct' or eng == 'Py_neuroConstruct'.lower():
             from omv.engines.pyneuroconstruct import PyneuroConstructEngine as ee
-            if ee.is_installed(None):
+            if ee.is_installed():
                 already_installed = True
             else:
+                if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
                 from omv.engines.getneuroconstruct import install_neuroconstruct
                 install_neuroconstruct()
 
         elif eng.lower() == 'pyNeuroML'.lower():
             from omv.engines.pyneuroml_ import PyNeuroMLEngine as ee
-            if ee.is_installed(None):
+            if ee.is_installed():
                 already_installed = True
             else:
-                from omv.engines.getpyneuroml import install_pynml
-                install_pynml()
+                ee.install(engine_version)
 
         elif eng.lower() == 'PyLEMS'.lower():
-
             from omv.engines.pylems import PyLemsEngine as ee
-            if ee.is_installed(None):
+            if ee.is_installed():
                 already_installed = True
             else:
+                if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
                 from omv.engines.getpylems import install_pylems
                 install_pylems()
 
         elif eng.lower() == 'Arbor'.lower():
-
             from omv.engines.arbor_ import ArborEngine as ee
-            if ee.is_installed(None):
+            if ee.is_installed():
                 already_installed = True
             else:
                 from omv.engines.getarbor import install_arbor
-                install_arbor()
+                install_arbor(engine_version)
 
         elif eng.lower() == 'EDEN'.lower():
 
             from omv.engines.eden_ import EdenEngine as ee
-            if ee.is_installed(None):
+            if ee.is_installed():
                 already_installed = True
             else:
                 from omv.engines.geteden import install_eden
-                install_eden()
+                install_eden(engine_version)
 
         elif eng.lower() == 'PyLEMS_NeuroML2'.lower():
 
@@ -233,7 +234,7 @@ def _install_engine(eng):
             nml2_already_installed = False
 
             from omv.engines.pylems import PyLemsEngine as ee
-            if ee.is_installed(None):
+            if ee.is_installed():
                 pylems_already_installed = True
             else:
                 from omv.engines.getpylems import install_pylems
@@ -243,6 +244,7 @@ def _install_engine(eng):
             if is_nml2_installed():
                 nml2_already_installed = True
             else:
+                if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
                 install_nml2()
 
             already_installed = nml2_already_installed and pylems_already_installed
@@ -250,22 +252,26 @@ def _install_engine(eng):
 
         elif eng.lower() == 'Py_neuroConstruct'.lower():
             from omv.engines.pyneuroconstruct import PyneuroConstructEngine as ee
-            if ee.is_installed(None):
+            if ee.is_installed():
                 already_installed = True
             else:
+                if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
                 from omv.engines.getneuroconstruct import install_neuroconstruct
                 install_neuroconstruct()
 
         elif eng.lower() == 'genesis'.lower():
+            if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
             from omv.engines.getgenesis import install_genesis
             install_genesis()
         elif eng.lower() == 'Moose'.lower():
+            if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
             from omv.engines.getmoose import install_moose
-            install_moose()
+            install_moose(engine_version)
         elif eng.lower() == 'NetPyNE'.lower():
             from omv.engines.getnetpyne import install_netpyne
-            install_netpyne()
+            install_netpyne(engine_version)
         elif eng.lower() == 'Brian'.lower():
+            if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
             from omv.engines.getbrian1 import install_brian
             install_brian()
         elif eng.lower() == 'Brian2'.lower():
@@ -273,14 +279,14 @@ def _install_engine(eng):
             install_brian2(engine_version)
         elif eng.lower() == 'NEST'.lower():
             from omv.engines.nestsli import NestEngine as ee
-            if ee.is_installed(None):
+            if ee.is_installed():
                 already_installed = True
             else:
                 from omv.engines.getnest import install_nest
                 install_nest(engine_version)
         elif eng.lower() == 'PyNEST'.lower():
             from omv.engines.pynest import PyNestEngine as ee
-            if ee.is_installed(None):
+            if ee.is_installed():
                 already_installed = True
             else:
                 from omv.engines.getnest import install_nest
@@ -290,8 +296,24 @@ def _install_engine(eng):
             install_pynn(engine_version)
 
         elif eng.lower() == 'PyNN_NEURON'.lower():
+            if engine_version is not None: raise Exception('Currently, cannot install a specific version of engine %s'%eng)
             from omv.engines.pynnneuron import PyNNNRNEngine
             PyNNNRNEngine.install()
+
+
+        elif eng.lower() == 'jNeuroML_Brian2'.lower():
+            from omv.engines.jneuromlbrian2 import JNeuroMLBrian2Engine as ee
+            if ee.is_installed():
+                already_installed = True
+            else:
+                ee.install(engine_version)
+
+        elif eng.lower() == 'jNeuroML_NEURON'.lower():
+            from omv.engines.jneuromlnrn import JNeuroMLNRNEngine as ee
+            if ee.is_installed():
+                already_installed = True
+            else:
+                ee.install(engine_version)
 
         else:
             inform('Code not implemented yet for installing %s using: omv install! Try running a test using this engine.'%eng)

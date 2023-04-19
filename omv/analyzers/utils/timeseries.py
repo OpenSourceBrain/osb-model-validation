@@ -1,5 +1,5 @@
-
 from omv.common.inout import inform
+
 
 def detect_spikes(v, method='threshold', threshold=0.):
     from numpy import flatnonzero, bitwise_and, roll, diff, array
@@ -27,10 +27,11 @@ def load_data_file(fname, columns=(0, 1), header_lines=0, scaling=1):
 
 def load_spike_file(fname, format='ID_TIME', ids=0, scaling=1.0):
     from numpy import loadtxt
-    ts = loadtxt(fname)
+    ts = loadtxt(fname, skiprows=3) if format=='ID_TIME_NEST_DAT' else loadtxt(fname)
     spike_map = {}
     for l in ts:
-        if format=='ID_TIME':
+        #print('Interpreting: %s'%l)
+        if format=='ID_TIME' or format=='ID_TIME_NEST_DAT':
             t = l[1]*scaling
             id = l[0]
         elif format=='TIME_ID':
@@ -45,8 +46,13 @@ def load_spike_file(fname, format='ID_TIME', ids=0, scaling=1.0):
 
 def compare_arrays(arrays, tolerance):
     from numpy import allclose, array, max, abs, atleast_1d
-    
-    a1, a2 = array(arrays)
+
+    # if array conversion fails, also fail test
+    try:
+        a1, a2 = array(arrays)
+    except ValueError as e:
+        print(e)
+        return (False, 0)
     
     if (hasattr(a1, '__len__') or hasattr(a2, '__len__')) and len(a1)!=len(a2):  # Different lengths!!
         return (False, 0)

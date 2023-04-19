@@ -4,15 +4,15 @@ from omv.common.inout import pip_install
 
 from omv.engines.utils.wdir import working_dir
 
-def install_pynn(version):
+def install_pynn(version=None):
 
     if not version:
-        version='0.10.0'
+        version='0.10.1'
 
     try:
 
         #pip_install('lazyarray')  # This should ideally be automatically installed with PyNN...
-        pip_install('neo==0.9.0')  # This should ideally be automatically installed with PyNN, some issues with 0.10.0...
+        #pip_install('neo>=0.11.0')  # This should ideally be automatically installed with PyNN...
 
         install_root = os.environ['HOME']
 

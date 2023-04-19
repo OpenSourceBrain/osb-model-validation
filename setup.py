@@ -25,6 +25,6 @@ setup(
         'PyYAML',
         'numpy',
         'pyrx',
-        'pathlib',
+        'pathlib; python_version<"3.4"',
         'docopt'],
 )
