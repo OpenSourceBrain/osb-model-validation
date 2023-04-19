@@ -20,9 +20,9 @@ class PyNestEngine(OMVEngine):
 
         ret = True
         try:
-            print('PN1')
+            #print('PN1')
             try:
-                print('PN1a')
+                #print('PN1a')
                 ret_str_cmd_line = check_output(['python -c "import nest; print(nest.__version__ if hasattr(nest,\'__version__\') else nest.version())"'], shell=True, verbosity=2)
 
                 #if is_verbose():
@@ -30,14 +30,15 @@ class PyNestEngine(OMVEngine):
                 ret_str = ret_str_cmd_line.split('Version: ')[1].split('Built:')[0].strip()
                 #print("ret_str: %s"%ret_str)
             except Exception as e:
-                print('NEST exc: %s'%e)
+                if is_verbose():
+                    print('NEST installed check exception: %s'%e)
                 import nest
-                print('PN2')
+                #print('PN2')
                 if hasattr(nest,'__version__'):
-                    print('PN3')
+                    #print('PN3')
                     ret_str = nest.__version__
                 else:
-                    print('PN4')
+                    #print('PN4')
                     ret_str = nest.version()
 
             ret = len(ret_str) > 0
