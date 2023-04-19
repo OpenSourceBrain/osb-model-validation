@@ -30,7 +30,8 @@ class PyNestEngine(OMVEngine):
                 ret_str = ret_str_cmd_line.split('Version: ')[1].split('Built:')[0].strip()
                 #print("ret_str: %s"%ret_str)
             except Exception as e:
-                print('NEST exc: %s'%e)
+                if is_verbose():
+                    print('NEST installed check exception: %s'%e)
                 import nest
                 #print('PN2')
                 if hasattr(nest,'__version__'):

@@ -19,7 +19,7 @@ setup(
             'engines/utils/genesis_utils.g']},
     url='https://github.com/OpenSourceBrain/osb-model-validation',
     license='LICENSE.txt',
-    description='OpenSourceBrain Model Validation',
+    description='Open Source Brain Model Validation framework',
     long_description=open('README.md').read(),
     install_requires=[
         'PyYAML',
