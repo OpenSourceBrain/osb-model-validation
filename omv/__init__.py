@@ -1,1 +1,6 @@
-__version__ = '0.2.7'
+try:
+    import importlib.metadata
+    __version__ = importlib.metadata.version("OSBModelValidation")
+except ImportError:
+    import importlib_metadata
+    __version__ = importlib_metadata.version("OSBModelValidation")
