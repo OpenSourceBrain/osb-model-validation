@@ -2,7 +2,6 @@ from omv.analyzers.analyzer import OMVAnalyzer
 
 
 class TemperatureAnalyzer(OMVAnalyzer):
-
     def before_running(self):
         self.query = self.engine.query_temperature()
 
@@ -11,7 +10,3 @@ class TemperatureAnalyzer(OMVAnalyzer):
 
     def parse_observable(self):
         return float(self.engine.fetch_query(self.query))
-
-
-
-

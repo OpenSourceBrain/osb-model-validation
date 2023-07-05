@@ -1,3 +1,3 @@
 import netpyne
 
-print("NetPyNE version: %s"%netpyne.__version__)
+print("NetPyNE version: %s" % netpyne.__version__)
