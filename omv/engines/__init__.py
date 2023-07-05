@@ -8,7 +8,8 @@ from omv.engines.jneuromlpynnnrn import JNeuroMLPyNNNRNEngine
 from omv.engines.jneuromlnetpyne import JNeuroMLNetPyNEEngine
 from omv.engines.jneuromlnetpyne_np4 import JNeuroMLNetPyNENP4Engine
 from omv.engines.jneuromlnetpyne_np2 import JNeuroMLNetPyNENP2Engine
-#from omv.engines.jneuromlbrian import JNeuroMLBrianEngine
+
+# from omv.engines.jneuromlbrian import JNeuroMLBrianEngine
 from omv.engines.jneuromleden import JNeuroMLEdenEngine
 from omv.engines.jneuromlbrian2 import JNeuroMLBrian2Engine
 from omv.engines.jneuromlmoose import JNeuroMLMooseEngine
@@ -18,7 +19,8 @@ from omv.engines.jlems import JLemsEngine
 from omv.engines.pylems import PyLemsEngine
 from omv.engines.pylemsnml2 import PyLemsNeuroML2Engine
 from omv.engines.genesis import GenesisEngine
-#from omv.engines.brian1 import Brian1Engine
+
+# from omv.engines.brian1 import Brian1Engine
 from omv.engines.brian2_ import Brian2Engine
 from omv.engines.arbor_ import ArborEngine
 from omv.engines.eden_ import EdenEngine
@@ -28,7 +30,8 @@ from omv.engines.moose_ import MooseEngine
 from omv.engines.pynn import PyNNEngine
 from omv.engines.pynnneuron import PyNNNRNEngine
 from omv.engines.pyneuron import PyNRNEngine
-#from omv.engines.pynnbrian1 import PyNNBrian1Engine
+
+# from omv.engines.pynnbrian1 import PyNNBrian1Engine
 from omv.engines.pynnbrian2 import PyNNBrian2Engine
 from omv.engines.pynnnest import PyNNNestEngine
 from omv.engines.pynnneuroml import PyNNNeuroMLEngine
@@ -40,7 +43,10 @@ from omv.engines.pyneuroconstruct import PyneuroConstructEngine
 from omv.engines.pyneuroml_ import PyNeuroMLEngine
 
 
-OMVEngines = {be.name: be for be in locals().values()
-              if inspect.isclass(be)
-              and issubclass(be, OMVEngine)
-              and not be.name == 'Name not yet set!'}
+OMVEngines = {
+    be.name: be
+    for be in locals().values()
+    if inspect.isclass(be)
+    and issubclass(be, OMVEngine)
+    and not be.name == "Name not yet set!"
+}

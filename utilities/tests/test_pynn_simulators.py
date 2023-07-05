@@ -5,4 +5,3 @@ print("Importing pyNN.%s..." % simulator)
 exec("import pyNN.%s as simulator" % simulator)
 
 print("Imported!")
-

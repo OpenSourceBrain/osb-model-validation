@@ -9,30 +9,13 @@ from omv.analyzers.input_resistance import InputResAnalyzer
 from omv.analyzers.timeseries import TimeSeriesAnalyzer
 
 OMVAnalyzers = {
-    'spike times' : SpikeAnalyzer,
-    'spike rate' : RateAnalyzer,
-    'dry': DryRunAnalyzer,
-    'resting': RestingAnalyzer,
-    'morphology': MorphologyAnalyzer,
-    'temperature': TemperatureAnalyzer,
-    'activation variables': ActivationVariableAnalyzer,
-    'input resistance': InputResAnalyzer,
-    'timeseries': TimeSeriesAnalyzer
+    "spike times": SpikeAnalyzer,
+    "spike rate": RateAnalyzer,
+    "dry": DryRunAnalyzer,
+    "resting": RestingAnalyzer,
+    "morphology": MorphologyAnalyzer,
+    "temperature": TemperatureAnalyzer,
+    "activation variables": ActivationVariableAnalyzer,
+    "input resistance": InputResAnalyzer,
+    "timeseries": TimeSeriesAnalyzer,
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

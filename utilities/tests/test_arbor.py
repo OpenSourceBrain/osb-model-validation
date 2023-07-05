@@ -1,3 +1,3 @@
 import arbor
 
-print("Version: %s"%arbor.__version__)
+print("Version: %s" % arbor.__version__)
