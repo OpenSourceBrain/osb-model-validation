@@ -1,3 +1,3 @@
 import moose
 
-print("Moose version: %s"%moose.__version__)
+print("Moose version: %s" % moose.__version__)
