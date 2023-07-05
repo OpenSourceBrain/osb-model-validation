@@ -1,5 +1,8 @@
 import os
+import shutil
 import subprocess as sp
+from pathlib import Path
+import platform
 
 from omv.common.inout import inform, trim_path, is_verbose, check_output
 from omv.engines.engine import OMVEngine, EngineExecutionError
@@ -12,8 +15,23 @@ class JNeuroMLEngine(OMVEngine):
     def get_environment():
         if "JNML_HOME" in os.environ:
             jnmlhome = os.environ["JNML_HOME"]
+        elif shutil.which("jnml") is not None:
+            jnmlhome = Path(shutil.which("jnml")).parent
         else:
-            jnmlhome = os.path.join(os.environ["HOME"], "jnml/jNeuroMLJar")
+            osname = platform.system()
+            if osname == "Linux":
+                try:
+                    jnmlhome = os.path.join(
+                        os.environ["XDG_DATA_HOME"], "jnml/jNeuroMLJar"
+                    )
+                except KeyError as e:
+                    jnmlhome = os.path.join(
+                        os.environ["HOME"], ".local/share/jnml/jNeuroMLJar"
+                    )
+            elif osname == "Darwin":
+                jnmlhome = os.path.join(os.environ["HOME"], "Library/jnml/jNeuroMLJar")
+            else:
+                jnmlhome = os.path.join(os.environ["HOME"], "jnml/jNeuroMLJar")
 
         environment_vars = {"JNML_HOME": jnmlhome}
 
