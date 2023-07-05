@@ -101,8 +101,8 @@ def test_all(
 
         for e in sorted(engs):
             inform(
-                "  Engine %s has %s tests (installed: %s)"
-                % (e, engs[e], OMVEngines[e].is_installed())
+                "  Engine %s %s tests\t(installed: %s)"
+                % (e+':'+' '*(21-len(e)), engs[e], OMVEngines[e].is_installed())
             )
 
         inform("")
