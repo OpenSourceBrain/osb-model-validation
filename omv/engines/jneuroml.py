@@ -25,9 +25,14 @@ class JNeuroMLEngine(OMVEngine):
                         os.environ["XDG_DATA_HOME"], "jnml/jNeuroMLJar"
                     )
                 except KeyError as e:
-                    jnmlhome = os.path.join(
-                        os.environ["HOME"], ".local/share/jnml/jNeuroMLJar"
-                    )
+                    localsharepath = os.path.join(os.environ["HOME"], ".local/share")
+                    if os.path.isdir(localsharepath):
+                        jnmlhome = os.path.join(
+                            os.environ["HOME"], ".local/share/jnml/jNeuroMLJar"
+                        )
+                    else:
+                        jnmlhome = os.path.join(os.environ["HOME"], "jnml/jNeuroMLJar")
+                        
             elif osname == "Darwin":
                 jnmlhome = os.path.join(os.environ["HOME"], "Library/jnml/jNeuroMLJar")
             else:
