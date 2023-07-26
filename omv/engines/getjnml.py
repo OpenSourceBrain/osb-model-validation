@@ -18,7 +18,12 @@ def install_jnml():
             try:
                 jnmlpath = os.path.join(os.environ["XDG_DATA_HOME"], "jnml")
             except KeyError:
-                jnmlpath = os.path.join(os.environ["HOME"], ".local/share/jnml")
+                localsharepath = os.path.join(os.environ["HOME"], ".local/share")
+                if os.path.isdir(localsharepath):
+                    jnmlpath = os.path.join(localsharepath, "jnml")
+                else:
+                    jnmlpath = os.path.join(os.environ["HOME"], "jnml")
+
         elif osname == "Darwin":
             jnmlpath = os.path.join(os.environ["HOME"], "Library/jnml")
         else:
