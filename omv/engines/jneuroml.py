@@ -32,7 +32,7 @@ class JNeuroMLEngine(OMVEngine):
                         )
                     else:
                         jnmlhome = os.path.join(os.environ["HOME"], "jnml/jNeuroMLJar")
-                        
+
             elif osname == "Darwin":
                 jnmlhome = os.path.join(os.environ["HOME"], "Library/jnml/jNeuroMLJar")
             else:

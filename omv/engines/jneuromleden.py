@@ -24,7 +24,7 @@ class JNeuroMLEdenEngine(JNeuroMLEngine):
         if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
         if not EdenEngine.is_installed():
-            EdenEngine.install(None)
+            EdenEngine.install(version)
 
         JNeuroMLEdenEngine.path = JNeuroMLEngine.path + ":" + EdenEngine.path
         JNeuroMLEdenEngine.environment_vars = {}

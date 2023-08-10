@@ -415,6 +415,14 @@ def _install_engine(eng):
             else:
                 ee.install(engine_version)
 
+        elif eng.lower() == "jNeuroML_EDEN".lower():
+            from omv.engines.jneuromleden import JNeuroMLEdenEngine as ee
+
+            if ee.is_installed():
+                already_installed = True
+            else:
+                ee.install(engine_version)
+
         else:
             inform(
                 "Code not implemented yet for installing %s using: omv install! Try running a test using this engine."
