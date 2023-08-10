@@ -36,15 +36,21 @@ include          escapelist      // setup macro keys for DEC and SUN keyboards
 
 
 def install_genesis(get_latest=False):
-    genpath = os.path.join(os.environ['HOME'], 'genesis')
+    genpath = os.path.join(os.environ["HOME"], "genesis")
     os.mkdir(genpath)
     with working_dir(genpath):
-        print(co(['wget',
-                  '-nv',
-                  'https://github.com/borismarin/genesis2.4gamma/archive/master.zip']))
-        print(co(['unzip', 'master.zip']))
-        print(co(['ls', '-la', 'genesis2.4gamma-master']))
-        os.chdir('genesis2.4gamma-master/src')
-        print(co(['./configure']))
-        print(co(['make']))
-        open(os.path.join(os.environ['HOME'], '.simrc'), 'w').write(simrc)
+        print(
+            co(
+                [
+                    "wget",
+                    "-nv",
+                    "https://github.com/borismarin/genesis2.4gamma/archive/master.zip",
+                ]
+            )
+        )
+        print(co(["unzip", "master.zip"]))
+        print(co(["ls", "-la", "genesis2.4gamma-master"]))
+        os.chdir("genesis2.4gamma-master/src")
+        print(co(["./configure"]))
+        print(co(["make"]))
+        open(os.path.join(os.environ["HOME"], ".simrc"), "w").write(simrc)

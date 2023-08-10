@@ -8,45 +8,54 @@ from omv.engines.engine import EngineExecutionError
 
 
 class JNeuroMLBrianEngine(JNeuroMLEngine):
-
     name = "jNeuroML_Brian"
-    
+
     python3_compatible = Brian1Engine.python3_compatible
 
     @staticmethod
     def is_installed():
         if is_verbose():
-            inform("Checking whether %s is installed..." %
-               JNeuroMLBrianEngine.name, indent=1)
+            inform(
+                "Checking whether %s is installed..." % JNeuroMLBrianEngine.name,
+                indent=1,
+            )
         return JNeuroMLEngine.is_installed() and Brian1Engine.is_installed()
 
     @staticmethod
     def install(version):
-
         if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
         if not Brian1Engine.is_installed():
             Brian1Engine.install(None)
 
-        JNeuroMLBrianEngine.path = JNeuroMLEngine.path + \
-            ":" + Brian1Engine.path
+        JNeuroMLBrianEngine.path = JNeuroMLEngine.path + ":" + Brian1Engine.path
         JNeuroMLBrianEngine.environment_vars = {}
-        JNeuroMLBrianEngine.environment_vars.update(
-            JNeuroMLEngine.environment_vars)
-        JNeuroMLBrianEngine.environment_vars.update(
-            Brian1Engine.environment_vars)
+        JNeuroMLBrianEngine.environment_vars.update(JNeuroMLEngine.environment_vars)
+        JNeuroMLBrianEngine.environment_vars.update(Brian1Engine.environment_vars)
         inform("PATH: " + JNeuroMLBrianEngine.path)
         inform("Env vars: %s" % JNeuroMLBrianEngine.environment_vars)
 
     def run(self):
         try:
-            inform("Running file %s with %s" % (trim_path(self.modelpath), JNeuroMLBrianEngine.name), indent=1)
-            
+            inform(
+                "Running file %s with %s"
+                % (trim_path(self.modelpath), JNeuroMLBrianEngine.name),
+                indent=1,
+            )
+
             from omv.engines.jneuroml import JNeuroMLEngine
+
             jnml = JNeuroMLEngine.get_executable()
-            
-            self.stdout = check_output([jnml, self.modelpath, '-brian'], cwd=os.path.dirname(self.modelpath),env=JNeuroMLEngine.get_environment())
-            self.stdout += check_output(['python', self.modelpath.replace('.xml', '_brian.py'), '-nogui'], cwd=os.path.dirname(self.modelpath))
+
+            self.stdout = check_output(
+                [jnml, self.modelpath, "-brian"],
+                cwd=os.path.dirname(self.modelpath),
+                env=JNeuroMLEngine.get_environment(),
+            )
+            self.stdout += check_output(
+                ["python", self.modelpath.replace(".xml", "_brian.py"), "-nogui"],
+                cwd=os.path.dirname(self.modelpath),
+            )
             inform("Success with running ", JNeuroMLBrianEngine.name, indent=1)
             self.returncode = 0
         except sp.CalledProcessError as err:

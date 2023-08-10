@@ -1,6 +1,9 @@
 import os
+
+
 class working_dir(object):
     """Context manager for changing the current working directory"""
+
     def __init__(self, newPath):
         self.newPath = newPath
 
