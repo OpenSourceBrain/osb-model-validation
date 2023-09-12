@@ -47,6 +47,6 @@ def install_netpyne(version=None):
                         "python-dateutil==2.8.0",
                     ]
                 )
-            print(check_output([sys.executable, "setup.py", "install"]))
+            pip_install(".")
 
         m = "Successfully installed NetPyNE..."

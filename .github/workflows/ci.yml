@@ -37,7 +37,7 @@ jobs:
           - PyLEMS
           - PyLEMS_NeuroML2
           - jLEMS
-          - jNeuroML
+          - "jNeuroML:v0.12.2"
           - jNeuroML_Brian2
           - jNeuroML_EDEN
           - "jNeuroML_NEURON:8.2.1"

@@ -4,10 +4,13 @@ from subprocess import check_output
 from pathlib import Path
 
 from omv.engines.utils.wdir import working_dir
+from omv.common.inout import inform
 
 
-def install_jnml():
-    version = "v0.12.2"
+def install_jnml(version):
+
+    if not version:
+        version = "v0.12.2"
 
     try:
         jnmlhome = os.environ["JNML_HOME"]
@@ -41,3 +44,5 @@ def install_jnml():
             ]
         )
         check_output(["unzip", "jNeuroML.zip"])
+
+    inform("Successfully installed jNeuroML "+version, indent=1)

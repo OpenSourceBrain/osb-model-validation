@@ -78,8 +78,8 @@ class JNeuroMLEngine(OMVEngine):
     def install(version):
         from omv.engines.getjnml import install_jnml
 
-        inform("Will fetch and install the latest jNeuroML jar", indent=2)
-        install_jnml()
+        inform("Will fetch and install jNeuroML jar", indent=2)
+        install_jnml(version)
 
     def run(self):
         try:

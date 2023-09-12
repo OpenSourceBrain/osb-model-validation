@@ -226,14 +226,9 @@ def _install_engine(eng):
             if ee.is_installed():
                 already_installed = True
             else:
-                if engine_version is not None:
-                    raise Exception(
-                        "Currently, cannot install a specific version of engine %s"
-                        % eng
-                    )
                 from omv.engines.getjnml import install_jnml
 
-                install_jnml()
+                install_jnml(engine_version)
 
         elif eng.lower() == "neuroConstruct" or eng == "Py_neuroConstruct".lower():
             from omv.engines.pyneuroconstruct import PyneuroConstructEngine as ee
