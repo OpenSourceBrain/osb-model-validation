@@ -122,3 +122,4 @@ report*.txt
 /utilities/tests/*.gen.c
 /utilities/tests/*_eden.py
 arm64
+/*ken.sh
