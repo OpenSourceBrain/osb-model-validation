@@ -278,6 +278,16 @@ def _install_engine(eng):
 
                 install_arbor(engine_version)
 
+        elif eng.lower() == "XPP".lower():
+            from omv.engines.xpp import XppEngine as ee
+
+            if ee.is_installed():
+                already_installed = True
+            else:
+                from omv.engines.getxpp import install_xpp
+
+                install_xpp(engine_version)
+
         elif eng.lower() == "EDEN".lower():
             from omv.engines.eden_ import EdenEngine as ee
 
