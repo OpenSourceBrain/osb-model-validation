@@ -14,7 +14,7 @@ def install_xpp(version='latest'):
         raise Exception('Can currently only install the latest XPP tarball')
 
     inform("Installing XPP", indent=2, verbosity=1)
-    xppinstallpath = os.path.join(os.environ["HOME"], "xpp")
+    xppinstallpath = os.path.join(os.environ["HOME"], "xpp/xppaut")
 
     inform(
         "Installing XPP to: %s" % (xppinstallpath),
