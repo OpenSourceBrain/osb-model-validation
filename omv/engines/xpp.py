@@ -12,7 +12,9 @@ class XppEngine(OMVEngine):
 
     @staticmethod
     def get_xpp_environment():
-        xpppath = os.path.join(os.environ["HOME"], "xpp/")
+
+        # Default, if it was installed by omv...
+        xpppath = os.path.join(os.environ["HOME"], "xpp/xppaut/")
 
         if "XPP_HOME" in os.environ:
             xpppath = os.environ["XPP_HOME"] + "/"
