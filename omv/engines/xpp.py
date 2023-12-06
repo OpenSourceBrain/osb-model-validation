@@ -35,9 +35,13 @@ class XppEngine(OMVEngine):
             r = check_output(
                 [environment_vars["XPP_HOME"] + "/xppaut", "-version"], verbosity=2
             )
-            ret = "%s" % r.split()[2]
-            if not "v" in ret:
-                ret = "v%s" % ret
+            if "Problem" in r:
+                ret = 'v???'
+
+            else:
+                ret = "%s" % r.split()[2]
+                if not "v" in ret:
+                    ret = "v%s" % ret
 
             inform("XPP %s is correctly installed..." % ret, indent=2, verbosity=1)
 
