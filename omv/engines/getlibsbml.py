@@ -3,7 +3,7 @@ from omv.common.inout import pip_install, inform
 
 def install_libsbml(version=None):
     try:
-        pip_install("libsbml", version)
+        pip_install("python-libsbml", version)
         import libsbml
 
         m = "Successfully installed libsbml v%s..." % libsbml.__version__
