@@ -14,16 +14,48 @@ def install_xpp(version='latest'):
         raise Exception('Can currently only install the latest XPP tarball')
 
     inform("Installing XPP", indent=2, verbosity=1)
-    xppinstallpath = os.path.join(os.environ["HOME"], "xpp")
+    xppinstallpath = os.path.join(os.environ["HOME"])
+    xpphomepath = os.path.join(xppinstallpath, 'xppaut')
 
     inform(
-        "Installing XPP to: %s" % (xppinstallpath),
+        "Installing XPP to: %s" % (xpphomepath),
         indent=2,
         verbosity=1,
     )
     pypaths = get_paths()
     inform("Python lib info: %s" % (pypaths), indent=2, verbosity=1)
 
+
+    with working_dir(xppinstallpath):
+        print(
+            check_output(
+                [
+                    "git",
+                    "clone",
+                    "https://github.com/Ermentrout/xppaut"
+                ]
+            )
+        )
+
+    with working_dir(xpphomepath):
+        print(
+            check_output(
+                [
+                    "ls",
+                    "-alth"
+                ]
+            )
+        )
+        print(
+            check_output(
+                [
+                    "make"
+                ]
+            )
+        )
+
+
+    '''
     try:
         os.mkdir(xppinstallpath)
     except:
@@ -39,7 +71,7 @@ def install_xpp(version='latest'):
             ]
         )
         check_output(["tar", "xzvf", "xpplinux.tgz"])
-        check_output(["mv", "xppaut8.0ubuntu", "xppaut"])
+        check_output(["mv", "xppaut8.0ubuntu", "xppaut"])'''
 
 
 
