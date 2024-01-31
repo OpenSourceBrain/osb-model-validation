@@ -48,6 +48,7 @@ jobs:
           - jNeuroML_validatev1
           - Py_neuroConstruct
           - pyNeuroML
+          - pyNeuroML_validate_sbml
           - jNeuroML_Moose
           - MOOSE
 

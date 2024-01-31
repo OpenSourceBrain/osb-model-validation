@@ -149,6 +149,7 @@ def main():
                 "pyneuroml",
                 "neuroml",
                 "neuromllite",
+                "libsbml",
             ]:
                 installed_ver = False
                 try:
