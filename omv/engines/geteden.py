@@ -1,6 +1,6 @@
 from omv.common.inout import pip_install
 
-DEFAULT_VERSION = "0.2.2"
+DEFAULT_VERSION = "0.2.3"
 
 
 def install_eden(version=None):
