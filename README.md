@@ -1,6 +1,6 @@
 [![Continuous builds](https://github.com/OpenSourceBrain/osb-model-validation/actions/workflows/ci.yml/badge.svg)](https://github.com/OpenSourceBrain/osb-model-validation/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/osb-model-validation)](https://pypi.org/project/osb-model-validation/)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/osb-model-validation)](https://pypi.org/project/osb-model-validation/)
+[![PyPI](https://img.shields.io/pypi/v/OSBModelValidation)](https://pypi.org/project/OSBModelValidation/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/OSBModelValidation)](https://pypi.org/project/OSBModelValidation/)
 [![GitHub](https://img.shields.io/github/license/OpenSourceBrain/osb-model-validation)](https://github.com/OpenSourceBrain/osb-model-validation/blob/master/LICENSE.lesser)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/OpenSourceBrain/osb-model-validation)](https://github.com/OpenSourceBrain/osb-model-validation/pulls)
 [![GitHub issues](https://img.shields.io/github/issues/OpenSourceBrain/osb-model-validation)](https://github.com/OpenSourceBrain/osb-model-validation/issues)
