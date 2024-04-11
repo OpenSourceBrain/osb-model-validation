@@ -339,19 +339,25 @@ def _install_engine(eng):
             from omv.engines.getgenesis import install_genesis
 
             install_genesis()
-        elif eng.lower() == "Moose".lower():
-            if engine_version is not None:
-                raise Exception(
-                    "Currently, cannot install a specific version of engine %s" % eng
-                )
-            from omv.engines.getmoose import install_moose
 
-            install_moose(engine_version)
+        elif eng.lower() == "Moose".lower():
+
+            from omv.engines.moose_ import MooseEngine as ee
+
+            if ee.is_installed():
+                already_installed = True
+            else:
+                from omv.engines.getmoose import install_moose
+
+                install_moose(engine_version)
+
         elif eng.lower() == "NetPyNE".lower():
             from omv.engines.getnetpyne import install_netpyne
 
             install_netpyne(engine_version)
+
         elif eng.lower() == "Brian".lower():
+
             if engine_version is not None:
                 raise Exception(
                     "Currently, cannot install a specific version of engine %s" % eng
@@ -359,10 +365,17 @@ def _install_engine(eng):
             from omv.engines.getbrian1 import install_brian
 
             install_brian()
-        elif eng.lower() == "Brian2".lower():
-            from omv.engines.getbrian2 import install_brian2
 
-            install_brian2(engine_version)
+        elif eng.lower() == "Brian2".lower():
+            from omv.engines.brian2_ import Brian2Engine as ee
+
+            if ee.is_installed():
+                already_installed = True
+            else:
+                from omv.engines.getbrian2 import install_brian2
+
+                install_brian2(engine_version)
+
         elif eng.lower() == "NEST".lower():
             from omv.engines.nestsli import NestEngine as ee
 
@@ -372,6 +385,7 @@ def _install_engine(eng):
                 from omv.engines.getnest import install_nest
 
                 install_nest(engine_version)
+
         elif eng.lower() == "PyNEST".lower():
             from omv.engines.pynest import PyNestEngine as ee
 
@@ -397,6 +411,14 @@ def _install_engine(eng):
 
         elif eng.lower() == "jNeuroML_Brian2".lower():
             from omv.engines.jneuromlbrian2 import JNeuroMLBrian2Engine as ee
+
+            if ee.is_installed():
+                already_installed = True
+            else:
+                ee.install(engine_version)
+
+        elif eng.lower() == "jNeuroML_Moose".lower():
+            from omv.engines.jneuromlmoose import JNeuroMLMooseEngine as ee
 
             if ee.is_installed():
                 already_installed = True
