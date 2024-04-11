@@ -26,7 +26,7 @@ class JNeuroMLMooseEngine(JNeuroMLEngine):
         if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
         if not MooseEngine.is_installed():
-            MooseEngine.install(None)
+            MooseEngine.install(version)
 
         JNeuroMLMooseEngine.path = JNeuroMLEngine.path + ":" + JNeuroMLMooseEngine.path
         JNeuroMLMooseEngine.environment_vars = {}
