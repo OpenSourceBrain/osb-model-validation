@@ -17,7 +17,7 @@ class Brian2Engine(OMVEngine):
             inform(
                 "Brian2 version %s is correctly installed..." % brian2.__version__,
                 indent=2,
-                verbosity=2,
+                verbosity=1,
             )
 
             ret = "v%s" % brian2.__version__
