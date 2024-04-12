@@ -4,9 +4,9 @@ on:
   schedule:
     - cron: "1 1 1 */1 *"  # Run once a month to test...
   push:
-    branches: [ master, development, test_* ]
+    branches: [ master, development, testxx_* ]
   pull_request:
-    branches: [ master, development, test_* ]
+    branches: [ master, development, testxx_* ]
 
 jobs:
   build:
