@@ -33,6 +33,11 @@ jobs:
         pip install .
         pip list
 
+    - name: Run simple OMV tests
+      run: |
+        omv install pyNeuroML
+        omv test -V utilities/tests/.test.ex9.jnmlnrn.omt
+
 
     - name: OMV final version info
       run: |
