@@ -9,11 +9,10 @@ class OMVExperiment(object):
 
         for obsname, observable in observables.items():
             # an experiment can have multiple observables
-            expected = experiment['expected'].get(obsname)
-            self.checks[obsname] = OMVAnalyzers[obsname](observable, expected,
-                                                         engine, omt_root, mep_root)
-            
+            expected = experiment["expected"].get(obsname)
+            self.checks[obsname] = OMVAnalyzers[obsname](
+                observable, expected, engine, omt_root, mep_root
+            )
+
     def check_all(self):
         return {n: c() for n, c in self.checks.items()}
-    
-        

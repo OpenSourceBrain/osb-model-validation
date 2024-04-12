@@ -16,17 +16,19 @@ import os
 try:
     from java.io import File
 except ImportError:
-    print "Note: this file should be run using ..\\..\\..\\nC.bat -python XXX.py' or '../../../nC.sh -python XXX.py'"
-    print "See http://www.neuroconstruct.org/docs/python.html for more details"
+    print(
+        "Note: this file should be run using ..\\..\\..\\nC.bat -python XXX.py' or '../../../nC.sh -python XXX.py'"
+    )
+    print("See http://www.neuroconstruct.org/docs/python.html for more details")
     quit()
 
-sys.path.append(os.environ["NC_HOME"]+"/pythonNeuroML/nCUtils")
+sys.path.append(os.environ["NC_HOME"] + "/pythonNeuroML/nCUtils")
 
 import ncutils as nc
 
 projFile = File(os.getcwd(), "../TestProject.ncx")
 
-print "Project file for this test: "+ projFile.getAbsolutePath()
+print("Project file for this test: " + projFile.getAbsolutePath())
 
 
 ##############  Main settings  ##################
@@ -35,21 +37,21 @@ simConfigs = []
 
 simConfigs.append("Default Simulation Configuration")
 
-simDt =                 0.001
+simDt = 0.001
 
-simulators =            ["NEURON"]
+simulators = ["NEURON"]
 
 # simulators =            ["NEURON", "LEMS"]
 
-numConcurrentSims =     4
+numConcurrentSims = 4
 
-varTimestepNeuron =     False
+varTimestepNeuron = False
 
-plotSims =              True
-plotVoltageOnly =       True
-analyseSims =           True
-runInBackground =       True
-verbose =               False
+plotSims = True
+plotVoltageOnly = True
+analyseSims = True
+runInBackground = True
+verbose = False
 
 #############################################
 
@@ -58,34 +60,32 @@ def testAll(argv=None):
     if argv is None:
         argv = sys.argv
 
-    print "Loading project from "+ projFile.getCanonicalPath()
+    print("Loading project from " + projFile.getCanonicalPath())
 
+    simManager = nc.SimulationManager(projFile, numConcurrentSims, verbose)
 
-    simManager = nc.SimulationManager(projFile,
-                                      numConcurrentSims,
-                                      verbose)
+    simManager.runMultipleSims(
+        simConfigs=simConfigs,
+        simDt=simDt,
+        simulators=simulators,
+        runInBackground=runInBackground,
+    )
 
-    simManager.runMultipleSims(simConfigs =      simConfigs,
-                               simDt =           simDt,
-                               simulators =      simulators,
-                               runInBackground = runInBackground)
-    
-
-    simManager.reloadSims(plotVoltageOnly =   plotVoltageOnly,
-                          plotSims =          plotSims,
-                          analyseSims =       analyseSims)
-
+    simManager.reloadSims(
+        plotVoltageOnly=plotVoltageOnly, plotSims=plotSims, analyseSims=analyseSims
+    )
 
     # These were discovered using analyseSims = True above.
     # They need to hold for all simulators
-    spikeTimesToCheck = {'SampleCellGroup_0' : [21.6, 35.171, 48.396, 61.602, 74.807]}
+    spikeTimesToCheck = {"SampleCellGroup_0": [21.6, 35.171, 48.396, 61.602, 74.807]}
 
     spikeTimeAccuracy = 0.0
 
-    report = simManager.checkSims(spikeTimesToCheck = spikeTimesToCheck,
-                                  spikeTimeAccuracy = spikeTimeAccuracy)
+    report = simManager.checkSims(
+        spikeTimesToCheck=spikeTimesToCheck, spikeTimeAccuracy=spikeTimeAccuracy
+    )
 
-    print report
+    print(report)
 
     return report
 
