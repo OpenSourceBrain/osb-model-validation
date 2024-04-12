@@ -28,6 +28,13 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
 
+    - name: Install HDF5/pytables
+      run: |
+        if [[  ${{ matrix.python-version }} == "3.11" ]] || [[  ${{ matrix.python-version }} == "3.12" ]]; then 
+        if [[  ${{ matrix.runs-on }} == *"macos"* ]]; then brew install hdf5 ; fi ;
+        fi;
+
+
     - name: Install OMV
       run: |
         pip install .
