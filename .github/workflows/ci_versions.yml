@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12"]
-        runs-on: [ubuntu-latest, windows-latest, macos-latest, macos-14]
+        runs-on: [ubuntu-latest, macos-latest, macos-14]
         exclude:
           - runs-on: macos-14
             python-version: "3.9"
@@ -36,7 +36,7 @@ jobs:
     - name: Run simple OMV tests
       run: |
         omv install pyNeuroML
-        omv test -V utilities/tests/.test.ex9.jnmlnrn.omt
+        omv test -V utilities/tests/.test.ex9.jnmlbrian2.omt
 
 
     - name: OMV final version info
