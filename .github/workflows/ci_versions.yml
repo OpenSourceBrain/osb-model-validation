@@ -1,0 +1,53 @@
+name: Test across versions
+
+on:
+  push:
+    branches: [ master, development, experimental, test* ]
+  pull_request:
+    branches: [ master, development, experimental, test* ]
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.runs-on }}
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        runs-on: [ubuntu-latest, macos-latest, macos-14]
+        exclude:
+          - runs-on: macos-14
+            python-version: "3.9"
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+
+    - name: Install HDF5 for pytables on macos-14
+      run: |
+        # if [[  ${{ matrix.python-version }} == "3.11" ]] || [[  ${{ matrix.python-version }} == "3.12" ]]; then 
+        if [[  ${{ matrix.runs-on }} == "macos-14" ]]; then brew install hdf5 ; fi;
+        #fi;
+
+
+    - name: Install OMV
+      run: |
+        pip install .
+        pip list
+
+    - name: Run simple OMV tests
+      run: |
+        omv install pyNeuroML
+        omv test -V utilities/tests/.test.ex9.jnmlbrian2.omt
+
+
+    - name: OMV final version info
+      run: |
+        omv list -V # list installed engines
+        env
+        pip list

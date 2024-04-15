@@ -38,6 +38,11 @@ class PyNeuroMLEngine(OMVEngine):
         inform("Will fetch and install the latest pyNeuroML", indent=2)
         install_pynml(version)
 
+        if not PyNeuroMLEngine.is_installed():
+            inform("Failure to install, exiting", indent=1)
+            exit(1)
+
+
     def run(self):
         try:
             inform(
