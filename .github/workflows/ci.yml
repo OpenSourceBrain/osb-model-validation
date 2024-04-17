@@ -42,7 +42,8 @@ jobs:
         
         cd xppaut
         make 
-        make install
+        sudo make install
+        xppaut -version
 
     - name: OMV final version info
       run: |
