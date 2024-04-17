@@ -121,8 +121,8 @@ def check_output(cmds, cwd=".", shell=False, verbosity=0, env=None):
 
     except sp.CalledProcessError as err:
         inform(
-            "Error running commands: %s in %s (return code: %s)"
-            % (cmds, cwd, err.returncode),
+            "CalledProcessError running commands: %s in %s (return code: %s), output:\n%s"
+            % (cmds, cwd, err.returncode, exc.output),
             indent=2,
             verbosity=verbosity,
         )
