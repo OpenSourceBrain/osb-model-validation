@@ -56,7 +56,7 @@ def install_xpp(version='latest'):
             filedata = file.read()
 
         # Replace the target string
-        filedata = filedata.replace("/usr/local/", "%s/bin/"%xpphomepath)
+        filedata = filedata.replace("/usr/local/", "%s/"%xpphomepath)
 
         # Write the file out again
         with open(makefile, 'w') as file:
