@@ -10,44 +10,24 @@ from omv.engines.engine import OMVEngine, EngineExecutionError
 class MooseEngine(OMVEngine):
     name = "Moose"
 
+
     @staticmethod
     def is_installed():
-        if is_verbose():
-            inform(
-                "Checking whether the engine %s has been installed correctly..."
-                % MooseEngine.name,
-                indent=1,
-            )
-
         ret = True
         try:
-            ret_str = sp.check_output(
-                ['python -c "import moose; print(moose.__version__)"'],
-                shell=True,
-                stderr=sp.STDOUT,
+            import moose
+
+            inform(
+                "Moose version %s is correctly installed..." % moose.__version__,
+                indent=2,
+                verbosity=1,
             )
-            ret = len(ret_str) > 0
 
-            if isinstance(ret_str, bytes):
-                ret_str = ret_str.decode("utf-8").strip()
-
-            if ret and is_verbose():
-                inform(
-                    "%s is correctly installed (%s)..." % (MooseEngine.name, ret_str),
-                    indent=2,
-                )
-            if ret:
-                # import moose
-                ret = "v%s" % ret_str
+            ret = "v%s" % moose.__version__
 
         except Exception as err:
-            if is_verbose():
-                inform("Couldn't import moose into Python: ", err, indent=1)
+            inform("Couldn't import Moose into Python: ", err, indent=1, verbosity=1)
             ret = False
-        if not ret or not PyNeuroMLEngine.is_installed():
-            ret = False
-
-        inform("Moose is_installed(): %s" % ret, "", indent=1, verbosity=2)
         return ret
 
     @staticmethod

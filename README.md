@@ -1,4 +1,10 @@
 [![Continuous builds](https://github.com/OpenSourceBrain/osb-model-validation/actions/workflows/ci.yml/badge.svg)](https://github.com/OpenSourceBrain/osb-model-validation/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/OSBModelValidation)](https://pypi.org/project/OSBModelValidation/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/OSBModelValidation)](https://pypi.org/project/OSBModelValidation/)
+[![GitHub](https://img.shields.io/github/license/OpenSourceBrain/osb-model-validation)](https://github.com/OpenSourceBrain/osb-model-validation/blob/master/LICENSE.lesser)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/OpenSourceBrain/osb-model-validation)](https://github.com/OpenSourceBrain/osb-model-validation/pulls)
+[![GitHub issues](https://img.shields.io/github/issues/OpenSourceBrain/osb-model-validation)](https://github.com/OpenSourceBrain/osb-model-validation/issues)
+[![Gitter](https://badges.gitter.im/NeuroML/community.svg)](https://gitter.im/NeuroML/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 ------------------------------------------
 
 # OSB Model Validation
@@ -18,38 +24,20 @@ To see this framework in action, click on some of the green buttons below:
 
 This framework has been used to test the 30+ NeuroML and PyNN models described in the [Open Source Brain paper (Gleeson et al. 2019)](https://www.cell.com/neuron/fulltext/S0896-6273(19)30444-1), and [many more](https://github.com/OpenSourceBrain/.github/blob/main/testsheet/README.md).
 
-Note: [Travis-CI](https://travis-ci.com) is no longer the preferred testing platform due to limitations with number of free test runs, all CI testing has been migrated to [GitHub Actions](https://github.com/features/actions).
-
 ## Installation
 
 Quick system-wide install:
 
 ``` bash
-pip install git+https://github.com/OpenSourceBrain/osb-model-validation
+pip install osb-model-validation
 ```
 
-System-wide install from cloned repository:
+Or you can install from cloned repository (preferably in a virtual environment):
 
 ``` bash
 git clone https://github.com/OpenSourceBrain/osb-model-validation.git
 cd osb-model-validation
-sudo python setup.py install
-```
-
-If you'd like to install only in a virtual environment in the `.venv` directory:
-
-``` bash
-git clone https://github.com/OpenSourceBrain/osb-model-validation.git
-cd osb-model-validation
-
-# Create the virtual environment
-python -m venv .venv
-# Activate the virtual environment
-source .venv/bin/activate
-python setup.py install
-
-# To deactivate the virtual environment:
-deactivate
+pip install .
 ```
 
 ## Instructions
@@ -165,6 +153,6 @@ Running validation tests locally ensures that you can quickly check if any chang
 Since you can run the validation with different [engines](https://github.com/OpenSourceBrain/osb-model-validation/tree/master/omv/engines) to use different simulators, this also allows you to quickly verify that your model gives similar results using these different tools.
 
 
-### Running tests automatically on ~~Travis-CI~~
+### Running tests automatically on GitHub Actions
 
-**Note: Travis-CI is no longer the preferred platform for testing, [GitHub Actions](https://github.com/features/actions) is. To use OMV with GHA, copy an existing configuration file, e.g. https://github.com/OpenSourceBrain/ACnet2/blob/master/.github/workflows/omv-ci.yml**
+To use OMV with GHA, copy an existing configuration file, e.g. https://github.com/OpenSourceBrain/ACnet2/blob/master/.github/workflows/omv-ci.yml and place it in the required repository.

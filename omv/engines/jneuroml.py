@@ -81,6 +81,10 @@ class JNeuroMLEngine(OMVEngine):
         inform("Will fetch and install jNeuroML jar", indent=2)
         install_jnml(version)
 
+        if not JNeuroMLEngine.is_installed():
+            inform("Failure to install, exiting", indent=1)
+            exit(1)
+
     def run(self):
         try:
             inform(
