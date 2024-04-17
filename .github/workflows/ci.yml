@@ -45,6 +45,11 @@ jobs:
         sudo make install
         xppaut -version
 
+        omv list -V # list installed engines
+                
+        omv all -V --engine=${{ matrix.engine }}
+
+
     - name: OMV final version info
       run: |
         omv list -V # list installed engines
