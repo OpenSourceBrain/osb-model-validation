@@ -38,11 +38,9 @@ jobs:
       run: |
         # Not yet checked: Octave, genesis
         sudo apt install gcc libx11-dev libc6-dev libx11-6 libc6
-        cd /tmp 
-        wget http://www.math.pitt.edu/~bard/bardware/xppaut_latest.tar.gz 
-        mkdir xpp 
-        tar zxvf xppaut_latest.tar.gz --directory xpp 
-        cd xpp 
+        git clone https://github.com/NeuroML/xppaut
+        
+        cd xppaut
         make 
         make install
 
