@@ -2,9 +2,9 @@ name: Test across versions
 
 on:
   push:
-    branches: [ master, development, experimental, test* ]
+    branches: [ master, development, experimental, test__* ]
   pull_request:
-    branches: [ master, development, experimental, test* ]
+    branches: [ master, development, experimental, test__* ]
 
 jobs:
   build:
