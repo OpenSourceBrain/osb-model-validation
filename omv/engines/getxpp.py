@@ -4,6 +4,8 @@ from omv.common.inout import inform, check_output
 from omv.engines.utils.wdir import working_dir
 from sysconfig import get_paths
 import sys
+        
+import fileinput
 
 
 def install_xpp(version='latest'):
@@ -46,13 +48,29 @@ def install_xpp(version='latest'):
                 ]
             )
         )
+
+        makefile = os.path.join(xpphomepath, 'Makefile')
+                
+        print(' - Replacing text in %s'%makefile)
+        with open(makefile, 'r') as file:
+            filedata = file.read()
+
+        # Replace the target string
+        filedata = filedata.replace("BINDIR = /usr/local/bin", "BINDIR = %s/bin"%xpphomepath)
+
+        # Write the file out again
+        with open(makefile, 'w') as file:
+            file.write(filedata)
+
+        '''
+                line.replace("BINDIR = \/usr\/local\/bin", "BINDIR = $(HOME)\/xppaut")
         print(
         check_output(
                 [
                     "sed", "-i", "-e", "s/'BINDIR = \/usr\/local\/bin'/'BINDIR = $(HOME)\/xppaut'/g", "Makefile"
                 ]
                 )
-        )
+        )'''
         print(
             check_output(
                 [
