@@ -47,16 +47,23 @@ def install_xpp(version='latest'):
             )
         )
         print(
+        check_output(
+                [
+                    "sed", "-i", "-e", "s/'BINDIR = \/usr\/local\/bin'/'BINDIR = $(HOME)\/xppaut'/g", "Makefile"
+                ]
+                )
+        )
+        print(
             check_output(
                 [
-                    "make"
+                    "make", "-j4"
                 ]
             )
         )
         print(
             check_output(
                 [
-                    "make install"
+                    "make", "install"
                 ]
             )
         )
