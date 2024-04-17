@@ -18,7 +18,39 @@ jobs:
         python-version: [ 3.9 ]
         engine:
           - Arbor
-          - XPP
+          - "Brian2:2.4"
+          - Brian2
+          - EDEN
+          - "NEST:2.20.0"
+          - "NEST:3.3"
+          - PyNEST    
+          - PyNEST:2.20.0
+          - PyNEST:3.1
+          - "NEURON:7.8.2"
+          - "PyNEURON:8.0.2"
+          - PyNN
+          - PyNN_Brian2
+          - PyNN_NEURON
+          - PyNN_Nest
+          - PyNN_NeuroML
+          - NetPyNE
+          - PyLEMS
+          - PyLEMS_NeuroML2
+          - jLEMS
+          - jNeuroML
+          - "jNeuroML:v0.12.3"
+          - jNeuroML_Brian2
+          - jNeuroML_EDEN
+          - "jNeuroML_NEURON:8.2.1"
+          - jNeuroML_NetPyNE
+          - jNeuroML_PyNN_NEURON
+          - jNeuroML_validate
+          - jNeuroML_validatev1
+          - Py_neuroConstruct
+          - pyNeuroML
+          - pyNeuroML_validate_sbml
+          - jNeuroML_Moose
+          - MOOSE:3.1.5
 
     steps:
     - uses: actions/checkout@v4
@@ -37,18 +69,7 @@ jobs:
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
         # Not yet checked: Octave, genesis
-        # sudo apt install gcc libx11-dev libc6-dev libx11-6 libc6
-        # git clone https://github.com/NeuroML/xppaut
-        
-        # cd xppaut
-        # make 
-        # sudo make install
-        # xppaut -version
-
-        omv list -V # list installed engines
-                
         omv all -V --engine=${{ matrix.engine }}
-
 
     - name: OMV final version info
       run: |
