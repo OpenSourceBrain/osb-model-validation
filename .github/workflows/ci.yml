@@ -46,6 +46,7 @@ jobs:
           - jNeuroML_PyNN_NEURON
           - jNeuroML_validate
           - jNeuroML_validatev1
+          - jNeuroML_XPP
           - Py_neuroConstruct
           - pyNeuroML
           - pyNeuroML_validate_sbml

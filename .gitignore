@@ -123,3 +123,4 @@ report*.txt
 /utilities/tests/*_eden.py
 arm64
 /*ken.sh
+/utilities/tests/LEMS_NML2_Ex9_FN.ode
