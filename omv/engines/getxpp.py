@@ -62,15 +62,6 @@ def install_xpp(version='latest'):
         with open(makefile, 'w') as file:
             file.write(filedata)
 
-        '''
-                line.replace("BINDIR = \/usr\/local\/bin", "BINDIR = $(HOME)\/xppaut")
-        print(
-        check_output(
-                [
-                    "sed", "-i", "-e", "s/'BINDIR = \/usr\/local\/bin'/'BINDIR = $(HOME)\/xppaut'/g", "Makefile"
-                ]
-                )
-        )'''
         print(
             check_output(
                 [
@@ -85,25 +76,6 @@ def install_xpp(version='latest'):
                 ]
             )
         )
-
-
-    '''
-    try:
-        os.mkdir(xppinstallpath)
-    except:
-        pass
-
-    with working_dir(xppinstallpath):
-        
-        check_output(
-            [
-                "wget",
-                "-nv",
-                "https://sites.pitt.edu/~phase/bard/bardware/binary/%s/xpplinux.tgz" % (version),
-            ]
-        )
-        check_output(["tar", "xzvf", "xpplinux.tgz"])
-        check_output(["mv", "xppaut8.0ubuntu", "xppaut"])'''
 
 
 
