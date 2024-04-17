@@ -32,7 +32,7 @@ def install_xpp(version='latest'):
                 [
                     "git",
                     "clone",
-                    "https://github.com/Ermentrout/xppaut"
+                    "https://github.com/NeuroML/xppaut"
                 ]
             )
         )
@@ -50,6 +50,13 @@ def install_xpp(version='latest'):
             check_output(
                 [
                     "make"
+                ]
+            )
+        )
+        print(
+            check_output(
+                [
+                    "make install"
                 ]
             )
         )
