@@ -13,7 +13,7 @@ def install_xpp(version='latest'):
     if version is None: 
         version='latest'
     elif not version=='latest':
-        raise Exception('Can currently only install the latest XPP tarball')
+        raise Exception('Can currently only install the latest XPP version')
 
     inform("Installing XPP", indent=2, verbosity=1)
     xppinstallpath = os.path.join(os.environ["HOME"])
