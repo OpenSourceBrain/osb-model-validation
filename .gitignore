@@ -124,3 +124,5 @@ report*.txt
 arm64
 /*ken.sh
 /utilities/tests/LEMS_NML2_Ex9_FN.ode
+/utilities/tests/LEMS_nca.xml
+/utilities/tests/nca.model.xml

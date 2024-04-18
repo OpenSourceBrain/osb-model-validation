@@ -50,6 +50,7 @@ jobs:
           - Py_neuroConstruct
           - pyNeuroML
           - pyNeuroML_validate_sbml
+          - pyNEURON_XPP_LEMS
           - jNeuroML_Moose
           - MOOSE:3.1.5
           - XPP

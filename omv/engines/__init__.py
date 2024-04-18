@@ -44,6 +44,7 @@ from omv.engines.netpyne__np2 import NetPyNENP2Engine
 from omv.engines.pyneuroconstruct import PyneuroConstructEngine
 from omv.engines.pyneuroml_ import PyNeuroMLEngine
 from omv.engines.pyneuromlvalidatesbml import PyNeuroMLValidateSBMLEngine
+from omv.engines.pyneuromlxpp import PyNeuroMLXppEngine
 
 
 OMVEngines = {
