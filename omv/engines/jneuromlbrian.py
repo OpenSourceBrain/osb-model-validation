@@ -26,7 +26,7 @@ class JNeuroMLBrianEngine(JNeuroMLEngine):
         if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
         if not Brian1Engine.is_installed():
-            Brian1Engine.install(None)
+            Brian1Engine.install(version)
 
         JNeuroMLBrianEngine.path = JNeuroMLEngine.path + ":" + Brian1Engine.path
         JNeuroMLBrianEngine.environment_vars = {}

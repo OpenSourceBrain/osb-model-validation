@@ -32,7 +32,7 @@ class JNeuroMLPyNNNRNEngine(JNeuroMLEngine):
                 verbosity=1,
             )
         if not PyNNNRNEngine.is_installed():
-            PyNNNRNEngine.install(None)
+            PyNNNRNEngine.install(version)
             inform(
                 "%s installed PyNN & NRN..." % JNeuroMLPyNNNRNEngine.name,
                 indent=2,
