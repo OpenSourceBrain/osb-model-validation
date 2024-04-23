@@ -1,7 +1,7 @@
 target: nca.ode
 engine: XPP
 
-mep: .test.xpp.mep
+mep: .test.nca.mep
 experiments:
   spikes:
     observables:

@@ -126,3 +126,5 @@ arm64
 /utilities/tests/LEMS_NML2_Ex9_FN.ode
 /utilities/tests/LEMS_nca.xml
 /utilities/tests/nca.model.xml
+/utilities/tests/NML2_SingleCompHHCell.nml__flattened.xml
+/utilities/tests/lems/simp2.dat

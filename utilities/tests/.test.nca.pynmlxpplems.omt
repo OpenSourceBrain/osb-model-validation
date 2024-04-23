@@ -1,17 +1,17 @@
 target: nca.ode
 engine: pyNEURON_XPP_LEMS
 
-mep: .test.xpp.mep
+mep: .test.nca.mep
 experiments:
   spikes:
     observables:
       spike times:
         file: 
           path: output.dat
-          columns: [0,1]
-          scaling: [1, 1]
+          columns: [0,14]
+          scaling: [1000, 1]
         spike detection: 
           method: threshold
           threshold: 0
-        tolerance: 0.00
+        tolerance: 0.009999966556292568
 
