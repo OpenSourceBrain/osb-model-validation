@@ -22,7 +22,7 @@ class PyNNNeuroMLEngine(PyNNEngine):
     @staticmethod
     def install(version):
         if not PyNeuroMLEngine.is_installed():
-            PyNeuroMLEngine.install(None)
+            PyNeuroMLEngine.install(version)
             inform(
                 "%s installed PyNeuroML..." % PyNNNeuroMLEngine.name,
                 indent=2,
