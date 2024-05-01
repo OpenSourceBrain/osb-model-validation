@@ -1,0 +1,7 @@
+system: Test XPP
+
+experiments:
+    spikes:
+        expected:
+            spike times: [32.25, 60.400002, 156.60001, 256.45001, 356.10001, 455.79999]
+

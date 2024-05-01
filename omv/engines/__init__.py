@@ -23,6 +23,7 @@ from omv.engines.genesis import GenesisEngine
 # from omv.engines.brian1 import Brian1Engine
 from omv.engines.brian2_ import Brian2Engine
 from omv.engines.arbor_ import ArborEngine
+from omv.engines.xpp import XppEngine
 from omv.engines.eden_ import EdenEngine
 from omv.engines.nestsli import NestEngine
 from omv.engines.pynest import PyNestEngine
@@ -41,6 +42,7 @@ from omv.engines.netpyne__np4 import NetPyNENP4Engine
 from omv.engines.netpyne__np2 import NetPyNENP2Engine
 from omv.engines.pyneuroconstruct import PyneuroConstructEngine
 from omv.engines.pyneuroml_ import PyNeuroMLEngine
+from omv.engines.pyneuromlvalidatesbml import PyNeuroMLValidateSBMLEngine
 
 
 OMVEngines = {

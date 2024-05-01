@@ -4,24 +4,7 @@ import subprocess as sp
 from omv.engines.jneuroml import JNeuroMLEngine, EngineExecutionError
 from omv.common.inout import inform, check_output
 from omv.engines.engine import PATH_DELIMITER
-
-
-# Make explicit list from: '*.nml myfile.xml' etc.
-def resolve_paths(path_s):
-    if "*" in path_s:
-        import glob
-
-        if PATH_DELIMITER in path_s:
-            all = []
-            for p in path_s.split(PATH_DELIMITER):
-                for g in glob.glob(p):
-                    all.append(g)
-            path_s = all
-        else:
-            path_s = glob.glob(path_s)
-
-    return path_s
-
+from omv.engines.utils import resolve_paths
 
 class JNeuroMLValidateEngine(JNeuroMLEngine):
     name = "jNeuroML_validate"
