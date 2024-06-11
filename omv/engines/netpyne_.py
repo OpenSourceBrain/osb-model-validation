@@ -73,7 +73,7 @@ class NetPyNEEngine(OMVEngine):
 
         home = os.environ["HOME"]
         inform("Will fetch and install the latest NetPyNE..", indent=2)
-        install_netpyne()
+        install_netpyne(version)
         inform("Done, NetPyNE is correctly installed...", indent=2)
 
         NetPyNEEngine.path = PyNRNEngine.path

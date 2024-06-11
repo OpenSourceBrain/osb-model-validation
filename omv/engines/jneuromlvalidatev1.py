@@ -17,7 +17,7 @@ class JNeuroMLValidateV1Engine(JNeuroMLEngine):
     @staticmethod
     def install(version):
         if not JNeuroMLEngine.is_installed():
-            JNeuroMLEngine.install(None)
+            JNeuroMLEngine.install(version)
 
         JNeuroMLValidateV1Engine.path = JNeuroMLEngine.path
         JNeuroMLValidateV1Engine.environment_vars = {}

@@ -31,7 +31,7 @@ class JNeuroMLNetPyNEEngine(JNeuroMLEngine):
                 verbosity=1,
             )
         if not NetPyNEEngine.is_installed():
-            NetPyNEEngine.install(None)
+            NetPyNEEngine.install(version)
             inform(
                 "%s installed NetPyNE (& NEURON)..." % JNeuroMLNetPyNEEngine.name,
                 indent=2,
