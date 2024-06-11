@@ -40,6 +40,8 @@ ignores = [
     "d-olfactory-bulb-network",
     "zetterbergjansenritmodel",
     "test_net",
+    "neuroml2",
+    "multiscale",
 ]
 
 if "-q" in sys.argv:
