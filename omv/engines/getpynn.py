@@ -13,6 +13,9 @@ def install_pynn(version=None):
         # pip_install('lazyarray')  # This should ideally be automatically installed with PyNN...
         # pip_install('neo>=0.11.0')  # This should ideally be automatically installed with PyNN...
 
+        pip_install("pynn", version)
+        import pyNN
+        '''
         install_root = os.environ["HOME"]
 
         pyNN_src = "PyNN_src"
@@ -33,6 +36,7 @@ def install_pynn(version=None):
             print(check_output(["pwd"]))
             print("Finished attempting to install PyNN")
         # import pyNN
+        '''
         m = "Successfully installed pyNN..."
     except Exception as e:
         m = "ERROR during install_pynn: %s" % e
