@@ -11,7 +11,7 @@ from omv.engines.utils.wdir import working_dir
 def install_neuron(version):
     if not version:
         if sys.version_info.major == 3:
-            version = "8.1"  # 8.1 works with pynn 0.10.1
+            version = "8.2.2"  # for pynn 0.11.0
         else:
             version = "7.6"
 
