@@ -65,8 +65,8 @@ jobs:
     - name: Install OMV
       run: |
         pip install .
+        pip install 'numpy<2.0.0' # Due to otehr packages not working yet with numpy v2
         pip install scipy sympy matplotlib cython pandas tables
-        # pip install 'numpy<=1.23.0' # temp fix for https://levelup.gitconnected.com/fix-attributeerror-module-numpy-has-no-attribute-float-d7d68c5a4971
         #sudo apt install octave
 
     - name: Run OMV tests on engine ${{ matrix.engine }}
