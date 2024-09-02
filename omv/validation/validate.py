@@ -1,10 +1,10 @@
-from os.path import splitext, basename
+from os.path import splitext, basename, dirname
 from omv.validation.rx_validator import RXSchemaValidator
 from omv.validation.utils import topological_sort, all_types_in_schema
-from pkg_resources import resource_filename
 
 
 class OMVValidator(RXSchemaValidator):
+
     def __init__(self):
         super(OMVValidator, self).__init__()
         self.add_osb_prefix()
@@ -18,7 +18,11 @@ class OMVValidator(RXSchemaValidator):
         self.omv_types = {}
         from glob import glob
 
-        typedir = resource_filename("omv", "schemata/types/")
+        #typedir = resource_filename("omv", "schemata/types/")
+        typedir = dirname(dirname(__file__)) + "/schemata/types/"
+
+        print("Type directory: %s"%typedir)
+
         for omv in glob(typedir + "*.yaml") + glob(typedir + "/base/*.yaml"):
             tag = self.prefix + splitext(basename(omv))[0]
             print("registering", tag)
