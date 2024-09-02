@@ -26,7 +26,7 @@ jobs:
           - PyNEST    
           - PyNEST:2.20.0
           - PyNEST:3.1
-          - "NEURON:7.8.2"
+          - "NEURON"
           - "PyNEURON:8.2.6"
           - PyNN
           - PyNN_Brian2
