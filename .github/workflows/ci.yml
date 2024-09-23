@@ -21,7 +21,6 @@ jobs:
           - "Brian2:2.4"
           - Brian2
           - EDEN
-          - "NEST:2.20.0"
           - "NEST:3.3"
           - PyNEST    
           - PyNEST:2.20.0
