@@ -1,7 +1,6 @@
 import os
 import sys
 from subprocess import check_output as co
-from distutils.core import run_setup
 from omv.common.inout import inform
 from omv.common.inout import pip_install
 
@@ -57,4 +56,4 @@ def install_neuron(version):
             print(co(["make", "install"]))
 
             os.chdir("src/nrnpython")
-            run_setup("./setup.py", ["install"])
+            print(co(["pip", "install", "."]))
