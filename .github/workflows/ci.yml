@@ -23,7 +23,6 @@ jobs:
           - EDEN
           - "NEST:3.3"
           - PyNEST    
-          - PyNEST:2.20.0
           - PyNEST:3.1
           - "NEURON"
           - "PyNEURON:8.2.6"
