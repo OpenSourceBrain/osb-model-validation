@@ -43,7 +43,7 @@ jobs:
     - name: Run simple OMV tests
       run: |
         omv install pyNeuroML
-        omv test -V utilities/tests/.test.ex9.jnmlbrian2.omt
+        omv test -V utilities/tests/.test.exIzh.jnmlnetpyne.omt
 
 
     - name: OMV final version info
