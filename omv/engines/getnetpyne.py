@@ -34,7 +34,6 @@ def install_netpyne(version=None):
 
         with working_dir(path):
             if sys.version_info.major == 2:
-                # pip_install([]'setuptools==42.0.1')
                 pip_install(
                     [
                         "kiwisolver==1.0.1",

@@ -15,19 +15,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ 3.9 ]
+        python-version: [ "3.10" ]
         engine:
           - Arbor
           - "Brian2:2.4"
           - Brian2
           - EDEN
-          - "NEST:2.20.0"
           - "NEST:3.3"
           - PyNEST    
-          - PyNEST:2.20.0
           - PyNEST:3.1
-          - "NEURON:7.8.2"
-          - "PyNEURON:8.0.2"
+          - "NEURON"
+          - "PyNEURON:8.2.6"
           - PyNN
           - PyNN_Brian2
           - PyNN_NEURON

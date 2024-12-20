@@ -1,7 +1,6 @@
 import os
 import sys
 from subprocess import check_output as co
-from distutils.core import run_setup
 from omv.common.inout import inform
 from omv.common.inout import pip_install
 
@@ -11,7 +10,7 @@ from omv.engines.utils.wdir import working_dir
 def install_neuron(version):
     if not version:
         if sys.version_info.major == 3:
-            version = "8.2.2"  # for pynn 0.11.0
+            version = "8.2.6"  # for pynn 0.11.0
         else:
             version = "7.6"
 
@@ -57,4 +56,4 @@ def install_neuron(version):
             print(co(["make", "install"]))
 
             os.chdir("src/nrnpython")
-            run_setup("./setup.py", ["install"])
+            print(co(["pip", "install", "."]))
