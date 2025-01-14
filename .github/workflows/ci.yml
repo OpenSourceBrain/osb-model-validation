@@ -65,6 +65,8 @@ jobs:
         pip install .
         pip install scipy sympy matplotlib cython pandas tables
         #sudo apt install octave
+        sudo apt install subversion # needed for neuroConstruct, not in ubuntu 24.04 runner
+        sudo apt install libx11-dev # needed for xpp...
 
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
