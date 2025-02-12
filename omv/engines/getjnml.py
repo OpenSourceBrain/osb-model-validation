@@ -10,7 +10,7 @@ from omv.common.inout import inform
 def install_jnml(version):
 
     if not version:
-        version = "v0.13.3"
+        version = "v0.14.0"
 
     try:
         jnmlhome = os.environ["JNML_HOME"]
