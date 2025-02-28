@@ -72,9 +72,7 @@ class PyNRNEngine(NeuronEngine):
             )
             cmd = """\
             %s
-            """ % (
-                "\n".join(self.extra_pars)
-            )
+            """ % ("\n".join(self.extra_pars))
             if sys.version_info[0] == 3:
                 c = dedent(cmd).encode()
             else:

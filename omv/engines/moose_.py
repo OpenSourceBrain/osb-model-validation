@@ -10,7 +10,6 @@ from omv.engines.engine import OMVEngine, EngineExecutionError
 class MooseEngine(OMVEngine):
     name = "Moose"
 
-
     @staticmethod
     def is_installed():
         ret = True

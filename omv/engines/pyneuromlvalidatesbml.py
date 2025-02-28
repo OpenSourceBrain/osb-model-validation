@@ -3,21 +3,24 @@ import subprocess as sp
 
 from omv.common.inout import inform, trim_path, check_output
 from omv.engines.engine import EngineExecutionError
-from omv.engines.pyneuroml_ import PyNeuroMLEngine 
+from omv.engines.pyneuroml_ import PyNeuroMLEngine
 from omv.engines.engine import PATH_DELIMITER
 from omv.engines.utils import resolve_paths
+
 
 class PyNeuroMLValidateSBMLEngine(PyNeuroMLEngine):
     name = "pyNeuroML_validate_sbml"
 
     @staticmethod
     def is_installed():
-        if not PyNeuroMLEngine.is_installed(): return False
+        if not PyNeuroMLEngine.is_installed():
+            return False
 
         ret = True
         try:
             inform(
-                "Checking whether %s is installed..." % PyNeuroMLValidateSBMLEngine.name,
+                "Checking whether %s is installed..."
+                % PyNeuroMLValidateSBMLEngine.name,
                 indent=1,
                 verbosity=2,
             )
@@ -37,7 +40,8 @@ class PyNeuroMLValidateSBMLEngine(PyNeuroMLEngine):
 
     @staticmethod
     def install(version):
-        if not PyNeuroMLEngine.is_installed(): PyNeuroMLEngine.install(None)
+        if not PyNeuroMLEngine.is_installed():
+            PyNeuroMLEngine.install(None)
 
         from omv.engines.getlibsbml import install_libsbml
 
@@ -54,19 +58,20 @@ class PyNeuroMLValidateSBMLEngine(PyNeuroMLEngine):
                 verbosity=1,
             )
 
-            #pynml = PyNeuroMLEngine.get_executable() #could implement more flexible way to find the executeable
+            # pynml = PyNeuroMLEngine.get_executable() #could implement more flexible way to find the executeable
             cmds = ["pynml", "-validate-sbml"]
             for p in path_s:
                 cmds.append(p)
 
             inform(
-                "Running with %s, using: %s..." % (PyNeuroMLValidateSBMLEngine.name, cmds),
+                "Running with %s, using: %s..."
+                % (PyNeuroMLValidateSBMLEngine.name, cmds),
                 indent=1,
             )
             self.stdout = check_output(
                 cmds,
-                cwd=os.path.dirname(self.modelpath.split(PATH_DELIMITER)[0])
-                #env=PyNeuroMLEngine.get_environment(),
+                cwd=os.path.dirname(self.modelpath.split(PATH_DELIMITER)[0]),
+                # env=PyNeuroMLEngine.get_environment(),
             )
             inform(
                 "Success with running ",
@@ -76,8 +81,9 @@ class PyNeuroMLValidateSBMLEngine(PyNeuroMLEngine):
             )
             self.returncode = 0
         except sp.CalledProcessError as err:
-            inform("Error with ", PyNeuroMLValidateSBMLEngine.name, indent=1, verbosity=1)
+            inform(
+                "Error with ", PyNeuroMLValidateSBMLEngine.name, indent=1, verbosity=1
+            )
             self.returncode = err.returncode
             self.stdout = err.output
             raise EngineExecutionError
-

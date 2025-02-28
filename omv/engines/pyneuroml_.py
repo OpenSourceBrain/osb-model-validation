@@ -42,7 +42,6 @@ class PyNeuroMLEngine(OMVEngine):
             inform("Failure to install, exiting", indent=1)
             exit(1)
 
-
     def run(self):
         try:
             inform(

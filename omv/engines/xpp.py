@@ -12,7 +12,6 @@ class XppEngine(OMVEngine):
 
     @staticmethod
     def get_xpp_environment():
-
         # Default, if it was installed by omv...
         xpppath = os.path.join(os.environ["HOME"], "xppaut/bin")
 
@@ -36,7 +35,7 @@ class XppEngine(OMVEngine):
                 [environment_vars["XPP_HOME"] + "/xppaut", "-version"], verbosity=2
             )
             if "Problem" in r:
-                ret = 'v???'
+                ret = "v???"
 
             else:
                 ret = "%s" % r.split()[2]
@@ -68,7 +67,11 @@ class XppEngine(OMVEngine):
                 indent=1,
             )
             self.stdout = check_output(
-                [self.environment_vars["XPP_HOME"] + "/xppaut", self.modelpath, '-silent'],
+                [
+                    self.environment_vars["XPP_HOME"] + "/xppaut",
+                    self.modelpath,
+                    "-silent",
+                ],
                 cwd=os.path.dirname(self.modelpath),
             )
             self.returncode = 0
