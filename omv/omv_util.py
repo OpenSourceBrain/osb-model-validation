@@ -156,7 +156,7 @@ def main():
                 try:
                     exec("import %s" % m)
                     installed_ver = "v%s" % eval("%s.__version__" % m)
-                except:
+                except Exception:
                     pass
                 inform(
                     "  %s%s(installed: %s)" % (m, " " * (30 - len(m)), installed_ver)

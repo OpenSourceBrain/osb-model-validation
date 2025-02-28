@@ -1,5 +1,4 @@
 import os
-import sys
 
 import subprocess as sp
 
@@ -39,7 +38,7 @@ class XppEngine(OMVEngine):
 
             else:
                 ret = "%s" % r.split()[2]
-                if not "v" in ret:
+                if "v" not in ret:
                     ret = "v%s" % ret
 
             inform("XPP %s is correctly installed..." % ret, indent=2, verbosity=1)

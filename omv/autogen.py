@@ -27,7 +27,7 @@ def read_option(options, default=0):
     opt = None
     while opt is None:
         try:
-            sel = int(raw_input("Select option number [default: %s]: " % default))
+            sel = int(input("Select option number [default: %s]: " % default))
             opt = options[sel]
         except IndexError:
             print("invalid index!")

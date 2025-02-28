@@ -1,11 +1,9 @@
 import os
 import subprocess as sp
 
-from omv.common.inout import inform, trim_path, check_output
+from omv.common.inout import inform, check_output
 from omv.engines.engine import EngineExecutionError
 from omv.engines.pyneuroml_ import PyNeuroMLEngine
-from omv.engines.engine import PATH_DELIMITER
-from omv.engines.utils import resolve_paths
 
 
 class PyNeuroMLXppEngine(PyNeuroMLEngine):

@@ -103,7 +103,7 @@ def check_output(cmds, cwd=".", shell=False, verbosity=0, env=None):
     if env:
         joint_env.update(env)
     for k in os.environ:
-        if not k in joint_env:
+        if k not in joint_env:
             joint_env[k] = os.environ[k]
 
     try:

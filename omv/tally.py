@@ -21,7 +21,7 @@ class Tallyman(object):
         self.experiments[exp.name] = results
 
     def __lt__(self, other):
-        if other.mep == None:
+        if other.mep is None:
             return True
         return self.omt < other.omt
 
@@ -44,17 +44,17 @@ class TallyHolder(object):
     all_engines = []
 
     def add(self, tally):
-        if not tally.engine in self.all_engines:
+        if tally.engine not in self.all_engines:
             self.all_engines.append(tally.engine)
 
         mp = trim_path(tally.modelpath)
 
-        if not mp in self.tallies:
+        if mp not in self.tallies:
             self.tallies[mp] = {}
 
         mptallies = self.tallies[mp]
 
-        if not tally.engine in mptallies:
+        if tally.engine not in mptallies:
             mptallies[tally.engine] = []
 
         mptallies[tally.engine].append(tally)
@@ -84,7 +84,7 @@ class TallyHolder(object):
             mptallies = self.tallies[mp]
 
             for engine in self.all_engines:
-                if not engine in mptallies:
+                if engine not in mptallies:
                     info = "%s" % (" ")
                     summary += " " * (len(engine) - len(info) - 2) + info + " |   "
                 else:

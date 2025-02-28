@@ -3,7 +3,7 @@ import subprocess as sp
 
 from omv.engines.pyneuroml_ import PyNeuroMLEngine
 
-from omv.common.inout import inform, trim_path, check_output, is_verbose
+from omv.common.inout import inform, trim_path, check_output
 from omv.engines.engine import OMVEngine, EngineExecutionError
 
 

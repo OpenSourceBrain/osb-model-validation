@@ -6,7 +6,7 @@ import sys
 
 from omv.engines.neuron_ import NeuronEngine
 
-from omv.common.inout import inform, is_verbose, check_output
+from omv.common.inout import inform, is_verbose
 from omv.engines.engine import EngineExecutionError
 
 

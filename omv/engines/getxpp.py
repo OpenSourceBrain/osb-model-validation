@@ -3,9 +3,7 @@ from omv.common.inout import inform, check_output
 
 from omv.engines.utils.wdir import working_dir
 from sysconfig import get_paths
-import sys
 
-import fileinput
 
 
 def install_xpp(version="latest"):
