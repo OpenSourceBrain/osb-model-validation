@@ -42,7 +42,7 @@ class NestEngine(OMVEngine):
             if "-" in ret:
                 ret = "v%s" % ret.split("-")[-1]
 
-            if not "v" in ret:
+            if "v" not in ret:
                 ret = "v%s" % ret
 
             inform("NEST %s is correctly installed..." % ret, indent=2, verbosity=1)

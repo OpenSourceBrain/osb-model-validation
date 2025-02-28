@@ -1,6 +1,5 @@
 from os.path import realpath
 from os import environ
-import sys
 from omv.common.inout import inform
 import platform
 
@@ -78,8 +77,8 @@ class OMVEngine(object):
     def set_environment(self):
         if self.environment_vars:
             for name, val in self.environment_vars.items():
-                if name in environ and not "HOME" in name:
-                    if not ":%s:" % val in environ[name]:
+                if name in environ and "HOME" not in name:
+                    if ":%s:" % val not in environ[name]:
                         environ[name] = "%s:%s" % (environ[name], val)
                 else:
                     environ[name] = val

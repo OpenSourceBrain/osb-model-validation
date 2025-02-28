@@ -93,7 +93,7 @@ def test_all(
         engs = {}
         tot_tests = 0
         for t in tallies:
-            if not t.engine in engs:
+            if t.engine not in engs:
                 engs[t.engine] = 0
             engs[t.engine] += 1
             tot_tests += 1

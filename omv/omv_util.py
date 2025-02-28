@@ -22,6 +22,7 @@
     --ignore-non-py3  If Python 3, ignore tests on non Py3 compatible engines [default: False]
     -y                Auto-select default options (non-interactive mode)
 """
+
 from docopt import docopt
 from omv.find_tests import test_all, test_one
 from omv.validation import validate_mep
@@ -155,7 +156,7 @@ def main():
                 try:
                     exec("import %s" % m)
                     installed_ver = "v%s" % eval("%s.__version__" % m)
-                except:
+                except Exception:
                     pass
                 inform(
                     "  %s%s(installed: %s)" % (m, " " * (30 - len(m)), installed_ver)
@@ -351,7 +352,6 @@ def _install_engine(eng):
             install_genesis()
 
         elif eng.lower() == "Moose".lower():
-
             from omv.engines.moose_ import MooseEngine as ee
 
             if ee.is_installed():
@@ -367,7 +367,6 @@ def _install_engine(eng):
             install_netpyne(engine_version)
 
         elif eng.lower() == "Brian".lower():
-
             if engine_version is not None:
                 raise Exception(
                     "Currently, cannot install a specific version of engine %s" % eng

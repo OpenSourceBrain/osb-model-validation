@@ -24,7 +24,7 @@ class JNeuroMLEngine(OMVEngine):
                     jnmlhome = os.path.join(
                         os.environ["XDG_DATA_HOME"], "jnml/jNeuroMLJar"
                     )
-                except KeyError as e:
+                except KeyError:
                     localsharepath = os.path.join(os.environ["HOME"], ".local/share")
                     if os.path.isdir(localsharepath):
                         jnmlhome = os.path.join(

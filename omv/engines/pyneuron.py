@@ -6,7 +6,7 @@ import sys
 
 from omv.engines.neuron_ import NeuronEngine
 
-from omv.common.inout import inform, is_verbose, check_output
+from omv.common.inout import inform, is_verbose
 from omv.engines.engine import EngineExecutionError
 
 
@@ -72,9 +72,7 @@ class PyNRNEngine(NeuronEngine):
             )
             cmd = """\
             %s
-            """ % (
-                "\n".join(self.extra_pars)
-            )
+            """ % ("\n".join(self.extra_pars))
             if sys.version_info[0] == 3:
                 c = dedent(cmd).encode()
             else:

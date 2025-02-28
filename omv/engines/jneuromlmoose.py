@@ -8,7 +8,6 @@ from omv.engines.engine import EngineExecutionError
 
 
 class JNeuroMLMooseEngine(JNeuroMLEngine):
-
     name = "jNeuroML_Moose"
 
     @staticmethod
@@ -22,7 +21,6 @@ class JNeuroMLMooseEngine(JNeuroMLEngine):
 
     @staticmethod
     def install(version):
-
         if not JNeuroMLEngine.is_installed():
             JNeuroMLEngine.install(None)
         if not MooseEngine.is_installed():
@@ -34,7 +32,6 @@ class JNeuroMLMooseEngine(JNeuroMLEngine):
         JNeuroMLMooseEngine.environment_vars.update(MooseEngine.environment_vars)
         inform("PATH: " + JNeuroMLMooseEngine.path)
         inform("Env vars: %s" % JNeuroMLMooseEngine.environment_vars)
-        
 
     def run(self):
         try:

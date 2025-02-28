@@ -42,7 +42,7 @@ class NeuronEngine(OMVEngine):
 
         environment_vars = {"PYTHONPATH": pp}
 
-        if not "NEURON_HOME" in os.environ:
+        if "NEURON_HOME" not in os.environ:
             pip_install_dir1 = "/usr/local"
             pip_install_nrniv1 = os.path.join(pip_install_dir1, "bin", "nrniv")
             scripts_bin = get_paths()["scripts"]

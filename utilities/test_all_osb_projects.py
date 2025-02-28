@@ -9,7 +9,6 @@ import osb
 import shutil
 import datetime
 import pprint
-import sys
 
 from subprocess import check_output as co
 from omv.find_tests import test_all
@@ -215,7 +214,7 @@ if __name__ == "__main__":
                 try:
                     test_all(ignore_non_py3=True)
                     passing_projects += 1
-                except:
+                except Exception:
                     passed = 0
                     failing_projects += 1
                     fails.append(target_dir)

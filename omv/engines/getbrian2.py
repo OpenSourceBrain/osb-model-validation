@@ -10,7 +10,7 @@ def install_brian2(version):
         pip_install("brian2", version)
         import brian2
 
-        m = "Successfully installed Brian2..."
+        m = "Successfully installed Brian2 %s..."%brian2.__version__
     except Exception as e:
         m = "ERROR installing Brian2: " + str(e)
     finally:
