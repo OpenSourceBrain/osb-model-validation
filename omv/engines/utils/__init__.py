@@ -10,11 +10,11 @@ def resolve_paths(path_s):
         import glob
 
         if PATH_DELIMITER in path_s:
-            all = []
+            all_paths = []
             for p in path_s.split(PATH_DELIMITER):
                 for g in glob.glob(p):
-                    all.append(g)
-            path_s = all
+                    all_paths.append(g)
+            path_s = all_paths
         else:
             path_s = glob.glob(path_s)
 
