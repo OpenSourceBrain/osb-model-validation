@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.11" ]
+        python-version: [ "3.10" ] # moose fails in 3.11 
         engine:
           - Arbor
           - "Brian2:2.9.0"
@@ -39,7 +39,7 @@ jobs:
           - "jNeuroML:v0.12.3"
           - jNeuroML_Brian2
           - jNeuroML_EDEN
-          - "jNeuroML_NEURON:8.2.1"
+          - "jNeuroML_NEURON:8.2.7"
           - jNeuroML_NetPyNE
           - jNeuroML_PyNN_NEURON
           - jNeuroML_validate
