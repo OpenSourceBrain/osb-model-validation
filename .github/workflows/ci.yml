@@ -11,14 +11,14 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
         python-version: [ "3.11" ]
         engine:
           - Arbor
-          - "Brian2:2.4"
+          - "Brian2:2.9.0"
           - Brian2
           - EDEN
           - "NEST:3.3"
@@ -63,8 +63,9 @@ jobs:
     - name: Install OMV
       run: |
         pip install .
-        pip install scipy sympy matplotlib cython pandas tables
+        pip install scipy sympy matplotlib "cython<3.1.0" pandas tables
         #sudo apt install octave
+        sudo apt-get install -y subversion # for neuroConstruct full install...
 
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |

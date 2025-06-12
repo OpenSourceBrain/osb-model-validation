@@ -26,7 +26,6 @@ class JNeuroMLXppEngine(JNeuroMLEngine):
         if not XppEngine.is_installed():
             XppEngine.install(xpp_version)
 
-
     def run(self):
         self.environment_vars = XppEngine.get_xpp_environment()
         self.set_environment()
@@ -44,9 +43,13 @@ class JNeuroMLXppEngine(JNeuroMLEngine):
                 cwd=os.path.dirname(self.modelpath),
                 env=JNeuroMLEngine.get_environment(),
             )
-            
+
             self.stdout = check_output(
-                [self.environment_vars["XPP_HOME"] + "/xppaut", self.modelpath.replace('.xml','.ode'), '-silent'],
+                [
+                    self.environment_vars["XPP_HOME"] + "/xppaut",
+                    self.modelpath.replace(".xml", ".ode"),
+                    "-silent",
+                ],
                 cwd=os.path.dirname(self.modelpath),
             )
 

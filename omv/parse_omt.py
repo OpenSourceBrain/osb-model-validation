@@ -20,7 +20,7 @@ def parse_omt(omt_path, do_not_run=False, engine_version=None, ignore_non_py3=Fa
     )
 
     mepomt = OMVTestParser(omt_path)
-    if not mepomt.engine in OMVEngines:
+    if mepomt.engine not in OMVEngines:
         inform(
             "Error! Unrecognised engine: %s (try running: omv list-engines)"
             % mepomt.engine

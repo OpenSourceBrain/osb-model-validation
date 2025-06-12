@@ -1,6 +1,5 @@
 import os
 import subprocess as sp
-import sys
 
 from omv.common.inout import inform, trim_path, check_output, is_verbose
 from omv.engines.engine import OMVEngine, EngineExecutionError

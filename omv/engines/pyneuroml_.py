@@ -1,7 +1,7 @@
 import os
 import subprocess as sp
 
-from omv.common.inout import inform, trim_path, is_verbose, check_output
+from omv.common.inout import inform, trim_path, check_output
 from omv.engines.engine import OMVEngine, EngineExecutionError
 
 
@@ -41,7 +41,6 @@ class PyNeuroMLEngine(OMVEngine):
         if not PyNeuroMLEngine.is_installed():
             inform("Failure to install, exiting", indent=1)
             exit(1)
-
 
     def run(self):
         try:

@@ -8,7 +8,7 @@ def install_arbor(version=None):
         pip_install("arbor==%s" % version)
         import arbor
 
-        m = "Successfully installed Arbor..."
+        m = "Successfully installed Arbor %s..."%arbor.__version__
     except Exception as e:
         m = "ERROR installing Arbor: " + str(e)
     finally:

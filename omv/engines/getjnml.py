@@ -8,9 +8,8 @@ from omv.common.inout import inform
 
 
 def install_jnml(version):
-
     if not version:
-        version = "v0.13.3"
+        version = "v0.14.0"
 
     try:
         jnmlhome = os.environ["JNML_HOME"]
@@ -45,4 +44,4 @@ def install_jnml(version):
         )
         check_output(["unzip", "jNeuroML.zip"])
 
-    inform("Successfully installed jNeuroML "+version, indent=1)
+    inform("Successfully installed jNeuroML " + version, indent=1)

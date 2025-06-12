@@ -157,3 +157,4 @@ Since you can run the validation with different [engines](https://github.com/Ope
 ### Running tests automatically on GitHub Actions
 
 To use OMV with GHA, copy an existing configuration file, e.g. https://github.com/OpenSourceBrain/ACnet2/blob/master/.github/workflows/omv-ci.yml and place it in the required repository.
+
