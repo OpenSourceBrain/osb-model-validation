@@ -17,6 +17,8 @@ class JNeuroMLEngine(OMVEngine):
             jnmlhome = os.environ["JNML_HOME"]
         elif shutil.which(JNeuroMLEngine.e_name) is not None:
             jnmlhome = Path(shutil.which(JNeuroMLEngine.e_name)).parent
+        else:
+            jnmlhome = ""
 
         environment_vars = {"JNML_HOME": jnmlhome}
 
