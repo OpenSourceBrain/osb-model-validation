@@ -10,7 +10,7 @@ from omv.engines.utils.wdir import working_dir
 def install_neuron(version):
     if not version:
         if sys.version_info.major == 3:
-            version = "8.2.6"  # for pynn 0.11.0
+            version = "8.2.7"  # for pynn 0.11.0
         else:
             version = "7.6"
 
