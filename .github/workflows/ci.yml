@@ -67,6 +67,11 @@ jobs:
         #sudo apt install octave
         sudo apt-get install -y subversion # for neuroConstruct full install...
 
+    - name: Install numpy < 2 if necessary...
+      run: |
+        if [[  ${{ matrix.engine }} == *"MOOSE"* ]] || [[  ${{ matrix.engine }} == *"Moose"* ]]; then pip install "numpy<2" ; fi ;
+        pip list
+
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |
         # Not yet checked: Octave, genesis
