@@ -7,7 +7,7 @@ from omv.engines.utils.wdir import working_dir
 
 def install_pynn(version=None):
     if not version:
-        version = "0.11.0"
+        version = "0.12.4"
 
     try:
         # pip_install('lazyarray')  # This should ideally be automatically installed with PyNN...
