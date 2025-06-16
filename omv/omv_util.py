@@ -154,8 +154,8 @@ def main():
             ]:
                 installed_ver = False
                 try:
-                    exec("import %s" % m)
-                    installed_ver = "v%s" % eval("%s.__version__" % m)
+                    mod = __import__(m)
+                    installed_ver = "v%s" % getattr(mod, "__version__", "unknown")
                 except Exception:
                     pass
                 inform(

@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.10" ]
+        python-version: [ "3.11" ] 
         engine:
           - Arbor
           - "Brian2:2.9.0"
@@ -39,7 +39,7 @@ jobs:
           - "jNeuroML:v0.12.3"
           - jNeuroML_Brian2
           - jNeuroML_EDEN
-          - "jNeuroML_NEURON:8.2.1"
+          - "jNeuroML_NEURON:8.2.7"
           - jNeuroML_NetPyNE
           - jNeuroML_PyNN_NEURON
           - jNeuroML_validate
@@ -66,6 +66,11 @@ jobs:
         pip install scipy sympy matplotlib "cython<3.1.0" pandas tables
         #sudo apt install octave
         sudo apt-get install -y subversion # for neuroConstruct full install...
+
+    - name: Install numpy < 2 if necessary...
+      run: |
+        if [[  ${{ matrix.engine }} == *"MOOSE"* ]] || [[  ${{ matrix.engine }} == *"Moose"* ]]; then pip install "numpy<2" ; fi ;
+        pip list
 
     - name: Run OMV tests on engine ${{ matrix.engine }}
       run: |

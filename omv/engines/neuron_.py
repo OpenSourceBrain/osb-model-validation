@@ -85,6 +85,7 @@ class NeuronEngine(OMVEngine):
             inform("Checking whether %s is installed..." % NeuronEngine.name, indent=1)
         try:
             output = check_output(["nrniv", "--version"], verbosity=2)
+            output = output[output.index('NEURON'):]
             if is_verbose():
                 inform(
                     "%s is installed; env: %s"
