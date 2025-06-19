@@ -16,6 +16,12 @@ def resolve_paths(path_s):
                 all_paths.append(g)
         path_s = all_paths
     else:
-        path_s = resolve_paths(glob.glob(path_s))
+        all_paths = []
+
+        for g in glob.glob(path_s):
+            print('Found path:', g)
+            all_paths.append(g)
+        path_s = all_paths
+
 
     return path_s
