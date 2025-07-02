@@ -3,8 +3,8 @@ import shutil
 import subprocess as sp
 from pathlib import Path
 
-from omv.common.inout import inform, trim_path, is_verbose, check_output
-from omv.engines.engine import OMVEngine, EngineExecutionError
+from omv.common.inout import check_output, inform, is_verbose, trim_path
+from omv.engines.engine import EngineExecutionError, OMVEngine
 
 
 class JNeuroMLEngine(OMVEngine):
@@ -27,9 +27,7 @@ class JNeuroMLEngine(OMVEngine):
     @staticmethod
     def get_executable():
         environment_vars = JNeuroMLEngine.get_environment()
-        jnml = os.path.join(
-            environment_vars["JNML_HOME"], JNeuroMLEngine.e_name if os.name != "nt" else "jnml.bat"
-        )
+        jnml = os.path.join(environment_vars["JNML_HOME"], JNeuroMLEngine.e_name)
         return jnml
 
     @staticmethod
