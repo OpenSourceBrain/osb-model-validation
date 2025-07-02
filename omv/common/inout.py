@@ -130,8 +130,8 @@ def check_output(cmds, cwd=".", shell=False, verbosity=0, env=None):
 def pip_install(packages, version=None):
     pip = "pip3" if sys.version_info.major == 3 else "pip"
     cmds = [pip, "install"]
-    if type(packages) == str:
-        if version == None:
+    if isinstance(packages, str):
+        if version is None:
             cmds.append(packages)
         else:
             cmds.append("%s==%s" % (packages, version))
