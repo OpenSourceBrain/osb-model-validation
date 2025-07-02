@@ -120,20 +120,9 @@ def check_output(cmds, cwd=".", shell=False, verbosity=0, env=None):
         return ret_string
 
     except sp.CalledProcessError as err:
-        inform(
-            "CalledProcessError running commands: %s in %s (return code: %s), output:\n%s"
-            % (cmds, cwd, err.returncode, err.output),
-            indent=2,
-            verbosity=verbosity,
-        )
         inform("Error: %s" % (err), indent=2, verbosity=verbosity)
         raise err
     except Exception as err:
-        inform(
-            "Error running commands: %s in (%s)!" % (cmds, cwd),
-            indent=2,
-            verbosity=verbosity,
-        )
         inform("Error: %s" % (err), indent=2, verbosity=verbosity)
         raise err
 
@@ -141,8 +130,8 @@ def check_output(cmds, cwd=".", shell=False, verbosity=0, env=None):
 def pip_install(packages, version=None):
     pip = "pip3" if sys.version_info.major == 3 else "pip"
     cmds = [pip, "install"]
-    if type(packages) == str:
-        if version == None:
+    if isinstance(packages, str):
+        if version is None:
             cmds.append(packages)
         else:
             cmds.append("%s==%s" % (packages, version))
