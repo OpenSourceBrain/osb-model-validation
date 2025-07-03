@@ -1,10 +1,10 @@
-import yaml
-from collections import deque
 import os
-import sys
 
 # import textwrap
 import subprocess as sp
+from collections import deque
+
+import yaml
 
 LINEWIDTH = 70
 __PROMPT__ = "[omv] "
@@ -25,10 +25,7 @@ def omvify(x):
 
 
 def check(b):
-    if sys.version_info >= (3, 0):
-        tick = "\u2714" if b else "\u2718"
-    else:
-        tick = "\u2714" if b else "\u2718"
+    tick = "\u2714" if b else "\u2718"
     return tick
 
 
@@ -57,11 +54,7 @@ def inform(
     else:
         p = pars if pars else ""
         # print("msg is %s"%msg.__class__)
-        msgstr = (
-            msg.encode("utf-8")
-            if sys.version_info[0] == 2 and isinstance(msg, unicode)
-            else str(msg)
-        )
+        msgstr = str(msg)
         infostr = msgstr + str(p)
         block = deque([infostr])
 
@@ -128,7 +121,7 @@ def check_output(cmds, cwd=".", shell=False, verbosity=0, env=None):
 
 
 def pip_install(packages, version=None):
-    pip = "pip3" if sys.version_info.major == 3 else "pip"
+    pip = "pip"
     cmds = [pip, "install"]
     if isinstance(packages, str):
         if version is None:

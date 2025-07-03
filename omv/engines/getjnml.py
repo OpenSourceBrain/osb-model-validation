@@ -8,6 +8,7 @@ from omv.common.inout import inform
 
 
 def install_jnml(version):
+    """Install JNeuroML from GitHub tar."""
     if not version:
         version = "v0.14.0"
 
