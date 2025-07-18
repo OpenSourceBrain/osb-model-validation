@@ -44,7 +44,7 @@ jobs:
 
     - name: Run simple OMV tests
       run: |
-        omv install pyNeuroML
+        omv all -V --engine=jNeuroML_NEURON
         omv test -V utilities/tests/.test.exIzh.jnmlnetpyne.omt
 
 
