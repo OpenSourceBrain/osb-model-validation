@@ -5,7 +5,7 @@ from omv.engines.getbrian1 import check_scipy_dev
 
 def install_brian2(version):
     if not version:
-        version = "2.7.1"
+        version = "2.9.0"
     try:
         pip_install("brian2", version)
         import brian2
