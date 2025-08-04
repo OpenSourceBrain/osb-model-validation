@@ -28,10 +28,14 @@ class JNeuroMLValidateEngine(JNeuroMLEngine):
             path_s = resolve_paths(self.modelpath)
 
             inform(
-                "Path [%s] expanded to: %s" % (self.modelpath, path_s),
+                "Path [%s] expanded to: \n        %s" % (self.modelpath, '\n        '.join(path_s)),
                 indent=1,
                 verbosity=1,
             )
+            if len(path_s) == 0:
+                raise EngineExecutionError(
+                    "Could not determine list of files for validation from string: %s" % self.modelpath
+                )
 
             from omv.engines.jneuroml import JNeuroMLEngine
 
