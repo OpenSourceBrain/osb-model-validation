@@ -3,7 +3,7 @@ from omv.common.inout import pip_install
 
 def install_moose(version):
     if not version:
-        version = "4.0.0.dev20240411"
+        version = "4.1.1"
     try:
         pip_install("pymoose", version)
         import moose
