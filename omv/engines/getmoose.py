@@ -3,8 +3,9 @@ from omv.common.inout import pip_install
 
 def install_moose(version):
     if not version:
-        version = "4.1.1"
+        version = "4.1.2"
     try:
+        pip_install("pint", version) # Ensure pint is installed first
         pip_install("pymoose", version)
         import moose
 
