@@ -67,10 +67,9 @@ jobs:
         #sudo apt install octave
         sudo apt-get install -y subversion # for neuroConstruct full install...
 
-    - name: Install numpy < 2 (or <2.4) if necessary...
+    - name: Install numpy < 2 if necessary...
       run: |
-        pip install "numpy<2.4" # Issue with numpy 2.4 and quantities, see https://github.com/OpenSourceBrain/osb-model-validation/issues/150
-
+      
         if [[  ${{ matrix.engine }} == *"MOOSE"* ]] || [[  ${{ matrix.engine }} == *"Moose"* ]]; then pip install "numpy<2" ; fi ;
 
         pip list
