@@ -7,6 +7,7 @@ def install_moose(version):
         version = "4.1.4"
     try:
         pip_install("pymoose", version)
+        pip_install("pint")
         import moose
 
         m = "Successfully installed MOOSE..."
