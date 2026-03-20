@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.11" ] 
+        python-version: [ "3.12" ] 
         engine:
           - Arbor
           - "Brian2:2.9.0"
@@ -49,14 +49,14 @@ jobs:
           - pyNeuroML
           - pyNeuroML_validate_sbml
           - pyNEURON_XPP_LEMS
-          - jNeuroML_Moose
           - MOOSE:3.1.5
           - XPP
+          # - jNeuroML_Moose # not yet working on py3.12
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Set up Python  ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version:  ${{ matrix.python-version }}
 
@@ -67,10 +67,11 @@ jobs:
         #sudo apt install octave
         sudo apt-get install -y subversion # for neuroConstruct full install...
 
-    - name: Install numpy < 2 (or <2.4) if necessary...
-      run: |
-        pip install "numpy<2.4" # Issue with numpy 2.4 and quantities, see https://github.com/OpenSourceBrain/osb-model-validation/issues/150
+        pip install setuptools==80 # needed for eden on Python 3.12...
 
+    - name: Install numpy < 2 if necessary...
+      run: |
+      
         if [[  ${{ matrix.engine }} == *"MOOSE"* ]] || [[  ${{ matrix.engine }} == *"Moose"* ]]; then pip install "numpy<2" ; fi ;
 
         pip list
