@@ -49,9 +49,9 @@ jobs:
           - pyNeuroML
           - pyNeuroML_validate_sbml
           - pyNEURON_XPP_LEMS
-          - jNeuroML_Moose
           - MOOSE:3.1.5
           - XPP
+          # - jNeuroML_Moose # not yet working on py3.12
 
     steps:
     - uses: actions/checkout@v6
