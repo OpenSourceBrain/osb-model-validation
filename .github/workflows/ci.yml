@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.11" ] 
+        python-version: [ "3.12" ] 
         engine:
           - Arbor
           - "Brian2:2.9.0"
@@ -66,6 +66,8 @@ jobs:
         pip install scipy sympy matplotlib "cython<3.1.0" pandas tables
         #sudo apt install octave
         sudo apt-get install -y subversion # for neuroConstruct full install...
+
+        pip install setuptools --upgrade # needed for Eden on Python 3.12
 
     - name: Install numpy < 2 if necessary...
       run: |
