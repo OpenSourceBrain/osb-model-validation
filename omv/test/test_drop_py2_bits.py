@@ -13,7 +13,7 @@ def test_install_neuron_defaults_to_modern_version(monkeypatch):
 
     getnrn.install_neuron(None)
 
-    assert pip_calls == ["neuron==8.2.7"]
+    assert pip_calls == [f"neuron=={getnrn.DEFAULT_NEURON_VERSION}"]
 
 
 def test_install_netpyne_without_version_only_installs_package(monkeypatch):

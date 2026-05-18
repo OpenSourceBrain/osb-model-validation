@@ -6,10 +6,12 @@ from omv.common.inout import pip_install
 
 from omv.engines.utils.wdir import working_dir
 
+DEFAULT_NEURON_VERSION = "8.2.7"
+
 
 def install_neuron(version):
     if not version:
-        version = "8.2.7"
+        version = DEFAULT_NEURON_VERSION
 
     if version.startswith("7.8") or version.startswith("8."):
         pip_install("neuron==%s" % version)
