@@ -1,5 +1,8 @@
 from contextlib import contextmanager
+import sys
 import types
+
+import pytest
 
 from omv.engines import getnetpyne, getnrn
 
@@ -9,11 +12,24 @@ def test_install_neuron_defaults_to_modern_version(monkeypatch):
 
     monkeypatch.setattr(getnrn, "pip_install", lambda spec: pip_calls.append(spec))
     monkeypatch.setattr(getnrn, "inform", lambda *args, **kwargs: None)
-    monkeypatch.setitem(__import__("sys").modules, "neuron", types.SimpleNamespace())
+    monkeypatch.setitem(sys.modules, "neuron", types.SimpleNamespace())
 
     getnrn.install_neuron(None)
 
     assert pip_calls == [f"neuron=={getnrn.DEFAULT_NEURON_VERSION}"]
+
+
+@pytest.mark.parametrize("version", ["7.8.1", "8.2.7"])
+def test_install_neuron_supported_versions_use_pip(monkeypatch, version):
+    pip_calls = []
+
+    monkeypatch.setattr(getnrn, "pip_install", lambda spec: pip_calls.append(spec))
+    monkeypatch.setattr(getnrn, "inform", lambda *args, **kwargs: None)
+    monkeypatch.setitem(sys.modules, "neuron", types.SimpleNamespace())
+
+    getnrn.install_neuron(version)
+
+    assert pip_calls == [f"neuron=={version}"]
 
 
 def test_install_netpyne_without_version_only_installs_package(monkeypatch):
