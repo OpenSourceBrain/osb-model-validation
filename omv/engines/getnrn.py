@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 from subprocess import check_output as co
 from omv.common.inout import inform
 from omv.common.inout import pip_install
@@ -9,11 +10,15 @@ from omv.engines.utils.wdir import working_dir
 DEFAULT_NEURON_VERSION = "8.2.7"
 
 
+def _supports_pip_install(version):
+    return bool(re.match(r"^7\.8($|\.)|^8\.", version))
+
+
 def install_neuron(version):
     if not version:
         version = DEFAULT_NEURON_VERSION
 
-    if version.startswith("7.8") or version.startswith("8."):
+    if _supports_pip_install(version):
         pip_install("neuron==%s" % version)
         import neuron
 

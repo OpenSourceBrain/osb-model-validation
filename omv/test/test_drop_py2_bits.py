@@ -32,6 +32,14 @@ def test_install_neuron_supported_versions_use_pip(monkeypatch, version):
     assert pip_calls == [f"neuron=={version}"]
 
 
+@pytest.mark.parametrize(
+    "version,expected",
+    [("7.8", True), ("7.8.1", True), ("8.2.7", True), ("7.80", False), ("7.7.2", False)],
+)
+def test_supports_pip_install_matches_supported_families(version, expected):
+    assert getnrn._supports_pip_install(version) is expected
+
+
 def test_install_netpyne_without_version_only_installs_package(monkeypatch):
     pip_calls = []
 
