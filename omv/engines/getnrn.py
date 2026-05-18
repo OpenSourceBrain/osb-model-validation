@@ -11,7 +11,7 @@ def install_neuron(version):
     if not version:
         version = "8.2.7"
 
-    if "7.8" in version or "8." in version:
+    if version.startswith("7.8") or version.startswith("8."):
         pip_install("neuron==%s" % version)
         import neuron
 
@@ -28,7 +28,7 @@ def install_neuron(version):
             )
             dl_file = "nrn-%s.tar.gz" % version
 
-            if "7.8" in version or "8.0" in version:
+            if version.startswith("7.8") or version.startswith("8.0"):
                 nrn_url = "https://github.com/neuronsimulator/nrn/archive/%s.tar.gz" % (
                     version
                 )
