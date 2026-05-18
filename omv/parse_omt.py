@@ -3,7 +3,6 @@ from omv.engines.engine import EngineInstallationError, EngineExecutionError
 from omv.omt_mep_parser import OMVTestParser
 from omv.common.inout import inform, check, trim_path
 from omv.tally import Tallyman
-import sys
 import platform
 
 
@@ -67,10 +66,7 @@ def parse_omt(omt_path, do_not_run=False, engine_version=None, ignore_non_py3=Fa
                     indent=3,
                 )
                 for rn, rv in results.items():
-                    if sys.version_info >= (3, 0):
-                        inform("{:<30}{:^20}".format(rn, check(rv)), indent=3)
-                    else:
-                        inform("{:<30}{:^20}".format(rn, check(rv)), indent=3)
+                    inform("{:<30}{:^20}".format(rn, check(rv)), indent=3)
                     if not rv:
                         some_failed = True
                 tally.add_experiment(exp, results)

@@ -1,20 +1,24 @@
 import os
 import sys
+import re
 from subprocess import check_output as co
 from omv.common.inout import inform
 from omv.common.inout import pip_install
 
 from omv.engines.utils.wdir import working_dir
 
+DEFAULT_NEURON_VERSION = "8.2.7"
+
+
+def _supports_pip_install(version):
+    return bool(re.match(r"^7\.8($|\.)|^8\.", version))
+
 
 def install_neuron(version):
     if not version:
-        if sys.version_info.major == 3:
-            version = "8.2.7"  
-        else:
-            version = "7.6"
+        version = DEFAULT_NEURON_VERSION
 
-    if sys.version_info.major == 3 and ("7.8" in version or "8." in version):
+    if _supports_pip_install(version):
         pip_install("neuron==%s" % version)
         import neuron
 
@@ -31,12 +35,6 @@ def install_neuron(version):
             )
             dl_file = "nrn-%s.tar.gz" % version
 
-            # See below re 7.8 on py2...
-            if "7.8" in version or "8.0" in version:
-                nrn_url = "https://github.com/neuronsimulator/nrn/archive/%s.tar.gz" % (
-                    version
-                )
-                dl_file = "%s.tar.gz" % version
             print(co(["wget", "-nv", nrn_url]))
             print(co(["tar", "xzvf", dl_file]))
             print(co(["mv", "nrn-%s" % version, "nrn"]))
