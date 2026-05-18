@@ -9,12 +9,9 @@ from omv.engines.utils.wdir import working_dir
 
 def install_neuron(version):
     if not version:
-        if sys.version_info.major == 3:
-            version = "8.2.7"  
-        else:
-            version = "7.6"
+        version = "8.2.7"
 
-    if sys.version_info.major == 3 and ("7.8" in version or "8." in version):
+    if "7.8" in version or "8." in version:
         pip_install("neuron==%s" % version)
         import neuron
 
@@ -31,7 +28,6 @@ def install_neuron(version):
             )
             dl_file = "nrn-%s.tar.gz" % version
 
-            # See below re 7.8 on py2...
             if "7.8" in version or "8.0" in version:
                 nrn_url = "https://github.com/neuronsimulator/nrn/archive/%s.tar.gz" % (
                     version
