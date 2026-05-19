@@ -1,5 +1,4 @@
 import os
-import sys
 from glob import glob
 import platform
 import subprocess as sp
@@ -175,10 +174,7 @@ class NeuronEngine(OMVEngine):
                 self.modelpath,
                 "\n".join(self.extra_pars),
             )
-            if sys.version_info[0] == 3:
-                c = dedent(cmd).encode()
-            else:
-                c = dedent(cmd)
+            c = dedent(cmd).encode()
             stdout, stderr = p.communicate(c)
             # with open('/tmp/omv_test.nrn.stdout', 'w') as f:
             #     f.write(stdout)
