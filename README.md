@@ -9,14 +9,14 @@
 
 # OSB Model Validation
 
-Tools for automated model validation in [Open Source Brain](http://www.opensourcebrain.org) projects, which can also be used for testing model behaviour on many [simulation engines](https://github.com/OpenSourceBrain/osb-model-validation/tree/master/omv/engines) both:
+Tools for automated model validation in [Open Source Brain](https://www.opensourcebrain.org) projects, which can also be used for testing model behaviour on many [simulation engines](https://github.com/OpenSourceBrain/osb-model-validation/tree/master/omv/engines) both:
 
 - on your local machine when developing models
 - on [GitHub Actions](https://github.com/features/actions), to ensure tests pass on every commit.
 
 To see this framework in action, click on some of the green buttons below:
 
-|  OSB project   |   Tests on GitHub Actions    |  Test workflow script |
+|  OSBv1 project   |   Tests on GitHub Actions    |  Test workflow script |
 |----------|:-------------:|:------:|
 |[FitzHugh Nagumo](http://www.opensourcebrain.org/projects/fitzhugh-nagumo-fitzhugh-1969) | [![Continuous build using OMV](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/actions/workflows/omv-ci.yml) | [omv-ci.yml](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/blob/master/.github/workflows/omv-ci.yml) |
 |[Auditory cortex network](http://www.opensourcebrain.org/projects/acnet2)| [![Continuous build using OMV](https://github.com/OpenSourceBrain/ACnet2/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/OpenSourceBrain/ACnet2/actions/workflows/omv-ci.yml) | [omv-ci.yml](https://github.com/OpenSourceBrain/ACnet2/blob/master/.github/workflows/omv-ci.yml) |
@@ -54,7 +54,7 @@ Setting up validation for a model and simulation written in NeuroML2/LEMS requir
 ### Write MEP files
 
 Depending on the size of your model, you can run validation on the full fledged model, or you can create smaller stripped down versions that test particular aspects of the model.
-Here is an example LEMS file for the FitzHugh-Nagumo model on Open Source Brain: [LEMS_FitzHugNagamo.xml](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/blob/master/NeuroML2/LEMS_FitzHughNagumo.xml).
+Here is an example LEMS file for the FitzHugh-Nagumo model on Open Source Brain: [LEMS_FitzHughNagumo.xml](https://github.com/OpenSourceBrain/FitzHugh-Nagumo/blob/master/NeuroML2/LEMS_FitzHughNagumo.xml).
 
 ``` yaml
 # Script for running automated tests on OSBrain, see https://github.com/OpenSourceBrain/osb-model-validation
