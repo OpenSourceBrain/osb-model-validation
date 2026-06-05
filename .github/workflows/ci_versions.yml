@@ -56,6 +56,10 @@ jobs:
         omv all -V --engine=jNeuroML_NEURON
         omv test -V utilities/tests/.test.exIzh.jnmlnetpyne.omt
 
+    - name: Run broken test with flag --exit-zero
+      run: |
+        # This is known to fail, but should not cause the CI to fail due to the --exit-zero flag
+        omv test -V utilities/tests/brokentest/.test.ex9.jnml.omt.broken --exit-zero
 
     - name: OMV final version info
       run: |

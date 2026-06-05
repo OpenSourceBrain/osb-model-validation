@@ -2,9 +2,9 @@
 ============================================
 
   Usage:
-    omv all [-V | --verbose] [--engine=engine] [--ignore-non-py3]
-    omv all_ [-V | --verbose] [--engine=engine]
-    omv test <testMe.omt> [-V | --verbose]
+    omv all [-V | --verbose] [--engine=engine] [--ignore-non-py3] [--exit-zero]
+    omv all_ [-V | --verbose] [--engine=engine] [--ignore-non-py3] [--exit-zero]
+    omv test <testMe.omt> [-V | --verbose] [--exit-zero]
     omv autogen [options]
     omv install <engine>
     omv find
@@ -20,6 +20,7 @@
     -V --verbose      Display additional diagnosis messages [default: False].
     --version         Show version.
     --ignore-non-py3  If Python 3, ignore tests on non Py3 compatible engines [default: False]
+    --exit-zero       Run tests as normal and report failures, but always exit with code 0 [default: False]
     -y                Auto-select default options (non-interactive mode)
 """
 
@@ -46,12 +47,15 @@ def main():
     if arguments["--verbose"]:
         set_verbosity(1)
 
+    exit_zero = arguments["--exit-zero"]
+
     if arguments["test"]:
         try:
             test_one(arguments["<testMe.omt>"])
         except AssertionError:
             inform("Failed due to non passing tests")
-            exit(1)
+            if not exit_zero:
+                exit(1)
 
     elif arguments["all"]:
         try:
@@ -74,7 +78,8 @@ def main():
             )
         except AssertionError:
             inform("Failed due to non passing tests")
-            exit(1)
+            if not exit_zero:
+                exit(1)
 
     # Includes *.omt_, i.e. temporary test files
     elif arguments["all_"]:
@@ -86,7 +91,8 @@ def main():
             )
         except AssertionError:
             inform("Failed due to non passing tests")
-            exit(1)
+            if not exit_zero:
+                exit(1)
 
     elif arguments["find"]:
         try:
