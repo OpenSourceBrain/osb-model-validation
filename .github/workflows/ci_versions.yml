@@ -44,6 +44,13 @@ jobs:
         pip install .
         pip list
 
+
+    - name: Run pytest 
+      run: |
+        pip install pytest
+        cd omv/test
+        pytest -vs
+
     - name: Run simple OMV tests
       run: |
         omv all -V --engine=jNeuroML_NEURON
