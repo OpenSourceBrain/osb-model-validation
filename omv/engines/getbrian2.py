@@ -1,7 +1,5 @@
 from omv.common.inout import pip_install
 
-from omv.engines.getbrian1 import check_scipy_dev
-
 
 def install_brian2(version):
     if not version:

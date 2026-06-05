@@ -21,7 +21,6 @@ from omv.engines.pylems import PyLemsEngine
 from omv.engines.pylemsnml2 import PyLemsNeuroML2Engine
 from omv.engines.genesis import GenesisEngine
 
-# from omv.engines.brian1 import Brian1Engine
 from omv.engines.brian2_ import Brian2Engine
 from omv.engines.arbor_ import ArborEngine
 from omv.engines.xpp import XppEngine
@@ -33,7 +32,6 @@ from omv.engines.pynn import PyNNEngine
 from omv.engines.pynnneuron import PyNNNRNEngine
 from omv.engines.pyneuron import PyNRNEngine
 
-# from omv.engines.pynnbrian1 import PyNNBrian1Engine
 from omv.engines.pynnbrian2 import PyNNBrian2Engine
 from omv.engines.pynnnest import PyNNNestEngine
 from omv.engines.pynnneuroml import PyNNNeuroMLEngine
