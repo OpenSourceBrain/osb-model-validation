@@ -364,15 +364,6 @@ def _install_engine(eng):
 
             install_netpyne(engine_version)
 
-        elif eng.lower() == "Brian".lower():
-            if engine_version is not None:
-                raise Exception(
-                    "Currently, cannot install a specific version of engine %s" % eng
-                )
-            from omv.engines.getbrian1 import install_brian
-
-            install_brian()
-
         elif eng.lower() == "Brian2".lower():
             from omv.engines.brian2_ import Brian2Engine as ee
 
